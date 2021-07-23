@@ -47,8 +47,7 @@ extension GithubApiRequest: APIRequest {
     }
     
     var headers: [String: Any] {
-        var headers: [String: Any] = [String: Any]()
-        return headers
+        return [String: Any]()
     }
 }
 

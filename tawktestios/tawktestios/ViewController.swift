@@ -18,6 +18,5 @@ class ViewController: UIViewController {
                 print("user list = \(user.last?.username ?? "")")
         }, onError: nil, onCompleted: nil, onDisposed: nil)
     }
-
 }
 
