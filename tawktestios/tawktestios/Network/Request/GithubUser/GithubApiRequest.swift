@@ -7,26 +7,9 @@
 
 import Foundation
 
-public class FetchGithubUserParams: Parameterizable{
-    let query: String
-
-    public init(query: String) {
-        self.query = query
-    }
-
-    private enum CodingKeys: String, CodingKey {
-        case query = "query"
-    }
-
-    public var asRequestParam: [String: Any] {
-        let param: [String: Any?] = [CodingKeys.query.rawValue: query]
-        return param.compactMapValues { $0 }
-    }
-}
-
 enum GithubApiRequest {
-    case fetchUserList(params: [String: Any])
-    case fetchUserProfile(params: [String: Any])
+    case fetchUserList(params: Parameterizable)
+    case fetchUserProfile(params: Parameterizable)
 }
 
 extension GithubApiRequest: APIRequest {
@@ -54,10 +37,10 @@ extension GithubApiRequest: APIRequest {
         
         switch self {
             case .fetchUserList (let params):
-                parameter["since"] = params["since"]
+                parameter = params.asRequestParam
                 
             case .fetchUserProfile (let params):
-                parameter["since"] = params["since"]
+                parameter = params.asRequestParam
         }
         
         return parameter

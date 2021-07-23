@@ -27,7 +27,7 @@ extension APIRequest {
         }
         
         components.queryItems = parameters.map {
-            URLQueryItem(name: String($0), value: $1 as! String)
+            URLQueryItem(name: String($0), value: String(describing: $1))
         }
         
         guard let url = components.url else {
