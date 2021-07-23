@@ -1,23 +1,23 @@
 //
-//  Network.swift
+//  ApiRequest.swift
 //  tawktestios
 //
 //  Created by JMC on 23/7/21.
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 
 
 public enum RequestType: String {
-    case GET, POST
+    case GET, POST, DELETE, PUT, PATCH
 }
 
 protocol APIRequest {
+    var baseURL: URL {get}
     var method: RequestType { get }
     var path: String { get }
-    var parameters: [String : String] { get }
+    var parameters: [String: Any] { get }
+    var headers: [String: Any] {get}
 }
 
 extension APIRequest {
@@ -27,7 +27,7 @@ extension APIRequest {
         }
         
         components.queryItems = parameters.map {
-            URLQueryItem(name: String($0), value: String($1))
+            URLQueryItem(name: String($0), value: $1 as! String)
         }
         
         guard let url = components.url else {
@@ -42,27 +42,4 @@ extension APIRequest {
 }
 
 
-class GithubUserFetchRequest: APIRequest {
-    var method = RequestType.GET
-    var path = "users"
-    var parameters = [String: String]()
-    
-    init(since: String) {
-        parameters["since"] = since
-    }
-}
-
-
-class APIClient {
-    private let baseURL = URL(string: "https://api.github.com")!
-    
-    func send<T: Codable>(apiRequest: APIRequest, type: T.Type) -> Observable<T> {
-        let request = apiRequest.request(with: baseURL)
-        return URLSession.shared.rx.data(request: request)
-            .map { data in
-                try JSONDecoder().decode(T.self, from: data)
-            }
-            .observe(on: MainScheduler.asyncInstance)
-    }
-}
 
