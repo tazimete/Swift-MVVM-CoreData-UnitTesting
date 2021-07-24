@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxFlow
 
 protocol InputOutputType: AnyObject {
     associatedtype Input
@@ -14,7 +15,7 @@ protocol InputOutputType: AnyObject {
     func transform(input: Input) -> Output
 }
 
-protocol ViewModel: AnyObject{
+protocol ViewModel: Stepper{
     var service: Service {get set}
 }
 
