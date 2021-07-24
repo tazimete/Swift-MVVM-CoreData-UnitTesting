@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxSwift
-
 
 protocol AbstractViewModel: AnyObject{
     associatedtype Input
@@ -16,7 +14,5 @@ protocol AbstractViewModel: AnyObject{
     var service: Service {get set}
     
     func transform(input: Input) -> Output
-    
-    func fetchGithubUserList(page: Int) -> Observable<[GithubUser]>
 }
 
