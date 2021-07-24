@@ -7,12 +7,14 @@
 
 import Foundation
 
-protocol ViewModel: AnyObject{
+protocol InputOutputType: AnyObject {
     associatedtype Input
     associatedtype Output
     
-    var service: Service {get set}
-    
     func transform(input: Input) -> Output
+}
+
+protocol ViewModel: AnyObject{
+    var service: Service {get set}
 }
 
