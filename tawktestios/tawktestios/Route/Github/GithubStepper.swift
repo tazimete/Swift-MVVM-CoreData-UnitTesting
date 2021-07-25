@@ -11,7 +11,7 @@ import RxFlow
 enum GithubStep: Step {
     case userList
     case userProfile
-    case dismissChildFlow
+    case dismiss
 }
 
 final class GithubStepper: Stepper {

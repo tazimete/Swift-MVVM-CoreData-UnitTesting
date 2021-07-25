@@ -11,9 +11,6 @@ import RxFlow
 
 
 final class GithubFlow: Flow {
-    
-    // MARK: - Assets
-    
     private let githubLocalDataSource: DataSource
     private let githubRemoteDataSource: DataSource
     
@@ -25,8 +22,6 @@ final class GithubFlow: Flow {
         return UINavigationController()
     }()
     
-    // MARK: - Initialization
-    
     init() {
         self.githubLocalDataSource = GithubLocalDataSource()
         self.githubRemoteDataSource = GithubRemoteDataSource()
@@ -35,8 +30,6 @@ final class GithubFlow: Flow {
     deinit {
         print("Deinit")
     }
-    
-    // MARK: - Functions
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = transform(step: step) as? GithubStep else {
@@ -47,8 +40,8 @@ final class GithubFlow: Flow {
             return showGithubUserListViewController()
         case .userProfile:
             return showGithubUserListViewController()
-        case .dismissChildFlow:
-            return showGithubUserListViewController()
+        case .dismiss:
+            return dismissChildFlow()
         }
     }
     

@@ -12,7 +12,7 @@ import RxCocoa
 class GithubUserListViewController: BaseViewController {
     
     public static func loadViewController(viewModel: ViewModel) -> GithubUserListViewController?{
-        let vc = UIStoryboard(name: "main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc
     }
