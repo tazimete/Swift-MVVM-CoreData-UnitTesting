@@ -7,10 +7,13 @@
 
 import UIKit
 import CoreData
+import RxFlow
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var window: UIWindow?
+    private var flowCoordinator: FlowCoordinator!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -74,6 +77,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    private func initRootViewController() {
+        guard let _window = window else {
+            return
+        }
+        
+        let rootFlow = RootFlow(rootWindow: _window)
+        flowCoordinator = FlowCoordinator()
+        
+        flowCoordinator.coordinate(
+            flow: rootFlow,
+            with: RootStepper()
+        )
     }
 
 }

@@ -34,17 +34,13 @@ class GithubUserListViewController: BaseViewController {
         
         let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
         
-        output.githubUserList.asObservable()
-            .subscribe(onNext: {
-                [unowned self] user in
-                print("\(self.description) -- bindViewModel() -- user list = \(user.last?.username ?? "")")
-        },onError: nil, onCompleted: nil, onDisposed: nil)
-        
-//        GithubViewModel(service: GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())).service.remoteDataSource.getGithubUserList(page: 20)
+        output.githubUserList.asDriver().drive(UITableView().rx.items(cellIdentifier: "R.reuseIdentifier.repoViewCell", cellType: UITableViewCell.self)) { tableView, viewModel, cell in
+//            cell.bind(to: viewModel)
+        }.dispose()
 //            .subscribe(onNext: {
 //                [unowned self] user in
-//                print("\(self.TAG) -- bindViewModel() -- user list = \(user.last?.username ?? "")")
-//            },onError: nil, onCompleted: nil, onDisposed: nil)
+//                print("\(self.description) -- bindViewModel() -- user list = \(user.last?.username ?? "")")
+//        },onError: nil, onCompleted: nil, onDisposed: nil)
     }
 }
 

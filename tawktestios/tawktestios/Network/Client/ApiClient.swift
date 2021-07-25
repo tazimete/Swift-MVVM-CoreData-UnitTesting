@@ -18,7 +18,6 @@ class APIClient {
         return URLSession.shared.rx.data(request: request)
             .map { data in
                 try JSONDecoder().decode(T.self, from: data)
-            }
-            .observe(on: MainScheduler.asyncInstance)
+            }.observe(on: MainScheduler.asyncInstance)
     }
 }
