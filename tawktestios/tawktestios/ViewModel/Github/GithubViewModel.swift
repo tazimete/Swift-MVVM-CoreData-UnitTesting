@@ -32,8 +32,9 @@ class GithubViewModel: AbstractGithubViewModel, InputOutputType {
         input.fetchGithubUserList.flatMapLatest({() -> Observable<[GithubUser]> in
             return self.getGithubUserList(page: 20)
         }).subscribe(onNext: {
-            [unowned self] user in
-            print("\(self) -- transform() -- user name = \(user.last?.username ?? "")")
+            [unowned self] userList in
+            print("\(self) -- transform() -- user name = \(userList.last?.username ?? "")")
+            githubUserList.accept(userList)
         },onError: nil, onCompleted: nil, onDisposed: nil)
         
         return Output(githubUserList: githubUserList)

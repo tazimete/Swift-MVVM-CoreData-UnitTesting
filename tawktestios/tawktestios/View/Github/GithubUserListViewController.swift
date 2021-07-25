@@ -34,6 +34,12 @@ class GithubUserListViewController: BaseViewController {
         
         let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
         
+        output.githubUserList.asObservable()
+            .subscribe(onNext: {
+                [unowned self] user in
+                print("\(self.description) -- bindViewModel() -- user list = \(user.last?.username ?? "")")
+        },onError: nil, onCompleted: nil, onDisposed: nil)
+        
 //        GithubViewModel(service: GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())).service.remoteDataSource.getGithubUserList(page: 20)
 //            .subscribe(onNext: {
 //                [unowned self] user in
