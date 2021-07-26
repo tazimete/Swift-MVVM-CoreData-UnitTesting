@@ -37,6 +37,8 @@ class GithubUserListViewController: BaseViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.self.description())
+        tableView.separatorStyle = .none
+        tableView.separatorInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     
     override func bindViewModel() {
@@ -69,5 +71,7 @@ class GithubUserListViewController: BaseViewController {
           .subscribe(onNext: { model in
             print("\(model.username) was selected")
           })
+        
+//        tableView.rx.b
     }
 }
