@@ -43,4 +43,16 @@ class GithubViewModel: AbstractGithubViewModel, InputOutputType {
     func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
         return service.remoteDataSource.getGithubUserList(page: 20)
     }
+    
+    func getGithubUserList(since: Int) {
+        service.remoteDataSource.getGitubUserList(since: 20) { result in
+            switch result{
+                case .success(let users):
+                    print("getGithubUserList() -- \(users.last?.username)")
+                
+                case .failure(let error):
+                    print("\((error as? NetworkError)?.localizedDescription)")
+            }
+        }
+    }
 }

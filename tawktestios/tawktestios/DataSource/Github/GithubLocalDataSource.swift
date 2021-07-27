@@ -18,4 +18,8 @@ public class GithubLocalDataSource: DataSource {
     func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
         return Observable.just([])
     }
+    
+    func getGitubUserList(since: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
+        
+    }
 }

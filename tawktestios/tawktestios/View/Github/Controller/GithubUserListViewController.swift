@@ -31,14 +31,17 @@ class GithubUserListViewController: BaseViewController {
     override func initView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0, enableInsets: true)
         
-        tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.self.description())
         tableView.separatorStyle = .none
         tableView.separatorInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.showsVerticalScrollIndicator = false
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.self.description())
     }
     
     override func bindViewModel() {
@@ -46,32 +49,47 @@ class GithubUserListViewController: BaseViewController {
             return
         }
         
-        let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
-        
-        output.githubUserList
-//            .asObservable()
-//            .bind(to: tableView.rx.items) { (tableView, row, element) in
-//                let indexPath = IndexPath(row: row, section: 0)
-//                print("\(self.TAG) -- CustomTableViewCell -- item = \(element.username)")
+//        let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
 //
-//                let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description(), for: indexPath) as! GithubUserCell    // 2
-//                // Configure the cell
-//                cell.user = element
-////                cell.contentView.backgroundColor = .brown
-//                return cell    // 3
-//
+//        output.githubUserList
+////            .asObservable()
+////            .bind(to: tableView.rx.items) { (tableView, row, element) in
+////                let indexPath = IndexPath(row: row, section: 0)
+////                print("\(self.TAG) -- CustomTableViewCell -- item = \(element.username)")
+////
+////                let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description(), for: indexPath) as! GithubUserCell    // 2
+////                // Configure the cell
+////                cell.user = element
+//////                cell.contentView.backgroundColor = .brown
+////                return cell    // 3
+////
+////            }
+//            .asDriver(onErrorJustReturn: [])
+//            .drive(tableView.rx.items(cellIdentifier: GithubUserCell.self.description(), cellType: GithubUserCell.self)) { tableView, item, cell in
+//                cell.user = item
 //            }
-            .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: GithubUserCell.self.description(), cellType: GithubUserCell.self)) { tableView, item, cell in
-                cell.user = item
-            }
+//
+//        tableView.rx
+//            .modelSelected(GithubUser.self)
+//          .subscribe(onNext: { model in
+//            print("\(model.username) was selected")
+//          })
         
-        tableView.rx
-            .modelSelected(GithubUser.self)
-          .subscribe(onNext: { model in
-            print("\(model.username) was selected")
-          })
         
-//        tableView.rx.b
+        viewModel.getGithubUserList(since: 20)
+    
+    }
+}
+
+
+extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description()) as! GithubUserCell
+        
+        return cell
     }
 }

@@ -16,6 +16,9 @@ enum NetworkError: Error {
     case noDataError
 }
 
+typealias NetworkCompletionHandler<T: Codable> = (Result<T, NetworkError>) -> Void
+
+
 class APIClient {
     public static let shared = APIClient()
     private let queueManager: QueueManager
@@ -29,7 +32,7 @@ class APIClient {
             }.observe(on: MainScheduler.asyncInstance)
     }
     
-    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completeionHandler: @escaping (Result<T, NetworkError>) -> Void){
+    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (Result<T, NetworkError>) -> Void){
         let session = URLSession.shared
         let request = apiRequest.request(with: apiRequest.baseURL)
            
@@ -40,26 +43,26 @@ class APIClient {
         let task = session.dataTask(with: request) { data, response, error in
 
            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                completeionHandler(.failure(.serverError))
+                completionHandler(.failure(.serverError))
                 return
            }
 
            guard let mime = response.mimeType, mime == "application/json" else {
-                completeionHandler(.failure(.wrongMimeTypeError))
+                completionHandler(.failure(.wrongMimeTypeError))
                 return
            }
 
            guard let responseData = data else{
-                completeionHandler(.failure(.noDataError))
+                completionHandler(.failure(.noDataError))
                 return
            }
             
             let resultjson = try? JSONDecoder().decode(T.self, from: responseData)
            
             if let result = resultjson{
-                completeionHandler(.success(result))
+                completionHandler(.success(result))
             }else{
-                completeionHandler(.failure(.decodingError))
+                completionHandler(.failure(.decodingError))
             }
        }
 

@@ -11,8 +11,8 @@ import RxFlow
 
 
 final class GithubFlow: Flow {
-    private let githubLocalDataSource: DataSource
-    private let githubRemoteDataSource: DataSource
+    private let localDataSource: DataSource
+    private let remoteDataSource: DataSource
     
     var root: Presentable {
         rootViewController
@@ -23,8 +23,8 @@ final class GithubFlow: Flow {
     }()
     
     init() {
-        self.githubLocalDataSource = GithubLocalDataSource()
-        self.githubRemoteDataSource = GithubRemoteDataSource()
+        self.localDataSource = GithubLocalDataSource()
+        self.remoteDataSource = GithubRemoteDataSource()
     }
     
     deinit {
@@ -52,7 +52,7 @@ final class GithubFlow: Flow {
 
 private extension GithubFlow {
     func showGithubUserListViewController() -> FlowContributors {
-        let service = GithubService(localDataSource: githubLocalDataSource, remoteDataSource: githubRemoteDataSource)
+        let service = GithubService(localDataSource: localDataSource, remoteDataSource: remoteDataSource)
         let viewModel = GithubViewModel(service: service)
         let viewController = GithubUserListViewController.loadViewController(viewModel: viewModel)
         rootViewController.setViewControllers([viewController as! UIViewController], animated: false)
