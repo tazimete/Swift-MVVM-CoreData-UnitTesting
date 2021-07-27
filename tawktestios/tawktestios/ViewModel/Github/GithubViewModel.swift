@@ -11,6 +11,8 @@ import RxCocoa
 import RxFlow
 
 class GithubViewModel: AbstractGithubViewModel, InputOutputType {
+    public var githubUserList: [GithubUser] = [GithubUser]()
+    
     struct Input {
         let fetchGithubUserList: Observable<Void>
     }
@@ -44,12 +46,13 @@ class GithubViewModel: AbstractGithubViewModel, InputOutputType {
         return service.remoteDataSource.getGithubUserList(page: 20)
     }
     
-    func getGithubUserList(since: Int) {
-        service.remoteDataSource.getGitubUserList(since: 20) { result in
+    func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void)) {
+        service.remoteDataSource.getGitubUserList(since: 20) { [weak self] result in
             switch result{
                 case .success(let users):
                     print("getGithubUserList() -- \(users.last?.username)")
-                
+                    self?.githubUserList.append(contentsOf: users)
+                    completeionHandler()
                 case .failure(let error):
                     print("\((error as? NetworkError)?.localizedDescription)")
             }

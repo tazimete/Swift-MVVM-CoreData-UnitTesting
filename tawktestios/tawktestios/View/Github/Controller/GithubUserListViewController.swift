@@ -11,6 +11,7 @@ import RxCocoa
 
 class GithubUserListViewController: BaseViewController {
     private let tableView = UITableView()
+    private var githubViewModel: AbstractGithubViewModel!
     
     public static func loadViewController(viewModel: ViewModel) -> GithubUserListViewController?{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
@@ -45,9 +46,7 @@ class GithubUserListViewController: BaseViewController {
     }
     
     override func bindViewModel() {
-        guard let viewModel = viewModel as? GithubViewModel else {
-            return
-        }
+        githubViewModel = viewModel as! GithubViewModel
         
 //        let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
 //
@@ -76,7 +75,9 @@ class GithubUserListViewController: BaseViewController {
 //          })
         
         
-        viewModel.getGithubUserList(since: 20)
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+        })
     
     }
 }
@@ -84,11 +85,13 @@ class GithubUserListViewController: BaseViewController {
 
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        30
+        githubViewModel.githubUserList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description()) as! GithubUserCell
+        
+        cell.user = githubViewModel.githubUserList[indexPath.row]
         
         return cell
     }

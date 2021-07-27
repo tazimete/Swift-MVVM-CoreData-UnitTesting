@@ -41,28 +41,29 @@ class APIClient {
 //       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                     completionHandler(.failure(.serverError))
+                     return
+                }
 
-           guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                completionHandler(.failure(.serverError))
-                return
-           }
+                guard let mime = response.mimeType, mime == "application/json" else {
+                     completionHandler(.failure(.wrongMimeTypeError))
+                     return
+                }
 
-           guard let mime = response.mimeType, mime == "application/json" else {
-                completionHandler(.failure(.wrongMimeTypeError))
-                return
-           }
-
-           guard let responseData = data else{
-                completionHandler(.failure(.noDataError))
-                return
-           }
-            
-            let resultjson = try? JSONDecoder().decode(T.self, from: responseData)
-           
-            if let result = resultjson{
-                completionHandler(.success(result))
-            }else{
-                completionHandler(.failure(.decodingError))
+                guard let responseData = data else{
+                     completionHandler(.failure(.noDataError))
+                     return
+                }
+                 
+                 let resultjson = try? JSONDecoder().decode(T.self, from: responseData)
+                
+                 if let result = resultjson{
+                     completionHandler(.success(result))
+                 }else{
+                     completionHandler(.failure(.decodingError))
+                 }
             }
        }
 
