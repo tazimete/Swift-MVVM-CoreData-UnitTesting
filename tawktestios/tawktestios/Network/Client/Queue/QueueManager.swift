@@ -12,13 +12,9 @@ class DataManager {
 
     private let queueManager: QueueManager
 
-    // MARK: - Init
-
     init(withQueueManager queueManager: QueueManager = QueueManager.shared) {
         self.queueManager = queueManager
     }
-
-    // MARK: - Retrieval
 
     func retrievalQuestions() {
         let operation = NetworkOperation()

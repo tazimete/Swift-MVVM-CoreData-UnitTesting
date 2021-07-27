@@ -9,14 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ApiClientError: Error {
-    let code:Int
-    let message: String
-    
-    init(code: Int, message: String) {
-        self.code = code
-        self.message = message
-    }
+enum NetworkError: Error {
+    case serverError
+    case decodingError
+    case wrongMimeTypeError
+    case noDataError
 }
 
 class APIClient {
@@ -32,7 +29,7 @@ class APIClient {
             }.observe(on: MainScheduler.asyncInstance)
     }
     
-    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completeionHandler: @escaping (_ response: T?, _ error: Error?) -> Void){
+    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completeionHandler: @escaping (Result<T, NetworkError>) -> Void){
         let session = URLSession.shared
         let request = apiRequest.request(with: apiRequest.baseURL)
            
@@ -42,33 +39,27 @@ class APIClient {
 
         let task = session.dataTask(with: request) { data, response, error in
 
-           if error != nil || data == nil {
-               print("Client error!")
-               return
-           }
-
            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-               print("Server error!")
-               return
+                completeionHandler(.failure(.serverError))
+                return
            }
 
            guard let mime = response.mimeType, mime == "application/json" else {
-               print("Wrong MIME type!")
-               return
+                completeionHandler(.failure(.wrongMimeTypeError))
+                return
            }
 
            guard let responseData = data else{
-               print("No data")
-               return
+                completeionHandler(.failure(.noDataError))
+                return
            }
             
             let resultjson = try? JSONDecoder().decode(T.self, from: responseData)
            
             if let result = resultjson{
-                completeionHandler(result, nil)
+                completeionHandler(.success(result))
             }else{
-                let error = ApiClientError(code: 100, message: "Error response")
-                completeionHandler(nil, error)
+                completeionHandler(.failure(.decodingError))
             }
        }
 
