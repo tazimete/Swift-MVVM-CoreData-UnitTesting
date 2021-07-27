@@ -7,28 +7,12 @@
 
 import Foundation
 
-
-class DataManager {
-
-    private let queueManager: QueueManager
-
-    init(withQueueManager queueManager: QueueManager = QueueManager.shared) {
-        self.queueManager = queueManager
-    }
-
-    func retrievalQuestions() {
-        let operation = NetworkOperation()
-//        operation.completionHandler = completionHandler
-        queueManager.enqueue(operation)
-    }
-}
-
-
 class QueueManager {
     static let shared = QueueManager()
 
     lazy var queue: OperationQueue = {
         let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
         return queue;
     }()
 

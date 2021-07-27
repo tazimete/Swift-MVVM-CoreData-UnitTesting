@@ -89,7 +89,9 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description()) as! GithubUserCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description()) as? GithubUserCell else {
+            return UITableViewCell() 
+        }
         
         cell.user = githubViewModel.githubUserList[indexPath.row]
         

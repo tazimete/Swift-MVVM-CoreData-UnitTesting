@@ -257,10 +257,9 @@
 			isa = PBXGroup;
 			children = (
 				29F4286026ADCC6F0073C150 /* Queue */,
-				2948DC7726AB367C001EF5D2 /* ApiRequest.swift */,
 				2948DC7B26AB3E35001EF5D2 /* Parameterizable.swift */,
+				2948DC7726AB367C001EF5D2 /* ApiRequest.swift */,
 				2948DC7D26AB3E82001EF5D2 /* ApiClient.swift */,
-				29F4285E26AD924D0073C150 /* NetworkOperation.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -374,6 +373,7 @@
 		29F4286026ADCC6F0073C150 /* Queue */ = {
 			isa = PBXGroup;
 			children = (
+				29F4285E26AD924D0073C150 /* NetworkOperation.swift */,
 				29F4286126ADCC8C0073C150 /* QueueManager.swift */,
 			);
 			path = Queue;

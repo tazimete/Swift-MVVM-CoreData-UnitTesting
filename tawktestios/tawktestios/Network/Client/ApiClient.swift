@@ -32,13 +32,9 @@ class APIClient {
             }.observe(on: MainScheduler.asyncInstance)
     }
     
-    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (Result<T, NetworkError>) -> Void){
+    func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
         let session = URLSession.shared
         let request = apiRequest.request(with: apiRequest.baseURL)
-           
-//       var request = URLRequest(url: url)
-//       request.httpMethod = "GET"
-//       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -74,14 +70,12 @@ class APIClient {
         self.queueManager = queueManager
     }
     
-    func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (Result<T, NetworkError>) -> Void) -> Observable<T> {
+    func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)) {
 //        let request = apiRequest.request(with: apiRequest.baseURL)
         
-        let operation = NetworkOperation()
+        let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
 //        operation.completionHandler = completionHandler
-        let result = operation.execute(apiRequest: apiRequest, type: type)
+//        operation.execute()
         queueManager.enqueue(operation)
-        
-        return result
     }
 }
