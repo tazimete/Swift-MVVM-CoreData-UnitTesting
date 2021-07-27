@@ -42,24 +42,24 @@ class NetworkOperation: Operation {
            super.init()
 
            // use weak self to prevent retain cycle
-//           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
-//
-//               /*
-//               if there is a custom completionHandler defined,
-//               pass the result gotten in downloadTask's completionHandler to the
-//               custom completionHandler
-//               */
-//               if let completionHandler = completionHandler {
-//                   // localURL is the temporary URL the downloaded file is located
-//                   completionHandler(localURL, response, error)
-//               }
-//
-//              /*
-//                set the operation state to finished once
-//                the download task is completed or have error
-//              */
-//               self?.state = .finished
-//           })
+           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
+
+               /*
+               if there is a custom completionHandler defined,
+               pass the result gotten in downloadTask's completionHandler to the
+               custom completionHandler
+               */
+               if let completionHandler = completionHandler {
+                   // localURL is the temporary URL the downloaded file is located
+                   completionHandler(localURL, response, error)
+               }
+
+              /*
+                set the operation state to finished once
+                the download task is completed or have error
+              */
+               self?.state = .finished
+           })
        }
     
 //    public func execute<T: Codable>(apiRequest: APIRequest, type: T.Type) -> Observable<T> {
@@ -95,23 +95,30 @@ class NetworkOperation: Operation {
     init<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
         super.init()
     
-        let session = URLSession.shared
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+
+        let session = URLSession(configuration: config)
         let request = apiRequest.request(with: apiRequest.baseURL)
 
-        task = session.dataTask(with: request) { data, response, error in
+        task = session.dataTask(with: request) { [weak self] data, response, error in
             DispatchQueue.main.async {
                 guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                      completionHandler(.failure(.serverError))
+                     self?.state = .finished
                      return
                 }
 
                 guard let mime = response.mimeType, mime == "application/json" else {
                      completionHandler(.failure(.wrongMimeTypeError))
+                     self?.state = .finished
                      return
                 }
 
                 guard let responseData = data else{
                      completionHandler(.failure(.noDataError))
+                     self?.state = .finished
                      return
                 }
                  
@@ -122,6 +129,8 @@ class NetworkOperation: Operation {
                  }else{
                      completionHandler(.failure(.decodingError))
                  }
+                
+                 self?.state = .finished
             }
        }
 
@@ -151,10 +160,10 @@ func testNetworkOperation() {
         queue.addOperation(operation)
     }
     
-    DispatchQueue.main.asyncAfter(deadline: .now()+20, execute: {
+    DispatchQueue.main.asyncAfter(deadline: .now()+150, execute: {
         let url = URL(string: "https://github.com/fluffyes/AppStoreCard/archive/master.zip")! 
         let operation = NetworkOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { (localURL, response, error) in
-            print("finished downloading ## -- \(url.absoluteString)")
+            print("finished downloading ## -- \(url.absoluteString) -- queue count = \(queue.operations.count)")
         })
         queue.addOperation(operation)
     })

@@ -10,17 +10,17 @@ import RxSwift
 import RxCocoa
 import RxFlow
 
-class GithubViewModel: AbstractGithubViewModel, InputOutputType {
+class GithubViewModel: AbstractGithubViewModel {
     public var githubUserList: [GithubUser] = [GithubUser]()
     
-    struct Input {
-        let fetchGithubUserList: Observable<Void>
-    }
-    
-    struct Output {
-        let githubUserList: BehaviorRelay<[GithubUser]>
-    }
-    
+//    struct Input {
+//        let fetchGithubUserList: Observable<Void>
+//    }
+//
+//    struct Output {
+//        let githubUserList: BehaviorRelay<[GithubUser]>
+//    }
+//
     var steps = PublishRelay<Step>()
     var service: Service
     
@@ -28,23 +28,23 @@ class GithubViewModel: AbstractGithubViewModel, InputOutputType {
         self.service = service
     }
     
-    func transform(input: Input) -> Output {
-        let githubUserList = BehaviorRelay<[GithubUser]>(value: [])
-        
-        input.fetchGithubUserList.flatMapLatest({() -> Observable<[GithubUser]> in
-            return self.getGithubUserList(page: 20)
-        }).subscribe(onNext: {
-            [unowned self] userList in
-            print("\(self) -- transform() -- user name = \(userList.last?.username ?? "")")
-            githubUserList.accept(userList)
-        },onError: nil, onCompleted: nil, onDisposed: nil)
-        
-        return Output(githubUserList: githubUserList)
-    }
+//    func transform(input: Input) -> Output {
+//        let githubUserList = BehaviorRelay<[GithubUser]>(value: [])
+//
+//        input.fetchGithubUserList.flatMapLatest({() -> Observable<[GithubUser]> in
+//            return self.getGithubUserList(page: 20)
+//        }).subscribe(onNext: {
+//            [unowned self] userList in
+//            print("\(self) -- transform() -- user name = \(userList.last?.username ?? "")")
+//            githubUserList.accept(userList)
+//        },onError: nil, onCompleted: nil, onDisposed: nil)
+//
+//        return Output(githubUserList: githubUserList)
+//    }
     
-    func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
-        return service.remoteDataSource.getGithubUserList(page: 20)
-    }
+//    func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
+//        return service.remoteDataSource.getGithubUserList(page: 20)
+//    }
     
     func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void)) {
         service.remoteDataSource.getGitubUserList(since: 20) { [weak self] result in

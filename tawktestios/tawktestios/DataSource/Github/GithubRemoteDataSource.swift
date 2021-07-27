@@ -15,9 +15,9 @@ public class GithubRemoteDataSource: DataSource {
         self.apiClient = APIClient.shared
     }
     
-    func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
-        return apiClient.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: page)), type: [GithubUser].self)
-    }
+//    func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
+//        return apiClient.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: page)), type: [GithubUser].self)
+//    }
     
     func getGitubUserList(since: Int, completionHandler: @escaping (NetworkCompletionHandler<[GithubUser]>)) {
 //        apiClient.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: since)), type: [GithubUser].self, completionHandler: completionHandler)

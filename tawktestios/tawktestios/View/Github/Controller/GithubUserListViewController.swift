@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 class GithubUserListViewController: BaseViewController {
     private let tableView = UITableView()
@@ -22,11 +20,7 @@ class GithubUserListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-//        APIClient.shared.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: 20)), type: [GithubUser].self)
-//            .subscribe(onNext: { user in
-//                print("user list = \(user.last?.username ?? "")")
-//        }, onError: nil, onCompleted: nil, onDisposed: nil)
+//        testNetworkOperation()
     }
     
     override func initView() {
@@ -48,35 +42,29 @@ class GithubUserListViewController: BaseViewController {
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-//        let output = viewModel.transform(input: GithubViewModel.Input(fetchGithubUserList: Observable.just(())))
-//
-//        output.githubUserList
-////            .asObservable()
-////            .bind(to: tableView.rx.items) { (tableView, row, element) in
-////                let indexPath = IndexPath(row: row, section: 0)
-////                print("\(self.TAG) -- CustomTableViewCell -- item = \(element.username)")
-////
-////                let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description(), for: indexPath) as! GithubUserCell    // 2
-////                // Configure the cell
-////                cell.user = element
-//////                cell.contentView.backgroundColor = .brown
-////                return cell    // 3
-////
-////            }
-//            .asDriver(onErrorJustReturn: [])
-//            .drive(tableView.rx.items(cellIdentifier: GithubUserCell.self.description(), cellType: GithubUserCell.self)) { tableView, item, cell in
-//                cell.user = item
-//            }
-//
-//        tableView.rx
-//            .modelSelected(GithubUser.self)
-//          .subscribe(onNext: { model in
-//            print("\(model.username) was selected")
-//          })
-        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 0")
+        })
         
         githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
             self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 1")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 2")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 3")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 4")
         })
     
     }
@@ -89,12 +77,40 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description()) as? GithubUserCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description(), for: indexPath)
+                as? GithubUserCell else{
             return UITableViewCell() 
         }
         
         cell.user = githubViewModel.githubUserList[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 00")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 11")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 22")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 33")
+        })
+        
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            self?.tableView.reloadData()
+            print("\(self?.TAG) -- getGithubUserList() -- 44")
+        })
     }
 }
