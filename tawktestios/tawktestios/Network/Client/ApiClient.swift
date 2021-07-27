@@ -75,7 +75,7 @@ class APIClient {
         
         let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
 //        operation.completionHandler = completionHandler
-//        operation.execute()
+        operation.qualityOfService = .utility
         queueManager.enqueue(operation)
     }
 }

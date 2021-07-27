@@ -148,7 +148,7 @@ func testNetworkOperation() {
             print("finished downloading \(url.absoluteString)")
         })
 
-//        queue.addOperation(operation)
+        queue.addOperation(operation)
     }
     
     DispatchQueue.main.asyncAfter(deadline: .now()+20, execute: {
@@ -156,7 +156,6 @@ func testNetworkOperation() {
         let operation = NetworkOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { (localURL, response, error) in
             print("finished downloading ## -- \(url.absoluteString)")
         })
-
-//        queue.addOperation(operation)
+        queue.addOperation(operation)
     })
 }
