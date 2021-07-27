@@ -17,6 +17,8 @@ class GithubUserCell : UITableViewCell {
         }
     }
     
+    public static let cellReuseIdentifier = "GithubUserCell"
+    
     private let containerView : UIView = {
         let view = UIView()
         view.backgroundColor = .white

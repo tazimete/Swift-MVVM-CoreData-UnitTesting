@@ -36,7 +36,7 @@ class GithubUserListViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.self.description())
+        tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
     }
     
     override func bindViewModel() {
@@ -77,7 +77,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.self.description(), for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.cellReuseIdentifier, for: indexPath)
                 as? GithubUserCell else{
             return UITableViewCell() 
         }
