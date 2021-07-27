@@ -74,7 +74,7 @@ class APIClient {
         self.queueManager = queueManager
     }
     
-    func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type) -> Observable<T> {
+    func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (Result<T, NetworkError>) -> Void) -> Observable<T> {
 //        let request = apiRequest.request(with: apiRequest.baseURL)
         
         let operation = NetworkOperation()
@@ -83,10 +83,5 @@ class APIClient {
         queueManager.enqueue(operation)
         
         return result
-
-//        return URLSession.shared.rx.data(request: request)
-//            .map { data in
-//                try JSONDecoder().decode(T.self, from: data)
-//            }.observe(on: MainScheduler.asyncInstance)
     }
 }
