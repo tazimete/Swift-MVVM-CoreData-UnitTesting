@@ -11,9 +11,9 @@ class GithubUserCell : UITableViewCell {
     
     var user : GithubUser? {
         didSet {
-//            productImage.image = user?.username
-            productNameLabel.text = user?.username
-            productDescriptionLabel.text = user?.username
+            lblUsername.text = user?.username
+            lblDescription.text = user?.url
+            ivAvatar.loadImage(from: user?.avatarUrl ?? "")
         }
     }
     
@@ -25,7 +25,7 @@ class GithubUserCell : UITableViewCell {
         return view
     }()
     
-    private let productNameLabel : UILabel = {
+    private let lblUsername : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.font = UIFont.boldSystemFont(ofSize: 16)
@@ -34,7 +34,7 @@ class GithubUserCell : UITableViewCell {
     }()
     
     
-    private let productDescriptionLabel : UILabel = {
+    private let lblDescription : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .gray
         lbl.font = UIFont.systemFont(ofSize: 16)
@@ -43,13 +43,18 @@ class GithubUserCell : UITableViewCell {
         return lbl
     }()
     
-    private let productImage : UIImageView = {
+    private let ivAvatar : UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "img_avatar"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
         return imgView
     }()
     
+    override func prepareForReuse() {
+        ivAvatar.image = nil
+        lblUsername.text = ""
+        lblDescription.text = ""
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -58,14 +63,14 @@ class GithubUserCell : UITableViewCell {
         containerView.layer.borderColor = UIColor.black.cgColor
         
         addSubview(containerView)
-        containerView.addSubview(productImage)
-        containerView.addSubview(productNameLabel)
-        containerView.addSubview(productDescriptionLabel)
+        containerView.addSubview(ivAvatar)
+        containerView.addSubview(lblUsername)
+        containerView.addSubview(lblDescription)
         
         containerView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: frame.width, height: 0, enableInsets: false)
-        productImage.anchor(top: containerView.topAnchor, left:  containerView.leftAnchor, bottom: containerView.bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 0, width: 90, height: 90, enableInsets: false)
-        productNameLabel.anchor(top: containerView.topAnchor, left: productImage.rightAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
-        productDescriptionLabel.anchor(top: productNameLabel.bottomAnchor, left: productImage.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 15, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
+        ivAvatar.anchor(top: containerView.topAnchor, left:  containerView.leftAnchor, bottom: containerView.bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 0, width: 90, height: 90, enableInsets: false)
+        lblUsername.anchor(top: containerView.topAnchor, left: ivAvatar.rightAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
+        lblDescription.anchor(top: lblUsername.bottomAnchor, left: ivAvatar.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 15, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
     }
     
     required init?(coder aDecoder: NSCoder) {

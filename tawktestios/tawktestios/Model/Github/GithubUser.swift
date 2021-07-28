@@ -10,9 +10,13 @@ import Foundation
 class GithubUser: Codable {
     var id: Int?
     var username: String?
+    var avatarUrl: String?
+    var url: String?
     
     enum CodingKeys: String, CodingKey {
             case id = "id"
             case username = "login"
+            case avatarUrl = "avatar_url"
+            case url = "url"
         }
 }
