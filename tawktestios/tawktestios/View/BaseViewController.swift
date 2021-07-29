@@ -12,6 +12,8 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
     public let TAG = description()
     public var viewModel: ViewModel!
     public var lastContentOffset:CGFloat = 0.0
+    public var paginationOffset = 0
+    public var paginationlimit = 20 
     
     enum ScrollDirection : Int {
         case none
@@ -112,14 +114,14 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
         return IndexPath(row: 0, section: 0)
     }
     
-    public func getDataCount() -> Int{
+    public func getTotalDataCount() -> Int{
         fatalError("Must Override")
         return 0
     }
     
     public func getPaginationOffset() -> Int{
         fatalError("Must Override")
-        return 10
+        return paginationlimit
     }
     
     public func onEndScrolling(scView: UIScrollView) -> Void{
@@ -128,9 +130,9 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
                 let firstVisibleItem = getFirstVisibleItem()
                 let lastVisibleItem = getLastVisibleItem()
                 
-                print("\(BaseViewController.self.description()) -- scrollViewDidScroll() -- down, lastVisibleItem = \(lastVisibleItem), dataCount = \(getDataCount())")
+                print("\(BaseViewController.self.description()) -- scrollViewDidScroll() -- down, lastVisibleItem = \(lastVisibleItem), dataCount = \(getTotalDataCount())")
                 
-                if ( lastVisibleItem.row > getDataCount()-getPaginationOffset()) {
+                if ( lastVisibleItem.row > getTotalDataCount()-getPaginationOffset()) {
                     loadMoreData();
                 }
                 

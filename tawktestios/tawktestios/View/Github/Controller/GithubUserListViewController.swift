@@ -15,6 +15,8 @@ class GithubUserListViewController: BaseViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
         let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
+        fetchRequest.fetchOffset = paginationOffset
+        fetchRequest.fetchLimit = paginationOffset + paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
@@ -81,6 +83,7 @@ class GithubUserListViewController: BaseViewController {
     }
     
     override func loadMoreData() -> Void{
+        paginationOffset += 20 
         loadGithubUserListOnPaginate()
     }
     
@@ -88,7 +91,7 @@ class GithubUserListViewController: BaseViewController {
         return fetchedResultsController.indexPath(forObject: fetchedResultsController.fetchedObjects?.last ?? GithubUserEntity())!
     }
     
-    override func getDataCount() -> Int{
+    override func getTotalDataCount() -> Int{
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
