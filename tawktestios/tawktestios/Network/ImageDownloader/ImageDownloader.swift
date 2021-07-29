@@ -21,10 +21,10 @@ final class ImageDownloader {
         imagesDownloadTasks = [:]
     }
     
-    func downloadImage(with imageUrlString: String?, completionHandler: @escaping (UIImage?, Bool) -> Void, placeholderImage: UIImage?) {
+    func downloadImage(with imageUrlString: String?, completionHandler: @escaping (ImageDownloadCompletionHandler), placeholderImage: UIImage?) {
         
         guard let imageUrlString = imageUrlString else {
-            completionHandler(placeholderImage, true)
+            completionHandler(placeholderImage, false)
             return
         }
         
@@ -32,11 +32,11 @@ final class ImageDownloader {
             completionHandler(image, true)
         } else {
             guard let url = URL(string: imageUrlString) else {
-                completionHandler(placeholderImage, true)
+                completionHandler(placeholderImage, false)
                 return
             }
             
-            if let _ = getDataTaskFrom(urlString: imageUrlString) {
+            if let cachedTask = getDataTaskFrom(urlString: imageUrlString) {
                 return
             }
             
@@ -48,7 +48,7 @@ final class ImageDownloader {
                 
                 if let _ = error {
                     DispatchQueue.main.async {
-                        completionHandler(placeholderImage, true)
+                        completionHandler(placeholderImage, false)
                     }
                     return
                 }

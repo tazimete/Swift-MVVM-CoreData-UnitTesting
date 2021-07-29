@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum NetworkError: Error {
     case serverError
@@ -15,20 +16,13 @@ enum NetworkError: Error {
 }
 
 typealias NetworkCompletionHandler<T: Codable> = (Result<T, NetworkError>) -> Void
+typealias DownloadCompletionHandler = ((URL?, URLResponse?, Error?) -> Void)?
+typealias ImageDownloadCompletionHandler = (UIImage?, Bool) -> Void
 
 
 class APIClient {
     public static let shared = APIClient()
     private let queueManager: QueueManager
-    
-//    func send<T: Codable>(apiRequest: APIRequest, type: T.Type) -> Observable<T> {
-//        let request = apiRequest.request(with: apiRequest.baseURL)
-//        
-//        return URLSession.shared.rx.data(request: request)
-//            .map { data in
-//                try JSONDecoder().decode(T.self, from: data)
-//            }.observe(on: MainScheduler.asyncInstance)
-//    }
     
     func send<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
         let session = URLSession.shared
@@ -69,11 +63,16 @@ class APIClient {
     }
     
     func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)) {
-//        let request = apiRequest.request(with: apiRequest.baseURL)
-        
         let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
 //        operation.completionHandler = completionHandler
         operation.qualityOfService = .utility
         queueManager.enqueue(operation)
     }
+    
+//    func enqueue<T: Codable>(session: URLSession, url: URL, completionHandler: @escaping (DownloadCompletionHandler)) {
+//        let operation = NetworkOperation(session: session, downloadTaskURL: url, completionHandler: completionHandler)
+////        operation.completionHandler = completionHandler
+//        operation.qualityOfService = .utility
+//        queueManager.enqueue(operation)
+//    }
 }

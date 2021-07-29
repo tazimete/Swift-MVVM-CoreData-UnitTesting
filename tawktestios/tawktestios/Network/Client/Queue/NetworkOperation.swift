@@ -43,22 +43,23 @@ class NetworkOperation: Operation {
 
            // use weak self to prevent retain cycle
            task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
+                    DispatchQueue.main.async {
+                    /*
+                    if there is a custom completionHandler defined,
+                    pass the result gotten in downloadTask's completionHandler to the
+                    custom completionHandler
+                    */
+                    if let completionHandler = completionHandler {
+                        // localURL is the temporary URL the downloaded file is located
+                        completionHandler(localURL, response, error)
+                    }
 
-               /*
-               if there is a custom completionHandler defined,
-               pass the result gotten in downloadTask's completionHandler to the
-               custom completionHandler
-               */
-               if let completionHandler = completionHandler {
-                   // localURL is the temporary URL the downloaded file is located
-                   completionHandler(localURL, response, error)
-               }
-
-              /*
-                set the operation state to finished once
-                the download task is completed or have error
-              */
-               self?.state = .finished
+                   /*
+                     set the operation state to finished once
+                     the download task is completed or have error
+                   */
+                        self?.state = .finished
+                }
            })
        }
     

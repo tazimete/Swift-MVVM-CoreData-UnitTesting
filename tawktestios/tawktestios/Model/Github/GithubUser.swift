@@ -6,6 +6,21 @@
 //
 
 import Foundation
+import CoreData
+
+//class GithubUserEntity: NSManagedObject {
+//    @NSManaged var id: NSNumber?
+//    @NSManaged var username: String?
+//    @NSManaged var avatarUrl: String?
+//    @NSManaged var url: String?
+//    
+//    func update(user: GithubUser){
+//        id = NSNumber(value: user.id ?? -1)
+//        username = user.username
+//        avatarUrl = user.avatarUrl
+//        url = user.url
+//    }
+//}
 
 class GithubUser: Codable {
     var id: Int?
@@ -14,9 +29,11 @@ class GithubUser: Codable {
     var url: String?
     
     enum CodingKeys: String, CodingKey {
-            case id = "id"
-            case username = "login"
-            case avatarUrl = "avatar_url"
-            case url = "url"
-        }
+        case id = "id"
+        case username = "login"
+        case avatarUrl = "avatar_url"
+        case url = "url"
+    }
 }
+
+
