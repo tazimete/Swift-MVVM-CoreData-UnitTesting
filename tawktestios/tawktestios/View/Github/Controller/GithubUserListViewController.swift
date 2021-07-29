@@ -12,13 +12,13 @@ class GithubUserListViewController: BaseViewController {
     private let tableView = UITableView()
     private var githubViewModel: AbstractGithubViewModel!
     
-    var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, repository: ApiRepository()) 
+//    var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, repository: ApiRepository())
     lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
         let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: dataProvider.viewContext,
+                                                    managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
         
@@ -42,9 +42,9 @@ class GithubUserListViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 //        testNetworkOperation()
-        dataProvider.fetchFilms { (error) in
-            // Handle Error by displaying it in UI
-        }
+//        dataProvider.fetchFilms { (error) in
+//            // Handle Error by displaying it in UI
+//        }
     }
     
     override func initView() {
@@ -67,9 +67,7 @@ class GithubUserListViewController: BaseViewController {
         githubViewModel = viewModel as! GithubViewModel
         
         githubViewModel.getGithubUserList(since: 20, completeionHandler: { [unowned self] in
-//            self?.tableView.reloadData()
             print("\(self.TAG) -- getGithubUserList() -- 0")
-            self.dataProvider.syncFilms(jsonDictionary: self.githubViewModel.githubUserList, taskContext: (self.dataProvider.persistentContainer.newBackgroundContext()))
         })
         
 //        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
@@ -117,30 +115,10 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        githubViewModel.getGithubUserList(since: 30, completeionHandler: { [weak self] in
-            self?.tableView.reloadData()
-            print("\(self?.TAG) -- getGithubUserList() -- 00")
+        let user = (fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
+        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [unowned self] in
+            print("\(self.TAG) -- getGithubUserList() -- 00")
         })
-        
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 11")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 22")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 33")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 44")
-//        })
     }
 }
 

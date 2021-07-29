@@ -11,6 +11,7 @@ import RxCocoa
 import RxFlow
 
 class GithubViewModel: AbstractGithubViewModel {
+    public var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, repository: ApiRepository()) 
     public var githubUserList: [GithubUser] = [GithubUser]()
     
 //    struct Input {
@@ -47,11 +48,12 @@ class GithubViewModel: AbstractGithubViewModel {
 //    }
     
     func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void)) {
-        service.remoteDataSource.getGitubUserList(since: 20) { [weak self] result in
+        service.remoteDataSource.getGitubUserList(since: since) { [unowned self] result in
             switch result{
                 case .success(let users):
                     print("getGithubUserList() -- \(users.last?.username)")
-                    self?.githubUserList.append(contentsOf: users)
+                    self.dataProvider.syncFilms(jsonDictionary: users, taskContext: (self.dataProvider.persistentContainer.newBackgroundContext()))
+                    self.githubUserList.append(contentsOf: users)
                     completeionHandler()
                 case .failure(let error):
                     print("\((error as? NetworkError)?.localizedDescription)")
