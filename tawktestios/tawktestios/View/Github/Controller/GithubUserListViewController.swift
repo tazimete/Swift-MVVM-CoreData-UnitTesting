@@ -12,7 +12,6 @@ class GithubUserListViewController: BaseViewController {
     private let tableView = UITableView()
     private var githubViewModel: AbstractGithubViewModel!
     
-//    var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, repository: ApiRepository())
     lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
         let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
@@ -21,7 +20,7 @@ class GithubUserListViewController: BaseViewController {
                                                     managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
-        fetchRequest.fetchBatchSize = 20 
+        fetchRequest.fetchBatchSize = 20
         
         do {
             try controller.performFetch()
@@ -43,9 +42,6 @@ class GithubUserListViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 //        testNetworkOperation()
-//        dataProvider.fetchFilms { (error) in
-//            // Handle Error by displaying it in UI
-//        }
     }
     
     override func initView() {
@@ -70,27 +66,34 @@ class GithubUserListViewController: BaseViewController {
         githubViewModel.getGithubUserList(since: 20, completeionHandler: { [unowned self] in
             print("\(self.TAG) -- getGithubUserList() -- 0")
         })
-        
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 1")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 2")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 3")
-//        })
-//
-//        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-//            self?.tableView.reloadData()
-//            print("\(self?.TAG) -- getGithubUserList() -- 4")
-//        })
+    }
     
+    public func loadGithubUserListOnPaginate(){
+        let user = (fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
+        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [unowned self] in
+            print("\(self.TAG) -- loadGithubUserListOnPaginate() -- 00")
+        })
+    }
+    
+    //MARK: Pagination
+    override func hasMoreData() -> Bool{
+        return true
+    }
+    
+    override func loadMoreData() -> Void{
+        loadGithubUserListOnPaginate()
+    }
+    
+    override func getLastVisibleItem() -> IndexPath{
+        return fetchedResultsController.indexPath(forObject: fetchedResultsController.fetchedObjects?.last ?? GithubUserEntity())!
+    }
+    
+    override func getDataCount() -> Int{
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
+    override func getPaginationOffset() -> Int{
+        return 15
     }
 }
 
@@ -114,15 +117,19 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = (fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
-        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [unowned self] in
-            print("\(self.TAG) -- getGithubUserList() -- 00")
-        })
+        
     }
 }
 
 
 extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("\(TAG) -- controllerDidChangeContent()")
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("\(TAG) -- controllerWillChangeContent()")
+    }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         tableView.reloadData()

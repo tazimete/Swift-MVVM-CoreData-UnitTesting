@@ -50,11 +50,11 @@ class GithubUserCell : UITableViewCell {
         return imgView
     }()
     
-    override func prepareForReuse() {
-        ivAvatar.image = nil
-        lblUsername.text = ""
-        lblDescription.text = ""
-    }
+//    override func prepareForReuse() {
+//        ivAvatar.image = nil
+//        lblUsername.text = ""
+//        lblDescription.text = ""
+//    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

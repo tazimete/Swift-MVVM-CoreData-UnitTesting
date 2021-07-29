@@ -7,7 +7,7 @@
 
 import CoreData
 
-let dataErrorDomain = "dataErrorDomain"
+//let dataErrorDomain = "dataErrorDomain"
 
 class ApiRepository {
 
@@ -32,7 +32,7 @@ class DataProvider {
         self.repository = repository
     }
     
-    func fetchFilms(completion: @escaping(Error?) -> Void) {
+//    func fetchFilms(completion: @escaping(Error?) -> Void) {
 //        repository.getFilms() { jsonDictionary, error in
 //            if let error = error {
 //                completion(error)
@@ -53,7 +53,7 @@ class DataProvider {
 //
 //            completion(nil)
 //        }
-    }
+//    }
     
     public func syncFilms(jsonDictionary: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
         var successfull = false

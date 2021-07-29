@@ -8,13 +8,23 @@
 import UIKit
 
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, UIScrollViewDelegate {
     public let TAG = description()
     public var viewModel: ViewModel!
-
+    public var lastContentOffset:CGFloat = 0.0
+    
+    enum ScrollDirection : Int {
+        case none
+        case right
+        case left
+        case up
+        case down
+        case crazy
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         bindViewModel()
         
@@ -52,4 +62,81 @@ class BaseViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
+    // MARK: Pagination
+    public func getScrollDirection(scrollView:UIScrollView) -> ScrollDirection{
+        var scrollDirection: ScrollDirection = .none
+        
+        if lastContentOffset > scrollView.contentOffset.y {
+            scrollDirection = .up
+        } else if lastContentOffset < scrollView.contentOffset.y {
+            scrollDirection = .down
+        }
+        
+        lastContentOffset = scrollView.contentOffset.y
+        
+        return scrollDirection
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //        onEndScrolling(scrollView: scrollView)
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        onEndScrolling(scView: scrollView)
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (!decelerate) {
+            onEndScrolling(scView: scrollView)
+        }
+    }
+    
+    // To be overriden by child classes
+    public func hasMoreData() -> Bool{
+        fatalError("Must Override")
+        return false
+    }
+    
+    public func loadMoreData() -> Void{
+        fatalError("Must Override")
+    }
+    
+    public func getFirstVisibleItem() -> IndexPath{
+        return IndexPath(row: 0, section: 0)
+    }
+    
+    public func getLastVisibleItem() -> IndexPath{
+        fatalError("Must Override")
+        return IndexPath(row: 0, section: 0)
+    }
+    
+    public func getDataCount() -> Int{
+        fatalError("Must Override")
+        return 0
+    }
+    
+    public func getPaginationOffset() -> Int{
+        fatalError("Must Override")
+        return 10
+    }
+    
+    public func onEndScrolling(scView: UIScrollView) -> Void{
+        if getScrollDirection(scrollView: scView) == .down{
+            if(hasMoreData()){
+                let firstVisibleItem = getFirstVisibleItem()
+                let lastVisibleItem = getLastVisibleItem()
+                
+                print("\(BaseViewController.self.description()) -- scrollViewDidScroll() -- down, lastVisibleItem = \(lastVisibleItem), dataCount = \(getDataCount())")
+                
+                if ( lastVisibleItem.row > getDataCount()-getPaginationOffset()) {
+                    loadMoreData();
+                }
+                
+            }
+        }
+    }
 }
+
+
