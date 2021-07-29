@@ -21,6 +21,7 @@ class GithubUserListViewController: BaseViewController {
                                                     managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
+        fetchRequest.fetchBatchSize = 20 
         
         do {
             try controller.performFetch()
@@ -97,8 +98,6 @@ class GithubUserListViewController: BaseViewController {
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return githubViewModel.githubUserList.count
-//        return fetchedResultsController.sections?.count ?? 0
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
