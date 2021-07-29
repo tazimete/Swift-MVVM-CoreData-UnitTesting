@@ -12,10 +12,10 @@ class GithubUserListViewController: BaseViewController {
     private let tableView = UITableView()
     private var githubViewModel: AbstractGithubViewModel!
     
-    var dataProvider: DataProvider!
-    lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEn> = {
-        let fetchRequest = NSFetchRequest<Film>(entityName:"Film")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "episodeId", ascending:true)]
+    var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, repository: ApiRepository()) 
+    lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
+        let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: dataProvider.viewContext,
@@ -66,9 +66,10 @@ class GithubUserListViewController: BaseViewController {
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-            self?.tableView.reloadData()
-            print("\(self?.TAG) -- getGithubUserList() -- 0")
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [unowned self] in
+//            self?.tableView.reloadData()
+            print("\(self.TAG) -- getGithubUserList() -- 0")
+            self.dataProvider.syncFilms(jsonDictionary: self.githubViewModel.githubUserList, taskContext: (self.dataProvider.persistentContainer.newBackgroundContext()))
         })
         
 //        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
@@ -98,9 +99,9 @@ class GithubUserListViewController: BaseViewController {
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return githubViewModel.githubUserList.count
+//        return githubViewModel.githubUserList.count
 //        return fetchedResultsController.sections?.count ?? 0
-//        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,8 +110,8 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell() 
         }
         
-        cell.user = githubViewModel.githubUserList[indexPath.row]
-//        fetchedResultsController.object(at: indexPath)
+//        cell.user = githubViewModel.githubUserList[indexPath.row]
+        cell.user = (fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
         
         return cell
     }

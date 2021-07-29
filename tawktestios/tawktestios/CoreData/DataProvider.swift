@@ -20,7 +20,7 @@ enum DataErrorCode: NSInteger {
 
 class DataProvider {
     
-    private let persistentContainer: NSPersistentContainer
+    public let persistentContainer: NSPersistentContainer
     private let repository: ApiRepository
     
     var viewContext: NSManagedObjectContext {
@@ -55,11 +55,11 @@ class DataProvider {
 //        }
     }
     
-    private func syncFilms(jsonDictionary: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
+    public func syncFilms(jsonDictionary: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
         var successfull = false
         
         taskContext.performAndWait {
-            let matchingEpisodeRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Film")
+            let matchingEpisodeRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
             let episodeIds = jsonDictionary.map { $0.id ?? -1 }.compactMap { $0 }
             matchingEpisodeRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [episodeIds])
             
@@ -82,13 +82,13 @@ class DataProvider {
             // Create new records.
             for filmDictionary in jsonDictionary {
                 
-                guard let film = NSEntityDescription.insertNewObject(forEntityName: "Film", into: taskContext) as? Film else {
+                guard let film = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
                     print("Error: Failed to create a new Film object!")
                     return
                 }
                 
                 do {
-                    try film.update(with: filmDictionary)
+                    try film.update(user: filmDictionary)
                 } catch {
                     print("Error: \(error)\nThe quake object will be deleted.")
                     taskContext.delete(film)
