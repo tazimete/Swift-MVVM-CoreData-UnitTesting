@@ -23,7 +23,7 @@ final class GithubFlow: Flow {
     }()
     
     init() {
-        self.localDataSource = GithubLocalDataSource(persistentContainer: CoreDataClient.shared.persistentContainer, viewContext: CoreDataClient.shared.persistentContainer.viewContext)
+        self.localDataSource = GithubLocalDataSource() 
         self.remoteDataSource = GithubRemoteDataSource()
     }
     

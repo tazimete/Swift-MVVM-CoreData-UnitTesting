@@ -21,7 +21,7 @@ class GithubLocalDataSource : LocalDataSource{
         return "GithubUserEntity"
     }
     
-    public init(persistentContainer: NSPersistentContainer, viewContext: NSManagedObjectContext) {
+    public init(persistentContainer: NSPersistentContainer = CoreDataClient.shared.persistentContainer, viewContext: NSManagedObjectContext = CoreDataClient.shared.persistentContainer.viewContext) {
         self.persistentContainer = persistentContainer
         self.viewContext = viewContext
     }
