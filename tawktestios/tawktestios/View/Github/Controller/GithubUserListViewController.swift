@@ -65,15 +65,15 @@ class GithubUserListViewController: BaseViewController {
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [unowned self] in
-            print("\(self.TAG) -- getGithubUserList() -- 0")
+        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
+            print("\(self?.TAG) -- getGithubUserList() -- 0")
         })
     }
     
     public func loadGithubUserListOnPaginate(){
         let user = (fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
-        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [unowned self] in
-            print("\(self.TAG) -- loadGithubUserListOnPaginate() -- 00")
+        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [weak self] in
+            print("\(self?.TAG) -- loadGithubUserListOnPaginate() -- 00")
         })
     }
     

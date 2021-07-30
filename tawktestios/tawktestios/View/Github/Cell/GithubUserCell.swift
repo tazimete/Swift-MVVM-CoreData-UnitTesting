@@ -16,10 +16,14 @@ class GithubUserCell : UITableViewCell {
             lblUsername.text = user?.username
             lblDescription.text = user?.url
             ivAvatar.loadImage(from: user?.avatarUrl ?? "", completionHandler: {
-                [unowned self] url, image, isCache in
+                [weak self] url, image, isCache in
                 
-                if (url).elementsEqual(imageUrlAtCurrentIndex ?? ""){
-                    ivAvatar.image = image
+                guard let weakSelf = self else {
+                    return
+                }
+                
+                if (url).elementsEqual(weakSelf.imageUrlAtCurrentIndex ?? ""){
+                    weakSelf.ivAvatar.image = image
                 }
             })
         }

@@ -22,12 +22,15 @@ class GithubViewModel: AbstractGithubViewModel {
     }
     
     func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void)) {
-        service.remoteDataSource.getGitubUserList(since: since) { [unowned self] result in
+        service.remoteDataSource.getGitubUserList(since: since) { [weak self] result in
             switch result{
                 case .success(let users):
-                    print("getGithubUserList() -- \(users.last?.username)")
-                    self.dataProvider.syncFilms(githubUsers: users, taskContext: (self.dataProvider.persistentContainer.newBackgroundContext()))
-                    self.githubUserList.append(contentsOf: users)
+                    guard let weakSelf = self else {
+                        return
+                    }
+                    print("getGithubUserList() -- \((users.last?.username)!)")
+                    weakSelf.dataProvider.syncFilms(githubUsers: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
+                    weakSelf.githubUserList.append(contentsOf: users)
 //                    completeionHandler()
                 case .failure(let error):
                     print("\(String(describing: (error as? NetworkError)?.localizedDescription))")
