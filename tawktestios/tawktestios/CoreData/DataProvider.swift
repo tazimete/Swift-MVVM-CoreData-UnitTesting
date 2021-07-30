@@ -9,9 +9,9 @@ import CoreData
 
 //let dataErrorDomain = "dataErrorDomain"
 
-class ApiRepository {
-
-}
+//class ApiRepository {
+//
+//}
 
 enum DataErrorCode: NSInteger {
     case networkUnavailable = 101
@@ -21,15 +21,15 @@ enum DataErrorCode: NSInteger {
 class DataProvider {
     
     public let persistentContainer: NSPersistentContainer
-    private let repository: ApiRepository
+//    private let repository: ApiRepository
     
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
-    init(persistentContainer: NSPersistentContainer, repository: ApiRepository) {
+    init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
-        self.repository = repository
+//        self.repository = repository
     }
     
 //    func fetchFilms(completion: @escaping(Error?) -> Void) {
@@ -55,14 +55,15 @@ class DataProvider {
 //        }
 //    }
     
-    public func syncFilms(jsonDictionary: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
+    public func syncFilms(githubUsers: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
         var successfull = false
         
         taskContext.performAndWait {
             let matchingEpisodeRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
-            let episodeIds = jsonDictionary.map { $0.id ?? -1 }.compactMap { $0 }
-            matchingEpisodeRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [episodeIds])
+            let userIds = githubUsers.map { $0.id ?? -1 }.compactMap { $0 }
+            matchingEpisodeRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [userIds])
             
+            //delete old matched data to get latest and updated data from server 
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingEpisodeRequest)
             batchDeleteRequest.resultType = .resultTypeObjectIDs
             
@@ -80,18 +81,18 @@ class DataProvider {
             }
             
             // Create new records.
-            for filmDictionary in jsonDictionary {
+            for githubUser in githubUsers {
                 
-                guard let film = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
-                    print("Error: Failed to create a new Film object!")
+                guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+                    print("Error: Failed to create a new user object!")
                     return
                 }
                 
                 do {
-                    try film.update(user: filmDictionary)
+                    try userEntity.update(user: githubUser)
                 } catch {
-                    print("Error: \(error)\nThe quake object will be deleted.")
-                    taskContext.delete(film)
+                    print("Error: \(error)\n this object will be deleted.")
+                    taskContext.delete(userEntity)
                 }
             }
             

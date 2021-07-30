@@ -17,7 +17,10 @@ extension UIImageView {
 //            (image, cached) in
 //            self.image = image
 //        }, placeholderImage: UIImage(named: "img_avatar"))
+        
+//        ImageCacheLoader.shared.obtainImageWithPath(imagePath: url) { (image) in
+//                // Before assigning the image, check whether the current cell is visible for ensuring that it's right cell
+//            self.image = image
+//        }
     }
-    
-    
 }

@@ -49,6 +49,7 @@
 		29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */; };
 		29F4288C26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */; };
 		29F4288D26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */; };
+		29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */; };
 		386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */; };
 		68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		29F4288426B331AC0073C150 /* tawktestios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tawktestios.xcdatamodel; sourceTree = "<group>"; };
 		29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheLoader.swift; sourceTree = "<group>"; };
 		2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -431,6 +433,7 @@
 				29F4286B26B12C860073C150 /* ImageDownloader.swift */,
 				29F4287126B160BD0073C150 /* ImageCache.swift */,
 				29F4287326B160E30073C150 /* ImageLoader.swift */,
+				29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */,
 			);
 			path = ImageDownloader;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,
 				2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */,
 				2948DC9826AC1512001EF5D2 /* GithubLocalDataSource.swift in Sources */,
+				29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
