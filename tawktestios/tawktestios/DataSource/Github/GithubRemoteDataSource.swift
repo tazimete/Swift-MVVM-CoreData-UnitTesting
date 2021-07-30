@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-public class GithubRemoteDataSource: DataSource {
+public class GithubRemoteDataSource: RemoteDataSource {
     var apiClient: APIClient
     
     init() {

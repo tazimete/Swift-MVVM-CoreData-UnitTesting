@@ -8,10 +8,10 @@
 import Foundation
 
 public class GithubService: Service {
-    var localDataSource: DataSource
-    var remoteDataSource: DataSource
+    var localDataSource: LocalDataSource
+    var remoteDataSource: RemoteDataSource
     
-    init(localDataSource: DataSource, remoteDataSource: DataSource) {
+    init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
         self.localDataSource = localDataSource
         self.remoteDataSource = remoteDataSource
     }

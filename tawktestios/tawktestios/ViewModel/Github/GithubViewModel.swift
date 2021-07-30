@@ -11,7 +11,7 @@ import RxCocoa
 import RxFlow
 
 class GithubViewModel: AbstractGithubViewModel {
-    public var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataClient.shared.persistentContainer, viewContext: CoreDataClient.shared.persistentContainer.viewContext, entityName: "GithubUserEntity")
+//    public var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataClient.shared.persistentContainer, viewContext: CoreDataClient.shared.persistentContainer.viewContext, entityName: "GithubUserEntity")
     public var githubUserList: [GithubUser] = [GithubUser]()
     
     var steps = PublishRelay<Step>()
@@ -29,7 +29,7 @@ class GithubViewModel: AbstractGithubViewModel {
                         return
                     }
                     print("getGithubUserList() -- \((users.last?.username)!)")
-                    weakSelf.dataProvider.syncData(data: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
+                    weakSelf.service.localDataSource.syncData(data: users, taskContext: (weakSelf.service.localDataSource.persistentContainer.newBackgroundContext()))
 //                    syncGithubUserList(githubUsers: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
                     weakSelf.githubUserList.append(contentsOf: users)
 //                    completeionHandler()

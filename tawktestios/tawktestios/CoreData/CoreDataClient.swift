@@ -10,6 +10,7 @@ import CoreData
 
 class CoreDataClient {
     private init() {}
+    
     static let shared = CoreDataClient()
     
     lazy var persistentContainer: NSPersistentContainer = {

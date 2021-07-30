@@ -11,8 +11,8 @@ import RxFlow
 
 
 final class GithubFlow: Flow {
-    private let localDataSource: DataSource
-    private let remoteDataSource: DataSource
+    private let localDataSource: LocalDataSource
+    private let remoteDataSource: RemoteDataSource
     
     var root: Presentable {
         rootViewController
@@ -23,7 +23,7 @@ final class GithubFlow: Flow {
     }()
     
     init() {
-        self.localDataSource = GithubLocalDataSource()
+        self.localDataSource = GithubLocalDataSource(persistentContainer: CoreDataClient.shared.persistentContainer, viewContext: CoreDataClient.shared.persistentContainer.viewContext)
         self.remoteDataSource = GithubRemoteDataSource()
     }
     

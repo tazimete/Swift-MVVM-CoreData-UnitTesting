@@ -9,6 +9,7 @@ import Foundation
 
 
 protocol Service: AnyObject {
-    var localDataSource: DataSource {get set}
-    var remoteDataSource: DataSource {get set}
+    var localDataSource: LocalDataSource {get set}
+    var remoteDataSource: RemoteDataSource {get set}
 }
+
