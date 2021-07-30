@@ -12,6 +12,7 @@ protocol LocalDataSource: AnyObject {
     var persistentContainer: NSPersistentContainer {get set}
     var viewContext: NSManagedObjectContext {get set}
     var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}
+    var entityName: String {get set}
     
     func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject?
     func syncData<T: AbstractDataModel>(data: [T], taskContext: NSManagedObjectContext) -> Bool
@@ -27,23 +28,24 @@ class DataProvider : LocalDataSource{
 //    {
 //        return persistentContainer.viewContext
 //    }
-    var fetchRequest: NSFetchRequest<NSFetchRequestResult>
-//    var entity: NSManagedObject
+    public var fetchRequest: NSFetchRequest<NSFetchRequestResult>
+    public var entityName: String
     
-    public init(persistentContainer: NSPersistentContainer, viewContext: NSManagedObjectContext) {
+    public init(persistentContainer: NSPersistentContainer, viewContext: NSManagedObjectContext, entityName: String) {
         self.persistentContainer = persistentContainer
         self.viewContext = viewContext
-        self.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity") 
+        self.entityName = entityName
+        self.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 //        self.entity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: self.viewContext) as! GithubUserEntity
     }
     
-//    public func makeFetchRequest(entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName) // GithubUserEntity
-//        return fetchRequest
-//    }
+    public func makeFetchRequest(entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
+        fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName) // GithubUserEntity
+        return fetchRequest
+    }
     
     public func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject? {
-        return NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: into)
+        return NSEntityDescription.insertNewObject(forEntityName: entityName, into: into)
     }
     
     public func syncData<T>(data: [T], taskContext: NSManagedObjectContext) -> Bool where T : AbstractDataModel {
@@ -97,7 +99,7 @@ class DataProvider : LocalDataSource{
         for item in items {
 
 //            guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
-            guard let userEntity = insertEntity(entityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+            guard let userEntity = insertEntity(entityName: self.entityName, into: taskContext) as? GithubUserEntity else {
                 print("Error: Failed to create a new user object!")
                 return
             }

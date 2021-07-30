@@ -19,7 +19,7 @@ class GithubUserListViewController: BaseViewController {
         fetchRequest.fetchLimit = paginationOffset + paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
+                                                    managedObjectContext: CoreDataClient.shared.persistentContainer.viewContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
         fetchRequest.fetchBatchSize = 20

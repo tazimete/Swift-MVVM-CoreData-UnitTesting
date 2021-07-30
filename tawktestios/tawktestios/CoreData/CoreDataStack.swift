@@ -7,9 +7,10 @@
 
 import CoreData
 
-class CoreDataStack {
+
+class CoreDataClient {
     private init() {}
-    static let shared = CoreDataStack()
+    static let shared = CoreDataClient()
     
     lazy var persistentContainer: NSPersistentContainer = {
        let container = NSPersistentContainer(name: "tawktestios")
