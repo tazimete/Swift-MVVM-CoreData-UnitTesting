@@ -11,7 +11,7 @@ import RxFlow
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var flowCoordinator: FlowCoordinator!
+    var coordinator: RootCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -57,16 +57,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         
-        guard let _window = window else { return }
-        _window.windowScene = windowScene
+        guard let _window = window else {
+            return
+        }
         
-        let rootFlow = RootFlow(rootWindow: _window)
-        flowCoordinator = FlowCoordinator()
+        let navController = UINavigationController()
+        coordinator = RootCoordinator(navigationController: navController)
+
+        // tell the coordinator show its controller
+        coordinator?.start()
         
-        flowCoordinator.coordinate(
-            flow: rootFlow,
-            with: RootStepper()
-        )
+        _window.rootViewController = navController
+        _window.makeKeyAndVisible()
     }
 
 }

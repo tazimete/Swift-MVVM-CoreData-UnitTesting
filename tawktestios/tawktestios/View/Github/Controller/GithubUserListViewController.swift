@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class GithubUserListViewController: BaseViewController {
+class GithubUserListViewController: BaseViewController, Storyboarded  {
     private let tableView = UITableView()
     private var githubViewModel: AbstractGithubViewModel!
     

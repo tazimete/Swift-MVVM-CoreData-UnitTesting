@@ -11,7 +11,7 @@ import RxFlow
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    private var flowCoordinator: FlowCoordinator!
+    var coordinator: RootCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -83,13 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        let rootFlow = RootFlow(rootWindow: _window)
-        flowCoordinator = FlowCoordinator()
+        let navController = UINavigationController()
+        coordinator = RootCoordinator(navigationController: navController)
+
+        // tell the coordinator show its controller 
+        coordinator?.start()
         
-        flowCoordinator.coordinate(
-            flow: rootFlow,
-            with: RootStepper()
-        )
+        _window.rootViewController = navController
+        _window.makeKeyAndVisible()
     }
 
 }
