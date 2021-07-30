@@ -13,7 +13,7 @@ import CoreData
 //    @NSManaged var username: String?
 //    @NSManaged var avatarUrl: String?
 //    @NSManaged var url: String?
-//    
+//
 //    func update(user: GithubUser){
 //        id = NSNumber(value: user.id ?? -1)
 //        username = user.username
@@ -22,7 +22,13 @@ import CoreData
 //    }
 //}
 
-class GithubUser: Codable {
+protocol AbstractUser: AnyObject {
+    var id: Int? {get set}
+    var username: String? {get set}
+    var avatarUrl: String? {get set}
+}
+
+class GithubUser: AbstractUser, Codable {
     var id: Int?
     var username: String?
     var avatarUrl: String?

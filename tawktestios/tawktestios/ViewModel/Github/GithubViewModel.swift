@@ -29,7 +29,8 @@ class GithubViewModel: AbstractGithubViewModel {
                         return
                     }
                     print("getGithubUserList() -- \((users.last?.username)!)")
-                    weakSelf.dataProvider.syncGithubUserList(githubUsers: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
+                    weakSelf.dataProvider.syncData(data: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
+//                    syncGithubUserList(githubUsers: users, taskContext: (weakSelf.dataProvider.persistentContainer.newBackgroundContext()))
                     weakSelf.githubUserList.append(contentsOf: users)
 //                    completeionHandler()
                 case .failure(let error):

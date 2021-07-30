@@ -10,6 +10,5 @@ import Foundation
 protocol DataSource: AnyObject {
     var apiClient: APIClient {set get}
     
-//    func getGithubUserList(page: Int) -> Observable<[GithubUser]>
     func getGitubUserList(since: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>)
 }
