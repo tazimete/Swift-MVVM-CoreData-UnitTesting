@@ -13,10 +13,10 @@ import CoreData
 //
 //}
 
-enum DataErrorCode: NSInteger {
-    case networkUnavailable = 101
-    case wrongDataFormat = 102
-}
+//enum DataErrorCode: NSInteger {
+//    case networkUnavailable = 101
+//    case wrongDataFormat = 102
+//}
 
 class DataProvider {
     
@@ -55,46 +55,53 @@ class DataProvider {
 //        }
 //    }
     
-    public func syncFilms(githubUsers: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
+    public func syncGithubUserList(githubUsers: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
         var successfull = false
         
         taskContext.performAndWait {
-            let matchingEpisodeRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
             let userIds = githubUsers.map { $0.id ?? -1 }.compactMap { $0 }
-            matchingEpisodeRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [userIds])
+            //delete old matched data to get latest and updated data from server
+            batchDeleteItems(userIds: userIds, taskContext: taskContext)
             
-            //delete old matched data to get latest and updated data from server 
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingEpisodeRequest)
-            batchDeleteRequest.resultType = .resultTypeObjectIDs
+//            let matchingRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
+//             let userIds = githubUsers.map { $0.id ?? -1 }.compactMap { $0 }
+//            matchingRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [userIds])
             
-            // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
-            do {
-                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
-                
-                if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
-                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
-                                                        into: [self.persistentContainer.viewContext])
-                }
-            }catch {
-                print("Error: \(error)\nCould not batch delete existing records.")
-                return
-            }
+//            //delete old matched data to get latest and updated data from server
+//            batchDeleteItems(userIds: userIds, taskContext: taskContext)
+//            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingRequest)
+//            batchDeleteRequest.resultType = .resultTypeObjectIDs
+//
+//            // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
+//            do {
+//                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+//
+//                if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+//                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+//                                                        into: [self.viewContext])
+//                }
+//            }catch {
+//                print("Error: \(error)\nCould not batch delete existing records.")
+//                return
+//            }
             
             // Create new records.
-            for githubUser in githubUsers {
-                
-                guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
-                    print("Error: Failed to create a new user object!")
-                    return
-                }
-                
-                do {
-                    try userEntity.update(user: githubUser)
-                } catch {
-                    print("Error: \(error)\n this object will be deleted.")
-                    taskContext.delete(userEntity)
-                }
-            }
+//            for githubUser in githubUsers {
+//
+//                guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+//                    print("Error: Failed to create a new user object!")
+//                    return
+//                }
+//
+//                do {
+//                    try userEntity.update(user: githubUser)
+//                } catch {
+//                    print("Error: \(error)\n this object will be deleted.")
+//                    taskContext.delete(userEntity)
+//                }
+//            }
+            
+            insertItemsToStore(items: githubUsers, taskContext: taskContext)
             
             // Save all the changes just made and reset the taskContext to free the cache.
             if taskContext.hasChanges {
@@ -108,5 +115,45 @@ class DataProvider {
             successfull = true
         }
         return successfull
+    }
+    
+    
+    // /delete old matched data to get latest and updated data from server
+    public func batchDeleteItems(userIds: [Int], taskContext: NSManagedObjectContext){
+        let matchingRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
+        matchingRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [userIds])
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingRequest)
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        
+        // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
+        do {
+            let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+            
+            if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+                                                    into: [self.viewContext])
+            }
+        }catch {
+            print("Error: \(error)\nCould not batch delete existing records.")
+        }
+    }
+    
+    //insert item to store
+    public func insertItemsToStore(items: [GithubUser], taskContext: NSManagedObjectContext) {
+        for githubUser in items {
+            
+            guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+                print("Error: Failed to create a new user object!")
+                return
+            }
+            
+            do {
+                try userEntity.update(user: githubUser)
+            } catch {
+                print("Error: \(error)\n this object will be deleted.")
+                taskContext.delete(userEntity)
+            }
+        }
     }
 }
