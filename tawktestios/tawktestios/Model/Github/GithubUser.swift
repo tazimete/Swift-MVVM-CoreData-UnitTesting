@@ -22,13 +22,11 @@ import CoreData
 //    }
 //}
 
-protocol AbstractUser: AnyObject {
+protocol AbstractDataModel: AnyObject {
     var id: Int? {get set}
-    var username: String? {get set}
-    var avatarUrl: String? {get set}
 }
 
-class GithubUser: AbstractUser, Codable {
+class GithubUser: AbstractDataModel, Codable {
     var id: Int?
     var username: String?
     var avatarUrl: String?

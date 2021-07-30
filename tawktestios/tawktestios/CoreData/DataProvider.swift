@@ -10,11 +10,13 @@ import CoreData
 protocol LocalDataSource: AnyObject {
     associatedtype T
     var persistentContainer: NSPersistentContainer {get set}
-    var viewContext: NSManagedObjectContext {get}
+    var viewContext: NSManagedObjectContext {get set}
+    var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}
+    var entity: NSManagedObject {get set}
     
-    func syncData<T: AbstractUser>(data: [T], taskContext: NSManagedObjectContext) -> Bool
+    func syncData<T: AbstractDataModel>(data: [T], taskContext: NSManagedObjectContext) -> Bool
     func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
-    func insertItemsToStore<T: AbstractUser>(items: [T], taskContext: NSManagedObjectContext)
+    func insertItemsToStore<T: AbstractDataModel>(items: [T], taskContext: NSManagedObjectContext)
 }
 
 class DataProvider : LocalDataSource{
@@ -22,15 +24,26 @@ class DataProvider : LocalDataSource{
     
     public var persistentContainer: NSPersistentContainer
     
-    public var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
+    public var viewContext: NSManagedObjectContext
+//    {
+//        return persistentContainer.viewContext
+//    }
     
-    public init(persistentContainer: NSPersistentContainer) {
+    public init(persistentContainer: NSPersistentContainer, viewContext: NSManagedObjectContext) {
         self.persistentContainer = persistentContainer
+        self.viewContext = viewContext
     }
     
-    public func syncData<T>(data: [T], taskContext: NSManagedObjectContext) -> Bool where T : AbstractUser {
+//    public func makeFetchRequest(entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName) // GithubUserEntity
+//        return fetchRequest
+//    }
+    
+    public func getDataEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject? {
+        return NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: into)
+    }
+    
+    public func syncData<T>(data: [T], taskContext: NSManagedObjectContext) -> Bool where T : AbstractDataModel {
         var successfull = false
 
         taskContext.performAndWait {
@@ -57,7 +70,8 @@ class DataProvider : LocalDataSource{
     }
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
-        let matchingRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
+//        let matchingRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
+        let matchingRequest = makeFetchRequest(entityName: "GithubUserEntity")
         matchingRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingRequest)
@@ -76,10 +90,11 @@ class DataProvider : LocalDataSource{
         }
     }
     
-    public func insertItemsToStore<T>(items: [T], taskContext: NSManagedObjectContext) where T : AbstractUser {
+    public func insertItemsToStore<T>(items: [T], taskContext: NSManagedObjectContext) where T : AbstractDataModel {
         for item in items {
 
-            guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+//            guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+            guard let userEntity = makeDataEntity(entityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
                 print("Error: Failed to create a new user object!")
                 return
             }
@@ -92,6 +107,7 @@ class DataProvider : LocalDataSource{
             }
         }
     }
+    
     
 //    public func syncGithubUserList(githubUsers: [GithubUser], taskContext: NSManagedObjectContext) -> Bool {
 //        var successfull = false

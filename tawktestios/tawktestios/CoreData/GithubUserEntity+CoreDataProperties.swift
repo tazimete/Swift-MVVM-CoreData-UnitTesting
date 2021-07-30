@@ -24,11 +24,14 @@ extension GithubUserEntity {
 
 
 extension GithubUserEntity {
-    func update(user: AbstractUser){
+    func update(user: AbstractDataModel){
         id = Int64((user.id ?? -1))
-        username = user.username
-        avatarUrl = user.avatarUrl
-        url = (user as? GithubUser)?.url
+        
+        let githubUser  = user as? GithubUser
+        
+        username = githubUser?.username
+        avatarUrl = githubUser?.avatarUrl
+        url = githubUser?.url
     }
     
     var asGithubUser: GithubUser{
