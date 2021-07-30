@@ -11,7 +11,7 @@ import RxCocoa
 import RxFlow
 
 class GithubViewModel: AbstractGithubViewModel {
-    public var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer)
+    public var dataProvider: DataProvider = DataProvider(persistentContainer: CoreDataStack.shared.persistentContainer, viewContext: CoreDataStack.shared.persistentContainer.viewContext)
     public var githubUserList: [GithubUser] = [GithubUser]()
     
     var steps = PublishRelay<Step>()

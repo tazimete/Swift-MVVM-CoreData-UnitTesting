@@ -12,8 +12,8 @@ protocol LocalDataSource: AnyObject {
     var persistentContainer: NSPersistentContainer {get set}
     var viewContext: NSManagedObjectContext {get set}
     var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}
-    var entity: NSManagedObject {get set}
     
+    func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject?
     func syncData<T: AbstractDataModel>(data: [T], taskContext: NSManagedObjectContext) -> Bool
     func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
     func insertItemsToStore<T: AbstractDataModel>(items: [T], taskContext: NSManagedObjectContext)
@@ -23,15 +23,18 @@ class DataProvider : LocalDataSource{
     typealias T = GithubUser
     
     public var persistentContainer: NSPersistentContainer
-    
     public var viewContext: NSManagedObjectContext
 //    {
 //        return persistentContainer.viewContext
 //    }
+    var fetchRequest: NSFetchRequest<NSFetchRequestResult>
+//    var entity: NSManagedObject
     
     public init(persistentContainer: NSPersistentContainer, viewContext: NSManagedObjectContext) {
         self.persistentContainer = persistentContainer
         self.viewContext = viewContext
+        self.fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity") 
+//        self.entity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: self.viewContext) as! GithubUserEntity
     }
     
 //    public func makeFetchRequest(entityName: String) -> NSFetchRequest<NSFetchRequestResult> {
@@ -39,7 +42,7 @@ class DataProvider : LocalDataSource{
 //        return fetchRequest
 //    }
     
-    public func getDataEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject? {
+    public func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject? {
         return NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: into)
     }
     
@@ -71,10 +74,10 @@ class DataProvider : LocalDataSource{
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
 //        let matchingRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GithubUserEntity")
-        let matchingRequest = makeFetchRequest(entityName: "GithubUserEntity")
-        matchingRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
+//        let matchingRequest = makeFetchRequest(entityName: "GithubUserEntity")
+        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: matchingRequest)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         batchDeleteRequest.resultType = .resultTypeObjectIDs
 
         // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
@@ -94,7 +97,7 @@ class DataProvider : LocalDataSource{
         for item in items {
 
 //            guard let userEntity = NSEntityDescription.insertNewObject(forEntityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
-            guard let userEntity = makeDataEntity(entityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
+            guard let userEntity = insertEntity(entityName: "GithubUserEntity", into: taskContext) as? GithubUserEntity else {
                 print("Error: Failed to create a new user object!")
                 return
             }
