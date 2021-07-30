@@ -17,7 +17,7 @@ enum NetworkError: Error {
 
 typealias NetworkCompletionHandler<T: Codable> = (Result<T, NetworkError>) -> Void
 typealias DownloadCompletionHandler = ((URL?, URLResponse?, Error?) -> Void)?
-typealias ImageDownloadCompletionHandler = (UIImage?, Bool) -> Void
+typealias ImageDownloadCompletionHandler = ((String, UIImage?, Bool) -> Void)
 
 
 class APIClient {

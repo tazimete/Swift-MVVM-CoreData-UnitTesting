@@ -83,7 +83,7 @@ class GithubUserListViewController: BaseViewController {
     }
     
     override func loadMoreData() -> Void{
-        paginationOffset += 20 
+        paginationOffset += 20
         loadGithubUserListOnPaginate()
     }
     

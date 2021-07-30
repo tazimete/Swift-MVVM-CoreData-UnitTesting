@@ -8,12 +8,20 @@
 import UIKit
 
 class GithubUserCell : UITableViewCell {
+    var imageUrl: String?
     
     var user : GithubUser? {
         didSet {
+            imageUrl = user?.avatarUrl
             lblUsername.text = user?.username
             lblDescription.text = user?.url
-            ivAvatar.loadImage(from: user?.avatarUrl ?? "")
+            ivAvatar.loadImage(from: user?.avatarUrl ?? "", completionHandler: {
+                [unowned self] url, image, isCache in
+                
+                if (url ?? "").elementsEqual(imageUrl ?? ""){
+                    ivAvatar.image = image
+                }
+            })
         }
     }
     
@@ -32,7 +40,6 @@ class GithubUserCell : UITableViewCell {
         lbl.textAlignment = .left
         return lbl
     }()
-    
     
     private let lblDescription : UILabel = {
         let lbl = UILabel()
