@@ -8,17 +8,17 @@
 import UIKit
 
 class GithubUserCell : UITableViewCell {
-    var imageUrl: String?
+    private var imageUrlAtCurrentIndex: String?
     
     var user : GithubUser? {
         didSet {
-            imageUrl = user?.avatarUrl
+            imageUrlAtCurrentIndex = user?.avatarUrl
             lblUsername.text = user?.username
             lblDescription.text = user?.url
             ivAvatar.loadImage(from: user?.avatarUrl ?? "", completionHandler: {
                 [unowned self] url, image, isCache in
                 
-                if (url ?? "").elementsEqual(imageUrl ?? ""){
+                if (url).elementsEqual(imageUrlAtCurrentIndex ?? ""){
                     ivAvatar.image = image
                 }
             })
