@@ -7,11 +7,20 @@
 
 import Foundation
 import CoreData
+import RxFlow
 
-protocol AbstractGithubViewModel: ViewModel {
-    associatedtype T:NSManagedObject
+protocol AbstractViewModel: Stepper {
+    associatedtype T: NSManagedObject
+    associatedtype D: AbstractDataModel
+    
+    var service: Service {get set}
+    var paginationOffset: Int {get set}
+    var paginationlimit: Int {get set}
+    var dataFetchingCompleteionHandler: (() -> Void)? {get set}
     
     var fetchedResultsController: NSFetchedResultsController<T> {get set}
-    var githubUserList: [GithubUser] {get set}
-    func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void))
+    var dataList: [D] {get set}
+    func fetchData(since: Int)
+    func setPaginationOffset(offset: Int)
+    func setPaginationLimit(limit: Int)
 }

@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
-
-class BaseViewController: UIViewController, UIScrollViewDelegate {
+class BaseViewController<T: NSManagedObject, D: AbstractDataModel>: UIViewController, UIScrollViewDelegate {
+    typealias T = T
+    typealias D = D
+    
     public let TAG = description()
-    public var viewModel: ViewModel!
-    public var lastContentOffset:CGFloat = 0.0
+    public var viewModel: ViewModel<T, D>!
+    public var lastContentOffset: CGFloat = 0.0
     
     enum ScrollDirection : Int {
         case none

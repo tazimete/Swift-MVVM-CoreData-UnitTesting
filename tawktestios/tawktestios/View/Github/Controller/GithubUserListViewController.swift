@@ -8,17 +8,17 @@
 import UIKit
 import CoreData
 
-class GithubUserListViewController: BaseViewController, Storyboarded  {
+class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubUser>, Storyboarded  {
     private let tableView = UITableView()
     private var githubViewModel: GithubViewModel!
     
-    public static func loadViewController(viewModel: ViewModel) -> GithubUserListViewController?{
+    public static func loadViewController(viewModel: ViewModel<T,D>) -> GithubUserListViewController?{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc
     }
     
-    public static func instantiate(viewModel: ViewModel) -> Self {
+    public static func instantiate(viewModel: ViewModel<T,D>) -> Self {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc as! Self
@@ -61,9 +61,10 @@ class GithubUserListViewController: BaseViewController, Storyboarded  {
 //            print("\(TAG) -- loadGithubUserListOnPaginate() -- error = \(error)")
 //        }
         
-        githubViewModel.getGithubUserList(since: since, completeionHandler: { [weak self] in
-            print("\(self?.TAG) -- getGithubUserList() -- since = \(since)")
-        })
+        githubViewModel.fetchData(since: since)
+        githubViewModel.dataFetchingCompleteionHandler = { [weak self] in
+            print("\(self?.TAG) -- dataFetchingCompleteionHandler()")
+        }
     }
     
     private func getLastUserEntity() -> GithubUserEntity?{
@@ -129,15 +130,14 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 
 // MARK: NSFetchedResultsControllerDelegate 
 extension GithubUserListViewController: NSFetchedResultsControllerDelegate {    
-    func controllerWillChangeContent(_ controller:
-      NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
 
@@ -150,12 +150,14 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             }
             
             tableView.insertRows(at: [index], with: .automatic)
+            
           case .delete:
             guard let index = indexPath else {
                 return
             }
             
             tableView.deleteRows(at: [index], with: .automatic)
+            
           case .update:
             guard let index = indexPath else {
                 return
@@ -163,6 +165,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             
             let cell = tableView.cellForRow(at: index) as! GithubUserCell
             cell.user = getUserObjectAt(indexPath: index)
+            
           case .move:
             guard let index = indexPath, let newIndex = indexPath else {
                 return
@@ -170,6 +173,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             
             tableView.deleteRows(at: [index], with: .automatic)
             tableView.insertRows(at: [newIndex], with: .automatic)
+            
           @unknown default:
             print("Unexpected NSFetchedResultsChangeType")
           }

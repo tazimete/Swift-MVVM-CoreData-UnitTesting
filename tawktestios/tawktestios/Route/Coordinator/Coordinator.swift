@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 protocol Coordinator {
@@ -17,11 +18,11 @@ protocol Coordinator {
 
 
 protocol Storyboarded {
-    static func instantiate(viewModel: ViewModel) -> Self
+    static func instantiate<T: NSManagedObject, D: AbstractDataModel>(viewModel: ViewModel<T, D>) -> Self
 }
 
 extension Storyboarded where Self: UIViewController {
-    static func instantiate(viewModel: ViewModel) -> Self {
+    static func instantiate<T: NSManagedObject, D: AbstractDataModel>(viewModel: ViewModel<T,D>) -> Self {
         // this pulls out "MyApp.MyViewController"
         let fullName = NSStringFromClass(self)
 
