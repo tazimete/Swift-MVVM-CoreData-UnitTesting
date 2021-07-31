@@ -20,8 +20,8 @@ class GithubViewModel: AbstractGithubViewModel {
     public lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
         let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
-//        fetchRequest.fetchOffset = paginationOffset
-//        fetchRequest.fetchLimit = paginationOffset + paginationlimit
+        fetchRequest.fetchOffset = paginationOffset
+        fetchRequest.fetchLimit = paginationOffset + paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: CoreDataClient.shared.persistentContainer.viewContext,

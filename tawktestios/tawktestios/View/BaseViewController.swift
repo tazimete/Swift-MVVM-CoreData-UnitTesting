@@ -133,7 +133,6 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
                 if ( lastVisibleItem.row > getTotalDataCount()-getPaginationOffset()) {
                     loadMoreData();
                 }
-                
             }
         }
     }
