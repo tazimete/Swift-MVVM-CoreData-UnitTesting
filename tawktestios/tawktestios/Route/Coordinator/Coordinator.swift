@@ -17,11 +17,11 @@ protocol Coordinator {
 
 
 protocol Storyboarded {
-    static func instantiate() -> Self
+    static func instantiate(viewModel: ViewModel) -> Self
 }
 
 extension Storyboarded where Self: UIViewController {
-    static func instantiate() -> Self {
+    static func instantiate(viewModel: ViewModel) -> Self {
         // this pulls out "MyApp.MyViewController"
         let fullName = NSStringFromClass(self)
 
@@ -32,6 +32,6 @@ extension Storyboarded where Self: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 
         // instantiate a view controller with that identifier, and force cast as the type that was requested
-        return storyboard.instantiateViewController(withIdentifier: className) as! Self
+        return storyboard.instantiateViewController(identifier: className) as! Self
     }
 }

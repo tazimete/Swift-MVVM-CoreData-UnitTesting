@@ -17,7 +17,9 @@ class ProfileCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = GithubUserListViewController.instantiate()
+        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
+        let viewModel = GithubViewModel(service: service)
+        let vc = GithubUserListViewController.instantiate(viewModel: viewModel)
         navigationController.pushViewController(vc, animated: false)
     }
 }

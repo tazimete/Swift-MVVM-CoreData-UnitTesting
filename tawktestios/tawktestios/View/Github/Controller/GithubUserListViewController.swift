@@ -10,34 +10,18 @@ import CoreData
 
 class GithubUserListViewController: BaseViewController, Storyboarded  {
     private let tableView = UITableView()
-    private var githubViewModel: AbstractGithubViewModel!
-    
-    lazy var fetchedResultsController: NSFetchedResultsController<GithubUserEntity> = {
-        let fetchRequest = NSFetchRequest<GithubUserEntity>(entityName:"GithubUserEntity")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
-        fetchRequest.fetchOffset = paginationOffset
-        fetchRequest.fetchLimit = paginationOffset + paginationlimit
-        
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: CoreDataClient.shared.persistentContainer.viewContext,
-                                                    sectionNameKeyPath: nil, cacheName: nil)
-        controller.delegate = self
-        fetchRequest.fetchBatchSize = 20
-        
-        do {
-            try controller.performFetch()
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
-        return controller
-    }()
+    private var githubViewModel: GithubViewModel!
     
     public static func loadViewController(viewModel: ViewModel) -> GithubUserListViewController?{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc
+    }
+    
+    public static func instantiate(viewModel: ViewModel) -> Self {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
+        vc.viewModel = viewModel
+        return vc as! Self
     }
 
     override func viewDidLoad() {
@@ -65,16 +49,30 @@ class GithubUserListViewController: BaseViewController, Storyboarded  {
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-        githubViewModel.getGithubUserList(since: 20, completeionHandler: { [weak self] in
-            print("\(self?.TAG) -- getGithubUserList() -- 0")
-        })
+        githubViewModel.fetchedResultsController.delegate = self
+        
+        loadGithubUserList(since: githubViewModel.paginationlimit)
     }
     
-    public func loadGithubUserListOnPaginate(){
-        let user = (fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
-        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [weak self] in
-            print("\(self?.TAG) -- loadGithubUserListOnPaginate() -- 00")
+    public func loadGithubUserList(since: Int){
+//        do {
+//            try githubViewModel.fetchedResultsController.performFetch()
+//        }catch(let error){
+//            print("\(TAG) -- loadGithubUserListOnPaginate() -- error = \(error)")
+//        }
+        
+        githubViewModel.getGithubUserList(since: since, completeionHandler: { [weak self] in
+            print("\(self?.TAG) -- getGithubUserList() -- since = \(since)")
         })
+        
+//        let user = (githubViewModel.fetchedResultsController.fetchedObjects?.last as? GithubUserEntity)?.asGithubUser
+//        githubViewModel.getGithubUserList(since: user?.id ?? 0, completeionHandler: { [weak self] in
+//            print("\(self?.TAG) -- loadGithubUserListOnPaginate() -- 00")
+//        })
+    }
+    
+    private func getLastEntity() -> GithubUserEntity?{
+         return (githubViewModel.fetchedResultsController.fetchedObjects?.last)
     }
     
     //MARK: Pagination
@@ -83,20 +81,33 @@ class GithubUserListViewController: BaseViewController, Storyboarded  {
     }
     
     override func loadMoreData() -> Void{
-        paginationOffset += 20
-        loadGithubUserListOnPaginate()
+        githubViewModel.paginationOffset += githubViewModel.paginationlimit
+        
+        guard let user = getLastEntity()?.asGithubUser else {
+            return
+        }
+        
+        loadGithubUserList(since: user.id ?? 0)
     }
     
     override func getLastVisibleItem() -> IndexPath{
-        return fetchedResultsController.indexPath(forObject: fetchedResultsController.fetchedObjects?.last ?? GithubUserEntity())!
+        guard let user = getLastEntity() else {
+            return IndexPath(row: 0, section: 0)
+        }
+        
+        guard let indexpath = githubViewModel.fetchedResultsController.indexPath(forObject: user) else{
+            return IndexPath(row: 0, section: 0)
+        }
+        
+        return indexpath
     }
     
     override func getTotalDataCount() -> Int{
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        return githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     override func getPaginationOffset() -> Int{
-        return 15
+        return githubViewModel.paginationlimit - 5 
     }
 }
 
@@ -104,7 +115,7 @@ class GithubUserListViewController: BaseViewController, Storyboarded  {
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,8 +124,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell() 
         }
         
-//        cell.user = githubViewModel.githubUserList[indexPath.row]
-        cell.user = (fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
+        cell.user = (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
         
         return cell
     }
@@ -125,16 +135,32 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 
-extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("\(TAG) -- controllerDidChangeContent()")
+// MARK: NSFetchedResultsControllerDelegate 
+extension GithubUserListViewController: NSFetchedResultsControllerDelegate {    
+    func controllerWillChangeContent(_ controller:
+      NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
     }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("\(TAG) -- controllerWillChangeContent()")
-    }
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        tableView.reloadData()
+      
+        switch type {
+          case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+          case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+          case .update:
+            let cell = tableView.cellForRow(at: indexPath!) as! GithubUserCell
+            cell.user = (githubViewModel.fetchedResultsController.object(at: indexPath!) as? GithubUserEntity)?.asGithubUser
+          case .move:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+          @unknown default:
+            print("Unexpected NSFetchedResultsChangeType")
+          }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }

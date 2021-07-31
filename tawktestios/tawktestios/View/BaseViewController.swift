@@ -12,8 +12,6 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
     public let TAG = description()
     public var viewModel: ViewModel!
     public var lastContentOffset:CGFloat = 0.0
-    public var paginationOffset = 0
-    public var paginationlimit = 20 
     
     enum ScrollDirection : Int {
         case none
@@ -121,7 +119,7 @@ class BaseViewController: UIViewController, UIScrollViewDelegate {
     
     public func getPaginationOffset() -> Int{
         fatalError("Must Override")
-        return paginationlimit
+        return 20
     }
     
     public func onEndScrolling(scView: UIScrollView) -> Void{

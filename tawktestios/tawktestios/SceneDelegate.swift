@@ -11,7 +11,7 @@ import RxFlow
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var coordinator: RootCoordinator?
+    private var flowCoordinator: FlowCoordinator!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -56,19 +56,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func initRootViewController(scene: UIScene) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        
-        guard let _window = window else {
-            return
-        }
-        
-        let navController = UINavigationController()
-        coordinator = RootCoordinator(navigationController: navController)
 
-        // tell the coordinator show its controller
-        coordinator?.start()
+        guard let _window = window else { return }
+        _window.windowScene = windowScene
+
+        let rootFlow = RootFlow(rootWindow: _window)
+        flowCoordinator = FlowCoordinator()
+
+        flowCoordinator.coordinate(
+            flow: rootFlow,
+            with: RootStepper()
+        )
         
-        _window.rootViewController = navController
-        _window.makeKeyAndVisible()
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//
+//        guard let _window = window else {
+//            return
+//        }
+//
+//        let navController = UINavigationController()
+//        let coordinator = RootCoordinator(navigationController: navController)
+//        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
+//        let viewModel = GithubViewModel(service: service)
+//        let viewController = GithubUserListViewController.instantiate(viewModel: viewModel)
+////        navController.setViewControllers([viewController], animated: true)
+//        navController.pushViewController(viewController, animated: true)
+//
+//        _window.rootViewController = navController
+//        _window.makeKeyAndVisible()
+//
+//        // tell the coordinator show its controller
+//        coordinator.start()
     }
 
 }

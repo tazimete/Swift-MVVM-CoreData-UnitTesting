@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
 protocol AbstractGithubViewModel: ViewModel {
+    associatedtype T:NSManagedObject
+    
+    var fetchedResultsController: NSFetchedResultsController<T> {get set}
     var githubUserList: [GithubUser] {get set}
-//    func getGithubUserList(page: Int) -> Observable<[GithubUser]>
     func getGithubUserList(since: Int, completeionHandler: @escaping (() -> Void))
 }

@@ -84,10 +84,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let navController = UINavigationController()
-        coordinator = RootCoordinator(navigationController: navController)
-
+//        coordinator = RootCoordinator(navigationController: navController)
         // tell the coordinator show its controller 
-        coordinator?.start()
+//        coordinator?.start()
+        
+        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
+        let viewModel = GithubViewModel(service: service)
+        let viewController = GithubUserListViewController.instantiate(viewModel: viewModel)
+//        navController.setViewControllers([viewController], animated: true)
+        navController.pushViewController(viewController, animated: true)
         
         _window.rootViewController = navController
         _window.makeKeyAndVisible()
