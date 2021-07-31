@@ -16,7 +16,7 @@ protocol RemoteDataSource: AnyObject {
 
 
 protocol LocalDataSource: AnyObject {
-//    associatedtype T
+//    associatedtype T: AbstractDataModel
     var persistentContainer: NSPersistentContainer {get set}
     var viewContext: NSManagedObjectContext {get set}
     var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}

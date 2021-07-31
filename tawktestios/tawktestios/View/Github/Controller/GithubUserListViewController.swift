@@ -44,6 +44,21 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
         tableView.dataSource = self
         
         tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
+        
+        addBottomIndicator()
+        showBottomIndicator(flag: false)
+    }
+    
+    private func addBottomIndicator (){
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.startAnimating()
+        spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+        spinner.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        self.tableView.tableFooterView = spinner
+    }
+    
+    private func showBottomIndicator(flag: Bool){
+        self.tableView.tableFooterView?.isHidden = !flag
     }
     
     override func bindViewModel() {
@@ -60,10 +75,17 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
 //        }catch(let error){
 //            print("\(TAG) -- loadGithubUserListOnPaginate() -- error = \(error)")
 //        }
-        
+        showBottomIndicator(flag: true)
         githubViewModel.fetchData(since: since)
-        githubViewModel.dataFetchingCompleteionHandler = { [weak self] in
-            print("\(self?.TAG) -- dataFetchingCompleteionHandler()")
+        githubViewModel.dataFetchingSuccessHandler = { [weak self] in
+            print("\(self?.TAG) -- dataFetchingSuccessHandler()")
+            self?.showBottomIndicator(flag: false)
+        }
+        
+        githubViewModel.dataFetchingFailedHandler = {
+            [weak self] in
+            print("\(self?.TAG) -- dataFetchingFailedHandler()")
+            self?.showBottomIndicator(flag: false)
         }
     }
     

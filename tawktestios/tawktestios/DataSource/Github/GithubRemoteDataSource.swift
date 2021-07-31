@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RxSwift
 
 public class GithubRemoteDataSource: RemoteDataSource {
     var apiClient: APIClient
@@ -15,12 +14,7 @@ public class GithubRemoteDataSource: RemoteDataSource {
         self.apiClient = APIClient.shared
     }
     
-//    func getGithubUserList(page: Int) -> Observable<[GithubUser]> {
-//        return apiClient.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: page)), type: [GithubUser].self)
-//    }
-    
     func getGitubUserList(since: Int, completionHandler: @escaping (NetworkCompletionHandler<[GithubUser]>)) {
-//        apiClient.send(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: since)), type: [GithubUser].self, completionHandler: completionHandler)
         apiClient.enqueue(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: since)), type: [GithubUser].self, completionHandler: completionHandler)
     }
 }

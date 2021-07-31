@@ -11,17 +11,6 @@ import RxCocoa
 import RxFlow
 import CoreData
 
-//protocol InputOutputType: AnyObject {
-//    associatedtype Input
-//    associatedtype Output
-//
-//    func transform(input: Input) -> Output
-//}
-
-//protocol ViewModel: Stepper{
-//    var service: Service {get set}
-//}
-
 
 class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     typealias T = T
@@ -36,7 +25,8 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     
     public var paginationlimit: Int = 20
     
-    public var dataFetchingCompleteionHandler: (() -> Void)?
+    public var dataFetchingSuccessHandler: (() -> Void)?
+    public var dataFetchingFailedHandler: (() -> Void)?
     
     public lazy var fetchedResultsController: NSFetchedResultsController<T> = {
         let fetchRequest = NSFetchRequest<T>(entityName:"GithubUserEntity")
@@ -61,6 +51,7 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     }()
     
     public var dataList: [D] = []
+    public var errorMessage: String = "Failed to fetch data..."
     
     public init(with service: Service){
         self.service = service
@@ -75,7 +66,6 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     }
     
     public func fetchData(since: Int) {
-        
+        fatalError("Must be overwritten")
     }
-    
 }
