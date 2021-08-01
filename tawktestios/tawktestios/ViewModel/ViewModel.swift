@@ -29,7 +29,7 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     public var dataFetchingFailedHandler: (() -> Void)?
     
     public lazy var fetchedResultsController: NSFetchedResultsController<T> = {
-        let fetchRequest = NSFetchRequest<T>(entityName:"GithubUserEntity")
+        let fetchRequest = NSFetchRequest<T>(entityName: CoreDataEntities<T>.getEntityName())  // GithubUserEntity
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
         fetchRequest.fetchOffset = paginationOffset
         fetchRequest.fetchLimit = paginationOffset + paginationlimit

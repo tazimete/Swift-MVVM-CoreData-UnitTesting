@@ -53,6 +53,7 @@
 		29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289326B48E3A0073C150 /* RootCoordinator.swift */; };
 		29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289526B48E850073C150 /* ProfileCoordinator.swift */; };
 		29F4289926B5ED490073C150 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289826B5ED490073C150 /* Reachability.swift */; };
+		29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */; };
 		386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */; };
 		68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		29F4289326B48E3A0073C150 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		29F4289526B48E850073C150 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		29F4289826B5ED490073C150 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
 		2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -454,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				29F4287626B2EF860073C150 /* CoreDataClient.swift */,
+				29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */,
 				2948DC9626AC0F07001EF5D2 /* GithubRemoteDataSource.swift in Sources */,
 				29F4286926AE9A640073C150 /* GithubUserCell.swift in Sources */,
+				29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */,
 				29F4286E26B12D660073C150 /* UIImageView+Extension.swift in Sources */,
 				2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */,
 				2948DC9A26AC1C39001EF5D2 /* BaseViewController.swift in Sources */,

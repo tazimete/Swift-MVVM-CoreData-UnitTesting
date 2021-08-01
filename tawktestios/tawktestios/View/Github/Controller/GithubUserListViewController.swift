@@ -129,7 +129,7 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
     }
     
     override func getPaginationOffset() -> Int{
-        return githubViewModel.paginationlimit - 5 
+        return githubViewModel.paginationlimit - 5
     }
 }
 
@@ -157,8 +157,8 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
 }
 
 
-// MARK: NSFetchedResultsControllerDelegate 
-extension GithubUserListViewController: NSFetchedResultsControllerDelegate {    
+// MARK: NSFetchedResultsControllerDelegate
+extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
