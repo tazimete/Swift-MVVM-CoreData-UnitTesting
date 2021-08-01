@@ -9,24 +9,54 @@ import CoreData
 
 
 class CoreDataClient {
-    private init() {}
+//    private init() {}
     
     static let shared = CoreDataClient()
     
-    lazy var persistentContainer: NSPersistentContainer = {
-       let container = NSPersistentContainer(name: "tawktestios")
+//    lazy var persistentContainer: NSPersistentContainer = {
+//       let container = NSPersistentContainer(name: "tawktestios")
+//
+//        let description = persistentContainer.persistentStoreDescriptions.first
+//        description?.type = NSSQLiteStoreType
+//
+//        persistentContainer.loadPersistentStores { description, error in
+//            guard error == nil else {
+//                fatalError("was unable to load store \(error!)")
+//            }
+//        }
+////        container.loadPersistentStores(completionHandler: { (_, error) in
+////            guard let error = error as NSError? else { return }
+////            fatalError("Unresolved error: \(error), \(error.userInfo)")
+////        })
+//
+//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+//        container.viewContext.undoManager = nil
+//        container.viewContext.shouldDeleteInaccessibleFaults = true
+//
+//        container.viewContext.automaticallyMergesChangesFromParent = true
+//
+//        return container
+//    }()
+    
+    let persistentContainer: NSPersistentContainer
+    let backgroundContext: NSManagedObjectContext
+    let mainContext: NSManagedObjectContext
+    
+    private init() {
+        persistentContainer = NSPersistentContainer(name: "tawktestios")
+        let description = persistentContainer.persistentStoreDescriptions.first
+        description?.type = NSSQLiteStoreType
         
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            guard let error = error as NSError? else { return }
-            fatalError("Unresolved error: \(error), \(error.userInfo)")
-        })
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("was unable to load store \(error!)")
+            }
+        }
         
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        container.viewContext.undoManager = nil
-        container.viewContext.shouldDeleteInaccessibleFaults = true
+        mainContext = persistentContainer.viewContext
         
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        
-        return container
-    }()
+        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        backgroundContext.parent = self.mainContext
+    }
 }

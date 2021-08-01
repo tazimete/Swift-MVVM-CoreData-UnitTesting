@@ -21,7 +21,7 @@ class GithubLocalDataSource : LocalDataSource{
         return CoreDataEntities<GithubUserEntity>.getEntityName()
     }
     
-    public init(persistentContainer: NSPersistentContainer = CoreDataClient.shared.persistentContainer, viewContext: NSManagedObjectContext = CoreDataClient.shared.persistentContainer.newBackgroundContext()) {
+    public init(persistentContainer: NSPersistentContainer = CoreDataClient.shared.persistentContainer, viewContext: NSManagedObjectContext = CoreDataClient.shared.backgroundContext) {
         self.persistentContainer = persistentContainer
         self.viewContext = viewContext
     }
@@ -68,7 +68,7 @@ class GithubLocalDataSource : LocalDataSource{
 
             if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
                 NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
-                                                    into: [self.viewContext])
+                                                    into: [taskContext])
             }
         }catch {
             print("Error: \(error)\nCould not batch delete existing records.")

@@ -46,7 +46,7 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
         tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
         
         addBottomIndicator()
-        showBottomIndicator(flag: true)
+//        showBottomIndicator(flag: true)
     }
     
     private func addBottomIndicator (){
