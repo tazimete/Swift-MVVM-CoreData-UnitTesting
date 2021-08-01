@@ -46,7 +46,7 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
         tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
         
         addBottomIndicator()
-        showBottomIndicator(flag: false)
+        showBottomIndicator(flag: true)
     }
     
     private func addBottomIndicator (){
@@ -70,16 +70,11 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
     }
     
     public func loadGithubUserList(since: Int){
-//        do {
-//            try githubViewModel.fetchedResultsController.performFetch()
-//        }catch(let error){
-//            print("\(TAG) -- loadGithubUserListOnPaginate() -- error = \(error)")
-//        }
         showBottomIndicator(flag: true)
         githubViewModel.fetchData(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
-            self?.showBottomIndicator(flag: false)
+//            self?.showBottomIndicator(flag: false)
         }
         
         githubViewModel.dataFetchingFailedHandler = {

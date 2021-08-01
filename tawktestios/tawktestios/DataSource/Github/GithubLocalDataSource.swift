@@ -18,10 +18,10 @@ class GithubLocalDataSource : LocalDataSource{
     }()
     
     public var entityName: String {
-        return "GithubUserEntity"
+        return CoreDataEntities<GithubUserEntity>.getEntityName()
     }
     
-    public init(persistentContainer: NSPersistentContainer = CoreDataClient.shared.persistentContainer, viewContext: NSManagedObjectContext = CoreDataClient.shared.persistentContainer.viewContext) {
+    public init(persistentContainer: NSPersistentContainer = CoreDataClient.shared.persistentContainer, viewContext: NSManagedObjectContext = CoreDataClient.shared.persistentContainer.newBackgroundContext()) {
         self.persistentContainer = persistentContainer
         self.viewContext = viewContext
     }
