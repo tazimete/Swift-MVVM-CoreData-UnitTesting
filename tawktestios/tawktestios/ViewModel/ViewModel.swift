@@ -37,7 +37,7 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: CoreDataClient.shared.mainContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
-//        controller.delegate = self
+        controller.delegate = self.fetchedResultsControllerDelegate
         fetchRequest.fetchBatchSize = paginationlimit
         
         do {
@@ -49,6 +49,8 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
         
         return controller
     }()
+    
+    weak public var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
     
     public var dataList: [D] = []
     public var errorMessage: String = "Failed to fetch data..."

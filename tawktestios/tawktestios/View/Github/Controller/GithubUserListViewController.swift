@@ -64,7 +64,7 @@ class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubU
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-        githubViewModel.fetchedResultsController.delegate = self
+        githubViewModel.fetchedResultsControllerDelegate = self
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
     }
