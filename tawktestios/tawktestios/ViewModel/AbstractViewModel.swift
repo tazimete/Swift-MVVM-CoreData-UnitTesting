@@ -11,7 +11,7 @@ import RxFlow
 
 protocol AbstractViewModel: Stepper {
     associatedtype S: Service
-    associatedtype D: AbstractDataModel
+    associatedtype D: AbstractDataModel & Codable
     associatedtype T: NSManagedObject
     
     var service: S {get set}
@@ -25,7 +25,8 @@ protocol AbstractViewModel: Stepper {
     var dataList: [D] {get set}
     var errorMessage: String {get set}
     
-    func fetchData(since: Int)
+    func fetchData(page: Int, completionHandler: @escaping NetworkCompletionHandler<D>)
+    func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[D]>)
     func setPaginationOffset(offset: Int)
     func setPaginationLimit(limit: Int)
 }

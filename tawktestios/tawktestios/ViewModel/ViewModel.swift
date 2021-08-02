@@ -12,7 +12,7 @@ import RxFlow
 import CoreData
 
 
-class ViewModel<S: Service, D: AbstractDataModel, T: NSManagedObject>: AbstractViewModel {
+class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedObject>: AbstractViewModel {
     typealias S = S
     typealias D = D
     typealias T = T
@@ -67,7 +67,11 @@ class ViewModel<S: Service, D: AbstractDataModel, T: NSManagedObject>: AbstractV
         paginationlimit = limit
     }
     
-    public func fetchData(since: Int) {
-        fatalError("Must be overwritten")
+    func fetchData(page: Int, completionHandler: @escaping NetworkCompletionHandler<D>) {
+        fatalError("Must be overwitten")
+    }
+    
+    func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
+        fatalError("Must be overwitten")
     }
 }

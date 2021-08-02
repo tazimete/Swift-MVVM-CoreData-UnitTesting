@@ -71,7 +71,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     public func loadGithubUserList(since: Int){
         showBottomIndicator(flag: true)
-        githubViewModel.fetchData(since: since)
+        githubViewModel.fetchDataList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
 //            self?.showBottomIndicator(flag: false)

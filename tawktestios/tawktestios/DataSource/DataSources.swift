@@ -8,30 +8,6 @@
 import Foundation
 import CoreData
 
-//protocol RemoteDataSource: AnyObject {
-//    var apiClient: APIClient {set get}
-//
-//    func getGitubUserList(since: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>)
-//}
-
-
-//protocol LocalDataSource: AnyObject {
-////    associatedtype T: AbstractDataModel
-////    associatedtype D: NSManagedObject
-//    
-//    var persistentContainer: NSPersistentContainer {get set}
-//    var viewContext: NSManagedObjectContext {get set}
-//    var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}
-//    var entityName: String {get}
-//    
-//    func fetchItems<T: NSManagedObject>(type: T, taskContext: NSManagedObjectContext)  ->[NSManagedObject]
-//    func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject?
-//    func insertItems<T: AbstractDataModel>(items: [T], taskContext: NSManagedObjectContext)
-//    func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
-//    func syncData<T: AbstractDataModel>(data: [T], taskContext: NSManagedObjectContext) -> Bool
-//}
-
-
 protocol AbstractRemoteDataSource: AnyObject {
     associatedtype T: APIRequest
     associatedtype D: AbstractDataModel & Codable
@@ -56,3 +32,28 @@ protocol AbstractLocalDataSource: AnyObject {
     func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
     func syncData(data: [T], taskContext: NSManagedObjectContext) -> Bool
 }
+
+
+
+//protocol RemoteDataSource: AnyObject {
+//    var apiClient: APIClient {set get}
+//
+//    func getGitubUserList(since: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>)
+//}
+
+
+//protocol LocalDataSource: AnyObject {
+////    associatedtype T: AbstractDataModel
+////    associatedtype D: NSManagedObject
+//
+//    var persistentContainer: NSPersistentContainer {get set}
+//    var viewContext: NSManagedObjectContext {get set}
+//    var fetchRequest: NSFetchRequest<NSFetchRequestResult> {get set}
+//    var entityName: String {get}
+//
+//    func fetchItems<T: NSManagedObject>(type: T, taskContext: NSManagedObjectContext)  ->[NSManagedObject]
+//    func insertEntity(entityName: String, into: NSManagedObjectContext) -> NSManagedObject?
+//    func insertItems<T: AbstractDataModel>(items: [T], taskContext: NSManagedObjectContext)
+//    func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
+//    func syncData<T: AbstractDataModel>(data: [T], taskContext: NSManagedObjectContext) -> Bool
+//}

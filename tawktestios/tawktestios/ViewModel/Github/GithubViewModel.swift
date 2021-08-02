@@ -17,8 +17,12 @@ class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEntity> {
         super.init(with: service)
     }
     
-    override func fetchData(since: Int) {
-        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParams(since: since))) { [weak self] result in
+    override func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
+        service.remoteDataSource.fetchDataList(request: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: page)), completionHandler: completionHandler)
+    }
+    
+    public func fetchDataList(since: Int) {
+        fetchDataList(page: since) { [weak self] result in
             guard let weakSelf = self else {
                 return
             }

@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class BaseViewController<S: Service, D: AbstractDataModel, T: NSManagedObject>: UIViewController, UIScrollViewDelegate {
+class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManagedObject>: UIViewController, UIScrollViewDelegate {
     typealias S = S
     typealias D = D
     typealias T = T
