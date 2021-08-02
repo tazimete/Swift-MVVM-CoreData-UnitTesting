@@ -8,17 +8,17 @@
 import UIKit
 import CoreData
 
-class GithubUserListViewController: BaseViewController<GithubUserEntity, GithubUser>, Storyboarded  {
+class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private let tableView = UITableView()
     private var githubViewModel: GithubViewModel!
     
-    public static func loadViewController(viewModel: ViewModel<T,D>) -> GithubUserListViewController?{
+    public static func loadViewController(viewModel: ViewModel<S, D, T>) -> GithubUserListViewController?{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc
     }
     
-    public static func instantiate(viewModel: ViewModel<T,D>) -> Self {
+    public static func instantiate(viewModel: ViewModel<S, D, T>) -> Self {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc as! Self

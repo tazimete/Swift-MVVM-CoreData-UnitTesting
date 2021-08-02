@@ -11,8 +11,8 @@ import RxFlow
 
 
 final class GithubFlow: Flow {
-    private let localDataSource: LocalDataSourceImp<GithubUser, GithubUserEntity>
-    private let remoteDataSource: RemoteDataSource
+    private let localDataSource: LocalDataSource<GithubUser, GithubUserEntity>
+    private let remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>
     
     var root: Presentable {
         rootViewController
@@ -23,8 +23,8 @@ final class GithubFlow: Flow {
     }()
     
     init() {
-        self.localDataSource = LocalDataSourceImp()
-        self.remoteDataSource = GithubRemoteDataSource()
+        self.localDataSource = LocalDataSource<GithubUser, GithubUserEntity>()
+        self.remoteDataSource = RemoteDataSource<GithubApiRequest, GithubUser>() 
     }
     
     deinit {

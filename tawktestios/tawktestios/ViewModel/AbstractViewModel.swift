@@ -10,10 +10,11 @@ import CoreData
 import RxFlow
 
 protocol AbstractViewModel: Stepper {
-    associatedtype T: NSManagedObject
+    associatedtype S: Service
     associatedtype D: AbstractDataModel
+    associatedtype T: NSManagedObject
     
-    var service: Service {get set}
+    var service: S {get set}
     var paginationOffset: Int {get set}
     var paginationlimit: Int {get set}
     var dataFetchingSuccessHandler: (() -> Void)? {get set}

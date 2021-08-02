@@ -8,12 +8,13 @@
 import UIKit
 import CoreData
 
-class BaseViewController<T: NSManagedObject, D: AbstractDataModel>: UIViewController, UIScrollViewDelegate {
-    typealias T = T
+class BaseViewController<S: Service, D: AbstractDataModel, T: NSManagedObject>: UIViewController, UIScrollViewDelegate {
+    typealias S = S
     typealias D = D
+    typealias T = T
     
     public let TAG = description()
-    public var viewModel: ViewModel<T, D>!
+    public var viewModel: ViewModel<S, D, T>!
     public var lastContentOffset: CGFloat = 0.0
     
     enum ScrollDirection : Int {

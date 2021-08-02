@@ -5,11 +5,13 @@
 //  Created by JMC on 24/7/21.
 //
 
-import Foundation
-
+import CoreData
 
 protocol Service: AnyObject {
-    var localDataSource: LocalDataSource {get set}
-    var remoteDataSource: RemoteDataSource {get set}
+    associatedtype L: AbstractLocalDataSource
+    associatedtype R: AbstractRemoteDataSource
+    
+    var localDataSource: L {get set}
+    var remoteDataSource: R {get set}
 }
 

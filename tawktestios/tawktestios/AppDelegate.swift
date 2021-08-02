@@ -108,11 +108,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tell the coordinator show its controller 
 //        coordinator?.start()
         
-        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
-        let viewModel = GithubViewModel(with: service)
-        let viewController = GithubUserListViewController.instantiate(viewModel: viewModel)
+//        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
+//        let viewModel = GithubViewModel(with: service)
+//        let viewController = GithubUserListViewController.instantiate(viewModel: viewModel)
 //        navController.setViewControllers([viewController], animated: true)
-        navController.pushViewController(viewController, animated: true)
+//        navController.pushViewController(viewController, animated: true)
         
         _window.rootViewController = navController
         _window.makeKeyAndVisible()

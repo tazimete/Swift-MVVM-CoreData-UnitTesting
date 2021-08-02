@@ -12,14 +12,14 @@ import RxFlow
 import CoreData
 
 
-class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
-    typealias T = T
-    
+class ViewModel<S: Service, D: AbstractDataModel, T: NSManagedObject>: AbstractViewModel {
+    typealias S = S
     typealias D = D
+    typealias T = T
     
     public var steps = PublishRelay<Step>()
     
-    public var service: Service
+    public var service: S
     
     public var paginationOffset: Int = 0
     
@@ -55,7 +55,7 @@ class ViewModel<T: NSManagedObject, D: AbstractDataModel>: AbstractViewModel {
     public var dataList: [D] = []
     public var errorMessage: String = "Failed to fetch data..."
     
-    public init(with service: Service){
+    public init(with service: S){
         self.service = service
     }
     

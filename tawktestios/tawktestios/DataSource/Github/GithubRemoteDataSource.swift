@@ -7,15 +7,34 @@
 
 import Foundation
 
-public class GithubRemoteDataSource: RemoteDataSource {
+//public class GithubRemoteDataSource: RemoteDataSource {
+//    var apiClient: APIClient
+//
+//    init() {
+//        self.apiClient = APIClient.shared
+//    }
+//
+//    func getGitubUserList(since: Int, completionHandler: @escaping (NetworkCompletionHandler<[GithubUser]>)) {
+//        apiClient.enqueue(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: since)), type: [GithubUser].self, completionHandler: completionHandler)
+//    }
+//}
+
+
+class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: AbstractRemoteDataSource{
+    typealias T = T
+    typealias D = D
+    
     var apiClient: APIClient
     
-    init() {
-        self.apiClient = APIClient.shared
+    init(apiClient: APIClient = APIClient.shared) {
+        self.apiClient = apiClient
     }
     
-    func getGitubUserList(since: Int, completionHandler: @escaping (NetworkCompletionHandler<[GithubUser]>)) {
-        apiClient.enqueue(apiRequest: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: since)), type: [GithubUser].self, completionHandler: completionHandler)
+    func fetchData(request: T, completionHandler: @escaping NetworkCompletionHandler<D>) {
+        apiClient.enqueue(apiRequest: request, type: D.self, completionHandler: completionHandler)
+    }
+
+    func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
+        apiClient.enqueue(apiRequest: request, type: [D].self, completionHandler: completionHandler)
     }
 }
-

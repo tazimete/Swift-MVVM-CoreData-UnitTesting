@@ -5,13 +5,17 @@
 //  Created by JMC on 24/7/21.
 //
 
-import Foundation
+import CoreData
 
 public class GithubService: Service {
-    var localDataSource: LocalDataSource
-    var remoteDataSource: RemoteDataSource
+    typealias L = LocalDataSource<GithubUser, GithubUserEntity>
+    typealias R = RemoteDataSource<GithubApiRequest, GithubUser>
     
-    init(localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource) {
+    var localDataSource: LocalDataSource<GithubUser, GithubUserEntity>
+    
+    var remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>
+
+    init(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>, remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>) {
         self.localDataSource = localDataSource
         self.remoteDataSource = remoteDataSource
     }
