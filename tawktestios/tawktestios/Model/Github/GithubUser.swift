@@ -22,17 +22,17 @@ import CoreData
 //    }
 //}
 
-protocol AbstractDataModel: AnyObject {
+public protocol AbstractDataModel: AnyObject {
     var id: Int? {get set}
 }
 
-class GithubUser: AbstractDataModel, Codable {
-    var id: Int?
-    var username: String?
-    var avatarUrl: String?
-    var url: String?
+public class GithubUser: AbstractDataModel, Codable {
+    public var id: Int?
+    public var username: String?
+    public var avatarUrl: String?
+    public var url: String?
     
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case id = "id"
         case username = "login"
         case avatarUrl = "avatar_url"

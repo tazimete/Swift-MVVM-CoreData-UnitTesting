@@ -8,9 +8,9 @@
 import CoreData
 
 
-class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{
-    typealias T = T
-    typealias D = D
+public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{
+    public typealias T = T
+    public typealias D = D
     
     public var persistentContainer: NSPersistentContainer
     public var viewContext: NSManagedObjectContext

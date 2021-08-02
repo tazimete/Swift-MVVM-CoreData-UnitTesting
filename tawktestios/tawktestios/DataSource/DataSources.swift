@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-protocol AbstractRemoteDataSource: AnyObject {
+public protocol AbstractRemoteDataSource: AnyObject {
     associatedtype T: APIRequest
     associatedtype D: AbstractDataModel & Codable
     var apiClient: APIClient {set get}
@@ -17,7 +17,7 @@ protocol AbstractRemoteDataSource: AnyObject {
     func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>)
 }
 
-protocol AbstractLocalDataSource: AnyObject {
+public protocol AbstractLocalDataSource: AnyObject {
     associatedtype T: AbstractDataModel = AbstractDataModel
     associatedtype D: NSManagedObject = NSManagedObject
     

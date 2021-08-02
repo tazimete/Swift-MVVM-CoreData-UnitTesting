@@ -7,32 +7,32 @@
 
 import Foundation
 
-enum GithubApiRequest {
+public enum GithubApiRequest {
     case fetchUserList(params: Parameterizable)
     case fetchUserProfile(params: Parameterizable)
 }
 
 extension GithubApiRequest: APIRequest {
-    var baseURL: URL {
+    public var baseURL: URL {
         let url =  "https://api.github.com"
         return URL(string: url)!
     }
     
-    var method: RequestType {
+    public var method: RequestType {
         switch self {
             case .fetchUserList: return .GET
             case .fetchUserProfile: return .GET
         }
     }
     
-    var path: String {
+    public var path: String {
         switch self {
             case .fetchUserList: return "users"
             case .fetchUserProfile: return ""
         }
     }
     
-    var parameters: [String: Any]{
+    public var parameters: [String: Any]{
         var parameter: [String: Any] = [:]
         
         switch self {
@@ -46,7 +46,7 @@ extension GithubApiRequest: APIRequest {
         return parameter
     }
     
-    var headers: [String: Any] {
+    public var headers: [String: Any] {
         return [String: Any]()
     }
 }

@@ -7,7 +7,7 @@
 
 import CoreData
 
-protocol Service: AnyObject {
+public protocol Service: AnyObject {
     associatedtype L: AbstractLocalDataSource
     associatedtype R: AbstractRemoteDataSource
     

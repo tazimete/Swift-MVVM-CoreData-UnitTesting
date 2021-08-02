@@ -12,7 +12,7 @@ public enum RequestType: String {
     case GET, POST, DELETE, PUT, PATCH
 }
 
-protocol APIRequest {
+public protocol APIRequest {
     var baseURL: URL {get}
     var method: RequestType { get }
     var path: String { get }
@@ -21,7 +21,7 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-    func request(with baseURL: URL) -> URLRequest {
+    public func request(with baseURL: URL) -> URLRequest {
         guard var components = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
             fatalError("Unable to create URL components")
         }

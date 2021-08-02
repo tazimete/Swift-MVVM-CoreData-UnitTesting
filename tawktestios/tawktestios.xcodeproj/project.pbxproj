@@ -33,7 +33,7 @@
 		2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA026AC742B001EF5D2 /* GithubStepper.swift */; };
 		2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA226AC8078001EF5D2 /* GithubFlow.swift */; };
 		29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */; };
-		29E8429026B7F14D00C8B48A /* GithubLocalDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428F26B7F14D00C8B48A /* GithubLocalDataSourceTest.swift */; };
+		29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */; };
 		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
 		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
@@ -110,7 +110,7 @@
 		2948DCA026AC742B001EF5D2 /* GithubStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubStepper.swift; sourceTree = "<group>"; };
 		2948DCA226AC8078001EF5D2 /* GithubFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubFlow.swift; sourceTree = "<group>"; };
 		29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClientTest.swift; sourceTree = "<group>"; };
-		29E8428F26B7F14D00C8B48A /* GithubLocalDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLocalDataSourceTest.swift; sourceTree = "<group>"; };
+		29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSourceTest.swift; sourceTree = "<group>"; };
 		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
 		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 				2917C6DA26AACA53003767B0 /* tawktestiosTests.swift */,
 				2917C6DC26AACA53003767B0 /* Info.plist */,
 				29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */,
-				29E8428F26B7F14D00C8B48A /* GithubLocalDataSourceTest.swift */,
+				29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */,
 			);
 			path = tawktestiosTests;
 			sourceTree = "<group>";
@@ -783,7 +783,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2917C6DB26AACA53003767B0 /* tawktestiosTests.swift in Sources */,
-				29E8429026B7F14D00C8B48A /* GithubLocalDataSourceTest.swift in Sources */,
+				29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */,
 				29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,16 +7,16 @@
 
 import Foundation
 
-class QueueManager {
-    static let shared = QueueManager()
+public class QueueManager {
+    public static let shared = QueueManager()
 
-    lazy var queue: OperationQueue = {
+    public lazy var queue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         return queue;
     }()
 
-    func enqueue(_ operation: Operation) {
+    public func enqueue(_ operation: Operation) {
         queue.addOperation(operation)
     }
 }

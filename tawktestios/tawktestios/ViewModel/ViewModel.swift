@@ -12,10 +12,10 @@ import RxFlow
 import CoreData
 
 
-class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedObject>: AbstractViewModel {
-    typealias S = S
-    typealias D = D
-    typealias T = T
+public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedObject>: AbstractViewModel {
+    public typealias S = S
+    public typealias D = D
+    public typealias T = T
     
     public var steps = PublishRelay<Step>()
     

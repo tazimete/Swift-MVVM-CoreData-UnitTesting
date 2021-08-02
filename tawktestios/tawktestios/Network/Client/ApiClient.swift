@@ -8,27 +8,27 @@
 import Foundation
 import UIKit
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case serverError
     case decodingError
     case wrongMimeTypeError
     case noDataError
 }
 
-typealias NetworkCompletionHandler<T: Codable> = (Result<T, NetworkError>) -> Void
-typealias ImageDownloadCompletionHandler = ((String, UIImage?, Bool) -> Void)
+public typealias NetworkCompletionHandler<T: Codable> = (Result<T, NetworkError>) -> Void
+public typealias ImageDownloadCompletionHandler = ((String, UIImage?, Bool) -> Void)
 
 
-class APIClient {
+public class APIClient {
     public static let shared = APIClient()
     private let queueManager: QueueManager
 
     
-    init(withQueueManager queueManager: QueueManager = QueueManager.shared) {
+    public init(withQueueManager queueManager: QueueManager = QueueManager.shared) {
         self.queueManager = queueManager
     }
     
-    func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)) {
+    public func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)) {
         let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
         operation.qualityOfService = .utility
         queueManager.enqueue(operation)

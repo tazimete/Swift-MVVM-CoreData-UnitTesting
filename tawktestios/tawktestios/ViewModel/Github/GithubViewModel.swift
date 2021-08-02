@@ -11,14 +11,14 @@ import RxSwift
 import RxCocoa
 import RxFlow
 
-class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEntity> {
+public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEntity> {
 
-    override init(with service: GithubService) {
+    public override init(with service: GithubService) {
         super.init(with: service)
     }
     
-    override func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
-        service.remoteDataSource.fetchDataList(request: GithubApiRequest.fetchUserList(params: FetchGithubUserParams(since: page)), completionHandler: completionHandler)
+    public override func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
+        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParams(since: page)), completionHandler: completionHandler)
     }
     
     public func fetchDataList(since: Int) {

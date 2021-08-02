@@ -8,10 +8,10 @@
 import CoreData
 
 
-class CoreDataClient {
+public class CoreDataClient {
 //    private init() {}
     
-    static let shared = CoreDataClient()
+    public static let shared = CoreDataClient()
     
 //    lazy var persistentContainer: NSPersistentContainer = {
 //       let container = NSPersistentContainer(name: "tawktestios")
@@ -38,9 +38,9 @@ class CoreDataClient {
 //        return container
 //    }()
     
-    let persistentContainer: NSPersistentContainer
-    let backgroundContext: NSManagedObjectContext
-    let mainContext: NSManagedObjectContext
+    public let persistentContainer: NSPersistentContainer
+    public let backgroundContext: NSManagedObjectContext
+    public let mainContext: NSManagedObjectContext
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "tawktestios")

@@ -7,21 +7,21 @@
 
 import Foundation
 
-class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: AbstractRemoteDataSource{
-    typealias T = T
-    typealias D = D
+public class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: AbstractRemoteDataSource{
+    public typealias T = T
+    public typealias D = D
     
-    var apiClient: APIClient
+    public var apiClient: APIClient
     
-    init(apiClient: APIClient = APIClient.shared) {
+    public init(apiClient: APIClient = APIClient.shared) {
         self.apiClient = apiClient
     }
     
-    func fetchData(request: T, completionHandler: @escaping NetworkCompletionHandler<D>) {
+    public func fetchData(request: T, completionHandler: @escaping NetworkCompletionHandler<D>) {
         apiClient.enqueue(apiRequest: request, type: D.self, completionHandler: completionHandler)
     }
 
-    func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
+    public func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
         apiClient.enqueue(apiRequest: request, type: [D].self, completionHandler: completionHandler)
     }
 }
