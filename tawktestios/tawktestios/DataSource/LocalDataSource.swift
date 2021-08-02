@@ -69,6 +69,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     }
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
+//        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)

@@ -50,23 +50,47 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
     
-//    func fetchEmployees() -> [Employee]? {
-//        let context = persistentContainer.viewContext
-//
-//        let fetchRequest = NSFetchRequest<Employee>(entityName: "Employee")
-//
-//        do {
-//            let employees = try context.fetch(fetchRequest)
-//            return employees
-//        } catch let error {
-//            print("Failed to fetch companies: \(error)")
-//        }
-//
-//        return nil
-//    }
+    func testFetchItems() {
+        localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
+        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        
+        XCTAssertEqual(result.count, 3)
+        XCTAssertTrue(users.count == result.count)
+        XCTAssertNotNil(result[0].username)
+        XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertNotEqual(users.first?.username, result.last?.username)
+    }
 
     func testBtachDelete(){
-
+        localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
+        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
+        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)
+        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        
+        XCTAssertEqual(result.count, 0)
+        XCTAssertNotEqual(users.count, result.count)
+        XCTAssertNotEqual(users.first?.username, result.last?.username)
+        XCTAssertNil(result.first)
+    }
+    
+    func testSyncData(){
+        let user4 = GithubUser()
+        user4.id = 11
+        user4.username = "test name 2"
+        user4.avatarUrl = "www.testapp.com/img/12"
+        
+        users.append(user4)
+        
+        localDataSource.syncData(data: users, taskContext: CoreDataClientTest.shared.persistentContainer.newBackgroundContext())
+//        let ids = users.map({$0.id ?? -1})
+//        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)
+        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.persistentContainer.newBackgroundContext())
+        
+        XCTAssertEqual(result.count, 3)
+        XCTAssertTrue(users.count == result.count)
+        XCTAssertNotNil(result[0].username)
+        XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
 
     func testPerformanceExample() throws {
@@ -75,5 +99,4 @@ class LocalDataSourceTest: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
