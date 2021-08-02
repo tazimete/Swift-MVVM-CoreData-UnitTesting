@@ -6,21 +6,44 @@
 //
 
 import XCTest
+import CoreData
 @testable import tawktestios
 
 class tawktestiosTests: XCTestCase {
+    var localDataSource: GithubLocalDataSource!
+    var users = [GithubUser]()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        localDataSource = GithubLocalDataSource(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
+        
+        let user1 = GithubUser()
+        user1.id = 10
+        user1.username = "test name 1"
+        user1.avatarUrl = "www.testapp.com/img/10"
+        
+        let user2 = GithubUser()
+        user2.id = 11
+        user2.username = "test name 2"
+        user2.avatarUrl = "www.testapp.com/img/11"
+        
+        let user3 = GithubUser()
+        user3.id = 12
+        user3.username = "test name 3"
+        user3.avatarUrl = "www.testapp.com/img/12"
+        
+        users = [user1, user2, user3]
+    }
+    
+    override func tearDown() {
+        localDataSource = nil
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testInsertItems() {
+        localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testBtachDelete(){
+        
     }
 
     func testPerformanceExample() throws {
