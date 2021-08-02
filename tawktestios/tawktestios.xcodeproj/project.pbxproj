@@ -26,7 +26,7 @@
 		2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC8926ABFB47001EF5D2 /* GithubService.swift */; };
 		2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC8C26ABFB6E001EF5D2 /* Service.swift */; };
 		2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9226AC065B001EF5D2 /* DataSources.swift */; };
-		2948DC9626AC0F07001EF5D2 /* GithubRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9526AC0F07001EF5D2 /* GithubRemoteDataSource.swift */; };
+		2948DC9626AC0F07001EF5D2 /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9526AC0F07001EF5D2 /* RemoteDataSource.swift */; };
 		2948DC9A26AC1C39001EF5D2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */; };
 		2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */; };
 		2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */; };
@@ -46,7 +46,7 @@
 		29F4287226B160BD0073C150 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287126B160BD0073C150 /* ImageCache.swift */; };
 		29F4287426B160E30073C150 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287326B160E30073C150 /* ImageLoader.swift */; };
 		29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287626B2EF860073C150 /* CoreDataClient.swift */; };
-		29F4287926B2F1910073C150 /* GithubLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287826B2F1910073C150 /* GithubLocalDataSource.swift */; };
+		29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287826B2F1910073C150 /* LocalDataSource.swift */; };
 		29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */; };
 		29F4288C26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */; };
 		29F4288D26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */; };
@@ -103,7 +103,7 @@
 		2948DC8926ABFB47001EF5D2 /* GithubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubService.swift; sourceTree = "<group>"; };
 		2948DC8C26ABFB6E001EF5D2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		2948DC9226AC065B001EF5D2 /* DataSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
-		2948DC9526AC0F07001EF5D2 /* GithubRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRemoteDataSource.swift; sourceTree = "<group>"; };
+		2948DC9526AC0F07001EF5D2 /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
 		2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		29F4287126B160BD0073C150 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		29F4287326B160E30073C150 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		29F4287626B2EF860073C150 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
-		29F4287826B2F1910073C150 /* GithubLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLocalDataSource.swift; sourceTree = "<group>"; };
+		29F4287826B2F1910073C150 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		29F4288426B331AC0073C150 /* tawktestios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tawktestios.xcdatamodel; sourceTree = "<group>"; };
 		29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -369,18 +369,10 @@
 			isa = PBXGroup;
 			children = (
 				2948DC9226AC065B001EF5D2 /* DataSources.swift */,
-				2948DC9426AC0EED001EF5D2 /* Github */,
+				29F4287826B2F1910073C150 /* LocalDataSource.swift */,
+				2948DC9526AC0F07001EF5D2 /* RemoteDataSource.swift */,
 			);
 			path = DataSource;
-			sourceTree = "<group>";
-		};
-		2948DC9426AC0EED001EF5D2 /* Github */ = {
-			isa = PBXGroup;
-			children = (
-				29F4287826B2F1910073C150 /* GithubLocalDataSource.swift */,
-				2948DC9526AC0F07001EF5D2 /* GithubRemoteDataSource.swift */,
-			);
-			path = Github;
 			sourceTree = "<group>";
 		};
 		2948DC9F26AC7402001EF5D2 /* Github */ = {
@@ -753,7 +745,7 @@
 				2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */,
 				2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */,
 				29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */,
-				2948DC9626AC0F07001EF5D2 /* GithubRemoteDataSource.swift in Sources */,
+				2948DC9626AC0F07001EF5D2 /* RemoteDataSource.swift in Sources */,
 				29F4286926AE9A640073C150 /* GithubUserCell.swift in Sources */,
 				29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */,
 				29F4286E26B12D660073C150 /* UIImageView+Extension.swift in Sources */,
@@ -770,7 +762,7 @@
 				2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */,
 				29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */,
 				29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */,
-				29F4287926B2F1910073C150 /* GithubLocalDataSource.swift in Sources */,
+				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,
 				2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */,
 				29F4289926B5ED490073C150 /* Reachability.swift in Sources */,

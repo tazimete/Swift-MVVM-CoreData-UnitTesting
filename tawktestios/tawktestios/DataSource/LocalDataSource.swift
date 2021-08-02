@@ -34,16 +34,18 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     
     public func fetchItems(taskContext: NSManagedObjectContext) -> [D] {
         let fetchRequest = NSFetchRequest<D>(entityName: CoreDataEntities<D>.getEntityName())
-            
+        let sort = NSSortDescriptor(key:"id", ascending:true)
+        fetchRequest.sortDescriptors = [sort]
+        
         var userEntities: [D]!
         
-        taskContext.performAndWait {
+//        taskContext.performAndWait {
             do {
                 userEntities = try taskContext.fetch(fetchRequest)
             } catch let error {
                 print("Failed to fetch companies: \(error)")
             }
-        }
+//        }
         
         return userEntities
     }

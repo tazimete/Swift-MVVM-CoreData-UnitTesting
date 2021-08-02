@@ -10,13 +10,13 @@ import tawktestios
 
 class LocalDataSourceTest: XCTestCase {
 
-    var localDataSource: LocalDataSourceTest!
+    var localDataSource: LocalDataSource<GithubUser, GithubUserEntity>!
     var users = [GithubUser]()
 
     override func setUp() {
-        localDataSource = GithubLocalDataSource(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
+        localDataSource = LocalDataSource(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
 
-        let user1 = GithubUserEntity()
+        let user1 = GithubUser()
         user1.id = 10
         user1.username = "test name 1"
         user1.avatarUrl = "www.testapp.com/img/10"
@@ -40,7 +40,30 @@ class LocalDataSourceTest: XCTestCase {
 
     func testInsertItems() {
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
+        
+        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        
+        XCTAssertEqual(result.count, 3)
+        XCTAssertTrue(users.count == result.count)
+        XCTAssertNotNil(result[0].username)
+        XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
+    
+//    func fetchEmployees() -> [Employee]? {
+//        let context = persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<Employee>(entityName: "Employee")
+//
+//        do {
+//            let employees = try context.fetch(fetchRequest)
+//            return employees
+//        } catch let error {
+//            print("Failed to fetch companies: \(error)")
+//        }
+//
+//        return nil
+//    }
 
     func testBtachDelete(){
 

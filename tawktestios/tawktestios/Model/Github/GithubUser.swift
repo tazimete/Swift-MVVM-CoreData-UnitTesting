@@ -32,6 +32,10 @@ public class GithubUser: AbstractDataModel, Codable {
     public var avatarUrl: String?
     public var url: String?
     
+    public init() {
+        
+    }
+    
     public enum CodingKeys: String, CodingKey {
         case id = "id"
         case username = "login"
