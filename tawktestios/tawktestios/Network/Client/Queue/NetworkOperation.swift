@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkOperation: Operation {
     
-    private var task: URLSessionTask!
+    private var task: URLSessionTask?
     
     enum OperationState: Int {
         case ready
@@ -36,61 +36,6 @@ class NetworkOperation: Operation {
     
     override init() {
         super.init()
-    }
-    
-    init(session: URLSession, downloadTaskURL: URL, completionHandler: ((URL?, URLResponse?, Error?) -> Void)?) {
-           super.init()
-
-           // use weak self to prevent retain cycle
-           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
-                    DispatchQueue.main.async {
-                        /*
-                        if there is a custom completionHandler defined,
-                        pass the result gotten in downloadTask's completionHandler to the
-                        custom completionHandler
-                        */
-                        if let completionHandler = completionHandler {
-                            // localURL is the temporary URL the downloaded file is located
-                            completionHandler(localURL, response, error)
-                        }
-
-                       /*
-                         set the operation state to finished once
-                         the download task is completed or have error
-                       */
-                        self?.state = .finished
-                    }
-           })
-       }
-    
-//    public func execute<T: Codable>(apiRequest: APIRequest, type: T.Type) -> Observable<T> {
-//        let request = apiRequest.request(with: apiRequest.baseURL)
-//
-//        return URLSession.shared.rx.data(request: request)
-//            .map { data in
-//                self.state = .finished
-//                return try JSONDecoder().decode(T.self, from: data)
-//            }.observe(on: MainScheduler.asyncInstance)
-//    }
-    
-    override func start() {
-        if(self.isCancelled) {
-            state = .finished
-            return
-        }
-        
-        // set the state to executing
-        state = .executing
-        
-        print("Processing \(self.task.originalRequest?.url?.absoluteString ?? "")")
-            
-        // start the downloading
-        self.task.resume()
-    }
-    
-    override func cancel() {
-        super.cancel()
-        self.task.cancel()
     }
     
     init<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
@@ -123,9 +68,9 @@ class NetworkOperation: Operation {
                      return
                 }
                  
-                 let resultjson = try? JSONDecoder().decode(T.self, from: responseData)
+                 let resultData = try? JSONDecoder().decode(T.self, from: responseData)
                 
-                 if let result = resultjson{
+                 if let result = resultData{
                      completionHandler(.success(result))
                  }else{
                      completionHandler(.failure(.decodingError))
@@ -134,8 +79,65 @@ class NetworkOperation: Operation {
                  self?.state = .finished
             }
        }
+    }
+    
+    init(session: URLSession, downloadTaskURL: URL, completionHandler: ((URL?, URLResponse?, Error?) -> Void)?) {
+           super.init()
 
-//       task.resume()
+           // use weak self to prevent retain cycle
+           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
+                    DispatchQueue.main.async {
+                        /*
+                        if there is a custom completionHandler defined,
+                        pass the result gotten in downloadTask's completionHandler to the
+                        custom completionHandler
+                        */
+                        if let completionHandler = completionHandler {
+                            // localURL is the temporary URL the downloaded file is located
+                            completionHandler(localURL, response, error)
+                        }
+
+                       /*
+                         set the operation state to finished once
+                         the download task is completed or have error
+                       */
+                        self?.state = .finished
+                    }
+           })
+       }
+    
+    override func start() {
+        if(self.isCancelled) {
+            state = .finished
+            return
+        }
+        
+        // set the state to executing
+        state = .executing
+        
+        print("Processing \(self.task?.originalRequest?.url?.absoluteString ?? "")")
+            
+        // start the downloading
+        self.task?.resume()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        self.task?.cancel()
+    }
+    
+    public func getStubbResponse<T: Codable>(type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
+        guard let data = try? JSONSerialization.data(withJSONObject: StubResponseProvider.get(type: type), options: .prettyPrinted) else {
+            completionHandler(.failure(.noDataError))
+            return
+        }
+        
+        guard let resultData = try? JSONDecoder().decode(T.self, from: data) else {
+            completionHandler(.failure(.decodingError))
+            return
+        }
+        
+        completionHandler(.success(resultData))
     }
 }
 

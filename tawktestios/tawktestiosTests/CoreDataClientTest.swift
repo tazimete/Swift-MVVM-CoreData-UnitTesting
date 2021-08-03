@@ -17,7 +17,11 @@ class CoreDataClientTest {
     private init() {
         persistentContainer = NSPersistentContainer(name: "tawktestios")
         let description = persistentContainer.persistentStoreDescriptions.first
-        description?.type = NSInMemoryStoreType
+//        description?.type = NSSQLiteStoreType
+//        let description = NSPersistentStoreDescription()
+        description?.type = NSSQLiteStoreType
+        description?.url = URL(fileURLWithPath: "/dev/null")
+        persistentContainer.persistentStoreDescriptions = [description!]
         
         persistentContainer.loadPersistentStores { description, error in
             guard error == nil else {

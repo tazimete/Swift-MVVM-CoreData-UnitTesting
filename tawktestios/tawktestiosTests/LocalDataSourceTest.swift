@@ -64,7 +64,7 @@ class LocalDataSourceTest: XCTestCase {
     func testBtachDelete(){
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
         let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
-        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)
+        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
         let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
         
         XCTAssertEqual(result.count, 0)
@@ -81,10 +81,10 @@ class LocalDataSourceTest: XCTestCase {
         
         users.append(user4)
         
-        localDataSource.syncData(data: users, taskContext: CoreDataClientTest.shared.persistentContainer.newBackgroundContext())
+        let isSuccess = localDataSource.syncData(data: users, taskContext: localDataSource.viewContext)
 //        let ids = users.map({$0.id ?? -1})
 //        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)
-        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.persistentContainer.newBackgroundContext())
+        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
         
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)

@@ -34,6 +34,8 @@
 		2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA226AC8078001EF5D2 /* GithubFlow.swift */; };
 		29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */; };
 		29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */; };
+		29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429126B905CB00C8B48A /* StubResponseProvider.swift */; };
+		29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429326B90FBE00C8B48A /* AbstractApiClient.swift */; };
 		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
 		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
@@ -111,6 +113,8 @@
 		2948DCA226AC8078001EF5D2 /* GithubFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubFlow.swift; sourceTree = "<group>"; };
 		29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClientTest.swift; sourceTree = "<group>"; };
 		29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSourceTest.swift; sourceTree = "<group>"; };
+		29E8429126B905CB00C8B48A /* StubResponseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubResponseProvider.swift; sourceTree = "<group>"; };
+		29E8429326B90FBE00C8B48A /* AbstractApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractApiClient.swift; sourceTree = "<group>"; };
 		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
 		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -295,9 +299,11 @@
 			isa = PBXGroup;
 			children = (
 				29F4286026ADCC6F0073C150 /* Queue */,
-				2948DC7B26AB3E35001EF5D2 /* Parameterizable.swift */,
+				29E8429326B90FBE00C8B48A /* AbstractApiClient.swift */,
 				2948DC7726AB367C001EF5D2 /* ApiRequest.swift */,
 				2948DC7D26AB3E82001EF5D2 /* ApiClient.swift */,
+				2948DC7B26AB3E35001EF5D2 /* Parameterizable.swift */,
+				29E8429126B905CB00C8B48A /* StubResponseProvider.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -739,8 +745,10 @@
 				29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */,
 				2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */,
 				2948DC8326AB415B001EF5D2 /* FetchGithubUserParams.swift in Sources */,
+				29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */,
 				2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */,
 				29F4288D26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift in Sources */,
+				29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */,
 				29F4289226B48DB40073C150 /* Coordinator.swift in Sources */,
 				2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */,
 				2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */,
