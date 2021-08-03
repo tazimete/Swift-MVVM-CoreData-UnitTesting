@@ -40,7 +40,7 @@
 		29E8429B26B94CC300C8B48A /* ApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429A26B94CC300C8B48A /* ApiClientTest.swift */; };
 		29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */; };
 		29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */; };
-		29E842A226B967DD00C8B48A /* AbstractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractCell.swift */; };
+		29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */; };
 		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
 		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
@@ -124,7 +124,7 @@
 		29E8429A26B94CC300C8B48A /* ApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTest.swift; sourceTree = "<group>"; };
 		29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellViewModel.swift; sourceTree = "<group>"; };
-		29E842A126B967DD00C8B48A /* AbstractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCell.swift; sourceTree = "<group>"; };
+		29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGithubCell.swift; sourceTree = "<group>"; };
 		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
 		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -368,6 +368,7 @@
 		2948DC8F26ABFDB4001EF5D2 /* Github */ = {
 			isa = PBXGroup;
 			children = (
+				29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */,
 				29F4286726AE9A510073C150 /* Cell */,
 				29F4286626AE9A4B0073C150 /* Controller */,
 			);
@@ -487,7 +488,6 @@
 			isa = PBXGroup;
 			children = (
 				29F4286826AE9A640073C150 /* GithubUserCell.swift */,
-				29E842A126B967DD00C8B48A /* AbstractCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -816,7 +816,7 @@
 				29F4287226B160BD0073C150 /* ImageCache.swift in Sources */,
 				2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */,
 				29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */,
-				29E842A226B967DD00C8B48A /* AbstractCell.swift in Sources */,
+				29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */,
 				29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */,
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,

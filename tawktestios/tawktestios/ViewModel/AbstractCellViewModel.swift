@@ -8,10 +8,11 @@
 import Foundation
 
 
-public protocol AbstractCellviewModel: AnyObject {
-    var id: String {set get}
-    var thumbnail: String {set get}
-    var title: String {set get}
-    var subtitle: String {set get}
-    var isSeen: Bool {set get}
+public protocol AbstractCellViewModel: AnyObject {
+    var id: String? {set get}
+    var thumbnail: String? {set get}
+    var title: String? {set get}
+    var subtitle: String? {set get}
+    var note: String? {set get}
+    var isSeen: Bool? {set get}
 }

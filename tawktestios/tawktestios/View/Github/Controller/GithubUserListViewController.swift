@@ -11,6 +11,18 @@ import CoreData
 class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private let tableView = UITableView()
     private var githubViewModel: GithubViewModel!
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        //            searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.tintColor = .brown
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.definesPresentationContext = true
+        
+        return searchController
+    }()
     
     public static func loadViewController(viewModel: ViewModel<S, D, T>) -> GithubUserListViewController?{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
@@ -23,14 +35,14 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         vc.viewModel = viewModel
         return vc as! Self
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        testNetworkOperation()
     }
     
     override func initView() {
+        //setup tableview
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0, enableInsets: true)
@@ -40,13 +52,17 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
         
+        // tableview delegate
         tableView.delegate = self
         tableView.dataSource = self
         
+        //cell registration
         tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
         
         addBottomIndicator()
-//        showBottomIndicator(flag: true)
+        
+        //add serch controller
+        self.navigationItem.titleView = self.searchController.searchBar
     }
     
     private func addBottomIndicator (){
@@ -66,12 +82,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         githubViewModel.fetchedResultsController.delegate = self
         
-//        do{
-////            try githubViewModel.fetchedResultsController.performFetch()
-//        }catch{
-//            print("\(TAG) -- bindViewModel() -- fetchingError - \(error)")
-//        }
-        
         loadGithubUserList(since: githubViewModel.paginationlimit)
     }
     
@@ -81,7 +91,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel.fetchDataList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
-//            self?.showBottomIndicator(flag: false)
+            //            self?.showBottomIndicator(flag: false)
         }
         
         githubViewModel.dataFetchingFailedHandler = {
@@ -92,11 +102,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     private func getLastUserEntity() -> GithubUserEntity?{
-         return (githubViewModel.fetchedResultsController.fetchedObjects?.last)
+        return (githubViewModel.fetchedResultsController.fetchedObjects?.last)
     }
     
     private func getUserObjectAt(indexPath: IndexPath) -> GithubUser?{
-         return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
+        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
     }
     
     //MARK: Pagination
@@ -164,25 +174,25 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-      
+        
         switch type {
-          case .insert:
+        case .insert:
             guard let index = newIndexPath else {
                 return
             }
             
             tableView.insertRows(at: [index], with: .automatic)
             
-          case .delete:
+        case .delete:
             guard let index = indexPath else {
                 return
             }
             
             tableView.deleteRows(at: [index], with: .automatic)
             
-          case .update:
+        case .update:
             guard let index = indexPath else {
                 return
             }
@@ -190,7 +200,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             let cell = tableView.cellForRow(at: index) as! GithubUserCell
             cell.user = getUserObjectAt(indexPath: index)
             
-          case .move:
+        case .move:
             guard let index = indexPath, let newIndex = indexPath else {
                 return
             }
@@ -198,12 +208,22 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [index], with: .automatic)
             tableView.insertRows(at: [newIndex], with: .automatic)
             
-          @unknown default:
+        @unknown default:
             print("Unexpected NSFetchedResultsChangeType")
-          }
+        }
     }
-
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+    }
+}
+
+
+//MARK: UISeacrController Delegate
+extension GithubUserListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let predicate = NSPredicate(format: "username CONTAINS[c] %@", searchText)
+        githubViewModel.fetchedResultsController.fetchRequest.predicate = predicate
+        try? githubViewModel.fetchedResultsController.performFetch()
     }
 }

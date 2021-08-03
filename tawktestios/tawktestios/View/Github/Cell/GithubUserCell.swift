@@ -7,10 +7,12 @@
 
 import UIKit
 
-class GithubUserCell : UITableViewCell {
+class GithubUserCell : UITableViewCell, AbstractGithubCell {
+    public var viewModel: AbstractCellViewModel?
+    public static var cellReuseIdentifier: String = "GithubUserCell"
     private var imageUrlAtCurrentIndex: String?
     
-    var user : GithubUser? {
+    public var user : GithubUser? {
         didSet {
             imageUrlAtCurrentIndex = user?.avatarUrl
             lblUsername.text = user?.username
@@ -28,8 +30,6 @@ class GithubUserCell : UITableViewCell {
             })
         }
     }
-    
-    public static let cellReuseIdentifier = "GithubUserCell"
     
     private let containerView : UIView = {
         let view = UIView()
@@ -86,5 +86,22 @@ class GithubUserCell : UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func configure(viewModel: AbstractCellViewModel) {
+        imageUrlAtCurrentIndex = viewModel.thumbnail
+        lblUsername.text = viewModel.title
+        lblDescription.text = viewModel.subtitle
+        ivAvatar.loadImage(from: viewModel.thumbnail ?? "", completionHandler: {
+            [weak self] url, image, isCache in
+            
+            guard let weakSelf = self else {
+                return
+            }
+            
+            if (url).elementsEqual(weakSelf.imageUrlAtCurrentIndex ?? ""){
+                weakSelf.ivAvatar.image = image
+            }
+        })
     }
 }

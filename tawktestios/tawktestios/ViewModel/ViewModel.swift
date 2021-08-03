@@ -33,12 +33,12 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
         fetchRequest.fetchOffset = paginationOffset
         fetchRequest.fetchLimit = paginationOffset + paginationlimit
+        fetchRequest.fetchBatchSize = paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: CoreDataClient.shared.mainContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self.fetchedResultsControllerDelegate
-        fetchRequest.fetchBatchSize = paginationlimit
         
         do {
             try controller.performFetch()
