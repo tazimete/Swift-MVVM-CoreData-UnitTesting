@@ -36,6 +36,9 @@
 		29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */; };
 		29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429126B905CB00C8B48A /* StubResponseProvider.swift */; };
 		29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429326B90FBE00C8B48A /* AbstractApiClient.swift */; };
+		29E8429826B94A6600C8B48A /* GithubViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429726B94A6600C8B48A /* GithubViewModelTest.swift */; };
+		29E8429B26B94CC300C8B48A /* ApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429A26B94CC300C8B48A /* ApiClientTest.swift */; };
+		29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */; };
 		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
 		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
@@ -115,6 +118,9 @@
 		29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSourceTest.swift; sourceTree = "<group>"; };
 		29E8429126B905CB00C8B48A /* StubResponseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubResponseProvider.swift; sourceTree = "<group>"; };
 		29E8429326B90FBE00C8B48A /* AbstractApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractApiClient.swift; sourceTree = "<group>"; };
+		29E8429726B94A6600C8B48A /* GithubViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModelTest.swift; sourceTree = "<group>"; };
+		29E8429A26B94CC300C8B48A /* ApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTest.swift; sourceTree = "<group>"; };
+		29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
 		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -233,10 +239,12 @@
 		2917C6D926AACA53003767B0 /* tawktestiosTests */ = {
 			isa = PBXGroup;
 			children = (
+				29E8429C26B94DB900C8B48A /* CoreData */,
+				29E8429926B94BFC00C8B48A /* ApiClient */,
+				29E8429626B94A4F00C8B48A /* ViewModel */,
+				29E8429526B94A3A00C8B48A /* LocalDataSource */,
 				2917C6DA26AACA53003767B0 /* tawktestiosTests.swift */,
 				2917C6DC26AACA53003767B0 /* Info.plist */,
-				29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */,
-				29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */,
 			);
 			path = tawktestiosTests;
 			sourceTree = "<group>";
@@ -398,6 +406,39 @@
 				2917C6C626AACA52003767B0 /* Main.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		29E8429526B94A3A00C8B48A /* LocalDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */,
+				29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */,
+			);
+			path = LocalDataSource;
+			sourceTree = "<group>";
+		};
+		29E8429626B94A4F00C8B48A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29E8429726B94A6600C8B48A /* GithubViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29E8429926B94BFC00C8B48A /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				29E8429A26B94CC300C8B48A /* ApiClientTest.swift */,
+			);
+			path = ApiClient;
+			sourceTree = "<group>";
+		};
+		29E8429C26B94DB900C8B48A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		29F4285926AD267B0073C150 /* Root */ = {
@@ -784,7 +825,10 @@
 			files = (
 				2917C6DB26AACA53003767B0 /* tawktestiosTests.swift in Sources */,
 				29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */,
+				29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */,
+				29E8429826B94A6600C8B48A /* GithubViewModelTest.swift in Sources */,
 				29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */,
+				29E8429B26B94CC300C8B48A /* ApiClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,8 +35,9 @@ class LocalDataSourceTest: XCTestCase {
     }
 
     override func tearDown() {
-        localDataSource = nil
         users.removeAll()
+        localDataSource.deleteAllItems(taskContext: CoreDataClientTest.shared.backgroundContext)
+        localDataSource = nil
     }
 
     func testInsertItems() {
@@ -50,9 +51,9 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
         
-        //empty store 
-        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
-        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
+        //empty data
+//        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
+//        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
     
     func testFetchItems() {
@@ -65,9 +66,9 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
         
-        //empty store
-        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
-        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
+        //empty data
+//        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
+//        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
 
     func testBtachDelete(){
@@ -83,22 +84,24 @@ class LocalDataSourceTest: XCTestCase {
     }
     
     func testSyncData(){
+        //first insert some data (pre-population)
+//        localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
+//
+//        // include new data
+//        let user2 = GithubUser()
+//        user2.id = 11
+//        user2.username = "test name 2"
+//        user2.avatarUrl = "www.testapp.com/img/11"
+//        users.append(user2)
+        
         let isSuccess = localDataSource.syncData(data: users, taskContext: localDataSource.viewContext)
-//        let ids = users.map({$0.id ?? -1})
-//        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)
         let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
         
+        XCTAssertTrue(isSuccess)
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
 }

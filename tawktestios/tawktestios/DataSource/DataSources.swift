@@ -27,9 +27,11 @@ public protocol AbstractLocalDataSource: AnyObject {
     var entityName: String {get}
     
     func fetchItems(taskContext: NSManagedObjectContext)  ->[D]
+    func fetchItems(ids: [Int], taskContext: NSManagedObjectContext) -> [D]
     func insertEntity(entityName: String, into: NSManagedObjectContext) -> D?
     func insertItems(items: [T], taskContext: NSManagedObjectContext)
     func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
+    func deleteAllItems(taskContext: NSManagedObjectContext)
     func syncData(data: [T], taskContext: NSManagedObjectContext) -> Bool
 }
 

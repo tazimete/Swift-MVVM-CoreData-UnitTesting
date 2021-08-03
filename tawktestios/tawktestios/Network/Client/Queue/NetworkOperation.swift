@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkOperation: Operation {
+public class NetworkOperation: Operation {
     
     private var task: URLSessionTask?
     
@@ -30,15 +30,15 @@ class NetworkOperation: Operation {
         }
     }
     
-    override var isReady: Bool { return state == .ready }
-    override var isExecuting: Bool { return state == .executing }
-    override var isFinished: Bool { return state == .finished }
+    override public var isReady: Bool { return state == .ready }
+    override public var isExecuting: Bool { return state == .executing }
+    override public var isFinished: Bool { return state == .finished }
     
-    override init() {
+    public override init() {
         super.init()
     }
     
-    init<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
+    public init<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
         super.init()
     
         let config = URLSessionConfiguration.default
@@ -81,7 +81,7 @@ class NetworkOperation: Operation {
        }
     }
     
-    init(session: URLSession, downloadTaskURL: URL, completionHandler: ((URL?, URLResponse?, Error?) -> Void)?) {
+    public init(session: URLSession, downloadTaskURL: URL, completionHandler: ((URL?, URLResponse?, Error?) -> Void)?) {
            super.init()
 
            // use weak self to prevent retain cycle
@@ -106,7 +106,7 @@ class NetworkOperation: Operation {
            })
        }
     
-    override func start() {
+    override public func start() {
         if(self.isCancelled) {
             state = .finished
             return
@@ -121,7 +121,7 @@ class NetworkOperation: Operation {
         self.task?.resume()
     }
     
-    override func cancel() {
+    override public func cancel() {
         super.cancel()
         self.task?.cancel()
     }

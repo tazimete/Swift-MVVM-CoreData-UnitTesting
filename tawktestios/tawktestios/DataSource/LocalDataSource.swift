@@ -39,13 +39,11 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         
         var userEntities: [D]!
         
-//        taskContext.performAndWait {
-            do {
-                userEntities = try taskContext.fetch(fetchRequest)
-            } catch let error {
-                print("Failed to fetch companies: \(error)")
-            }
-//        }
+        do {
+            userEntities = try taskContext.fetch(fetchRequest)
+        } catch let error {
+            print("Failed to fetch companies: \(error)")
+        }
         
         return userEntities
     }
@@ -58,13 +56,11 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         
         var userEntities: [D]!
         
-//        taskContext.performAndWait {
-            do {
-                userEntities = try taskContext.fetch(fetchRequest)
-            } catch let error {
-                print("Failed to fetch companies: \(error)")
-            }
-//        }
+        do {
+            userEntities = try taskContext.fetch(fetchRequest)
+        } catch let error {
+            print("Failed to fetch companies: \(error)")
+        }
         
         return userEntities
     }
@@ -90,8 +86,9 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     }
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
+        //removing batch delete request, because its not working inMemoryStore Type 
 //        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
+//        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
 //        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 //        batchDeleteRequest.resultType = .resultTypeObjectIDs
@@ -116,6 +113,17 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         
         try? taskContext.save()
     }
+    
+    public func deleteAllItems(taskContext: NSManagedObjectContext) {
+        let items = fetchItems(taskContext: taskContext)
+        
+        for item in items {
+            taskContext.delete(item)
+        }
+        
+        try? taskContext.save()
+    }
+    
     
     public func syncData(data: [T], taskContext: NSManagedObjectContext) -> Bool {
         var successfull = false

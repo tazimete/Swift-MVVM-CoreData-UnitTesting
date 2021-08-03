@@ -64,13 +64,20 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
-        githubViewModel.fetchedResultsControllerDelegate = self
+        githubViewModel.fetchedResultsController.delegate = self
+        
+//        do{
+////            try githubViewModel.fetchedResultsController.performFetch()
+//        }catch{
+//            print("\(TAG) -- bindViewModel() -- fetchingError - \(error)")
+//        }
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
     }
     
     public func loadGithubUserList(since: Int){
         showBottomIndicator(flag: true)
+        
         githubViewModel.fetchDataList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
