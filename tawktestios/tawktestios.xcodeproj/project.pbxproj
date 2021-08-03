@@ -39,6 +39,8 @@
 		29E8429826B94A6600C8B48A /* GithubViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429726B94A6600C8B48A /* GithubViewModelTest.swift */; };
 		29E8429B26B94CC300C8B48A /* ApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429A26B94CC300C8B48A /* ApiClientTest.swift */; };
 		29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */; };
+		29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */; };
+		29E842A226B967DD00C8B48A /* AbstractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractCell.swift */; };
 		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
 		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
@@ -121,6 +123,8 @@
 		29E8429726B94A6600C8B48A /* GithubViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModelTest.swift; sourceTree = "<group>"; };
 		29E8429A26B94CC300C8B48A /* ApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTest.swift; sourceTree = "<group>"; };
 		29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
+		29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellViewModel.swift; sourceTree = "<group>"; };
+		29E842A126B967DD00C8B48A /* AbstractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCell.swift; sourceTree = "<group>"; };
 		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
 		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
@@ -242,7 +246,7 @@
 				29E8429C26B94DB900C8B48A /* CoreData */,
 				29E8429926B94BFC00C8B48A /* ApiClient */,
 				29E8429626B94A4F00C8B48A /* ViewModel */,
-				29E8429526B94A3A00C8B48A /* LocalDataSource */,
+				29E8429526B94A3A00C8B48A /* DataSource */,
 				2917C6DA26AACA53003767B0 /* tawktestiosTests.swift */,
 				2917C6DC26AACA53003767B0 /* Info.plist */,
 			);
@@ -279,6 +283,7 @@
 		2948DC7626AAD245001EF5D2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */,
 				2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */,
 				2948DC8526AB4DF3001EF5D2 /* ViewModel.swift */,
 				2948DC8426AB4DD5001EF5D2 /* Github */,
@@ -408,13 +413,13 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		29E8429526B94A3A00C8B48A /* LocalDataSource */ = {
+		29E8429526B94A3A00C8B48A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */,
 				29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */,
 			);
-			path = LocalDataSource;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		29E8429626B94A4F00C8B48A /* ViewModel */ = {
@@ -482,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				29F4286826AE9A640073C150 /* GithubUserCell.swift */,
+				29E842A126B967DD00C8B48A /* AbstractCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -810,11 +816,13 @@
 				29F4287226B160BD0073C150 /* ImageCache.swift in Sources */,
 				2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */,
 				29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */,
+				29E842A226B967DD00C8B48A /* AbstractCell.swift in Sources */,
 				29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */,
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,
 				2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */,
 				29F4289926B5ED490073C150 /* Reachability.swift in Sources */,
+				29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */,
 				29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
