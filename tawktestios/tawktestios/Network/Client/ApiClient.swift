@@ -25,11 +25,11 @@ public class APIClient: AbstractApiClient{
     }
     
     public func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)) {
-//        let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
-        let operation = NetworkOperation()
+        let operation = NetworkOperation(apiRequest: apiRequest, type: type, completionHandler: completionHandler)
+//        let operation = NetworkOperation()
         operation.qualityOfService = .utility
         queueManager.enqueue(operation)
-        operation.getStubbResponse(type: type, completionHandler: completionHandler)
+//        operation.getStubbResponse(type: type, completionHandler: completionHandler)
     }
     
 //    func enqueue<T: Codable>(session: URLSession, url: URL, completionHandler: @escaping (DownloadCompletionHandler)) {

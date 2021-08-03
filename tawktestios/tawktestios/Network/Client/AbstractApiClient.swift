@@ -16,6 +16,6 @@ public protocol AbstractApiClient: AnyObject {
 }
 
 
-public protocol AbstractApiOperation: AnyObject {
-    
-}
+//public protocol AbstractApiOperation: AnyObject {
+//
+//}

@@ -50,6 +50,25 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         return userEntities
     }
     
+    public func fetchItems(ids: [Int], taskContext: NSManagedObjectContext) -> [D] {
+        let fetchRequest = NSFetchRequest<D>(entityName: CoreDataEntities<D>.getEntityName())
+        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
+        let sort = NSSortDescriptor(key:"id", ascending:true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        var userEntities: [D]!
+        
+//        taskContext.performAndWait {
+            do {
+                userEntities = try taskContext.fetch(fetchRequest)
+            } catch let error {
+                print("Failed to fetch companies: \(error)")
+            }
+//        }
+        
+        return userEntities
+    }
+    
     public func insertItems(items: [T], taskContext: NSManagedObjectContext) {
         for item in items {
             guard let userEntity = insertEntity(entityName: self.entityName, into: taskContext) as? D else {
@@ -72,20 +91,28 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
 //        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        batchDeleteRequest.resultType = .resultTypeObjectIDs
-
-        // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
-        do {
-            let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
-
-            if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
-                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
-                                                    into: [taskContext])
-            }
-        }catch {
-            print("Error: \(error)\nCould not batch delete existing records.")
+//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        batchDeleteRequest.resultType = .resultTypeObjectIDs
+//
+//        // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
+//        do {
+//            let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+//
+//            if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+//                                                    into: [taskContext])
+//            }
+//        }catch {
+//            print("Error: \(error)\nCould not batch delete existing records.")
+//        }
+        
+        let items = fetchItems(ids: ids, taskContext: taskContext)
+        
+        for item in items {
+            taskContext.delete(item)
         }
+        
+        try? taskContext.save()
     }
     
     public func syncData(data: [T], taskContext: NSManagedObjectContext) -> Bool {

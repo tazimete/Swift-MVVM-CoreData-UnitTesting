@@ -74,13 +74,6 @@ class LocalDataSourceTest: XCTestCase {
     }
     
     func testSyncData(){
-        let user4 = GithubUser()
-        user4.id = 11
-        user4.username = "test name 2"
-        user4.avatarUrl = "www.testapp.com/img/12"
-        
-        users.append(user4)
-        
         let isSuccess = localDataSource.syncData(data: users, taskContext: localDataSource.viewContext)
 //        let ids = users.map({$0.id ?? -1})
 //        localDataSource.batchDeleteItems(ids: ids, taskContext: CoreDataClientTest.shared.backgroundContext)

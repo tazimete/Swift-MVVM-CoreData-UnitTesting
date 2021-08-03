@@ -11,9 +11,9 @@ public class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: Ab
     public typealias T = T
     public typealias D = D
     
-    public var apiClient: APIClient
+    public var apiClient: AbstractApiClient
     
-    public init(apiClient: APIClient = APIClient.shared) {
+    public init(apiClient: AbstractApiClient = APIClient.shared) {
         self.apiClient = apiClient
     }
     

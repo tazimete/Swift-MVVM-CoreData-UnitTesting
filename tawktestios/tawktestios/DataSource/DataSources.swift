@@ -11,7 +11,7 @@ import CoreData
 public protocol AbstractRemoteDataSource: AnyObject {
     associatedtype T: APIRequest
     associatedtype D: AbstractDataModel & Codable
-    var apiClient: APIClient {set get}
+    var apiClient: AbstractApiClient {set get}
     
     func fetchData(request: T, completionHandler: @escaping NetworkCompletionHandler<D>)
     func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>)
