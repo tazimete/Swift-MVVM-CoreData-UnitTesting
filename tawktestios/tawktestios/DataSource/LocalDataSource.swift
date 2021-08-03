@@ -80,6 +80,8 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
                 if let entity = userEntity as? GithubUserEntity {
                     try entity.update(user: item)
                 }
+                
+                try taskContext.save()
             } catch {
                 print("Error: \(error)\n this object will be deleted.")
                 taskContext.delete(userEntity)

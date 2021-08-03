@@ -36,6 +36,7 @@ class LocalDataSourceTest: XCTestCase {
 
     override func tearDown() {
         localDataSource = nil
+        users.removeAll()
     }
 
     func testInsertItems() {
@@ -48,17 +49,25 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
+        
+        //empty store 
+        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
+        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
     
     func testFetchItems() {
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
         let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
-        
+
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
+        
+        //empty store
+        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
+        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
 
     func testBtachDelete(){
