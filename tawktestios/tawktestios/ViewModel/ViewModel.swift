@@ -54,7 +54,7 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
     
     public var data: D? 
     public var dataList: [D]? = []
-    public var errorMessage: String = "Failed to fetch data..."
+    public var errorMessage: String?
     
     public init(with service: S){
         self.service = service
