@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import RxFlow
 
 class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private var githubViewModel: GithubViewModel!
@@ -25,7 +26,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         return searchController
     }()
     
-    public static func loadViewController(viewModel: ViewModel<S, D, T>) -> GithubUserListViewController?{
+    public static func loadViewController(viewModel: ViewModel<S, D, T>) -> GithubUserListViewController? {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
         vc.viewModel = viewModel
         return vc
@@ -97,7 +98,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     public func loadGithubUserList(since: Int){
         showBottomIndicator(flag: true)
         
-        githubViewModel.fetchDataList(since: since)
+        githubViewModel.fetchUserList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
             //            self?.showBottomIndicator(flag: false)
@@ -119,11 +120,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     //MARK: Pagination
-    override func hasMoreData() -> Bool{
+    override func hasMoreData() -> Bool {
         return true
     }
     
-    override func loadMoreData() -> Void{
+    override func loadMoreData() -> Void {
         githubViewModel.paginationOffset += githubViewModel.paginationlimit
         
         guard let user = getLastUserEntity()?.asGithubUser else {
@@ -133,7 +134,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         loadGithubUserList(since: user.id ?? 0)
     }
     
-    override func getLastVisibleItem() -> IndexPath{
+    override func getLastVisibleItem() -> IndexPath {
         guard let user = getLastUserEntity() else {
             return IndexPath(row: 0, section: 0)
         }
@@ -145,11 +146,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         return indexpath
     }
     
-    override func getTotalDataCount() -> Int{
+    override func getTotalDataCount() -> Int {
         return githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
-    override func getPaginationOffset() -> Int{
+    override func getPaginationOffset() -> Int {
         return githubViewModel.paginationlimit - 5
     }
 }
@@ -174,6 +175,10 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let flow = GithubFlow()
+        flow.navigate(to: GithubStep.userProfile)
+        FlowCoordinator().coordinate(flow: flow, with: GithubStepper())
     }
 }
 

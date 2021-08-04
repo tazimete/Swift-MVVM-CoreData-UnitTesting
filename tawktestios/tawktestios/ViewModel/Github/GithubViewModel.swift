@@ -18,7 +18,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParam(since: page)), completionHandler: completionHandler)
     }
     
-    public func fetchDataList(since: Int) {
+    public func fetchUserList(since: Int) {
         fetchDataList(page: since) { [weak self] result in
             guard let weakSelf = self else {
                 return
