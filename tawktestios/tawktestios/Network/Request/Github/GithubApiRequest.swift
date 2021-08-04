@@ -28,7 +28,7 @@ extension GithubApiRequest: APIRequest {
     public var path: String {
         switch self {
             case .fetchUserList: return "users"
-            case .fetchUserProfile: return ""
+            case .fetchUserProfile: return "users/\(parameters["username"] as! String)"
         }
     }
     

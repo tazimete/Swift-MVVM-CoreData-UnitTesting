@@ -54,7 +54,7 @@ private extension GithubFlow {
     func showGithubUserListViewController() -> FlowContributors {
         let service = GithubService(localDataSource: localDataSource, remoteDataSource: remoteDataSource)
         let viewModel = GithubViewModel(with: service)
-        let viewController = GithubUserListViewController.loadViewController(viewModel: viewModel) 
+        let viewController = GithubUserListViewController(viewModel: viewModel)
         rootViewController.setViewControllers([viewController as! UIViewController], animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController as! Presentable, withNextStepper: viewModel as! Stepper))
     }

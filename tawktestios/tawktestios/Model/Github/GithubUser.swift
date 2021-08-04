@@ -31,6 +31,8 @@ public class GithubUser: AbstractDataModel, Codable {
     public var username: String?
     public var avatarUrl: String?
     public var url: String?
+    public var note: String?
+    public var isSeen: Bool?
     
     public init() {
         
@@ -41,6 +43,8 @@ public class GithubUser: AbstractDataModel, Codable {
         case username = "login"
         case avatarUrl = "avatar_url"
         case url = "url"
+        case note = "note"
+        case isSeen = "isSeen"
     }
 }
 

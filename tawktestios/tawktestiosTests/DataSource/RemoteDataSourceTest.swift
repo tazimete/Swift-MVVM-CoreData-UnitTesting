@@ -22,7 +22,7 @@ class RemoteDataSourceTest: XCTestCase {
     }
 
     func testFetchDataList() {
-        remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParams(since: 20))){ result in
+        remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParam(since: 20))){ result in
             switch result{
                 case .success(let users):
                     print("fetchData() -- \(users.map({$0.username}))")

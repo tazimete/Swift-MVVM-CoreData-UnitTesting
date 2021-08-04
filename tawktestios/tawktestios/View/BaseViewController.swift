@@ -26,6 +26,16 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         case crazy
     }
     
+    public init(viewModel: ViewModel<S, D, T>) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.viewDidLoad()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

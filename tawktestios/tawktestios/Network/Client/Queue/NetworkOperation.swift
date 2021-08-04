@@ -43,6 +43,7 @@ public class NetworkOperation: Operation {
     
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
+//        config.requestCachePolicy = .returnCacheDataElseLoad
         config.urlCache = nil
 
         let session = URLSession(configuration: config)

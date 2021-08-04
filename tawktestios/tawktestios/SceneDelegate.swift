@@ -94,16 +94,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let _window = window else {
 //            return
 //        }
-//
+
 //        let navController = UINavigationController()
 //        let coordinator = RootCoordinator(navigationController: navController)
-//        let service = GithubService(localDataSource: GithubLocalDataSource(), remoteDataSource: GithubRemoteDataSource())
-//        let viewModel = GithubViewModel(service: service)
-//        let viewController = GithubUserListViewController.instantiate(viewModel: viewModel)
+//        let service = GithubService(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>(), remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>() )
+//        let viewModel = GithubViewModel(with: service)
+//        let viewController = GithubUserListViewController.init(viewModel: viewModel)
 ////        navController.setViewControllers([viewController], animated: true)
 //        navController.pushViewController(viewController, animated: true)
 //
-//        _window.rootViewController = navController
+//        _window.rootViewController = coordinator.navigationController
 //        _window.makeKeyAndVisible()
 //
 //        // tell the coordinator show its controller

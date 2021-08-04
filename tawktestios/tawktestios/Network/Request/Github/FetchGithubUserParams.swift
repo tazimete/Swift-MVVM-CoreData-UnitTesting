@@ -8,7 +8,7 @@
 import Foundation
 
 
-public class FetchGithubUserParams: Parameterizable{
+public class FetchGithubUserParam: Parameterizable{
     let since: Int
 
     public init(since: Int) {

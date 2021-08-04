@@ -18,7 +18,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
     }
     
     public override func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
-        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParams(since: page)), completionHandler: completionHandler)
+        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParam(since: page)), completionHandler: completionHandler)
     }
     
     public func fetchDataList(since: Int) {

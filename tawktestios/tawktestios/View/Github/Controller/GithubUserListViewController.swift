@@ -31,9 +31,17 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     public static func instantiate(viewModel: ViewModel<S, D, T>) -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
-        vc.viewModel = viewModel
+        let vc = GithubUserListViewController(viewModel: viewModel)
         return vc as! Self
+    }
+    
+    override public init(viewModel: ViewModel<S, D, T>) {
+        super.init(viewModel: viewModel)
+//        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -223,7 +231,10 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let predicate = NSPredicate(format: "username CONTAINS[c] %@", searchText)
-        githubViewModel.fetchedResultsController.fetchRequest.predicate = predicate
+        githubViewModel.fetchedResultsController.fetchRequest.predicate = NSPredicate(value: true)
         try? githubViewModel.fetchedResultsController.performFetch()
+        
+        try? githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
+        tableView.reloadData()
     }
 }

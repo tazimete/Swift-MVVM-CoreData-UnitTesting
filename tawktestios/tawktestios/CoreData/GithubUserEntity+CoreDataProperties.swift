@@ -20,6 +20,8 @@ extension GithubUserEntity {
     @NSManaged public var username: String?
     @NSManaged public var avatarUrl: String?
     @NSManaged public var url: String?
+    @NSManaged public var note: String?
+    @NSManaged public var isSeen: Bool
 }
 
 
@@ -32,6 +34,8 @@ extension GithubUserEntity {
         username = githubUser?.username
         avatarUrl = githubUser?.avatarUrl
         url = githubUser?.url
+        note = githubUser?.note
+        isSeen = githubUser?.isSeen ?? false
     }
     
     public var asGithubUser: GithubUser{
@@ -40,6 +44,8 @@ extension GithubUserEntity {
         user.username = username
         user.avatarUrl = avatarUrl
         user.url = url
+        user.note = note
+        user.isSeen = isSeen
         return user
     }
 }

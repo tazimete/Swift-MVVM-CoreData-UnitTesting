@@ -32,6 +32,8 @@
 		2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */; };
 		2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA026AC742B001EF5D2 /* GithubStepper.swift */; };
 		2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA226AC8078001EF5D2 /* GithubFlow.swift */; };
+		29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */; };
+		29D4DE9826BA935200AE6DB8 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */; };
 		29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */; };
 		29E8429026B7F14D00C8B48A /* LocalDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */; };
 		29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429126B905CB00C8B48A /* StubResponseProvider.swift */; };
@@ -116,6 +118,8 @@
 		2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
 		2948DCA026AC742B001EF5D2 /* GithubStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubStepper.swift; sourceTree = "<group>"; };
 		2948DCA226AC8078001EF5D2 /* GithubFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubFlow.swift; sourceTree = "<group>"; };
+		29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserProfileParam.swift; sourceTree = "<group>"; };
+		29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClientTest.swift; sourceTree = "<group>"; };
 		29E8428F26B7F14D00C8B48A /* LocalDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSourceTest.swift; sourceTree = "<group>"; };
 		29E8429126B905CB00C8B48A /* StubResponseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubResponseProvider.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 			children = (
 				2917C6F426AACAA3003767B0 /* GithubApiRequest.swift */,
 				2948DC8226AB415B001EF5D2 /* FetchGithubUserParams.swift */,
+				29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				2917C6C426AACA52003767B0 /* GithubUserListViewController.swift */,
+				29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */,
+				29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */,
 				29F4287426B160E30073C150 /* ImageLoader.swift in Sources */,
 				29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */,
 				2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */,
@@ -824,6 +831,7 @@
 				29F4289926B5ED490073C150 /* Reachability.swift in Sources */,
 				29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */,
 				29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */,
+				29D4DE9826BA935200AE6DB8 /* UserProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
