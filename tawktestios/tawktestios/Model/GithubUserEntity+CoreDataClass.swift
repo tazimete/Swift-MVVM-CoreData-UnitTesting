@@ -2,7 +2,7 @@
 //  GithubUserEntity+CoreDataClass.swift
 //  
 //
-//  Created by JMC on 30/7/21.
+//  Created by JMC on 5/8/21.
 //
 //
 

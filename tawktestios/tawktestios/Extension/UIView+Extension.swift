@@ -10,6 +10,37 @@ import UIKit
 
 extension UIView {
  
+    @IBInspectable var cornerRadius: CGFloat {
+       set(newValue) {
+           layer.cornerRadius = newValue
+           layer.masksToBounds = newValue > 0
+       }
+        
+        get{
+            return layer.cornerRadius
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        set(newValue) {
+            layer.borderWidth = newValue
+        }
+         
+         get{
+             return layer.borderWidth
+         }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        set(newValue) {
+            layer.borderColor = newValue?.cgColor
+        }
+         
+         get{
+            return UIColor(cgColor: layer.borderColor!)
+         }
+    }
+    
  func anchor (top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat, enableInsets: Bool) {
      var topInset = CGFloat(0)
      var bottomInset = CGFloat(0)

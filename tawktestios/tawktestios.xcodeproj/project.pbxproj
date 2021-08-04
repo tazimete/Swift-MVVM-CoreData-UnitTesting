@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		01076A8C42A766A19033534E /* Pods_tawktestios_tawktestiosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DECD537938270ADF8BE1DE5F /* Pods_tawktestios_tawktestiosUITests.framework */; };
+		290FF53026BB0D6A00FDE99B /* AbstractDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */; };
+		290FF53826BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */; };
+		290FF53926BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */; };
 		2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C026AACA52003767B0 /* AppDelegate.swift */; };
 		2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C226AACA52003767B0 /* SceneDelegate.swift */; };
 		2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C426AACA52003767B0 /* GithubUserListViewController.swift */; };
@@ -57,8 +60,6 @@
 		29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287626B2EF860073C150 /* CoreDataClient.swift */; };
 		29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287826B2F1910073C150 /* LocalDataSource.swift */; };
 		29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */; };
-		29F4288C26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */; };
-		29F4288D26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */; };
 		29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */; };
 		29F4289226B48DB40073C150 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289126B48DB40073C150 /* Coordinator.swift */; };
 		29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289326B48E3A0073C150 /* RootCoordinator.swift */; };
@@ -88,6 +89,9 @@
 
 /* Begin PBXFileReference section */
 		232358D441F54C0C05818D10 /* Pods-tawktestiosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestiosTests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestiosTests/Pods-tawktestiosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDataModel.swift; sourceTree = "<group>"; };
+		290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		2917C6BD26AACA52003767B0 /* tawktestios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tawktestios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2917C6C026AACA52003767B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2917C6C226AACA52003767B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,8 +147,6 @@
 		29F4287626B2EF860073C150 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
 		29F4287826B2F1910073C150 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		29F4288426B331AC0073C150 /* tawktestios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tawktestios.xcdatamodel; sourceTree = "<group>"; };
-		29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/CoreData/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheLoader.swift; sourceTree = "<group>"; };
 		29F4289126B48DB40073C150 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		29F4289326B48E3A0073C150 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		2948DC7526AAD23E001EF5D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */,
 				2948DC8E26ABFDA7001EF5D2 /* Github */,
 			);
 			path = Model;
@@ -363,8 +366,8 @@
 		2948DC8E26ABFDA7001EF5D2 /* Github */ = {
 			isa = PBXGroup;
 			children = (
-				29F4288B26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift */,
-				29F4288A26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift */,
+				290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */,
+				290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */,
 				2948DC8026AB3F28001EF5D2 /* GithubUser.swift */,
 			);
 			path = Github;
@@ -787,10 +790,10 @@
 			files = (
 				2917C6F526AACAA3003767B0 /* GithubApiRequest.swift in Sources */,
 				29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */,
+				290FF53926BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift in Sources */,
 				29F4286C26B12C860073C150 /* ImageDownloader.swift in Sources */,
 				2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */,
 				29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */,
-				29F4288C26B35C920073C150 /* GithubUserEntity+CoreDataProperties.swift in Sources */,
 				2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */,
@@ -801,7 +804,6 @@
 				2948DC8326AB415B001EF5D2 /* FetchGithubUserParams.swift in Sources */,
 				29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */,
 				2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */,
-				29F4288D26B35C920073C150 /* GithubUserEntity+CoreDataClass.swift in Sources */,
 				29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */,
 				29F4289226B48DB40073C150 /* Coordinator.swift in Sources */,
 				2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */,
@@ -816,6 +818,7 @@
 				29F4286526AE9A3E0073C150 /* UIView+Extension.swift in Sources */,
 				2948DC7C26AB3E35001EF5D2 /* Parameterizable.swift in Sources */,
 				2948DC7E26AB3E82001EF5D2 /* ApiClient.swift in Sources */,
+				290FF53826BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift in Sources */,
 				2948DC8626AB4DF3001EF5D2 /* ViewModel.swift in Sources */,
 				2948DC8126AB3F28001EF5D2 /* GithubUser.swift in Sources */,
 				2948DC7826AB367C001EF5D2 /* ApiRequest.swift in Sources */,
@@ -828,6 +831,7 @@
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,
 				2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */,
+				290FF53026BB0D6A00FDE99B /* AbstractDataModel.swift in Sources */,
 				29F4289926B5ED490073C150 /* Reachability.swift in Sources */,
 				29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */,
 				29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */,
