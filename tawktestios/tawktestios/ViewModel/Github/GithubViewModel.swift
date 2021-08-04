@@ -7,9 +7,6 @@
 
 import Foundation
 import CoreData
-import RxSwift
-import RxCocoa
-import RxFlow
 
 public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEntity> {
 

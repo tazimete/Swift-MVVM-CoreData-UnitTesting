@@ -11,6 +11,7 @@
 		290FF53026BB0D6A00FDE99B /* AbstractDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */; };
 		290FF53826BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */; };
 		290FF53926BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */; };
+		290FF53B26BB231400FDE99B /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53A26BB231400FDE99B /* UserProfileViewModel.swift */; };
 		2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C026AACA52003767B0 /* AppDelegate.swift */; };
 		2917C6C326AACA52003767B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C226AACA52003767B0 /* SceneDelegate.swift */; };
 		2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917C6C426AACA52003767B0 /* GithubUserListViewController.swift */; };
@@ -92,6 +93,7 @@
 		290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDataModel.swift; sourceTree = "<group>"; };
 		290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		290FF53A26BB231400FDE99B /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		2917C6BD26AACA52003767B0 /* tawktestios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tawktestios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2917C6C026AACA52003767B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2917C6C226AACA52003767B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */,
+				290FF53A26BB231400FDE99B /* UserProfileViewModel.swift */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */,
 				29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */,
+				290FF53B26BB231400FDE99B /* UserProfileViewModel.swift in Sources */,
 				29F4287426B160E30073C150 /* ImageLoader.swift in Sources */,
 				29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */,
 				2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */,

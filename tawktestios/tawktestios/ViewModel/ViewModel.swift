@@ -52,7 +52,8 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
     
     weak public var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
     
-    public var dataList: [D] = []
+    public var data: D? 
+    public var dataList: [D]? = []
     public var errorMessage: String = "Failed to fetch data..."
     
     public init(with service: S){

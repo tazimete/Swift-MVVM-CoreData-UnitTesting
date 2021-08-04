@@ -26,7 +26,6 @@ extension GithubUserEntity {
     @NSManaged public var blog: String?
     @NSManaged public var followers: Int64
     @NSManaged public var followings: Int64
-
 }
 
 extension GithubUserEntity {

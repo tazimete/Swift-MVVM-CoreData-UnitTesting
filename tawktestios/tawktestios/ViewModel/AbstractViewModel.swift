@@ -22,7 +22,8 @@ protocol AbstractViewModel: Stepper {
     
     var fetchedResultsController: NSFetchedResultsController<T> {get set}
     var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate? {set get}
-    var dataList: [D] {get set}
+    var data: D? {get set}
+    var dataList: [D]? {get set}
     var errorMessage: String {get set}
     
     func fetchData(page: Int, completionHandler: @escaping NetworkCompletionHandler<D>)

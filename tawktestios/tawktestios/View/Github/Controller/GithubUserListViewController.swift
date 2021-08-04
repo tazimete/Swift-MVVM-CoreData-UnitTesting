@@ -9,8 +9,9 @@ import UIKit
 import CoreData
 
 class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
-    private let tableView = UITableView()
     private var githubViewModel: GithubViewModel!
+    
+    private let tableView = UITableView()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         //            searchController.searchResultsUpdater = self
