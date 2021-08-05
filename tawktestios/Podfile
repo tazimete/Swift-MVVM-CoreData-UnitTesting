@@ -6,9 +6,6 @@ target 'tawktestios' do
   use_frameworks!
 
   # Pods for tawktestios
-    pod 'RxSwift', '6.2.0'
-    pod 'RxCocoa', '6.2.0'
-    pod 'RxFlow'
 
   target 'tawktestiosTests' do
     inherit! :search_paths

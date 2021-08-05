@@ -7,9 +7,8 @@
 
 import Foundation
 import CoreData
-import RxFlow
 
-protocol AbstractViewModel: Stepper {
+protocol AbstractViewModel {
     associatedtype S: Service
     associatedtype D: AbstractDataModel & Codable
     associatedtype T: NSManagedObject

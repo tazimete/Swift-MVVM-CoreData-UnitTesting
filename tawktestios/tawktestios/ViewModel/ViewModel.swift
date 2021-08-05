@@ -6,9 +6,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
-import RxFlow
 import CoreData
 
 
@@ -16,8 +13,6 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
     public typealias S = S
     public typealias D = D
     public typealias T = T
-    
-    public var steps = PublishRelay<Step>()
     
     public var service: S
     

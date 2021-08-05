@@ -34,8 +34,6 @@
 		2948DC9A26AC1C39001EF5D2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */; };
 		2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */; };
 		2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */; };
-		2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA026AC742B001EF5D2 /* GithubStepper.swift */; };
-		2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DCA226AC8078001EF5D2 /* GithubFlow.swift */; };
 		29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */; };
 		29D4DE9826BA935200AE6DB8 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */; };
 		29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */; };
@@ -47,8 +45,6 @@
 		29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */; };
 		29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */; };
 		29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */; };
-		29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285A26AD268A0073C150 /* RootStepper.swift */; };
-		29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285C26AD26B80073C150 /* RootFlow.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extension.swift */; };
@@ -63,7 +59,7 @@
 		29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */; };
 		29F4288F26B3EF000073C150 /* ImageCacheLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */; };
 		29F4289226B48DB40073C150 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289126B48DB40073C150 /* Coordinator.swift */; };
-		29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289326B48E3A0073C150 /* RootCoordinator.swift */; };
+		29F4289426B48E3A0073C150 /* GithubCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289326B48E3A0073C150 /* GithubCoordinator.swift */; };
 		29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289526B48E850073C150 /* ProfileCoordinator.swift */; };
 		29F4289926B5ED490073C150 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289826B5ED490073C150 /* Reachability.swift */; };
 		29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */; };
@@ -122,8 +118,6 @@
 		2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
-		2948DCA026AC742B001EF5D2 /* GithubStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubStepper.swift; sourceTree = "<group>"; };
-		2948DCA226AC8078001EF5D2 /* GithubFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubFlow.swift; sourceTree = "<group>"; };
 		29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserProfileParam.swift; sourceTree = "<group>"; };
 		29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClientTest.swift; sourceTree = "<group>"; };
@@ -135,8 +129,6 @@
 		29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellViewModel.swift; sourceTree = "<group>"; };
 		29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGithubCell.swift; sourceTree = "<group>"; };
-		29F4285A26AD268A0073C150 /* RootStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStepper.swift; sourceTree = "<group>"; };
-		29F4285C26AD26B80073C150 /* RootFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFlow.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -151,7 +143,7 @@
 		29F4288426B331AC0073C150 /* tawktestios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tawktestios.xcdatamodel; sourceTree = "<group>"; };
 		29F4288E26B3EF000073C150 /* ImageCacheLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheLoader.swift; sourceTree = "<group>"; };
 		29F4289126B48DB40073C150 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		29F4289326B48E3A0073C150 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		29F4289326B48E3A0073C150 /* GithubCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCoordinator.swift; sourceTree = "<group>"; };
 		29F4289526B48E850073C150 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		29F4289826B5ED490073C150 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
@@ -417,8 +409,7 @@
 		2948DC9F26AC7402001EF5D2 /* Github */ = {
 			isa = PBXGroup;
 			children = (
-				2948DCA026AC742B001EF5D2 /* GithubStepper.swift */,
-				2948DCA226AC8078001EF5D2 /* GithubFlow.swift */,
+				29F4289326B48E3A0073C150 /* GithubCoordinator.swift */,
 				29F4289526B48E850073C150 /* ProfileCoordinator.swift */,
 			);
 			path = Github;
@@ -469,9 +460,6 @@
 		29F4285926AD267B0073C150 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				29F4285A26AD268A0073C150 /* RootStepper.swift */,
-				29F4285C26AD26B80073C150 /* RootFlow.swift */,
-				29F4289326B48E3A0073C150 /* RootCoordinator.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -572,7 +560,6 @@
 				2917C6B926AACA52003767B0 /* Sources */,
 				2917C6BA26AACA52003767B0 /* Frameworks */,
 				2917C6BB26AACA52003767B0 /* Resources */,
-				AB9A04F0A0BD8B75AB665C35 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -610,7 +597,6 @@
 				2917C6DD26AACA53003767B0 /* Sources */,
 				2917C6DE26AACA53003767B0 /* Frameworks */,
 				2917C6DF26AACA53003767B0 /* Resources */,
-				80F0CBDEE4F42001B62EABCD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -736,40 +722,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80F0CBDEE4F42001B62EABCD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB9A04F0A0BD8B75AB665C35 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tawktestios/Pods-tawktestios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tawktestios/Pods-tawktestios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tawktestios/Pods-tawktestios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CDA6BD5C013441CBE8673173 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,10 +752,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2917C6F526AACAA3003767B0 /* GithubApiRequest.swift in Sources */,
-				29F4285B26AD268A0073C150 /* RootStepper.swift in Sources */,
 				290FF53926BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift in Sources */,
 				29F4286C26B12C860073C150 /* ImageDownloader.swift in Sources */,
-				2948DCA326AC8078001EF5D2 /* GithubFlow.swift in Sources */,
 				29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */,
 				2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
@@ -815,12 +765,11 @@
 				2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */,
 				2948DC8326AB415B001EF5D2 /* FetchGithubUserParams.swift in Sources */,
 				29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */,
-				2948DCA126AC742B001EF5D2 /* GithubStepper.swift in Sources */,
 				29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */,
 				29F4289226B48DB40073C150 /* Coordinator.swift in Sources */,
 				2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */,
 				2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */,
-				29F4289426B48E3A0073C150 /* RootCoordinator.swift in Sources */,
+				29F4289426B48E3A0073C150 /* GithubCoordinator.swift in Sources */,
 				2948DC9626AC0F07001EF5D2 /* RemoteDataSource.swift in Sources */,
 				29F4286926AE9A640073C150 /* GithubUserCell.swift in Sources */,
 				29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */,
@@ -837,7 +786,6 @@
 				2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */,
 				29F4287226B160BD0073C150 /* ImageCache.swift in Sources */,
 				2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */,
-				29F4285D26AD26B80073C150 /* RootFlow.swift in Sources */,
 				29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */,
 				29F4289626B48E850073C150 /* ProfileCoordinator.swift in Sources */,
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,

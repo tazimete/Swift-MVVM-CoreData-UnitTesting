@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import RxFlow
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    public var flowCoordinator: FlowCoordinator!
+    public var rootCoordinator: GithubCoordinator!
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -80,13 +79,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _window = window else { return }
         _window.windowScene = windowScene
 
-        let rootFlow = RootFlow(rootWindow: _window)
-        flowCoordinator = FlowCoordinator()
-
-        flowCoordinator.coordinate(
-            flow: rootFlow,
-            with: RootStepper()
-        )
+//        let rootFlow = RootFlow(rootWindow: _window)
+//        flowCoordinator = FlowCoordinator()
+//
+//        flowCoordinator.coordinate(
+//            flow: rootFlow,
+//            with: RootStepper()
+//        )
         
 //        guard let windowScene = (scene as? UIWindowScene) else { return }
 //        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -95,19 +94,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            return
 //        }
 
-//        let navController = UINavigationController()
-//        let coordinator = RootCoordinator(navigationController: navController)
-//        let service = GithubService(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>(), remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>() )
+        let navController = UINavigationController()
+        rootCoordinator = GithubCoordinator(navigationController: navController)
+//        let service = GithubService(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>(), remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>())
 //        let viewModel = GithubViewModel(with: service)
 //        let viewController = GithubUserListViewController.init(viewModel: viewModel)
-////        navController.setViewControllers([viewController], animated: true)
 //        navController.pushViewController(viewController, animated: true)
-//
-//        _window.rootViewController = coordinator.navigationController
-//        _window.makeKeyAndVisible()
-//
+        _window.rootViewController = rootCoordinator.navigationController
+        _window.makeKeyAndVisible()
+        
 //        // tell the coordinator show its controller
-//        coordinator.start()
+        rootCoordinator.start()
     }
 
 }

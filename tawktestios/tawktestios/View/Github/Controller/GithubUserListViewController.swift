@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import RxFlow
 
 class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private var githubViewModel: GithubViewModel!
@@ -202,7 +201,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
                                                 
-        (self.view.window?.windowScene?.delegate as! SceneDelegate).flowCoordinator.navigate(to: GithubStep.userProfile(user: user))
+        (self.view.window?.windowScene?.delegate as! SceneDelegate).rootCoordinator.showUserProfileController(user: user)
     }
 }
 
@@ -235,7 +234,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
             
-            let count = tableView.visibleCells.count
+//            let count = tableView.visibleCells.count
             
             let cell = tableView.cellForRow(at: index) as! GithubUserCell
             cell.user = getUserObjectAt(indexPath: index)
