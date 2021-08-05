@@ -51,6 +51,21 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+    }
     override func initView() {
         //setup tableview
         view.addSubview(tableView)
@@ -164,7 +179,9 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+//        let count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -217,6 +234,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             guard let index = indexPath else {
                 return
             }
+            
+            let count = tableView.visibleCells.count
             
             let cell = tableView.cellForRow(at: index) as! GithubUserCell
             cell.user = getUserObjectAt(indexPath: index)
