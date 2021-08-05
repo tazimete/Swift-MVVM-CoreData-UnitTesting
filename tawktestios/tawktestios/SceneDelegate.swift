@@ -79,27 +79,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _window = window else { return }
         _window.windowScene = windowScene
 
-//        let rootFlow = RootFlow(rootWindow: _window)
-//        flowCoordinator = FlowCoordinator()
-//
-//        flowCoordinator.coordinate(
-//            flow: rootFlow,
-//            with: RootStepper()
-//        )
-        
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-//
-//        guard let _window = window else {
-//            return
-//        }
-
         let navController = UINavigationController()
         rootCoordinator = GithubCoordinator(navigationController: navController)
-//        let service = GithubService(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>(), remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>())
-//        let viewModel = GithubViewModel(with: service)
-//        let viewController = GithubUserListViewController.init(viewModel: viewModel)
-//        navController.pushViewController(viewController, animated: true)
         _window.rootViewController = rootCoordinator.navigationController
         _window.makeKeyAndVisible()
         

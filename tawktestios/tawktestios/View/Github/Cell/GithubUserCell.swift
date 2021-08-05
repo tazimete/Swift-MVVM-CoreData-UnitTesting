@@ -17,7 +17,7 @@ class GithubUserCell : UITableViewCell, AbstractGithubCell {
             imageUrlAtCurrentIndex = user?.avatarUrl
             lblUsername.text = user?.username
             lblDescription.text = user?.url
-            containerView.backgroundColor = user?.isSeen ?? false ? .gray : .white
+            containerView.backgroundColor = user?.isSeen ?? false ? .lightGray : .white
             ivAvatar.loadImage(from: user?.avatarUrl ?? "", completionHandler: {
                 [weak self] url, image, isCache in
                 
