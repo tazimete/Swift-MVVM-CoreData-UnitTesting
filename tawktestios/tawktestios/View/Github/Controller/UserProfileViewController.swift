@@ -25,6 +25,15 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         return vc as! Self
     }
     
+    override public init(viewModel: ViewModel<S, D, T>) {
+        super.init(viewModel: viewModel)
+    }
+    
+    override required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

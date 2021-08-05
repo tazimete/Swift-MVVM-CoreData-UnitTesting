@@ -32,7 +32,7 @@ final class GithubFlow: Flow {
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        guard let step = transform(step: step) as? GithubStep else {
+        guard let step = step as? GithubStep else {
             return .none
         }
         switch step {
@@ -44,10 +44,7 @@ final class GithubFlow: Flow {
             return dismissChildFlow()
         }
     }
-    
-    private func transform(step: Step) -> Step? {
-        return GithubStep.userList
-    }
+
 }
 
 private extension GithubFlow {

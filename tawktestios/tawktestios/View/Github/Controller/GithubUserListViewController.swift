@@ -95,7 +95,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         loadGithubUserList(since: githubViewModel.paginationlimit)
     }
     
-    public func loadGithubUserList(since: Int){
+    public func loadGithubUserList(since: Int) {
         showBottomIndicator(flag: true)
         
         githubViewModel.fetchUserList(since: since)
@@ -111,11 +111,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         }
     }
     
-    private func getLastUserEntity() -> GithubUserEntity?{
+    private func getLastUserEntity() -> GithubUserEntity? {
         return (githubViewModel.fetchedResultsController.fetchedObjects?.last)
     }
     
-    private func getUserObjectAt(indexPath: IndexPath) -> GithubUser?{
+    private func getUserObjectAt(indexPath: IndexPath) -> GithubUser? {
         return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
     }
     
@@ -176,9 +176,11 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let flow = GithubFlow()
-        flow.navigate(to: GithubStep.userProfile)
-        FlowCoordinator().coordinate(flow: flow, with: GithubStepper())
+        guard let user = getUserObjectAt(indexPath: indexPath) else {
+            return
+        }
+                                                
+        (self.view.window?.windowScene?.delegate as! SceneDelegate).flowCoordinator.navigate(to: GithubStep.userProfile(user: user))
     }
 }
 

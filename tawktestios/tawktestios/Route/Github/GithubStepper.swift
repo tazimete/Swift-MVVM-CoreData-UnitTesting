@@ -10,7 +10,7 @@ import RxFlow
 
 enum GithubStep: Step {
     case userList
-    case userProfile
+    case userProfile(user: GithubUser)
     case dismiss
 }
 
