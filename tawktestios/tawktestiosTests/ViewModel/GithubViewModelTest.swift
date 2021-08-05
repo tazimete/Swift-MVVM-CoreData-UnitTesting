@@ -38,7 +38,7 @@ class GithubViewModelTest: XCTestCase, NSFetchedResultsControllerDelegate {
             XCTAssertEqual(self?.viewModel.fetchedResultsController.fetchedObjects?.count ?? 0, 0)
         }
         
-        viewModel.fetchDataList(since: 20)
+        viewModel.fetchDataList(page: 20)
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {

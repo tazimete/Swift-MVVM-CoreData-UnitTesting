@@ -38,8 +38,8 @@ final class GithubFlow: Flow {
         switch step {
         case .userList:
             return showGithubUserListViewController()
-        case .userProfile:
-            return showUserProfileViewController()
+        case .userProfile(let user) :
+            return showUserProfileViewController(user: user)
         case .dismiss:
             return dismissChildFlow()
         }
@@ -56,10 +56,11 @@ private extension GithubFlow {
         return .one(flowContributor: .contribute(withNextPresentable: viewController as! Presentable, withNextStepper: viewModel as! Stepper))
     }
     
-    func showUserProfileViewController() -> FlowContributors {
+    func showUserProfileViewController(user: GithubUser) -> FlowContributors {
         let service = GithubService(localDataSource: localDataSource, remoteDataSource: remoteDataSource)
         let viewModel = UserProfileViewModel(with: service)
         let viewController = UserProfileViewController.instantiate(viewModel: viewModel)
+        viewController.githubUser = user 
         rootViewController.setViewControllers([viewController as! UIViewController], animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController as! Presentable, withNextStepper: viewModel as! Stepper))
     }
