@@ -29,7 +29,6 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     public init(viewModel: ViewModel<S, D, T>) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-        self.viewDidLoad()
     }
     
     required init?(coder: NSCoder) {
