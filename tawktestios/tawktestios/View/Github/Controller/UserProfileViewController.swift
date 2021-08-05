@@ -9,7 +9,7 @@ import UIKit
 
 class UserProfileViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private var userProfileViewModel: UserProfileViewModel!
-    public var githubUser: GithubUser?
+    public var githubUser: GithubUserEntity?
     
     //MARK: Outlet
     @IBOutlet weak var ivProfilePicture: UIImageView!
@@ -34,7 +34,6 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         super.init(coder: coder)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -57,23 +56,16 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             return
         }
         
+        user.isSeen = true
+        userProfileViewModel.updateUserEntity(user: user)
         userProfileViewModel.fetchProfile(username: user.username ?? "")
         
         userProfileViewModel.dataFetchingSuccessHandler = {[weak self] in
-            self?.lblName.text = "Name : \(self?.userProfileViewModel.data?.username ?? "")"
-            self?.lblFollwer.text = "Followers : \(self?.userProfileViewModel.data?.followers ?? 0)"
-            self?.lblFollowing.text = "Follwings : \(self?.userProfileViewModel.data?.followings ?? 0)"
-            self?.lblCompany.text = "Company : \(self?.userProfileViewModel.data?.company ?? "")"
-            self?.lblBlog.text = "Blog : \(self?.userProfileViewModel.data?.blog ?? "")"
-            self?.ivProfilePicture.loadImage(from: self?.userProfileViewModel.data?.avatarUrl ?? "" ) {
-                [weak self] url, image, isCache in
-                
-                guard let weakSelf = self else {
-                    return
-                }
-                
-                self?.ivProfilePicture.image = image
+            guard let user = self?.userProfileViewModel.data else {
+                return
             }
+            
+            self?.showData(user: user)
         }
     }
     
@@ -81,5 +73,17 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+    }
+    
+    private func showData(user: GithubUser) {
+        self.lblName.text = "Name : \(user.username ?? "")"
+        self.lblFollwer.text = "Followers : \(user.followers ?? 0)"
+        self.lblFollowing.text = "Follwings : \(user.followings ?? 0)"
+        self.lblCompany.text = "Company : \(user.company ?? "")"
+        self.lblBlog.text = "Blog : \(user.blog ?? "")"
+        self.ivProfilePicture.loadImage(from: user.avatarUrl ?? "" ) {
+            [weak self] url, image, isCache in
+            self?.ivProfilePicture.image = image
+        }
     }
 }

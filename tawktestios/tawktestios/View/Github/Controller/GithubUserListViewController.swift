@@ -90,6 +90,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func bindViewModel() {
         githubViewModel = viewModel as! GithubViewModel
         
+        githubViewModel.fetchedResultsControllerDelegate = self 
         githubViewModel.fetchedResultsController.delegate = self
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
@@ -117,6 +118,10 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     private func getUserObjectAt(indexPath: IndexPath) -> GithubUser? {
         return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)?.asGithubUser
+    }
+    
+    private func getUserEntityAt(indexPath: IndexPath) -> GithubUserEntity? {
+        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
     }
     
     //MARK: Pagination
@@ -176,7 +181,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let user = getUserObjectAt(indexPath: indexPath) else {
+        guard let user = getUserEntityAt(indexPath: indexPath) else {
             return
         }
                                                 

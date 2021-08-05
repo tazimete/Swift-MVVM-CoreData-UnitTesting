@@ -85,6 +85,14 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         }
     }
     
+    public func updateItem(item: D, taskContext: NSManagedObjectContext) {
+        do {
+            try taskContext.save()
+        } catch let error {
+            print("Failed to update: \(error)")
+        }
+    }
+    
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
         //removing batch delete request, because its not working inMemoryStore Type 
 //        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

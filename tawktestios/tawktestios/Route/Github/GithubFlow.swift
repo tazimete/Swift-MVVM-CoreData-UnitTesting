@@ -19,7 +19,8 @@ final class GithubFlow: Flow {
     }
     
     private lazy var rootViewController: UINavigationController = {
-        return UINavigationController()
+        let navController = UINavigationController()
+        return navController
     }()
     
     init() {
@@ -56,7 +57,7 @@ private extension GithubFlow {
         return .one(flowContributor: .contribute(withNextPresentable: viewController as! Presentable, withNextStepper: viewModel as! Stepper))
     }
     
-    func showUserProfileViewController(user: GithubUser) -> FlowContributors {
+    func showUserProfileViewController(user: GithubUserEntity) -> FlowContributors {
         let service = GithubService(localDataSource: localDataSource, remoteDataSource: remoteDataSource)
         let viewModel = UserProfileViewModel(with: service)
         let viewController = UserProfileViewController.instantiate(viewModel: viewModel)
