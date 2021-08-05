@@ -46,6 +46,7 @@ public class CoreDataClient {
         persistentContainer = NSPersistentContainer(name: "tawktestios")
         let description = persistentContainer.persistentStoreDescriptions.first
         description?.type = NSSQLiteStoreType
+        persistentContainer.persistentStoreDescriptions = [description!]
         
         persistentContainer.loadPersistentStores { description, error in
             guard error == nil else {
@@ -54,6 +55,7 @@ public class CoreDataClient {
         }
         
         mainContext = persistentContainer.viewContext
+//        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy

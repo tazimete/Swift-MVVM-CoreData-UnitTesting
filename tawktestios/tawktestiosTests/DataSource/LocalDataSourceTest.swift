@@ -50,10 +50,6 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
-        
-        //empty data
-//        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
-//        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
     
     func testFetchItems() {
@@ -65,10 +61,6 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
         XCTAssertNotEqual(users.first?.username, result.last?.username)
-        
-        //empty data
-//        let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
-//        localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
     }
 
     func testBtachDelete(){

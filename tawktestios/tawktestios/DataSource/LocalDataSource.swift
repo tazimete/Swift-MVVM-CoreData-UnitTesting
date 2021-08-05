@@ -11,7 +11,7 @@ import CoreData
 public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{
     public typealias T = T
     public typealias D = D
-    
+    public let TAG = "LocalDataSource"
     public var persistentContainer: NSPersistentContainer
     public var viewContext: NSManagedObjectContext
     public lazy var fetchRequest: NSFetchRequest<NSFetchRequestResult> = {
@@ -28,8 +28,8 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         self.viewContext = viewContext
     }
     
-    public func insertEntity(entityName: String, into: NSManagedObjectContext) -> D? {
-        return NSEntityDescription.insertNewObject(forEntityName: entityName, into: into) as? D
+    public func insertEntity(entityName: String, into context: NSManagedObjectContext) -> D? {
+        return NSEntityDescription.insertNewObject(forEntityName: entityName, into: context) as? D
     }
     
     public func fetchItems(taskContext: NSManagedObjectContext) -> [D] {
@@ -42,7 +42,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         do {
             userEntities = try taskContext.fetch(fetchRequest)
         } catch let error {
-            print("Failed to fetch companies: \(error)")
+            print("\(TAG) -- Failed to fetch companies: \(error)")
         }
         
         return userEntities
@@ -59,37 +59,40 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         do {
             userEntities = try taskContext.fetch(fetchRequest)
         } catch let error {
-            print("Failed to fetch companies: \(error)")
+            print("\(TAG) -- Failed to fetch companies: \(error)")
         }
         
         return userEntities
     }
     
     public func insertItems(items: [T], taskContext: NSManagedObjectContext) {
-        for item in items {
-            guard let userEntity = insertEntity(entityName: self.entityName, into: taskContext) as? D else {
-                print("Error: Failed to create a new user object!")
-                return
-            }
-
-            do {
-                if let entity = userEntity as? GithubUserEntity {
-                    try entity.update(user: item)
+//        taskContext.performAndWait {
+            for item in items {
+                guard let userEntity = self.insertEntity(entityName: self.entityName, into: taskContext) else {
+                    print("\(self.TAG) -- Error: Failed to create a new user object!")
+                    return
                 }
-                
-                try taskContext.save()
-            } catch {
-                print("Error: \(error)\n this object will be deleted.")
-                taskContext.delete(userEntity)
+
+                do {
+                    if let entity = userEntity as? GithubUserEntity {
+                        entity.update(user: item)
+                    }
+                    
+                    try taskContext.save()
+                } catch (let error){
+                    print("\(self.TAG) -- Error: \(error)\n this object will be deleted.")
+                    taskContext.delete(userEntity)
+                }
             }
-        }
+//        }
+        
     }
     
     public func updateItem(item: D, taskContext: NSManagedObjectContext) {
         do {
             try taskContext.save()
         } catch let error {
-            print("Failed to update: \(error)")
+            print("\(TAG) -- Failed to update: \(error)")
         }
     }
     
@@ -150,7 +153,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
                 do {
                     try taskContext.save()
                 } catch {
-                    print("Error: \(error)\nCould not save Core Data context.")
+                    print("\(TAG) -- Error: \(error)\nCould not save Core Data context.")
                 }
                 taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
             }

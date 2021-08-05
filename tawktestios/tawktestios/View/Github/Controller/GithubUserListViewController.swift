@@ -38,7 +38,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     override public init(viewModel: ViewModel<S, D, T>) {
         super.init(viewModel: viewModel)
-//        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +47,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -262,7 +262,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let predicate = NSPredicate(format: "username CONTAINS[c] %@", searchText)
-        githubViewModel.fetchedResultsController.fetchRequest.predicate = NSPredicate(value: true)
+        githubViewModel.fetchedResultsController.fetchRequest.predicate = predicate
         try? githubViewModel.fetchedResultsController.performFetch()
         
         try? githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
