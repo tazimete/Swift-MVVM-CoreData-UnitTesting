@@ -81,11 +81,12 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel.fetchedResultsControllerDelegate = self 
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
-        tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
     }
     
     public func loadGithubUserList(since: Int) {
         showBottomIndicator(flag: true)
+        
+        tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
         githubViewModel.fetchUserList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
@@ -152,20 +153,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
-//        let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
         let count = tableViewdataSource.getCount()
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCellNormal.cellReuseIdentifier, for: indexPath)
-//                as? GithubUserCellNormal else{
-//            return UITableViewCell()
-//        }
-//
-//        cell.user = getUserObjectAt(indexPath: indexPath)
-        
         let item = tableViewdataSource.getCellConfigurator(at:indexPath.row)
 
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
