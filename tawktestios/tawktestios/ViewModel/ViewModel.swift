@@ -26,9 +26,9 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
     public lazy var fetchedResultsController: NSFetchedResultsController<T> = {
         let fetchRequest = NSFetchRequest<T>(entityName: CoreDataEntities<T>.getEntityName())
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
-//        fetchRequest.fetchOffset = paginationOffset
-//        fetchRequest.fetchLimit = paginationOffset + paginationlimit
-//        fetchRequest.fetchBatchSize = paginationlimit
+        fetchRequest.fetchOffset = paginationOffset
+        fetchRequest.fetchLimit = paginationOffset + paginationlimit
+        fetchRequest.fetchBatchSize = paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                     managedObjectContext: CoreDataClient.shared.mainContext,
