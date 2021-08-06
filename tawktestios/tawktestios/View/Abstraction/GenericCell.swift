@@ -40,14 +40,15 @@ typealias GithubUserInvertedCellConfig = TableCellConfigurator<GithubUserCellInv
 class TableViewModel {
     private var items: [CellConfigurator] = []
     
-    public func getCellConfigurator(cellViewModel: AbstractCellViewModel) -> CellConfigurator? {
+    public func getCellConfigurator(cellViewModel: AbstractCellViewModel, index: Int) -> CellConfigurator? {
         var cellConfig: CellConfigurator!
         
         if (cellViewModel.hasNote ?? false) {
             cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
         }
         
-        else if (cellViewModel.isInverted ?? false) {
+        else if (index % 4 == 0) { //every forth cell
+            cellViewModel.isInverted = true 
             cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
         }
         

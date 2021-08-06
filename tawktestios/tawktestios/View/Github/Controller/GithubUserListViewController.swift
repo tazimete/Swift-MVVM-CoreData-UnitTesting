@@ -173,7 +173,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
 //        cell.user = getUserObjectAt(indexPath: indexPath)
         
 //        let item = tableViewdataSource.getCellConfigurator(at:indexPath.row)
-        let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel())!
+        let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
  
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
         item.configure(cell: cell)
@@ -229,7 +229,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //            cell.user = getUserObjectAt(indexPath: index)
 //            let item = tableViewdataSource.getCellConfigurator(at:index.row)
 
-            let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())!
+            let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), index: index.row)!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
 //            let cell = tableView(tableView, cellForRowAt: index)
             item.configure(cell: cell)
