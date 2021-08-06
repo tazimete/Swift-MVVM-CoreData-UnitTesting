@@ -55,7 +55,9 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         tableView.dataSource = self
         
         //cell registration
-        tableView.register(GithubUserCellNormal.self, forCellReuseIdentifier: GithubUserCellNormal.cellReuseIdentifier)
+        tableView.register(GithubUserCellNormal.self, forCellReuseIdentifier: GithubUserNormalCellConfig.reuseId)
+        tableView.register(GithubUserCellNote.self, forCellReuseIdentifier: GithubUserNoteCellConfig.reuseId)
+        tableView.register(GithubUserCellInverted.self, forCellReuseIdentifier: GithubUserInvertedCellConfig.reuseId)
         
         addBottomIndicator()
         
@@ -111,6 +113,10 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     private func getUserEntityAt(indexPath: IndexPath) -> GithubUserEntity? {
         return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
+    }
+    
+    private func getReuseIdentifier(item: CellConfigurator) -> String {
+        return type(of: item).reuseId
     }
     
     //MARK: Pagination
@@ -224,8 +230,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //            let item = tableViewdataSource.getCellConfigurator(at:index.row)
 
             let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())!
-            let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
-//            let cell = tableView(tableView, cellForRowAt: index)
+            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
             item.configure(cell: cell)
             
         case .move:
@@ -253,8 +258,21 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //MARK: UISeacrController Delegate
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let predicate = NSPredicate(format: "username CONTAINS[c] %@", searchText)
+        var predicate: NSPredicate? = NSPredicate(format: "username CONTAINS[c] %@", searchText)
+        
+        if searchText.isEmpty {
+            predicate = nil
+        }
+        
         githubViewModel.fetchedResultsController.fetchRequest.predicate = predicate
+        try? githubViewModel.fetchedResultsController.performFetch()
+        
+        githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        githubViewModel.fetchedResultsController.fetchRequest.predicate = nil 
         try? githubViewModel.fetchedResultsController.performFetch()
         
         githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
