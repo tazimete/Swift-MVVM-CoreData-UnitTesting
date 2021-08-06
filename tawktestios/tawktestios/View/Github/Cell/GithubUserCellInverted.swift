@@ -105,7 +105,7 @@ class GithubUserCellInverted: UITableViewCell, ConfigurableCell {
             }
 
             if (url).elementsEqual(weakSelf.imageUrlAtCurrentIndex ?? ""){
-                weakSelf.ivAvatar.image = image
+                weakSelf.ivAvatar.image = image?.invertedImage()
             }
         })
     }

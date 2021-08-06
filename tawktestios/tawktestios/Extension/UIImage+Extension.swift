@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 extension UIImage {
     func decodedImage() -> UIImage {
@@ -23,4 +24,21 @@ extension UIImage {
         guard let cgImage = cgImage else { return 0 }
         return cgImage.bytesPerRow * cgImage.height
     }
+    
+    func invertedImage() -> UIImage? {
+        
+        let img = CIImage(cgImage: self.cgImage!)
+        
+        let filter = CIFilter(name: "CIColorInvert")
+        filter?.setDefaults()
+        
+        filter?.setValue(img, forKey: "inputImage")
+        
+        let context = CIContext(options:nil)
+        
+        let cgimg = context.createCGImage((filter?.outputImage)!, from: (filter?.outputImage?.extent)!)
+
+        return UIImage(cgImage: cgimg!)
+    }
 }
+

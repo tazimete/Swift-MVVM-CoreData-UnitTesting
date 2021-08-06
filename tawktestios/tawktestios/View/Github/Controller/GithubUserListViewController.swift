@@ -231,6 +231,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 
             let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
+//            let cell = tableView(tableView, cellForRowAt: index)
             item.configure(cell: cell)
             
         case .move:
