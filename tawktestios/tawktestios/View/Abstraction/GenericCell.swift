@@ -33,6 +33,10 @@ class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigura
 }
 
 
-//typealias UserCellConfig = TableCellConfigurator<GithubUserCell, AbstractCellViewModel>
-//typealias MessageCellConfig = TableCellConfigurator<GithubUserCell, AbstractCellViewModel>
-//typealias ImageCellConfig = TableCellConfigurator<GithubUserCell, AbstractCellViewModel>
+typealias GithubUserNormalCellConfig = TableCellConfigurator<GithubUserCellNormal, AbstractCellViewModel>
+typealias GithubUserNoteCellConfig = TableCellConfigurator<GithubUserCellNote, AbstractCellViewModel>
+typealias GithubUserInvertedCellConfig = TableCellConfigurator<GithubUserCellInverted, AbstractCellViewModel>
+
+class TableViewModel {
+    var items: [CellConfigurator] = []
+}
