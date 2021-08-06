@@ -60,7 +60,7 @@ extension GithubUserEntity {
     }
     
     public var asCellViewModel: GithubCellViewModel {
-        let cellViewModel = GithubCellViewModel(id: Int(id), thumbnail: avatarUrl, title: username, subtitle: url, hasNote: note?.isEmpty ?? false, isSeen: isSeen)
+        let cellViewModel = GithubCellViewModel(id: Int(id), thumbnail: avatarUrl, title: username, subtitle: url, hasNote: (note?.isEmpty ?? true) ? false : true, isSeen: isSeen)
         
         return cellViewModel
     }

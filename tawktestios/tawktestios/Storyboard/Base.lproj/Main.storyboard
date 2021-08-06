@@ -126,6 +126,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-dV-sGU">
                                             <rect key="frame" x="190" y="682.5" width="34" height="30"/>
                                             <state key="normal" title="Save"/>
+                                            <connections>
+                                                <action selector="didTapSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ES-Jy-nLj"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -167,6 +170,7 @@
                         <outlet property="lblFollowing" destination="yfI-gs-rUV" id="sxj-cJ-a0N"/>
                         <outlet property="lblFollwer" destination="pAI-hq-3nr" id="Imn-Cb-Il6"/>
                         <outlet property="lblName" destination="pZV-03-1D1" id="pxV-nO-niR"/>
+                        <outlet property="tvNote" destination="VfF-ZR-YJN" id="YWD-xp-ENk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -65,6 +65,13 @@ class GithubUserCellNote: UITableViewCell, ConfigurableCell {
         return imgView
     }()
     
+    private let ivNote : UIImageView = {
+        let imgView = UIImageView(image: UIImage(named: "ic_note"))
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+        return imgView
+    }()
+    
     override func prepareForReuse() {
         ivAvatar.image = nil
         lblUsername.text = ""
@@ -81,11 +88,13 @@ class GithubUserCellNote: UITableViewCell, ConfigurableCell {
         containerView.addSubview(ivAvatar)
         containerView.addSubview(lblUsername)
         containerView.addSubview(lblDescription)
+        containerView.addSubview(ivNote)
         
         containerView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: frame.width, height: 0, enableInsets: false)
         ivAvatar.anchor(top: containerView.topAnchor, left:  containerView.leftAnchor, bottom: containerView.bottomAnchor, right: nil, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 0, width: 90, height: 90, enableInsets: false)
         lblUsername.anchor(top: containerView.topAnchor, left: ivAvatar.rightAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 0, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
         lblDescription.anchor(top: lblUsername.bottomAnchor, left: ivAvatar.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 15, paddingRight: 15, width: frame.size.width, height: 0, enableInsets: false)
+        ivNote.anchor(top: containerView.topAnchor, left: lblDescription.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 30, height: 30, enableInsets: false)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,6 +106,8 @@ class GithubUserCellNote: UITableViewCell, ConfigurableCell {
         lblUsername.text = data.title
         lblDescription.text = data.subtitle
         containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
+        ivNote.isHidden = (data.hasNote ?? false) ? false : true
+        
         ivAvatar.loadImage(from: data.thumbnail ?? "", completionHandler: {
             [weak self] url, image, isCache in
 

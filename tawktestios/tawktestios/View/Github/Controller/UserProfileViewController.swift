@@ -18,6 +18,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblCompany: UILabel!
     @IBOutlet weak var lblBlog: UILabel!
+    @IBOutlet weak var tvNote: UITextView!
     
     
     override public init(viewModel: ViewModel<S, D, T>) {
@@ -68,6 +69,18 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    //When tap on save button
+    @IBAction func didTapSaveButton(_ sender: UIButton) {
+        guard let user = githubUser else {
+            return
+        }
+        
+        user.note = tvNote.text.isEmpty ? nil : tvNote.text 
+        
+        userProfileViewModel.updateUserEntity(user: user)
+    }
+    
     
     private func showData(user: GithubUser) {
         self.lblName.text = "Name : \(user.username ?? "")"
