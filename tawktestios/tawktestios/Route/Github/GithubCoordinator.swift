@@ -26,6 +26,7 @@ class GithubCoordinator: Coordinator {
         let service = GithubService(localDataSource: LocalDataSource<GithubUser, GithubUserEntity>(), remoteDataSource: RemoteDataSource<GithubApiRequest, GithubUser>())
         let viewModel = UserProfileViewModel(with: service)
         let vc = UserProfileViewController.instantiate(viewModel: viewModel)
+        vc.viewModel = viewModel
         vc.githubUser = user
         navigationController.pushViewController(vc, animated: false)
     }

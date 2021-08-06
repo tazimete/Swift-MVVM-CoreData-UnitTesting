@@ -58,4 +58,10 @@ extension GithubUserEntity {
         user.isSeen = isSeen
         return user
     }
+    
+    public var asCellViewModel: GithubCellViewModel {
+        let cellViewModel = GithubCellViewModel(id: Int(id), thumbnail: avatarUrl, title: username, subtitle: url, hasNote: note?.isEmpty ?? false, isSeen: isSeen)
+        
+        return cellViewModel
+    }
 }

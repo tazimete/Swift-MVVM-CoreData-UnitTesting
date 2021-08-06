@@ -10,3 +10,4 @@ import Foundation
 public protocol AbstractDataModel: AnyObject {
     var id: Int? {get set}
 }
+

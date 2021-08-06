@@ -8,29 +8,26 @@
 import Foundation
 
 
-public class GithubCellNormalViewModel: AbstractCellViewModel {
-    public var id: String?
-    
+public class GithubCellViewModel: AbstractCellViewModel {
+    public var id: Int?
     public var thumbnail: String?
-    
     public var title: String?
-    
     public var subtitle: String?
-    
-    public var note: String?
-    
+    public var hasNote: Bool?
     public var isSeen: Bool?
+    public var isInverted: Bool?
     
     init() {
         
     }
     
-    init(id: String?, thumbnail: String?, title: String?, subtitle: String?, note: String?, isSeen: Bool?) {
+    init(id: Int?, thumbnail: String?, title: String?, subtitle: String?, hasNote: Bool?, isInverted: Bool? = false, isSeen: Bool?) {
         self.id = id
         self.thumbnail = thumbnail
         self.title = title
         self.subtitle = subtitle
-        self.note = note
+        self.hasNote = hasNote
+        self.isInverted = isInverted
         self.isSeen = isSeen
     }
 }

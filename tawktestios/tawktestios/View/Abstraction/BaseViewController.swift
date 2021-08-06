@@ -93,7 +93,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        onEndScrolling(scrollView: scrollView)
+//            onEndScrolling(scView: scrollView)
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

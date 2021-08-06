@@ -38,5 +38,92 @@ typealias GithubUserNoteCellConfig = TableCellConfigurator<GithubUserCellNote, A
 typealias GithubUserInvertedCellConfig = TableCellConfigurator<GithubUserCellInverted, AbstractCellViewModel>
 
 class TableViewModel {
-    var items: [CellConfigurator] = []
+    private var items: [CellConfigurator] = []
+    
+    public func addAsCellConfigurator(cellViewModel: AbstractCellViewModel) {
+        if (cellViewModel.hasNote ?? false) {
+            let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
+            items.append(cellConfig)
+        }
+        
+        else if (cellViewModel.isInverted ?? false) {
+            let cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
+            items.append(cellConfig)
+        }
+        
+        else {
+            let cellConfig = GithubUserNormalCellConfig.init(item: cellViewModel)
+            items.append(cellConfig)
+        }
+    }
+    
+    public func addAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
+        for cellViewModel in cellViewModels {
+            if (cellViewModel.hasNote ?? false) {
+                let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
+                items.append(cellConfig)
+            }
+            
+            else if (cellViewModel.isInverted ?? false) {
+                let cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
+                items.append(cellConfig)
+            }
+            
+            else {
+                let cellConfig = GithubUserNormalCellConfig.init(item: cellViewModel)
+                items.append(cellConfig)
+            }
+        }
+    }
+    
+    
+    public func addCellConfigurator(cellConfig: CellConfigurator) {
+        items.append(cellConfig)
+    }
+    
+    public func insertAsCellConfigurator(cellViewModel: AbstractCellViewModel, at index: Int) {
+        if (cellViewModel.hasNote ?? false) {
+            let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
+            items.insert(cellConfig, at: index)
+        }
+        
+        else if (cellViewModel.isInverted ?? false) {
+            let cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
+            items.insert(cellConfig, at: index)
+        }
+        
+        else {
+            let cellConfig = GithubUserNormalCellConfig.init(item: cellViewModel)
+            items.insert(cellConfig, at: index)
+        }
+    }
+    
+    public func insertCellConfigurator(cellConfig: CellConfigurator, at index: Int) {
+        items.insert(cellConfig, at: index)
+    }
+    
+    public func getCellConfigurator(at index: Int) -> CellConfigurator {
+        return items[index]
+    }
+    
+    public func updateCellConfigurator(cellConfig: CellConfigurator, at index: Int) {
+        items[index] = cellConfig
+    }
+    
+    public func getCount() -> Int {
+        return items.count
+    }
+    
+    public func getLastItem() -> CellConfigurator? {
+        return items.last
+    }
+    
+    public func removeCellConfigurator(at index: Int) {
+        let cournt = items.count;
+        items.remove(at: index)
+    }
+    
+    public func removeAll() {
+        return items.removeAll()
+    }
 }
