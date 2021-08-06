@@ -40,7 +40,15 @@ final class ImageDownloader {
                 return
             }
             
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+            let cache = URLCache(memoryCapacity: 10_000_000, diskCapacity: 1_000_000_000, directory: diskCacheURL)
+            let config = URLSessionConfiguration.default
+            config.urlCache = cache
+            let session = URLSession(configuration: config)
+            
+
+            let task = session.dataTask(with: url) { (data, response, error) in
                 
                 guard let data = data else {
                     return
