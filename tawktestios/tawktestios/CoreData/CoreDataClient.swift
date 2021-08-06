@@ -55,6 +55,7 @@ public class CoreDataClient {
         }
         
         mainContext = persistentContainer.viewContext
+//        mainContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 //        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)

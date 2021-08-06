@@ -75,7 +75,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
 
                 do {
                     if let entity = userEntity as? GithubUserEntity {
-                        entity.update(user: item)
+                        try entity.update(user: item)
                     }
                     
                     try taskContext.save()

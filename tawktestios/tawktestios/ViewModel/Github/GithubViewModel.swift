@@ -27,7 +27,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
             switch result{
                 case .success(let users):
                     print("fetchData() -- \(users.map({$0.username}))")
-                    weakSelf.service.localDataSource.syncData(data: users, taskContext: CoreDataClient.shared.backgroundContext)
+                    weakSelf.service.localDataSource.syncData(data: users, taskContext: CoreDataClient.shared.mainContext)
 //                    weakSelf.dataList.append(contentsOf: users)
 
                     weakSelf.dataFetchingSuccessHandler?()

@@ -18,11 +18,11 @@ protocol Coordinator {
 
 
 protocol Storyboarded {
-    static func instantiate<T: NSManagedObject, D: AbstractDataModel, S: Service>(viewModel: ViewModel<T, D, S>) -> Self
+    static func instantiate<S: Service, D: AbstractDataModel, T: NSManagedObject>(viewModel: ViewModel<S, D, T>) -> Self
 }
 
 extension Storyboarded where Self: UIViewController {
-    static func instantiate<T: NSManagedObject, D: AbstractDataModel, S: Service>(viewModel: ViewModel<T, D, S>) -> Self {
+    static func instantiate<S: Service, D: AbstractDataModel, T: NSManagedObject>(viewModel: ViewModel<S, D, T>) -> Self {
         // this pulls out "MyApp.MyViewController"
         let fullName = NSStringFromClass(self)
 

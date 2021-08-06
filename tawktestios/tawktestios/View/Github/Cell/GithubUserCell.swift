@@ -59,6 +59,7 @@ class GithubUserCell : UITableViewCell, AbstractGithubCell {
         let imgView = UIImageView(image: UIImage(named: "img_avatar"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
+        imgView.layer.cornerRadius = 45 
         return imgView
     }()
     

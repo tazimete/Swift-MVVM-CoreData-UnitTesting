@@ -25,17 +25,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         return searchController
     }()
     
-    public static func loadViewController(viewModel: ViewModel<S, D, T>) -> GithubUserListViewController? {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "GithubUserListViewController") as! GithubUserListViewController
-        vc.viewModel = viewModel
-        return vc
-    }
-    
-    public static func instantiate(viewModel: ViewModel<S, D, T>) -> Self {
-        let vc = GithubUserListViewController(viewModel: viewModel)
-        return vc as! Self
-    }
-    
     override public init(viewModel: ViewModel<S, D, T>) {
         super.init(viewModel: viewModel)
     }
@@ -47,24 +36,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        
-    }
     override func initView() {
         //setup tableview
         view.addSubview(tableView)
@@ -105,9 +78,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel = viewModel as! GithubViewModel
         
         githubViewModel.fetchedResultsControllerDelegate = self 
-        githubViewModel.fetchedResultsController.delegate = self
+//        githubViewModel.fetchedResultsController.delegate = self
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
+        let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
+        count;
     }
     
     public func loadGithubUserList(since: Int) {
@@ -233,8 +208,6 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             guard let index = indexPath else {
                 return
             }
-            
-//            let count = tableView.visibleCells.count
             
             let cell = tableView.cellForRow(at: index) as! GithubUserCell
             cell.user = getUserObjectAt(indexPath: index)

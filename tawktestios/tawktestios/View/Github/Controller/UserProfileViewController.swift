@@ -20,12 +20,6 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     @IBOutlet weak var lblBlog: UILabel!
     
     
-    public static func instantiate(viewModel: ViewModel<S, D, T>) -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "UserProfileViewController") as! UserProfileViewController
-        vc.viewModel = viewModel
-        return vc as! Self
-    }
-    
     override public init(viewModel: ViewModel<S, D, T>) {
         super.init(viewModel: viewModel)
     }
