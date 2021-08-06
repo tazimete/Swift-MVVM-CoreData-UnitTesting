@@ -201,8 +201,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
             
-//            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())
-            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
+            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())
+//            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.insertRows(at: [index], with: .automatic)
             
         case .delete:
