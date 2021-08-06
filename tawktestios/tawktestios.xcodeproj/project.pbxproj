@@ -48,7 +48,7 @@
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extension.swift */; };
-		29F4286926AE9A640073C150 /* GithubUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286826AE9A640073C150 /* GithubUserCell.swift */; };
+		29F4286926AE9A640073C150 /* GithubUserCellNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286826AE9A640073C150 /* GithubUserCellNormal.swift */; };
 		29F4286C26B12C860073C150 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286B26B12C860073C150 /* ImageDownloader.swift */; };
 		29F4286E26B12D660073C150 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286D26B12D660073C150 /* UIImageView+Extension.swift */; };
 		29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */; };
@@ -62,6 +62,9 @@
 		29F4289426B48E3A0073C150 /* GithubCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289326B48E3A0073C150 /* GithubCoordinator.swift */; };
 		29F4289926B5ED490073C150 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289826B5ED490073C150 /* Reachability.swift */; };
 		29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */; };
+		29F7BF9726BD25F3004E6BFC /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9626BD25F3004E6BFC /* GenericCell.swift */; };
+		29F7BF9926BD30CB004E6BFC /* GithubUserCellNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */; };
+		29F7BF9B26BD30F9004E6BFC /* GithubUserCellInverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */; };
 		386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */; };
 		68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */; };
 /* End PBXBuildFile section */
@@ -131,7 +134,7 @@
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		29F4286826AE9A640073C150 /* GithubUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCell.swift; sourceTree = "<group>"; };
+		29F4286826AE9A640073C150 /* GithubUserCellNormal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCellNormal.swift; sourceTree = "<group>"; };
 		29F4286B26B12C860073C150 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		29F4286D26B12D660073C150 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -145,6 +148,9 @@
 		29F4289326B48E3A0073C150 /* GithubCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCoordinator.swift; sourceTree = "<group>"; };
 		29F4289826B5ED490073C150 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		29F4289A26B6A6C70073C150 /* CoreDataEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEntities.swift; sourceTree = "<group>"; };
+		29F7BF9626BD25F3004E6BFC /* GenericCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
+		29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCellNote.swift; sourceTree = "<group>"; };
+		29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCellInverted.swift; sourceTree = "<group>"; };
 		2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,7 +498,10 @@
 		29F4286726AE9A510073C150 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				29F4286826AE9A640073C150 /* GithubUserCell.swift */,
+				29F7BF9626BD25F3004E6BFC /* GenericCell.swift */,
+				29F4286826AE9A640073C150 /* GithubUserCellNormal.swift */,
+				29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */,
+				29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -755,6 +764,7 @@
 				2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */,
+				29F7BF9726BD25F3004E6BFC /* GenericCell.swift in Sources */,
 				29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */,
 				290FF53B26BB231400FDE99B /* UserProfileViewModel.swift in Sources */,
 				29F4287426B160E30073C150 /* ImageLoader.swift in Sources */,
@@ -762,13 +772,14 @@
 				2948DC9326AC065B001EF5D2 /* DataSources.swift in Sources */,
 				2948DC8326AB415B001EF5D2 /* FetchGithubUserParams.swift in Sources */,
 				29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */,
+				29F7BF9926BD30CB004E6BFC /* GithubUserCellNote.swift in Sources */,
 				29E8429426B90FBE00C8B48A /* AbstractApiClient.swift in Sources */,
 				29F4289226B48DB40073C150 /* Coordinator.swift in Sources */,
 				2948DC8A26ABFB48001EF5D2 /* GithubService.swift in Sources */,
 				2917C6C526AACA52003767B0 /* GithubUserListViewController.swift in Sources */,
 				29F4289426B48E3A0073C150 /* GithubCoordinator.swift in Sources */,
 				2948DC9626AC0F07001EF5D2 /* RemoteDataSource.swift in Sources */,
-				29F4286926AE9A640073C150 /* GithubUserCell.swift in Sources */,
+				29F4286926AE9A640073C150 /* GithubUserCellNormal.swift in Sources */,
 				29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */,
 				29F4286E26B12D660073C150 /* UIImageView+Extension.swift in Sources */,
 				2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */,
@@ -783,6 +794,7 @@
 				2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */,
 				29F4287226B160BD0073C150 /* ImageCache.swift in Sources */,
 				2917C6C126AACA52003767B0 /* AppDelegate.swift in Sources */,
+				29F7BF9B26BD30F9004E6BFC /* GithubUserCellInverted.swift in Sources */,
 				29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */,
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */,

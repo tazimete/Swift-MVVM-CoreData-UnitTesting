@@ -54,7 +54,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         tableView.dataSource = self
         
         //cell registration
-        tableView.register(GithubUserCell.self, forCellReuseIdentifier: GithubUserCell.cellReuseIdentifier)
+        tableView.register(GithubUserCellNormal.self, forCellReuseIdentifier: GithubUserCellNormal.cellReuseIdentifier)
         
         addBottomIndicator()
         
@@ -78,7 +78,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel = viewModel as! GithubViewModel
         
         githubViewModel.fetchedResultsControllerDelegate = self 
-//        githubViewModel.fetchedResultsController.delegate = self
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
         let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
@@ -159,8 +158,8 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCell.cellReuseIdentifier, for: indexPath)
-                as? GithubUserCell else{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCellNormal.cellReuseIdentifier, for: indexPath)
+                as? GithubUserCellNormal else{
             return UITableViewCell() 
         }
         
@@ -209,7 +208,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
             
-            let cell = tableView.cellForRow(at: index) as! GithubUserCell
+            let cell = tableView.cellForRow(at: index) as! GithubUserCellNormal
             cell.user = getUserObjectAt(indexPath: index)
             
         case .move:

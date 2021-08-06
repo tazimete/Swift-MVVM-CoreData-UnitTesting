@@ -1,13 +1,13 @@
 //
-//  TableViewCell.swift
+//  GithubUserCellNote.swift
 //  tawktestios
 //
-//  Created by JMC on 26/7/21.
+//  Created by JMC on 6/8/21.
 //
 
 import UIKit
 
-class GithubUserCell : UITableViewCell, AbstractGithubCell {
+class GithubUserCellNote: UITableViewCell, AbstractGithubCell {
     public var viewModel: AbstractCellViewModel?
     public static var cellReuseIdentifier: String = "GithubUserCell"
     private var imageUrlAtCurrentIndex: String?
@@ -59,7 +59,7 @@ class GithubUserCell : UITableViewCell, AbstractGithubCell {
         let imgView = UIImageView(image: UIImage(named: "img_avatar"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
-        imgView.layer.cornerRadius = 45 
+        imgView.layer.cornerRadius = 45
         return imgView
     }()
     
