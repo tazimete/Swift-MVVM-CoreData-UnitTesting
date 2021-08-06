@@ -43,15 +43,15 @@ class GithubUserCellNote: UITableViewCell, ConfigurableCell {
     private let lblUsername : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
+        lbl.font = UIFont.boldSystemFont(ofSize: 18)
         lbl.textAlignment = .left
         return lbl
     }()
     
     private let lblDescription : UILabel = {
         let lbl = UILabel()
-        lbl.textColor = .gray
-        lbl.font = UIFont.systemFont(ofSize: 16)
+        lbl.textColor = .darkGray
+        lbl.font = UIFont.systemFont(ofSize: 15)
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
         return lbl
