@@ -37,4 +37,28 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
             }
         }
     }
+    
+    public func searchUser(username: String) {
+        let text = username.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
+        let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
+        
+        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2])
+        
+        if username.isEmpty {
+            predicates = nil
+        }
+        
+        fetchedResultsController.fetchRequest.predicate = predicates
+        try? fetchedResultsController.performFetch()
+        
+        fetchedResultsController.managedObjectContext.refreshAllObjects()
+    }
+    
+    public func clearSearch() {
+        fetchedResultsController.fetchRequest.predicate = nil
+        try? fetchedResultsController.performFetch()
+        
+        fetchedResultsController.managedObjectContext.refreshAllObjects()
+    }
 }

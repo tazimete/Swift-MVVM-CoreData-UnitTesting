@@ -259,28 +259,12 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //MARK: UISeacrController Delegate
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
-        let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
-        
-        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2])
-        
-        if searchText.isEmpty {
-            predicates = nil
-        }
-        
-        githubViewModel.fetchedResultsController.fetchRequest.predicate = predicates
-        try? githubViewModel.fetchedResultsController.performFetch()
-        
-        githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
+        githubViewModel.searchUser(username: searchText)
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        githubViewModel.fetchedResultsController.fetchRequest.predicate = nil
-        try? githubViewModel.fetchedResultsController.performFetch()
-        
-        githubViewModel.fetchedResultsController.managedObjectContext.refreshAllObjects()
+        githubViewModel.clearSearch()
         tableView.reloadData()
     }
 }
