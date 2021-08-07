@@ -59,7 +59,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         
         let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let params = ["username": text, "note": text]
-        service.localDataSource.searchUser(params: params, controller: fetchedResultsController, isEnded: text.isEmpty)
+        service.localDataSource.search(params: params, controller: fetchedResultsController, isEnded: text.isEmpty)
     }
     
     public func clearSearch() {

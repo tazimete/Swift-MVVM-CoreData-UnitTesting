@@ -33,7 +33,7 @@ public protocol AbstractLocalDataSource: AnyObject {
     func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext)
     func deleteAllItems(taskContext: NSManagedObjectContext)
     func syncData(data: [T], taskContext: NSManagedObjectContext) -> Bool
-    func searchUser(params: [String: String], controller: NSFetchedResultsController<D>, isEnded: Bool)
+    func search(params: [String: String], controller: NSFetchedResultsController<D>, isEnded: Bool)
     func clearSearch(controller: NSFetchedResultsController<D>)
 }
 

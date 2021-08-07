@@ -162,7 +162,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         return successfull
     }
     
-    public func searchUser(params: [String: String], controller: NSFetchedResultsController<D>, isEnded: Bool) {
+    public func search(params: [String: String], controller: NSFetchedResultsController<D>, isEnded: Bool) {
         var predicateList = [NSPredicate]()
         
         params.forEach({
