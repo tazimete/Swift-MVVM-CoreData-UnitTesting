@@ -43,8 +43,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        reachability.stopNotifier()
-//        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
     }
     
     override func initView() {
@@ -170,16 +170,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     private func stopShimmering() {
         if self.isShimmerNeeded {
-//            var indexes: [IndexPath] = []
-//            tableView.beginUpdates()
-//            for i in 0..<10 {
-//                indexes.append(IndexPath(row: i, section: 0))
-//            }
-            
-//            tableView.deleteRows(at: indexes, with: .automatic)
-//            tableView.endUpdates()
-            tableView.reloadData()
             self.isShimmerNeeded = false
+            tableView.reloadData()
         }
     }
     
@@ -192,8 +184,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     private func getUserEntityAt(indexPath: IndexPath) -> GithubUserEntity? {
-//        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
-        return (githubViewModel.fetchedResultsController.fetchedObjects?[indexPath.row])
+        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
+//        return (githubViewModel.fetchedResultsController.fetchedObjects?[indexPath.row])
     }
     
     private func getReuseIdentifier(item: CellConfigurator) -> String {
@@ -240,12 +232,16 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        var count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        
+//        var count = 10
         var count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
         
         if isShimmerNeeded {
+//            count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
             count += 10
         }
+        
+        print("\(TAG) -- numberOfRowsInSection -- count = \(count)")
         
         return count
     }
@@ -275,6 +271,10 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if isShimmerNeeded {
+            return
+        }
+        
         guard let user = getUserEntityAt(indexPath: indexPath) else {
             return
         }
@@ -297,24 +297,24 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             guard let index = newIndexPath else {
                 return
             }
-            
+
 //            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())
 ////            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.insertRows(at: [index], with: .automatic)
-            
+
         case .delete:
             guard let index = indexPath else {
                 return
             }
-            
+
 //            tableViewdataSource.removeCellConfigurator(at: index.row)
             tableView.deleteRows(at: [index], with: .automatic)
-            
+
         case .update:
             guard let index = indexPath else {
                 return
             }
-            
+
 //            let cell = tableView.cellForRow(at: index) as! GithubUserCellNormal
 //            cell.user = getUserObjectAt(indexPath: index)
 //            let item = tableViewdataSource.getCellConfigurator(at:index.row)
@@ -324,18 +324,18 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
 //            let cell = tableView(tableView, cellForRowAt: index)
             item.configure(cell: cell)
-            
+
         case .move:
             guard let index = indexPath, let newIndex = indexPath else {
                 return
             }
-            
+
 //            tableViewdataSource.removeCellConfigurator(at: index.row)
 //            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel(), at: newIndex.row)
 ////            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel())
             tableView.deleteRows(at: [index], with: .automatic)
             tableView.insertRows(at: [newIndex], with: .automatic)
-            
+
         @unknown default:
             print("Unexpected NSFetchedResultsChangeType")
         }
