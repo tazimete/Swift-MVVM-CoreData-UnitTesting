@@ -167,6 +167,7 @@
 		29F7C0EA26BE9BFC004E6BFC /* SkeletonDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C0C026BE9BFC004E6BFC /* SkeletonDebug.swift */; };
 		29F7C0EC26BEA0EE004E6BFC /* ShimmerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C0EB26BEA0EE004E6BFC /* ShimmerHelper.swift */; };
 		29F7C0EE26BEA67A004E6BFC /* GithubUserShimmerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C0ED26BEA67A004E6BFC /* GithubUserShimmerCell.swift */; };
+		29F7C0F026BEAA39004E6BFC /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C0EF26BEAA39004E6BFC /* TableViewDataSource.swift */; };
 		386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */; };
 		68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */; };
 /* End PBXBuildFile section */
@@ -356,6 +357,7 @@
 		29F7C0C026BE9BFC004E6BFC /* SkeletonDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonDebug.swift; sourceTree = "<group>"; };
 		29F7C0EB26BEA0EE004E6BFC /* ShimmerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerHelper.swift; sourceTree = "<group>"; };
 		29F7C0ED26BEA67A004E6BFC /* GithubUserShimmerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserShimmerCell.swift; sourceTree = "<group>"; };
+		29F7C0EF26BEAA39004E6BFC /* TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -762,6 +764,7 @@
 				29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */,
 				29F7BF9626BD25F3004E6BFC /* GenericCell.swift */,
 				29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */,
+				29F7C0EF26BEAA39004E6BFC /* TableViewDataSource.swift */,
 			);
 			path = Abstraction;
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				29F7C08926BE6FF3004E6BFC /* MarqueeLabel.swift in Sources */,
 				29F7C05826BE6EDC004E6BFC /* String+heightForConstrainedWidth.swift in Sources */,
 				29E8429226B905CB00C8B48A /* StubResponseProvider.swift in Sources */,
+				29F7C0F026BEAA39004E6BFC /* TableViewDataSource.swift in Sources */,
 				29F7C0E426BE9BFC004E6BFC /* SkeletonCollectionViewProtocols.swift in Sources */,
 				29F7C02D26BE6E78004E6BFC /* ConstraintRelatableTarget.swift in Sources */,
 				29F7BF9926BD30CB004E6BFC /* GithubUserCellNote.swift in Sources */,

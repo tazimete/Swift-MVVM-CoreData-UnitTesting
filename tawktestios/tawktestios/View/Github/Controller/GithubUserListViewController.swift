@@ -38,6 +38,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     override func viewDidLoad() {
+        isShimmerNeeded = true
         super.viewDidLoad()
     }
     
@@ -65,6 +66,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         tableView.register(GithubUserCellNormal.self, forCellReuseIdentifier: GithubUserNormalCellConfig.reuseId)
         tableView.register(GithubUserCellNote.self, forCellReuseIdentifier: GithubUserNoteCellConfig.reuseId)
         tableView.register(GithubUserCellInverted.self, forCellReuseIdentifier: GithubUserInvertedCellConfig.reuseId)
+        tableView.register(GithubUserShimmerCell.self, forCellReuseIdentifier: GithubUserShimmerCellConfig.reuseId)
         
         addBottomIndicator()
         
@@ -231,13 +233,13 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
 //        }
 //
 //        cell.user = getUserObjectAt(indexPath: indexPath)
-        
 //        let item = tableViewdataSource.getCellConfigurator(at:indexPath.row)
-        let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
+        
+//        let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
+        let item = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
  
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
         item.configure(cell: cell)
-        item.startShimmerAnimation(cell: cell)
         
         return cell
     }

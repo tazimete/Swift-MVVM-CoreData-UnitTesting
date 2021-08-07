@@ -13,6 +13,7 @@ class GithubUserCellNote: GithubUserCellNormal {
         let imgView = UIImageView(image: UIImage(named: "ic_note"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
+        imgView.isSkeletonable = true 
         return imgView
     }()
     

@@ -15,6 +15,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     public let TAG = description()
     public var viewModel: ViewModel<S, D, T>!
+    public var isShimmerNeeded: Bool = false
     public var lastContentOffset: CGFloat = 0.0
     
     enum ScrollDirection : Int {

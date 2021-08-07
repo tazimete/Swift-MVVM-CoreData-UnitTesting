@@ -15,6 +15,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
     internal let containerView : UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.isSkeletonable = true
         return view
     }()
     
@@ -23,6 +24,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         lbl.textColor = .black
         lbl.font = UIFont.boldSystemFont(ofSize: 18)
         lbl.textAlignment = .left
+        lbl.isSkeletonable = true
         return lbl
     }()
     
@@ -32,6 +34,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         lbl.font = UIFont.systemFont(ofSize: 15)
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
+        lbl.isSkeletonable = true
         return lbl
     }()
     
@@ -39,7 +42,8 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         let imgView = UIImageView(image: UIImage(named: "img_avatar"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
-        imgView.layer.cornerRadius = 45 
+        imgView.layer.cornerRadius = 45
+        imgView.isSkeletonable = true 
         return imgView
     }()
     

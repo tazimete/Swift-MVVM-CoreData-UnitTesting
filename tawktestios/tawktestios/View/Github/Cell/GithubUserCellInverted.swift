@@ -15,6 +15,7 @@ class GithubUserCellInverted: GithubUserCellNormal {
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
         lbl.text = "Inverted"
+        lbl.isSkeletonable = true 
         return lbl
     }()
     
