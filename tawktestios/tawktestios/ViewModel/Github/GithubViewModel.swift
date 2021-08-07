@@ -43,8 +43,10 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         let text = username.trimmingCharacters(in: .whitespacesAndNewlines)
         let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
         let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
+        let pred3: NSPredicate = NSPredicate(format: "note CONTAINS[c] %@", text)
+        let pred4: NSPredicate = NSPredicate(format: "note == %@", text)
         
-        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2])
+        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2, pred3, pred4])
         
         if username.isEmpty {
             predicates = nil
