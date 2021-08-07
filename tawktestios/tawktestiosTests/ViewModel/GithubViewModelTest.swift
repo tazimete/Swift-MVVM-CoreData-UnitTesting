@@ -50,7 +50,21 @@ class GithubViewModelTest: XCTestCase, NSFetchedResultsControllerDelegate {
             }
             
             XCTAssertNotNil(user)
-            self?.viewModel.searchUser(username: user.username ?? "")
+            self?.viewModel.searchUser(searchText: user.username ?? "")
+        }
+        
+        viewModel.fetchUserList(since: viewModel.paginationlimit)
+    }
+    
+    func testClearSearchUser() {
+        viewModel.dataFetchingSuccessHandler = { [weak self] in
+            guard let user = (self?.viewModel.fetchedResultsController.fetchedObjects?.first)?.asGithubUser else {
+                XCTFail("Empty user obejct")
+                return
+            }
+            
+            XCTAssertNotNil(user)
+            self?.viewModel.clearSearch()
         }
         
         viewModel.fetchUserList(since: viewModel.paginationlimit)

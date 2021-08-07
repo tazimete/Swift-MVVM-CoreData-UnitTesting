@@ -327,7 +327,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //MARK: UISeacrController Delegate
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        githubViewModel.searchUser(username: searchText)
+        githubViewModel.searchUser(searchText: searchText)
         tableView.reloadData()
     }
     

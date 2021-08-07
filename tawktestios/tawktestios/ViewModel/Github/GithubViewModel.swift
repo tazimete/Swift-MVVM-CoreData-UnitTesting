@@ -39,8 +39,8 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         }
     }
     
-    public func searchUser(username: String) {
-        let text = username.trimmingCharacters(in: .whitespacesAndNewlines)
+    public func searchUser(searchText: String) {
+        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
         let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
         let pred3: NSPredicate = NSPredicate(format: "note CONTAINS[c] %@", text)
@@ -48,7 +48,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         
         var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2, pred3, pred4])
         
-        if username.isEmpty {
+        if searchText.isEmpty {
             predicates = nil
         }
         
