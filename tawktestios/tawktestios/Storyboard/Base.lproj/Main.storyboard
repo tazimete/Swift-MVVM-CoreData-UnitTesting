@@ -29,18 +29,27 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="250" id="RL1-hA-pWt"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfI-gs-rUV">
                                             <rect key="frame" x="15" y="275" width="72" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follower" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAI-hq-3nr">
                                             <rect key="frame" x="335" y="275" width="64" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-lQ-Dau">
                                             <rect key="frame" x="15" y="320.5" width="384" height="101.5"/>
@@ -83,6 +92,7 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                     <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eU-xo-JUr">
@@ -100,6 +110,7 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                     <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfF-ZR-YJN">
@@ -121,11 +132,15 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                     <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </textView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-dV-sGU">
                                             <rect key="frame" x="190" y="682.5" width="34" height="30"/>
                                             <state key="normal" title="Save"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="didTapSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ES-Jy-nLj"/>
                                             </connections>
@@ -151,6 +166,9 @@
                                         <constraint firstItem="cNG-l2-t9E" firstAttribute="top" secondItem="txy-NV-hZ9" secondAttribute="top" id="x1V-1x-HxP"/>
                                         <constraint firstItem="JPp-lQ-Dau" firstAttribute="top" secondItem="yfI-gs-rUV" secondAttribute="bottom" constant="25" id="yKw-YP-dqB"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </tableView>
                         </subviews>
@@ -164,13 +182,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnSave" destination="3G5-dV-sGU" id="Gbp-QF-Eds"/>
                         <outlet property="ivProfilePicture" destination="cNG-l2-t9E" id="29e-A8-gpW"/>
                         <outlet property="lblBlog" destination="8gJ-dg-olU" id="UU6-H1-3Gj"/>
                         <outlet property="lblCompany" destination="1Yp-IN-Zaf" id="8gw-50-siS"/>
-                        <outlet property="lblFollowing" destination="yfI-gs-rUV" id="sxj-cJ-a0N"/>
+                        <outlet property="lblFollowing" destination="yfI-gs-rUV" id="Fm4-4f-KwE"/>
                         <outlet property="lblFollwer" destination="pAI-hq-3nr" id="Imn-Cb-Il6"/>
                         <outlet property="lblName" destination="pZV-03-1D1" id="pxV-nO-niR"/>
+                        <outlet property="lblTitleNote" destination="0eU-xo-JUr" id="Pn9-hs-69H"/>
                         <outlet property="tvNote" destination="VfF-ZR-YJN" id="YWD-xp-ENk"/>
+                        <outlet property="uivInfoContainer" destination="JPp-lQ-Dau" id="nSx-Hc-GSl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -13,12 +13,15 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     
     //MARK: Outlet
     @IBOutlet weak var ivProfilePicture: UIImageView!
+    @IBOutlet weak var uivInfoContainer: UIView!
     @IBOutlet weak var lblFollowing: UILabel!
     @IBOutlet weak var lblFollwer: UILabel!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblCompany: UILabel!
     @IBOutlet weak var lblBlog: UILabel!
+    @IBOutlet weak var lblTitleNote: UILabel!
     @IBOutlet weak var tvNote: UITextView!
+    @IBOutlet weak var btnSave: UIButton!
     
     
     override public init(viewModel: ViewModel<S, D, T>) {
@@ -32,6 +35,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        startShimmerAnimation()
     }
     
     override func initView() {
@@ -76,7 +80,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             return
         }
         
-        user.note = tvNote.text.isEmpty ? nil : tvNote.text 
+        user.note = tvNote.text.isEmpty ? nil : tvNote.text
         
         userProfileViewModel.updateUserEntity(user: user)
     }
@@ -92,6 +96,33 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         self.ivProfilePicture.loadImage(from: user.avatarUrl ?? "" ) {
             [weak self] url, image, isCache in
             self?.ivProfilePicture.image = image
+            self?.stopShimmerAnimation()
         }
     }
+    
+    public func startShimmerAnimation() -> Void {
+       //shmmer skeleton animation
+       let gradient = SkeletonGradient(baseColor: UIColor.lightGray)
+       let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
+
+        ivProfilePicture.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        lblFollowing.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        lblFollwer.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        ivProfilePicture.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        uivInfoContainer.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        lblTitleNote.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        tvNote.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        btnSave.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+   }
+       
+   //stop shimmer animation
+   public func stopShimmerAnimation() -> Void {
+        ivProfilePicture.hideSkeleton()
+        lblFollwer.hideSkeleton()
+        lblFollowing.hideSkeleton()
+        uivInfoContainer.hideSkeleton()
+        lblTitleNote.hideSkeleton()
+        tvNote.hideSkeleton()
+        btnSave.hideSkeleton()
+   }
 }

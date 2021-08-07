@@ -192,7 +192,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     private func getUserEntityAt(indexPath: IndexPath) -> GithubUserEntity? {
-        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
+//        return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
+        return (githubViewModel.fetchedResultsController.fetchedObjects?[indexPath.row])
     }
     
     private func getReuseIdentifier(item: CellConfigurator) -> String {
