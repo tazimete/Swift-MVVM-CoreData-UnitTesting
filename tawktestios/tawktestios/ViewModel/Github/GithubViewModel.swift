@@ -40,28 +40,33 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
     }
     
     public func searchUser(searchText: String) {
+//        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
+//        let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
+//        let pred3: NSPredicate = NSPredicate(format: "note CONTAINS[c] %@", text)
+//        let pred4: NSPredicate = NSPredicate(format: "note == %@", text)
+//
+//        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2, pred3, pred4])
+//
+//        if searchText.isEmpty {
+//            predicates = nil
+//        }
+        
+//        fetchedResultsController.fetchRequest.predicate = predicates
+//        try? fetchedResultsController.performFetch()
+//
+//        fetchedResultsController.managedObjectContext.refreshAllObjects()
+        
         let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let pred1: NSPredicate = NSPredicate(format: "username CONTAINS[c] %@", text)
-        let pred2: NSPredicate = NSPredicate(format: "username == %@", text)
-        let pred3: NSPredicate = NSPredicate(format: "note CONTAINS[c] %@", text)
-        let pred4: NSPredicate = NSPredicate(format: "note == %@", text)
-        
-        var predicates:NSPredicate? = NSCompoundPredicate(orPredicateWithSubpredicates:[pred1,pred2, pred3, pred4])
-        
-        if searchText.isEmpty {
-            predicates = nil
-        }
-        
-        fetchedResultsController.fetchRequest.predicate = predicates
-        try? fetchedResultsController.performFetch()
-        
-        fetchedResultsController.managedObjectContext.refreshAllObjects()
+        let params = ["username": text, "note": text]
+        service.localDataSource.searchUser(params: params, controller: fetchedResultsController, isEnded: text.isEmpty)
     }
     
     public func clearSearch() {
-        fetchedResultsController.fetchRequest.predicate = nil
-        try? fetchedResultsController.performFetch()
-        
-        fetchedResultsController.managedObjectContext.refreshAllObjects()
+//        fetchedResultsController.fetchRequest.predicate = nil
+//        try? fetchedResultsController.performFetch()
+//
+//        fetchedResultsController.managedObjectContext.refreshAllObjects()
+        service.localDataSource.clearSearch(controller: fetchedResultsController)
     }
 }
