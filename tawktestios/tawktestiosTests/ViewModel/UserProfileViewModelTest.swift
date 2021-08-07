@@ -14,9 +14,9 @@ class UserProfileViewModelTest: XCTestCase, NSFetchedResultsControllerDelegate {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in = the class.
-        let remoteDataSource = LocalDataSource<GithubUser, GithubUserEntity>(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
-        let localDataSource = RemoteDataSource<GithubApiRequest, GithubUser>(apiClient: ApiClientTest.shared)
-        let service = GithubService(localDataSource: remoteDataSource, remoteDataSource: localDataSource)
+        let localDataSource = LocalDataSource<GithubUser, GithubUserEntity>(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
+        let remoteDataSource = RemoteDataSource<GithubApiRequest, GithubUser>(apiClient: ApiClientTest.shared)
+        let service = GithubService(localDataSource: localDataSource, remoteDataSource: remoteDataSource)
         
         viewModel = UserProfileViewModel(with: service)
         viewModel.fetchedResultsController.delegate = self
@@ -35,7 +35,6 @@ class UserProfileViewModelTest: XCTestCase, NSFetchedResultsControllerDelegate {
             XCTAssertEqual(user.username, "tawk")
             XCTAssertEqual(user.url, "https://api.github.com/users/tawk")
             XCTAssertEqual(user.avatarUrl, "https://avatars.githubusercontent.com/u/9743939?v=4")
-            
         }
         
         viewModel.dataFetchingFailedHandler = { [weak self] in
