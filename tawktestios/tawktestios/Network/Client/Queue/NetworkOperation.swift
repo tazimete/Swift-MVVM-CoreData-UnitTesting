@@ -128,7 +128,11 @@ public class NetworkOperation: Operation {
     }
     
     public func getStubbResponse<T: Codable>(type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>)){
-        guard let data = try? JSONSerialization.data(withJSONObject: StubResponseProvider.get(type: type), options: .prettyPrinted) else {
+        guard let response = ((StubResponseProvider.get(type: type)[0])["response"]) else {
+            completionHandler(.failure(.noDataError))
+            return
+        }
+        guard let data = try? JSONSerialization.data(withJSONObject: response, options: .prettyPrinted) else {
             completionHandler(.failure(.noDataError))
             return
         }

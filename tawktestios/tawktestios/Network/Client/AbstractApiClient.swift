@@ -14,8 +14,3 @@ public protocol AbstractApiClient: AnyObject {
     var queueManager: QueueManager {get set}
     func enqueue<T: Codable>(apiRequest: APIRequest, type: T.Type, completionHandler: @escaping (NetworkCompletionHandler<T>))
 }
-
-
-//public protocol AbstractApiOperation: AnyObject {
-//
-//}

@@ -33,7 +33,7 @@ public class StubResponseProvider{
         var result = [[String: Any]]()
         
         if T.self is [GithubUser].Type {
-            result = [
+            result = [["response": [
                 [
                   "login": "mojombo",
                   "id": 1,
@@ -193,8 +193,48 @@ public class StubResponseProvider{
                   "received_events_url": "https://api.github.com/users/vanpelt/received_events",
                   "type": "User",
                   "site_admin": false
-                ]]
-            }
+                ]
+            ]]
+            ]
+        }
+        
+        else if T.self is GithubUser.Type {
+            result = [["response": [
+                  "login": "tawk",
+                  "id": 9743939,
+                  "node_id": "MDEyOk9yZ2FuaXphdGlvbjk3NDM5Mzk=",
+                  "avatar_url": "https://avatars.githubusercontent.com/u/9743939?v=4",
+                  "gravatar_id": "",
+                  "url": "https://api.github.com/users/tawk",
+                  "html_url": "https://github.com/tawk",
+                  "followers_url": "https://api.github.com/users/tawk/followers",
+                  "following_url": "https://api.github.com/users/tawk/following{/other_user}",
+                  "gists_url": "https://api.github.com/users/tawk/gists{/gist_id}",
+                  "starred_url": "https://api.github.com/users/tawk/starred{/owner}{/repo}",
+                  "subscriptions_url": "https://api.github.com/users/tawk/subscriptions",
+                  "organizations_url": "https://api.github.com/users/tawk/orgs",
+                  "repos_url": "https://api.github.com/users/tawk/repos",
+                  "events_url": "https://api.github.com/users/tawk/events{/privacy}",
+                  "received_events_url": "https://api.github.com/users/tawk/received_events",
+                  "type": "Organization",
+                  "site_admin": false,
+                  "name": "tawk.to",
+                  "company": "",
+                  "blog": "https://www.tawk.to",
+                  "location": "",
+                  "email": "",
+                  "hireable": "",
+                  "bio": "",
+                  "twitter_username": "tawktotawk",
+                  "public_repos": 29,
+                  "public_gists": 0,
+                  "followers": 0,
+                  "following": 0,
+                  "created_at": "2014-11-14T12:23:56Z",
+                  "updated_at": "2021-08-06T09:20:54Z"
+                ]
+            ]]
+        }
         
         return result
     }

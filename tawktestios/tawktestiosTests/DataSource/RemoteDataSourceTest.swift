@@ -34,5 +34,22 @@ class RemoteDataSourceTest: XCTestCase {
             }
         }
     }
+    
+    func testFetchData() {
+        remoteDataSource.fetchData(request: .fetchUserProfile(params: FetchUserProfileParam(username: "tawk"))){ result in
+            switch result{
+                case .success(let user):
+                    print("fetchData() -- \(user.username)")
+                    
+                    XCTAssertNotEqual(user.id, -1)
+                    XCTAssertNotEqual(user.username, "")
+                    XCTAssertEqual(user.username, "tawk")
+                    XCTAssertEqual(user.url, "https://api.github.com/users/tawk")
+                    XCTAssertEqual(user.avatarUrl, "https://avatars.githubusercontent.com/u/9743939?v=4")
+                case .failure(let error):
+                    print("\(String(describing: (error).localizedDescription))")
+            }
+        }
+    }
 
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class FetchUserProfileParam: Parameterizable{
+public class FetchUserProfileParam: Parameterizable{
     let username: String
 
     public init(username: String) {

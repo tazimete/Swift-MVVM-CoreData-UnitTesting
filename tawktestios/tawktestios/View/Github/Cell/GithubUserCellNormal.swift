@@ -24,7 +24,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         lbl.textColor = .black
         lbl.font = UIFont.boldSystemFont(ofSize: 18)
         lbl.textAlignment = .left
-        lbl.numberOfLines = 1 
+        lbl.numberOfLines = 1
         lbl.isSkeletonable = true
         return lbl
     }()

@@ -26,6 +26,7 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
                     weakSelf.dataFetchingSuccessHandler?()
                 case .failure(let error):
                     print("\(String(describing: (error).localizedDescription))")
+                    weakSelf.errorMessage = (String(describing: (error).localizedDescription)) 
                     weakSelf.dataFetchingFailedHandler?()
             }
         }

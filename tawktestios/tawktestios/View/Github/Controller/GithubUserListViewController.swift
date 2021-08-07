@@ -232,29 +232,17 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        var count = 10
         var count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
+//            count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
         
         if isShimmerNeeded {
-//            count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
             count += 10
         }
-        
-        print("\(TAG) -- numberOfRowsInSection -- count = \(count)")
         
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: GithubUserCellNormal.cellReuseIdentifier, for: indexPath)
-//                as? GithubUserCellNormal else{
-//            return UITableViewCell()
-//        }
-//
-//        cell.user = getUserObjectAt(indexPath: indexPath)
-//        let item = tableViewdataSource.getCellConfigurator(at:indexPath.row)
-        
         var item: CellConfigurator = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
         
         if !isShimmerNeeded {
@@ -298,8 +286,6 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-//            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel())
-////            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.insertRows(at: [index], with: .automatic)
 
         case .delete:
@@ -307,7 +293,6 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-//            tableViewdataSource.removeCellConfigurator(at: index.row)
             tableView.deleteRows(at: [index], with: .automatic)
 
         case .update:
@@ -315,14 +300,9 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-//            let cell = tableView.cellForRow(at: index) as! GithubUserCellNormal
-//            cell.user = getUserObjectAt(indexPath: index)
-//            let item = tableViewdataSource.getCellConfigurator(at:index.row)
-
             let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), index: index.row)!
 //            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
-//            let cell = tableView(tableView, cellForRowAt: index)
             item.configure(cell: cell)
 
         case .move:
@@ -330,9 +310,6 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-//            tableViewdataSource.removeCellConfigurator(at: index.row)
-//            tableViewdataSource.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel(), at: newIndex.row)
-////            tableViewdataSource.addAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel())
             tableView.deleteRows(at: [index], with: .automatic)
             tableView.insertRows(at: [newIndex], with: .automatic)
 

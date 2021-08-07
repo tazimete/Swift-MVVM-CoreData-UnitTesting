@@ -33,6 +33,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
                     weakSelf.dataFetchingSuccessHandler?()
                 case .failure(let error):
                     print("\(String(describing: (error).localizedDescription))")
+                    weakSelf.errorMessage = (String(describing: (error).localizedDescription)) 
                     weakSelf.dataFetchingFailedHandler?()
             }
         }
