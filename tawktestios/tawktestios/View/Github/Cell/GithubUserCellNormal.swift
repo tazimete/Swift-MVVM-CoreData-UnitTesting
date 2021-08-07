@@ -10,29 +10,7 @@ import UIKit
 class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
     typealias DataType = AbstractCellViewModel
     
-//    public var viewModel: AbstractCellViewModel?
-//    public static var cellReuseIdentifier: String = "GithubUserCellNormal"
     private var imageUrlAtCurrentIndex: String?
-    
-//    public var user : GithubUser? {
-//        didSet {
-//            imageUrlAtCurrentIndex = user?.avatarUrl
-//            lblUsername.text = user?.username
-//            lblDescription.text = user?.url
-//            containerView.backgroundColor = user?.isSeen ?? false ? .lightGray : .white
-//            ivAvatar.loadImage(from: user?.avatarUrl ?? "", completionHandler: {
-//                [weak self] url, image, isCache in
-//
-//                guard let weakSelf = self else {
-//                    return
-//                }
-//
-//                if (url).elementsEqual(weakSelf.imageUrlAtCurrentIndex ?? ""){
-//                    weakSelf.ivAvatar.image = image
-//                }
-//            })
-//        }
-//    }
     
     private let containerView : UIView = {
         let view = UIView()

@@ -64,7 +64,6 @@
 		29F7BF9926BD30CB004E6BFC /* GithubUserCellNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */; };
 		29F7BF9B26BD30F9004E6BFC /* GithubUserCellInverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */; };
 		29F7BF9E26BD3D73004E6BFC /* GithubCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BF9D26BD3D73004E6BFC /* GithubCellViewModel.swift */; };
-		29F7BFB226BE64A9004E6BFC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BFB126BE64A9004E6BFC /* UIViewController+Extension.swift */; };
 		29F7C00E26BE6E78004E6BFC /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BFE926BE6E78004E6BFC /* ConstraintMultiplierTarget.swift */; };
 		29F7C00F26BE6E78004E6BFC /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BFEA26BE6E78004E6BFC /* LayoutConstraintItem.swift */; };
 		29F7C01026BE6E78004E6BFC /* ConstraintMakerPrioritizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7BFEB26BE6E78004E6BFC /* ConstraintMakerPrioritizable.swift */; };
@@ -209,7 +208,6 @@
 		29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCellNote.swift; sourceTree = "<group>"; };
 		29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserCellInverted.swift; sourceTree = "<group>"; };
 		29F7BF9D26BD3D73004E6BFC /* GithubCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubCellViewModel.swift; sourceTree = "<group>"; };
-		29F7BFB126BE64A9004E6BFC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		29F7BFE926BE6E78004E6BFC /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		29F7BFEA26BE6E78004E6BFC /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		29F7BFEB26BE6E78004E6BFC /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
@@ -600,7 +598,6 @@
 				29F4286426AE9A3E0073C150 /* UIView+Extension.swift */,
 				29F4286D26B12D660073C150 /* UIImageView+Extension.swift */,
 				29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */,
-				29F7BFB126BE64A9004E6BFC /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1041,7 +1038,6 @@
 				29F7C02626BE6E78004E6BFC /* ConstraintMaker.swift in Sources */,
 				29F7C01726BE6E78004E6BFC /* ConstraintDSL.swift in Sources */,
 				2948DC9626AC0F07001EF5D2 /* RemoteDataSource.swift in Sources */,
-				29F7BFB226BE64A9004E6BFC /* UIViewController+Extension.swift in Sources */,
 				29F7C01E26BE6E78004E6BFC /* UILayoutSupport+Extensions.swift in Sources */,
 				29F4286926AE9A640073C150 /* GithubUserCellNormal.swift in Sources */,
 				29F4289B26B6A6C70073C150 /* CoreDataEntities.swift in Sources */,
