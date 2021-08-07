@@ -19,26 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 //        guard let _ = (scene as? UIWindowScene) else { return }
         initRootViewController(scene: scene)
-        
-        let reachability = try? Reachability()
-
-        reachability?.whenReachable = { reachability in
-            if reachability.connection == .wifi {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-            }
-        }
-
-        reachability?.whenUnreachable = { _ in
-            print("Not reachable")
-        }
-
-        do {
-            try reachability?.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
