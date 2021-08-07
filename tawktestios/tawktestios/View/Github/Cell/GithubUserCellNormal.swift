@@ -10,15 +10,15 @@ import UIKit
 class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
     typealias DataType = AbstractCellViewModel
     
-    private var imageUrlAtCurrentIndex: String?
+    internal var imageUrlAtCurrentIndex: String?
     
-    private let containerView : UIView = {
+    internal let containerView : UIView = {
         let view = UIView()
         view.backgroundColor = .white
         return view
     }()
     
-    private let lblUsername : UILabel = {
+    internal let lblUsername : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
         lbl.font = UIFont.boldSystemFont(ofSize: 18)
@@ -26,7 +26,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         return lbl
     }()
     
-    private let lblDescription : UILabel = {
+    internal let lblDescription : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .darkGray
         lbl.font = UIFont.systemFont(ofSize: 15)
@@ -35,7 +35,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         return lbl
     }()
     
-    private let ivAvatar : UIImageView = {
+    internal let ivAvatar : UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "img_avatar"))
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
