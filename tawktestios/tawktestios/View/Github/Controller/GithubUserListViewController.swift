@@ -152,18 +152,25 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
-        isShimmerNeeded = tableViewdataSource.getCount() == 0 
+        isShimmerNeeded = tableViewdataSource.getCount() == 0
         
         githubViewModel.fetchUserList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
-            self?.isShimmerNeeded = false
+            self?.stopShimmering()
         }
         
         githubViewModel.dataFetchingFailedHandler = {
             [weak self] in
             print("\(self?.TAG) -- dataFetchingFailedHandler()")
             self?.showBottomIndicator(flag: false)
+        }
+    }
+    
+    private func stopShimmering() {
+        if self.isShimmerNeeded {
+            tableView.reloadData()
+            self.isShimmerNeeded = false
         }
     }
     
