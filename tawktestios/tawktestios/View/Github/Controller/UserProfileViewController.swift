@@ -66,6 +66,11 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             
             self?.showData(user: user)
         }
+        
+        userProfileViewModel.dataFetchingFailedHandler = { [weak self] in
+            self?.showData(user: self?.githubUser?.asGithubUser ?? GithubUser())
+            self?.stopShimmerAnimation()
+        }
     }
     
     //Calls this function when the tap is recognized.
