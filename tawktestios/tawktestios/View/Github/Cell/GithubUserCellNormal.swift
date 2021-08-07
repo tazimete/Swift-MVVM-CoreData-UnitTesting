@@ -95,21 +95,4 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         })
         
     }
-    
-     public func startShimmerAnimation() -> Void {
-        //shmmer skeleton animation
-        let gradient = SkeletonGradient(baseColor: UIColor.lightGray)
-        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
-
-        lblUsername.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
-        lblDescription.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
-        ivAvatar.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
-    }
-        
-    //stop shimmer animation
-    public func stopShimmerAnimation() -> Void {
-        lblUsername.hideSkeleton()
-        lblDescription.hideSkeleton()
-        ivAvatar.hideSkeleton()
-    }
 }

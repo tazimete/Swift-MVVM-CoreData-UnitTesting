@@ -10,15 +10,11 @@ import UIKit
 protocol ConfigurableCell {
     associatedtype DataType
     func configure(data: DataType)
-    func startShimmerAnimation() -> Void
-    func stopShimmerAnimation() -> Void
 }
 
 protocol CellConfigurator {
     static var reuseId: String { get }
     func configure(cell: UIView)
-    func startShimmerAnimation(cell: UIView)
-    func stopShimmerAnimation(cell: UIView)
 }
 
 class TableViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UITableViewCell {
@@ -33,14 +29,6 @@ class TableViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfi
     
     func configure(cell: UIView) {
         (cell as! CellType).configure(data: item)
-    }
-    
-    func startShimmerAnimation(cell: UIView) {
-        (cell as! CellType).startShimmerAnimation()
-    }
-    
-    func stopShimmerAnimation(cell: UIView) {
-        (cell as! CellType).stopShimmerAnimation()
     }
 }
 
