@@ -12,7 +12,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     private var githubViewModel: GithubViewModel!
     
     private let tableView = UITableView()
-    private let tableViewdataSource = TableViewModel() 
+    private let tableViewdataSource = TableViewDataSource() 
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         //            searchController.searchResultsUpdater = self
@@ -237,7 +237,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
  
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
         item.configure(cell: cell)
-        
+        item.startShimmerAnimation(cell: cell)
         
         return cell
     }

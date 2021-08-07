@@ -10,14 +10,18 @@ import UIKit
 protocol ConfigurableCell {
     associatedtype DataType
     func configure(data: DataType)
+    func startShimmerAnimation() -> Void
+    func stopShimmerAnimation() -> Void
 }
 
 protocol CellConfigurator {
     static var reuseId: String { get }
     func configure(cell: UIView)
+    func startShimmerAnimation(cell: UIView)
+    func stopShimmerAnimation(cell: UIView)
 }
 
-class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UITableViewCell {
+class TableViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UITableViewCell {
     
     static var reuseId: String { return String(describing: CellType.self) }
     
@@ -30,14 +34,22 @@ class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigura
     func configure(cell: UIView) {
         (cell as! CellType).configure(data: item)
     }
+    
+    func startShimmerAnimation(cell: UIView) {
+        (cell as! CellType).startShimmerAnimation()
+    }
+    
+    func stopShimmerAnimation(cell: UIView) {
+        (cell as! CellType).stopShimmerAnimation()
+    }
 }
 
 
-typealias GithubUserNormalCellConfig = TableCellConfigurator<GithubUserCellNormal, AbstractCellViewModel>
-typealias GithubUserNoteCellConfig = TableCellConfigurator<GithubUserCellNote, AbstractCellViewModel>
-typealias GithubUserInvertedCellConfig = TableCellConfigurator<GithubUserCellInverted, AbstractCellViewModel>
+typealias GithubUserNormalCellConfig = TableViewCellConfigurator<GithubUserCellNormal, AbstractCellViewModel>
+typealias GithubUserNoteCellConfig = TableViewCellConfigurator<GithubUserCellNote, AbstractCellViewModel>
+typealias GithubUserInvertedCellConfig = TableViewCellConfigurator<GithubUserCellInverted, AbstractCellViewModel>
 
-class TableViewModel {
+class TableViewDataSource {
     private var items: [CellConfigurator] = []
     
     public func getCellConfigurator(cellViewModel: AbstractCellViewModel, index: Int) -> CellConfigurator? {
@@ -75,7 +87,7 @@ class TableViewModel {
             items.append(cellConfig)
         }
     }
-    
+   
     public func addAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
         for cellViewModel in cellViewModels {
             if (cellViewModel.hasNote ?? false) {
@@ -94,7 +106,7 @@ class TableViewModel {
             }
         }
     }
-    
+
     public func clearAndaddAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
         items.removeAll()
         

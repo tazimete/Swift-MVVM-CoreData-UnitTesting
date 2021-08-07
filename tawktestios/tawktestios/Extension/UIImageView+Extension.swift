@@ -14,3 +14,4 @@ extension UIImageView {
         ImageDownloader.shared.downloadImage(with: url, completionHandler: completionHandler, placeholderImage: placeholderImage)
     }
 }
+

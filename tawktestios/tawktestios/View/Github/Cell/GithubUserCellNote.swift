@@ -27,8 +27,23 @@ class GithubUserCellNote: GithubUserCellNormal {
         super.init(coder: aDecoder)
     }
     
-    override func configure(data: GithubUserCellNormal.DataType) {
+    override func configure(data: GithubUserCellNote.DataType) {
         super.configure(data: data)
+    }
+    
+    override func startShimmerAnimation() {
+        super.startShimmerAnimation()
+        
+        let gradient = SkeletonGradient(baseColor: UIColor(0xe2e2e2))
+        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
+
+        ivNote.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+    }
+    
+    override func stopShimmerAnimation() {
+        super.stopShimmerAnimation()
+        
+        ivNote.hideSkeleton()
     }
 }
 

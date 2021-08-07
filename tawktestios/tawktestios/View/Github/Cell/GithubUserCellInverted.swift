@@ -29,7 +29,7 @@ class GithubUserCellInverted: GithubUserCellNormal {
         super.init(coder: aDecoder)
     }
     
-    override func configure(data: GithubUserCellNormal.DataType) {
+    override func configure(data: GithubUserCellInverted.DataType) {
         imageUrlAtCurrentIndex = data.thumbnail
         lblUsername.text = data.title
         lblDescription.text = data.subtitle
@@ -53,6 +53,21 @@ class GithubUserCellInverted: GithubUserCellNormal {
                 }
             }
         })
+    }
+    
+    override func startShimmerAnimation() {
+        super.startShimmerAnimation()
+        
+        let gradient = SkeletonGradient(baseColor: UIColor(0xe2e2e2))
+        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
+
+        lblType.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+    }
+    
+    override func stopShimmerAnimation() {
+        super.stopShimmerAnimation()
+        
+        lblType.hideSkeleton()
     }
 }
 
