@@ -152,10 +152,12 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
+        isShimmerNeeded = tableViewdataSource.getCount() == 0 
+        
         githubViewModel.fetchUserList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
-            //            self?.showBottomIndicator(flag: false)
+            self?.isShimmerNeeded = false
         }
         
         githubViewModel.dataFetchingFailedHandler = {
@@ -221,8 +223,13 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        var count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
 //        let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
+        
+        if isShimmerNeeded {
+            count += 10
+        }
+        
         return count
     }
     
@@ -235,8 +242,11 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
 //        cell.user = getUserObjectAt(indexPath: indexPath)
 //        let item = tableViewdataSource.getCellConfigurator(at:indexPath.row)
         
-//        let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
-        let item = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
+        var item: CellConfigurator = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
+        
+        if !isShimmerNeeded {
+            item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
+        }
  
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
         item.configure(cell: cell)
