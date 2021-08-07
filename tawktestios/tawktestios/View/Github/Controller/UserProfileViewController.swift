@@ -88,6 +88,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         self.lblFollowing.text = "Follwings : \(user.followings ?? 0)"
         self.lblCompany.text = "Company : \(user.company ?? "")"
         self.lblBlog.text = "Blog : \(user.blog ?? "")"
+        self.tvNote.text = githubUser?.note
         self.ivProfilePicture.loadImage(from: user.avatarUrl ?? "" ) {
             [weak self] url, image, isCache in
             self?.ivProfilePicture.image = image

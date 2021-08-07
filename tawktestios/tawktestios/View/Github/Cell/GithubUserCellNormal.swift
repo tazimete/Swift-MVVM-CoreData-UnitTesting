@@ -92,6 +92,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
                 weakSelf.ivAvatar.image = image
             }
         })
+        
     }
     
      public func startShimmerAnimation() -> Void {

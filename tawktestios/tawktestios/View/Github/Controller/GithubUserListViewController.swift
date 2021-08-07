@@ -94,6 +94,27 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         loadGithubUserList(since: githubViewModel.paginationlimit)
         initReachability()
     }
+    
+    public func loadGithubUserList(since: Int) {
+        showBottomIndicator(flag: true)
+        
+        tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
+        
+        isShimmerNeeded = tableViewdataSource.getCount() == 0
+        
+        githubViewModel.fetchUserList(since: since)
+        githubViewModel.dataFetchingSuccessHandler = { [weak self] in
+            print("\(self?.TAG) -- dataFetchingSuccessHandler()")
+            self?.stopShimmering()
+        }
+        
+        githubViewModel.dataFetchingFailedHandler = {
+            [weak self] in
+            print("\(self?.TAG) -- dataFetchingFailedHandler()")
+            self?.showBottomIndicator(flag: false)
+        }
+    }
+    
     private func initReachability() {
         notificationbanner.autoDismiss = false
        
@@ -147,28 +168,16 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         }
     }
     
-    public func loadGithubUserList(since: Int) {
-        showBottomIndicator(flag: true)
-        
-        tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
-        
-        isShimmerNeeded = tableViewdataSource.getCount() == 0
-        
-        githubViewModel.fetchUserList(since: since)
-        githubViewModel.dataFetchingSuccessHandler = { [weak self] in
-            print("\(self?.TAG) -- dataFetchingSuccessHandler()")
-            self?.stopShimmering()
-        }
-        
-        githubViewModel.dataFetchingFailedHandler = {
-            [weak self] in
-            print("\(self?.TAG) -- dataFetchingFailedHandler()")
-            self?.showBottomIndicator(flag: false)
-        }
-    }
-    
     private func stopShimmering() {
         if self.isShimmerNeeded {
+//            var indexes: [IndexPath] = []
+//            tableView.beginUpdates()
+//            for i in 0..<10 {
+//                indexes.append(IndexPath(row: i, section: 0))
+//            }
+            
+//            tableView.deleteRows(at: indexes, with: .automatic)
+//            tableView.endUpdates()
             tableView.reloadData()
             self.isShimmerNeeded = false
         }
@@ -230,8 +239,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
 // MARK: Tableview  
 extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
-//        let count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
+//        var count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        var count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
         
         if isShimmerNeeded {
             count += 10
@@ -255,7 +264,8 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
         }
  
-        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
+//        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId, for: indexPath)
         item.configure(cell: cell)
         
         return cell
@@ -309,7 +319,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //            let item = tableViewdataSource.getCellConfigurator(at:index.row)
 
             let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), index: index.row)!
-            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
+//            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
+            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
 //            let cell = tableView(tableView, cellForRowAt: index)
             item.configure(cell: cell)
             
