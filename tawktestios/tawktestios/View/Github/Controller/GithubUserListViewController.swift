@@ -259,6 +259,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        view.endEditing(true)
         if isShimmerNeeded {
             return
         }
@@ -334,5 +335,6 @@ extension GithubUserListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         githubViewModel.clearSearch()
         tableView.reloadData()
+        view.endEditing(true)
     }
 }
