@@ -18,7 +18,7 @@ class GithubUserShimmerCell: GithubUserCellNormal {
     }
     
     override func configure(data: GithubUserShimmerCell.DataType) {
-        containerView.layer.borderWidth = 1
+        containerView.layer.borderWidth = 0
         containerView.layer.borderColor = UIColor.clear.cgColor
         
         //shmmer skeleton animation
