@@ -8,6 +8,10 @@
 import Foundation
 import CoreData
 
+/*
+ This is the abstraction of our Remote data source of our project, It uses generic data model to fetch certain request
+ and write response data to certain model. Request must be type of APIRequest and Data model must be conformed from AbstractDataModel
+ */
 public protocol AbstractRemoteDataSource: AnyObject {
     associatedtype T: APIRequest
     associatedtype D: AbstractDataModel & Codable
@@ -17,6 +21,11 @@ public protocol AbstractRemoteDataSource: AnyObject {
     func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>)
 }
 
+
+/*
+ This is the abstraction of our local data source of our project, It uses generic data model (AbstractDataModel/NSManagedObject ) to store and retrieve data which is actually server response, must be conformed from AbstractdataModel.
+  Write response data to NSManagedObject model, which is coredata model.
+ */
 public protocol AbstractLocalDataSource: AnyObject {
     associatedtype T: AbstractDataModel = AbstractDataModel
     associatedtype D: NSManagedObject = NSManagedObject
