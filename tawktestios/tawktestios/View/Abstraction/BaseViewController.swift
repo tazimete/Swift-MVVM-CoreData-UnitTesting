@@ -156,8 +156,9 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
                 let firstVisibleItem = getFirstVisibleItem()
                 let lastVisibleItem = getLastVisibleItem()
                 
-                print("\(BaseViewController.self.description()) -- scrollViewDidScroll() -- down, lastVisibleItem = \(lastVisibleItem), dataCount = \(getTotalDataCount())")
+//                print("\(BaseViewController.self.description()) -- scrollViewDidScroll() -- down, lastVisibleItem = \(lastVisibleItem), dataCount = \(getTotalDataCount())")
                 
+                //load more data if indexpath is greater than total data count/offset 
                 if ( lastVisibleItem.row > getTotalDataCount()-getPaginationOffset()) {
                     loadMoreData();
                 }

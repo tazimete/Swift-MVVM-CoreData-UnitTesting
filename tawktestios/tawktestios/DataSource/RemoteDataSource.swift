@@ -23,10 +23,12 @@ public class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: Ab
         self.apiClient = apiClient
     }
     
+    // enqueue request with single object response
     public func fetchData(request: T, completionHandler: @escaping NetworkCompletionHandler<D>) {
         apiClient.enqueue(apiRequest: request, type: D.self, completionHandler: completionHandler)
     }
 
+    //enqueue request for object's array response 
     public func fetchDataList(request: T, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
         apiClient.enqueue(apiRequest: request, type: [D].self, completionHandler: completionHandler)
     }

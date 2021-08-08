@@ -256,6 +256,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
         var item: CellConfigurator = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
         
         if !isShimmerNeeded {
+            // get cell configurator by cellviewmodel, which will bind cellviewmodel to the cell
             item = cellConfiguratorFactory.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
         }
 

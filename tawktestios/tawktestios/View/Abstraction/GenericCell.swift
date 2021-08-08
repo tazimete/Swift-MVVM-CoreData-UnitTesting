@@ -12,11 +12,14 @@ protocol ConfigurableCell {
     func configure(data: DataType)
 }
 
+
 protocol CellConfigurator {
     static var reuseId: String { get }
     func configure(cell: UIView)
 }
 
+
+// this class will be used to bind cellviewmodel to cell 
 class TableViewCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UITableViewCell {
     
     static var reuseId: String { return String(describing: CellType.self) }

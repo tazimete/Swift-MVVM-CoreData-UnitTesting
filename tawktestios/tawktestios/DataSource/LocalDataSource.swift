@@ -16,6 +16,7 @@ import CoreData
 public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{
     public typealias T = T
     public typealias D = D
+    
     public let TAG = "LocalDataSource"
     public var persistentContainer: NSPersistentContainer
     public var viewContext: NSManagedObjectContext
@@ -121,6 +122,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
 //            print("Error: \(error)\nCould not batch delete existing records.")
 //        }
         
+        // batch delete is not working in InMemoryStoreType for unit testing, thats why deleting manually
         let items = fetchItems(ids: ids, taskContext: taskContext)
         
         for item in items {
@@ -167,6 +169,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         return successfull
     }
     
+    //search entity by its properties, properties are added in params by key-value pair
     public func search(params: [String: String], controller: NSFetchedResultsController<D>, isEnded: Bool) {
         var predicateList = [NSPredicate]()
         

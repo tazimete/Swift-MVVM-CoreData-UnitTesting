@@ -14,9 +14,11 @@ typealias GithubUserInvertedCellConfig = TableViewCellConfigurator<GithubUserCel
 typealias GithubUserShimmerCellConfig = TableViewCellConfigurator<GithubUserShimmerCell, AbstractCellViewModel>
 
 
+// collection of cell configurator
 class TableViewCellConfiguratorFactory {
     private var items: [CellConfigurator] = []
     
+    //get cell confurator by cellviewmodel
     public func getCellConfigurator(cellViewModel: AbstractCellViewModel, index: Int) -> CellConfigurator? {
         var cellConfig: CellConfigurator!
         
@@ -36,6 +38,7 @@ class TableViewCellConfiguratorFactory {
         return cellConfig
     }
     
+    //add cell configurator converted from cellviewmodel
     public func addAsCellConfigurator(cellViewModel: AbstractCellViewModel) {
         if (cellViewModel.hasNote ?? false) {
             let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
@@ -53,6 +56,7 @@ class TableViewCellConfiguratorFactory {
         }
     }
    
+    //add multiple cell configurator converted from cellviewmodel
     public func addAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
         items.removeAll()
         
@@ -74,6 +78,7 @@ class TableViewCellConfiguratorFactory {
         }
     }
 
+    
     public func clearAndaddAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
         items.removeAll()
         
