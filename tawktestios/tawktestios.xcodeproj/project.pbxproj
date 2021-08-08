@@ -478,6 +478,7 @@
 		2917C6BF26AACA52003767B0 /* tawktestios */ = {
 			isa = PBXGroup;
 			children = (
+				291D3B1A26BFD9D400334071 /* Application */,
 				29F4289726B5ED320073C150 /* Helper */,
 				29F4287526B2EF620073C150 /* CoreData */,
 				29F4286326AE9A1F0073C150 /* Extension */,
@@ -489,8 +490,6 @@
 				2948DC7626AAD245001EF5D2 /* ViewModel */,
 				2948DC9026ABFDC5001EF5D2 /* Route */,
 				2948DCA426AC8256001EF5D2 /* Storyboard */,
-				2917C6C026AACA52003767B0 /* AppDelegate.swift */,
-				2917C6C226AACA52003767B0 /* SceneDelegate.swift */,
 				29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */,
 				2917C6CC26AACA53003767B0 /* Assets.xcassets */,
 				2917C6D126AACA53003767B0 /* Info.plist */,
@@ -528,6 +527,15 @@
 				2948DC7A26AB3D4A001EF5D2 /* Request */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		291D3B1A26BFD9D400334071 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				2917C6C226AACA52003767B0 /* SceneDelegate.swift */,
+				2917C6C026AACA52003767B0 /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		2948DC7526AAD23E001EF5D2 /* Model */ = {
