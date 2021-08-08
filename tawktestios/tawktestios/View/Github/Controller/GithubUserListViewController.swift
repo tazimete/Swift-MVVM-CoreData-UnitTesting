@@ -15,7 +15,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     private let tableViewdataSource = TableViewDataSource() 
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        //            searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
@@ -199,15 +198,17 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     override func loadMoreData() -> Void {
-        githubViewModel.paginationOffset += githubViewModel.paginationlimit
-        
-        var userId = githubViewModel.paginationlimit
-        
-        if let user = getLastUserEntity()?.asGithubUser  {
-            userId = user.id ?? 0 
+        if isPaginationEnabled {
+            githubViewModel.paginationOffset += githubViewModel.paginationlimit
+            
+            var userId = githubViewModel.paginationlimit
+            
+            if let user = getLastUserEntity()?.asGithubUser  {
+                userId = user.id ?? 0
+            }
+            
+            loadGithubUserList(since: userId)
         }
-        
-        loadGithubUserList(since: userId)
     }
     
     override func getLastVisibleItem() -> IndexPath {
@@ -251,8 +252,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
         if !isShimmerNeeded {
             item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
         }
- 
-//        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId)!
+
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId, for: indexPath)
         item.configure(cell: cell)
         
@@ -305,7 +305,6 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             }
 
             let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), index: index.row)!
-//            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item))!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
             item.configure(cell: cell)
 
@@ -331,13 +330,24 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
 //MARK: UISeacrController Delegate
 extension GithubUserListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        //enable/disable pagination and bottom indicator
+        if text.isEmpty {
+            isPaginationEnabled = true
+        }else{
+            isPaginationEnabled = false
+            showBottomIndicator(flag: false)
+        }
+        
         githubViewModel.searchUser(searchText: searchText)
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isPaginationEnabled = true
+        view.endEditing(true)
         githubViewModel.clearSearch()
         tableView.reloadData()
-        view.endEditing(true)
     }
 }
