@@ -308,12 +308,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             guard let index = indexPath else {
                 return
             }
-
-            let cellViewModel = getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel()
-//            cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: cellViewModel, at: index.row)
-            let item = cellConfiguratorFactory.getCellConfigurator(cellViewModel: cellViewModel, index: index.row)!
-            let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
-            item.configure(cell: cell)
+            
+            tableView.reloadRows(at: [index], with: .automatic)
 
         case .move:
             guard let index = indexPath, let newIndex = indexPath else {
