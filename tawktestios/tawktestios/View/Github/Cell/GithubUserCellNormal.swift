@@ -24,7 +24,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         lbl.textColor = .black
         lbl.font = UIFont.boldSystemFont(ofSize: 18)
         lbl.textAlignment = .left
-        lbl.numberOfLines = 2
+        lbl.numberOfLines = 1
         lbl.isSkeletonable = true
         lbl.skeletonLineSpacing = 10
         lbl.multilineSpacing = 10
@@ -36,7 +36,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         lbl.textColor = .darkGray
         lbl.font = UIFont.systemFont(ofSize: 15)
         lbl.textAlignment = .left
-        lbl.numberOfLines = 1
+        lbl.numberOfLines = 2
         lbl.isSkeletonable = true
         lbl.skeletonLineSpacing = 10
         lbl.multilineSpacing = 10
