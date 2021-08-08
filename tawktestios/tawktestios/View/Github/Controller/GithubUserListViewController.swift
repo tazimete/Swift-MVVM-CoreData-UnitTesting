@@ -137,6 +137,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
             notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
             notificationbanner.autoDismiss = true
             notificationbanner.show()
+            
             //load last request
             loadMoreData()
             
@@ -146,6 +147,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
             notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
             notificationbanner.autoDismiss = true
             notificationbanner.show()
+            
             //load last request
             loadMoreData()
             
@@ -185,7 +187,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     private func getUserEntityAt(indexPath: IndexPath) -> GithubUserEntity? {
         return (githubViewModel.fetchedResultsController.object(at: indexPath) as? GithubUserEntity)
-//        return (githubViewModel.fetchedResultsController.fetchedObjects?[indexPath.row])
     }
     
     private func getReuseIdentifier(item: CellConfigurator) -> String {
@@ -200,11 +201,13 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func loadMoreData() -> Void {
         githubViewModel.paginationOffset += githubViewModel.paginationlimit
         
-        guard let user = getLastUserEntity()?.asGithubUser else {
-            return
+        var userId = githubViewModel.paginationlimit
+        
+        if let user = getLastUserEntity()?.asGithubUser  {
+            userId = user.id ?? 0 
         }
         
-        loadGithubUserList(since: user.id ?? 0)
+        loadGithubUserList(since: userId)
     }
     
     override func getLastVisibleItem() -> IndexPath {

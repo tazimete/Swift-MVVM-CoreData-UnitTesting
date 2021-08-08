@@ -66,7 +66,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     }
     
     public func insertItems(items: [T], taskContext: NSManagedObjectContext) {
-//        taskContext.performAndWait {
+        taskContext.performAndWait {
             for item in items {
                 guard let userEntity = self.insertEntity(entityName: self.entityName, into: taskContext) else {
                     print("\(self.TAG) -- Error: Failed to create a new user object!")
@@ -84,7 +84,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
                     taskContext.delete(userEntity)
                 }
             }
-//        }
+        }
         
     }
     

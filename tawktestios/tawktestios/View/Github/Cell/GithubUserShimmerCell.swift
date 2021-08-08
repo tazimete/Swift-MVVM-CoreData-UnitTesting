@@ -18,6 +18,9 @@ class GithubUserShimmerCell: GithubUserCellNormal {
     }
     
     override func configure(data: GithubUserShimmerCell.DataType) {
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.clear.cgColor
+        
         //shmmer skeleton animation
         let gradient = SkeletonGradient(baseColor: UIColor.lightGray)
         let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
