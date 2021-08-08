@@ -52,7 +52,6 @@
 		29F4286C26B12C860073C150 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286B26B12C860073C150 /* ImageDownloader.swift */; };
 		29F4286E26B12D660073C150 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286D26B12D660073C150 /* UIImageView+Extension.swift */; };
 		29F4287026B12EEC0073C150 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */; };
-		29F4287226B160BD0073C150 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287126B160BD0073C150 /* ImageCache.swift */; };
 		29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287626B2EF860073C150 /* CoreDataClient.swift */; };
 		29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4287826B2F1910073C150 /* LocalDataSource.swift */; };
 		29F4288526B331AC0073C150 /* tawktestios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29F4288326B331AC0073C150 /* tawktestios.xcdatamodeld */; };
@@ -266,7 +265,6 @@
 		29F4286B26B12C860073C150 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		29F4286D26B12D660073C150 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		29F4287126B160BD0073C150 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		29F4287626B2EF860073C150 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
 		29F4287826B2F1910073C150 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		29F4288426B331AC0073C150 /* tawktestios.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tawktestios.xcdatamodel; sourceTree = "<group>"; };
@@ -764,7 +762,6 @@
 			isa = PBXGroup;
 			children = (
 				29F4286B26B12C860073C150 /* ImageDownloader.swift */,
-				29F4287126B160BD0073C150 /* ImageCache.swift */,
 			);
 			path = ImageDownloader;
 			sourceTree = "<group>";
@@ -1481,7 +1478,6 @@
 				29F7C01226BE6E78004E6BFC /* ConstraintAttributes.swift in Sources */,
 				2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */,
 				29F7C00F26BE6E78004E6BFC /* LayoutConstraintItem.swift in Sources */,
-				29F4287226B160BD0073C150 /* ImageCache.swift in Sources */,
 				29F7C12426BFBFD7004E6BFC /* IQKeyboardManager+Toolbar.swift in Sources */,
 				29F7C0D126BE9BFC004E6BFC /* UIView+UIApplicationDelegate.swift in Sources */,
 				29F7C0DE26BE9BFC004E6BFC /* CollectionSkeletonProtocol.swift in Sources */,

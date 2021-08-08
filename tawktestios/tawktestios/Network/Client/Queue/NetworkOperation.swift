@@ -43,7 +43,6 @@ public class NetworkOperation: Operation {
     
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
-//        config.requestCachePolicy = .returnCacheDataElseLoad
         config.urlCache = nil
 
         let session = URLSession(configuration: config)
@@ -146,33 +145,3 @@ public class NetworkOperation: Operation {
     }
 }
 
-
-
-func testNetworkOperation() {
-    let queue = OperationQueue()
-    queue.maxConcurrentOperationCount = 1
-
-    let urls = [
-        URL(string: "https://github.com/fluffyes/AppStoreCard/archive/master.zip")!,
-        URL(string: "https://github.com/fluffyes/currentLocation/archive/master.zip")!,
-        URL(string: "https://github.com/fluffyes/DispatchQueue/archive/master.zip")!,
-        URL(string: "https://github.com/fluffyes/dynamicFont/archive/master.zip")!,
-        URL(string: "https://github.com/fluffyes/telegrammy/archive/master.zip")!
-    ]
-
-    for url in urls {
-        let operation = NetworkOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { (localURL, response, error) in
-            print("finished downloading \(url.absoluteString)")
-        })
-
-        queue.addOperation(operation)
-    }
-    
-    DispatchQueue.main.asyncAfter(deadline: .now()+150, execute: {
-        let url = URL(string: "https://github.com/fluffyes/AppStoreCard/archive/master.zip")! 
-        let operation = NetworkOperation(session: URLSession.shared, downloadTaskURL: url, completionHandler: { (localURL, response, error) in
-            print("finished downloading ## -- \(url.absoluteString) -- queue count = \(queue.operations.count)")
-        })
-        queue.addOperation(operation)
-    })
-}

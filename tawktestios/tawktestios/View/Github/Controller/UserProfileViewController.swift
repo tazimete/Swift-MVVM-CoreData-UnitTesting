@@ -40,6 +40,12 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     
     override func initView() {
         disableKeyboard(tappingView: view)
+        ivProfilePicture.contentMode = .scaleAspectFill
+        
+        //init data
+        self.tvNote.text = githubUser?.note
+        self.lblFollwer.text = "Followers : \(githubUser?.followers ?? 0)"
+        self.lblFollowing.text = "Follwings : \(githubUser?.followings ?? 0)"
     }
     
     override func initNavigationBar() {
@@ -63,6 +69,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             }
             
             self?.showData(user: user)
+            self?.saveData(userProfile: user)
         }
         
         userProfileViewModel.dataFetchingFailedHandler = { [weak self] in
@@ -89,12 +96,30 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         self.lblFollowing.text = "Follwings : \(user.followings ?? 0)"
         self.lblCompany.text = "Company : \(user.company ?? "")"
         self.lblBlog.text = "Blog : \(user.blog ?? "")"
-        self.tvNote.text = githubUser?.note
+
         self.ivProfilePicture.loadImage(from: user.avatarUrl ?? "" ) {
             [weak self] url, image, isCache in
-            self?.ivProfilePicture.image = image
-            self?.stopShimmerAnimation()
+            
+            guard let weakSelf = self else {
+                return
+            }
+            
+            weakSelf.ivProfilePicture.image = image?.decodedImage(size: weakSelf.ivProfilePicture.bounds.size)
+            weakSelf.stopShimmerAnimation()
         }
+    }
+    
+    private func saveData(userProfile: GithubUser) {
+        guard let user = githubUser else {
+            return
+        }
+        
+        user.followers = Int64(userProfile.followers ?? 0)
+        user.followings = Int64(userProfile.followings ?? 0)
+        user.company = userProfile.company
+        user.blog = userProfile.blog
+        
+        userProfileViewModel.updateUserEntity(user: user)
     }
     
     public func startShimmerAnimation() -> Void {
