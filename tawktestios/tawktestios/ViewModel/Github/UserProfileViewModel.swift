@@ -39,6 +39,6 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
     }
     
     public func updateUserEntity(user: GithubUserEntity) {
-        service.localDataSource.updateItem(item: user, taskContext: CoreDataClient.shared.backgroundContext)
+        service.localDataSource.updateItem(item: user, taskContext: CoreDataClient.shared.mainContext)
     }
 }
