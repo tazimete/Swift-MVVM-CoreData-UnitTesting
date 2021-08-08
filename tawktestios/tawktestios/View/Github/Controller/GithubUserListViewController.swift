@@ -12,7 +12,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     private var githubViewModel: GithubViewModel!
     
     private let tableView = UITableView()
-    private let tableViewdataSource = TableViewDataSource() 
+    private let cellConfiguratorFactory = TableViewCellConfiguratorFactory()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
@@ -101,9 +101,9 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     public func loadGithubUserList(since: Int) {
         showBottomIndicator(flag: true)
         
-        tableViewdataSource.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
+        cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
-        isShimmerNeeded = tableViewdataSource.getCount() == 0
+        isShimmerNeeded = cellConfiguratorFactory.getCount() == 0
         
         githubViewModel.fetchUserList(since: since)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
@@ -254,7 +254,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
         var item: CellConfigurator = GithubUserShimmerCellConfig.init(item: GithubCellViewModel())
         
         if !isShimmerNeeded {
-            item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
+            item = cellConfiguratorFactory.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
         }
 
 //        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId, for: indexPath)
@@ -310,8 +310,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
             }
 
             let cellViewModel = getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel()
-//            tableViewdataSource.insertAsCellConfigurator(cellViewModel: cellViewModel, at: index.row)
-            let item = tableViewdataSource.getCellConfigurator(cellViewModel: cellViewModel, index: index.row)!
+//            cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: cellViewModel, at: index.row)
+            let item = cellConfiguratorFactory.getCellConfigurator(cellViewModel: cellViewModel, index: index.row)!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
             item.configure(cell: cell)
 

@@ -25,7 +25,6 @@ class ShimmerHelper: NSObject {
             
             view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
         }
-        
     }
         
     //stop shimmer animation

@@ -14,7 +14,7 @@ typealias GithubUserInvertedCellConfig = TableViewCellConfigurator<GithubUserCel
 typealias GithubUserShimmerCellConfig = TableViewCellConfigurator<GithubUserShimmerCell, AbstractCellViewModel>
 
 
-class TableViewDataSource {
+class TableViewCellConfiguratorFactory {
     private var items: [CellConfigurator] = []
     
     public func getCellConfigurator(cellViewModel: AbstractCellViewModel, index: Int) -> CellConfigurator? {
