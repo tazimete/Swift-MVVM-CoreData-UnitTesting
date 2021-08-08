@@ -20,6 +20,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         searchController.searchBar.sizeToFit()
         searchController.searchBar.tintColor = .brown
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.automaticallyShowsCancelButton = true
         self.definesPresentationContext = true
         
         return searchController
@@ -49,6 +50,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     override func initView() {
         //setup tableview
         view.addSubview(tableView)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width, height: 0, enableInsets: true)
         
@@ -71,6 +73,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         //add serch controller
         self.navigationItem.titleView = self.searchController.searchBar
+        
+        //disable keyboard for search controller
     }
     
     private func addBottomIndicator (){

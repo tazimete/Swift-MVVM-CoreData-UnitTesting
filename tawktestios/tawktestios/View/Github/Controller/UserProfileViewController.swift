@@ -39,9 +39,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     }
     
     override func initView() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.dismissKeyboard))
-
-        view.addGestureRecognizer(tap)
+        disableKeyboard(tappingView: view)
     }
     
     override func initNavigationBar() {
@@ -71,12 +69,6 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             self?.showData(user: self?.githubUser?.asGithubUser ?? GithubUser())
             self?.stopShimmerAnimation()
         }
-    }
-    
-    //Calls this function when the tap is recognized.
-    @objc func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
     }
     
     //When tap on save button

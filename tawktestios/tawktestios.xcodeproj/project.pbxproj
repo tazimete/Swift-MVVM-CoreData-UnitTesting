@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01076A8C42A766A19033534E /* Pods_tawktestios_tawktestiosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DECD537938270ADF8BE1DE5F /* Pods_tawktestios_tawktestiosUITests.framework */; };
+		0A86F897C0EE776F34A425E1 /* Pods_tawktestios_tawktestiosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3997993F9EE418755DF507A /* Pods_tawktestios_tawktestiosUITests.framework */; };
 		290FF53026BB0D6A00FDE99B /* AbstractDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */; };
 		290FF53826BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */; };
 		290FF53926BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */; };
@@ -192,8 +192,8 @@
 		29F7C12826BFBFD8004E6BFC /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C11126BFBFD7004E6BFC /* IQUIView+Hierarchy.swift */; };
 		29F7C12926BFBFD8004E6BFC /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C11226BFBFD7004E6BFC /* IQNSArray+Sort.swift */; };
 		29F7C12A26BFBFD8004E6BFC /* IQKeyboardManager+UITextFieldViewNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F7C11326BFBFD7004E6BFC /* IQKeyboardManager+UITextFieldViewNotification.swift */; };
-		386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */; };
-		68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */; };
+		D818A2985035D1156D62C528 /* Pods_tawktestios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5BCA694749BACB2884AD8E /* Pods_tawktestios.framework */; };
+		ECB058B645920F6F7C95D4C2 /* Pods_tawktestiosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6981BC26FF67A61CFB1F540 /* Pods_tawktestiosTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,7 +214,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		232358D441F54C0C05818D10 /* Pods-tawktestiosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestiosTests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestiosTests/Pods-tawktestiosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0C83D87C69750AC4F7C4CF29 /* Pods-tawktestiosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestiosTests.release.xcconfig"; path = "Target Support Files/Pods-tawktestiosTests/Pods-tawktestiosTests.release.xcconfig"; sourceTree = "<group>"; };
+		129B9F7CACC797074E8F9C42 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		290FF52F26BB0D6A00FDE99B /* AbstractDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDataModel.swift; sourceTree = "<group>"; };
 		290FF53626BB166600FDE99B /* GithubUserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataClass.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		290FF53726BB166600FDE99B /* GithubUserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GithubUserEntity+CoreDataProperties.swift"; path = "/Users/agmtazim/Desktop/Project/iOS/Test/tawk-test-ios/tawktestios/tawktestios/Model/GithubUserEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
@@ -407,14 +408,13 @@
 		29F7C11126BFBFD7004E6BFC /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
 		29F7C11226BFBFD7004E6BFC /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		29F7C11326BFBFD7004E6BFC /* IQKeyboardManager+UITextFieldViewNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQKeyboardManager+UITextFieldViewNotification.swift"; sourceTree = "<group>"; };
-		2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FBC235EA25A04E96054FBE7 /* Pods-tawktestios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios.release.xcconfig"; path = "Target Support Files/Pods-tawktestios/Pods-tawktestios.release.xcconfig"; sourceTree = "<group>"; };
-		BCD18C40D1F4BEAFA661F282 /* Pods-tawktestios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios/Pods-tawktestios.debug.xcconfig"; sourceTree = "<group>"; };
-		C5930E47CECBA93DEA7AD49C /* Pods-tawktestiosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestiosTests.release.xcconfig"; path = "Target Support Files/Pods-tawktestiosTests/Pods-tawktestiosTests.release.xcconfig"; sourceTree = "<group>"; };
-		DECD537938270ADF8BE1DE5F /* Pods_tawktestios_tawktestiosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios_tawktestiosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB63D16D6EB0CCF3B2ED717D /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.release.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		39AA200E41FDBAB134FA41FB /* Pods-tawktestiosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestiosTests.debug.xcconfig"; path = "Target Support Files/Pods-tawktestiosTests/Pods-tawktestiosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5FE0B961C9549305EA2AB15C /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios-tawktestiosUITests.release.xcconfig"; path = "Target Support Files/Pods-tawktestios-tawktestiosUITests/Pods-tawktestios-tawktestiosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		93190D3E527AF30C22321A3B /* Pods-tawktestios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios.debug.xcconfig"; path = "Target Support Files/Pods-tawktestios/Pods-tawktestios.debug.xcconfig"; sourceTree = "<group>"; };
+		B5736E23249C3AB739C92584 /* Pods-tawktestios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tawktestios.release.xcconfig"; path = "Target Support Files/Pods-tawktestios/Pods-tawktestios.release.xcconfig"; sourceTree = "<group>"; };
+		B6981BC26FF67A61CFB1F540 /* Pods_tawktestiosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestiosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3997993F9EE418755DF507A /* Pods_tawktestios_tawktestiosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios_tawktestiosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5BCA694749BACB2884AD8E /* Pods_tawktestios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tawktestios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,7 +422,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				386219E0B23F09E95E5AFA5F /* Pods_tawktestios.framework in Frameworks */,
+				D818A2985035D1156D62C528 /* Pods_tawktestios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +430,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68B8DB606656DBF87C358B47 /* Pods_tawktestiosTests.framework in Frameworks */,
+				ECB058B645920F6F7C95D4C2 /* Pods_tawktestiosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,23 +438,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01076A8C42A766A19033534E /* Pods_tawktestios_tawktestiosUITests.framework in Frameworks */,
+				0A86F897C0EE776F34A425E1 /* Pods_tawktestios_tawktestiosUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		26A5F597BA5BEB608520D28C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				717F7B6EC8E5057CD8EAEAFB /* Pods_tawktestios.framework */,
-				DECD537938270ADF8BE1DE5F /* Pods_tawktestios_tawktestiosUITests.framework */,
-				65EFE33544A0348AFA6D9190 /* Pods_tawktestiosTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		290FF53C26BB2CCE00FDE99B /* Abstraction */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,7 +461,7 @@
 				2917C6E426AACA53003767B0 /* tawktestiosUITests */,
 				2917C6BE26AACA52003767B0 /* Products */,
 				A269DF04B61870306708AFDE /* Pods */,
-				26A5F597BA5BEB608520D28C /* Frameworks */,
+				5FEBE45341918A0CD8F2DD85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1127,15 +1117,25 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		5FEBE45341918A0CD8F2DD85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA5BCA694749BACB2884AD8E /* Pods_tawktestios.framework */,
+				D3997993F9EE418755DF507A /* Pods_tawktestios_tawktestiosUITests.framework */,
+				B6981BC26FF67A61CFB1F540 /* Pods_tawktestiosTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A269DF04B61870306708AFDE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BCD18C40D1F4BEAFA661F282 /* Pods-tawktestios.debug.xcconfig */,
-				8FBC235EA25A04E96054FBE7 /* Pods-tawktestios.release.xcconfig */,
-				2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */,
-				EB63D16D6EB0CCF3B2ED717D /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */,
-				232358D441F54C0C05818D10 /* Pods-tawktestiosTests.debug.xcconfig */,
-				C5930E47CECBA93DEA7AD49C /* Pods-tawktestiosTests.release.xcconfig */,
+				93190D3E527AF30C22321A3B /* Pods-tawktestios.debug.xcconfig */,
+				B5736E23249C3AB739C92584 /* Pods-tawktestios.release.xcconfig */,
+				129B9F7CACC797074E8F9C42 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */,
+				5FE0B961C9549305EA2AB15C /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */,
+				39AA200E41FDBAB134FA41FB /* Pods-tawktestiosTests.debug.xcconfig */,
+				0C83D87C69750AC4F7C4CF29 /* Pods-tawktestiosTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1147,7 +1147,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2917C6EA26AACA53003767B0 /* Build configuration list for PBXNativeTarget "tawktestios" */;
 			buildPhases = (
-				4E68672ADD5508F12119CBD3 /* [CP] Check Pods Manifest.lock */,
+				481A1BC25FF634A5D4F1D41A /* [CP] Check Pods Manifest.lock */,
 				2917C6B926AACA52003767B0 /* Sources */,
 				2917C6BA26AACA52003767B0 /* Frameworks */,
 				2917C6BB26AACA52003767B0 /* Resources */,
@@ -1165,7 +1165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2917C6ED26AACA53003767B0 /* Build configuration list for PBXNativeTarget "tawktestiosTests" */;
 			buildPhases = (
-				CDA6BD5C013441CBE8673173 /* [CP] Check Pods Manifest.lock */,
+				DB0875FA86E1BD36EBFEF83F /* [CP] Check Pods Manifest.lock */,
 				2917C6D226AACA53003767B0 /* Sources */,
 				2917C6D326AACA53003767B0 /* Frameworks */,
 				2917C6D426AACA53003767B0 /* Resources */,
@@ -1184,7 +1184,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2917C6F026AACA53003767B0 /* Build configuration list for PBXNativeTarget "tawktestiosUITests" */;
 			buildPhases = (
-				4C6DB9AD06C959D56777ABDF /* [CP] Check Pods Manifest.lock */,
+				F01BCA2C3CC79E0EF9D2D798 /* [CP] Check Pods Manifest.lock */,
 				2917C6DD26AACA53003767B0 /* Sources */,
 				2917C6DE26AACA53003767B0 /* Frameworks */,
 				2917C6DF26AACA53003767B0 /* Resources */,
@@ -1277,29 +1277,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4C6DB9AD06C959D56777ABDF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-tawktestios-tawktestiosUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4E68672ADD5508F12119CBD3 /* [CP] Check Pods Manifest.lock */ = {
+		481A1BC25FF634A5D4F1D41A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1321,7 +1299,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDA6BD5C013441CBE8673173 /* [CP] Check Pods Manifest.lock */ = {
+		DB0875FA86E1BD36EBFEF83F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1337,6 +1315,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-tawktestiosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F01BCA2C3CC79E0EF9D2D798 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-tawktestios-tawktestiosUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1693,7 +1693,7 @@
 		};
 		2917C6EB26AACA53003767B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BCD18C40D1F4BEAFA661F282 /* Pods-tawktestios.debug.xcconfig */;
+			baseConfigurationReference = 93190D3E527AF30C22321A3B /* Pods-tawktestios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1713,7 +1713,7 @@
 		};
 		2917C6EC26AACA53003767B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FBC235EA25A04E96054FBE7 /* Pods-tawktestios.release.xcconfig */;
+			baseConfigurationReference = B5736E23249C3AB739C92584 /* Pods-tawktestios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1733,7 +1733,7 @@
 		};
 		2917C6EE26AACA53003767B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 232358D441F54C0C05818D10 /* Pods-tawktestiosTests.debug.xcconfig */;
+			baseConfigurationReference = 39AA200E41FDBAB134FA41FB /* Pods-tawktestiosTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1755,7 +1755,7 @@
 		};
 		2917C6EF26AACA53003767B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5930E47CECBA93DEA7AD49C /* Pods-tawktestiosTests.release.xcconfig */;
+			baseConfigurationReference = 0C83D87C69750AC4F7C4CF29 /* Pods-tawktestiosTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1777,7 +1777,7 @@
 		};
 		2917C6F126AACA53003767B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C10C7D74EB1C6736EDC74C6 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */;
+			baseConfigurationReference = 129B9F7CACC797074E8F9C42 /* Pods-tawktestios-tawktestiosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1797,7 +1797,7 @@
 		};
 		2917C6F226AACA53003767B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB63D16D6EB0CCF3B2ED717D /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */;
+			baseConfigurationReference = 5FE0B961C9549305EA2AB15C /* Pods-tawktestios-tawktestiosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

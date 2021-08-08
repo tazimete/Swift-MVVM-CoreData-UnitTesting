@@ -27,7 +27,7 @@ class GithubViewModelTest: XCTestCase, NSFetchedResultsControllerDelegate {
         viewModel = nil
     }
 
-    func testFetchDataList() {
+    func testFetchUserList() {
         viewModel.dataFetchingSuccessHandler = { [weak self] in
             let user = (self?.viewModel.fetchedResultsController.fetchedObjects?.first)?.asGithubUser
             XCTAssertNotEqual(self?.viewModel.fetchedResultsController.fetchedObjects?.count ?? 0, 0)

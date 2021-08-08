@@ -70,6 +70,19 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         // TODO: Implement in child Class
     }
     
+    //disbale keyboard
+    public func disableKeyboard(tappingView: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UserProfileViewController.dismissKeyboard))
+        tappingView.isUserInteractionEnabled = true 
+        tappingView.addGestureRecognizer(tap)
+    }
+    
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     //show alert dialog
     public func alert(_ title: String, text: String, actionTitle: String, handler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
