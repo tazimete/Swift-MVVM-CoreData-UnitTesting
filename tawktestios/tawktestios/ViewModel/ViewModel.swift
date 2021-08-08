@@ -9,6 +9,10 @@ import Foundation
 import CoreData
 
 
+/*
+ This is the base view model of our project. Which is will be used create all other view model of our porject. ViewModel consist generic service (S), server data model(D) and coredata model (T), means which data (conformed from AbstractDataModel & Codable) it should fetch from server and which core data entity (NSManagedObject type) it should store into local database through its service (Service has LocalDataSource and RemoteDataSource). ViewModel will fetch array of objects and single object  from server
+ */
+
 public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedObject>: AbstractViewModel {
     public typealias S = S
     public typealias D = D
