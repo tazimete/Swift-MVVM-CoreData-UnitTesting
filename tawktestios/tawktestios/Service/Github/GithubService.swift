@@ -7,6 +7,10 @@
 
 import CoreData
 
+/*
+ As we will fetch github user info, we creating github service by providing LocalDataSource (with GithubUser and GithubUserEntity) and RemoteDataSource (with GithubApiRequest and GithubUser)
+ */
+
 public class GithubService: Service {
     public typealias L = LocalDataSource<GithubUser, GithubUserEntity>
     public typealias R = RemoteDataSource<GithubApiRequest, GithubUser>

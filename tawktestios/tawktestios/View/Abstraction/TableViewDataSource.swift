@@ -54,6 +54,8 @@ class TableViewDataSource {
     }
    
     public func addAllAsCellConfigurator(cellViewModels: [AbstractCellViewModel]) {
+        items.removeAll()
+        
         for cellViewModel in cellViewModels {
             if (cellViewModel.hasNote ?? false) {
                 let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)

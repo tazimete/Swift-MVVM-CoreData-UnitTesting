@@ -8,6 +8,11 @@
 import Foundation
 import CoreData
 
+/*
+ This class will be used for fetching github user list from its remote data source and search users from local data source.
+ As ViewModel accepts a service, server data model, and coredata model, we assign GithubService, GithubUser (AbstractDataModel & codable) and GithubUserEntity respectively for creating GithubViewModel 
+ */
+
 public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEntity> {
 
     public override init(with service: GithubService) {

@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+
 public class GithubUser: AbstractDataModel, Codable {
     public var id: Int?
     public var username: String?

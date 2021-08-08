@@ -9,8 +9,8 @@ import Foundation
 
 
 /*
- This is the abstraction of our Remote data source of our project, It uses generic data model to fetch certain request
- and write response data to certain model. It fetches two types of data (Array ob objects and single object). Request must be type of APIRequest and Data model must be conformed from AbstractDataModel
+ This is  our remote data source object of our project, It uses generic data model to fetch certain request
+ and write response data to certain model. It fetches two types of data (Array ob objects and single object). The Request which will be processed must be type of APIRequest and Data model must be conformed from AbstractDataModel
  */
 
 public class RemoteDataSource<T: APIRequest, D: AbstractDataModel & Codable>: AbstractRemoteDataSource{

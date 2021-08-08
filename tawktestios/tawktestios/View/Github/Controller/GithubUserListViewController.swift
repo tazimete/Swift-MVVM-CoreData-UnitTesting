@@ -114,7 +114,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel.dataFetchingFailedHandler = {
             [weak self] in
             print("\(self?.TAG) -- dataFetchingFailedHandler()")
-            self?.showBottomIndicator(flag: false)
+            self?.showBottomIndicator(flag: true)
         }
     }
     
@@ -257,7 +257,8 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: indexPath)?.asCellViewModel ?? GithubCellViewModel(), index: indexPath.row)!
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId, for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: type(of: item).reuseId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: indexPath)
         item.configure(cell: cell)
         
         return cell
@@ -308,7 +309,9 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-            let item = tableViewdataSource.getCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), index: index.row)!
+            let cellViewModel = getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel()
+//            tableViewdataSource.insertAsCellConfigurator(cellViewModel: cellViewModel, at: index.row)
+            let item = tableViewdataSource.getCellConfigurator(cellViewModel: cellViewModel, index: index.row)!
             let cell = tableView.dequeueReusableCell(withIdentifier: getReuseIdentifier(item: item), for: index)
             item.configure(cell: cell)
 

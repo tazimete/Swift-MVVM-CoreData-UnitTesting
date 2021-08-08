@@ -9,8 +9,8 @@ import CoreData
 
 
 /*
- This is the abstraction of our local data source of our project, It uses generic data model (AbstractDataModel/NSManagedObject ) to store and retrieve data which is actually server response, must be conformed from AbstractdataModel.
-  Write response data to NSManagedObject model, which is coredata model. Its used to  create, fetche, update, delete, sync, search  AbstractdataModel to coredata. 
+ This is local data source of our project, It uses generic data model (AbstractDataModel/NSManagedObject ) to store and retrieve data which is actually server response, must be conformed from AbstractdataModel.
+  Write response data to NSManagedObject model, which is coredata model. Its used to  create, fetche, update, delete, sync, search  AbstractdataModel to coredata.
  */
 
 public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{

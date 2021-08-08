@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+/*
+ Base class for our server response
+ */
+
 public protocol AbstractDataModel: AnyObject {
     var id: Int? {get set}
 }
