@@ -10,9 +10,10 @@ import CoreData
 
 class GithubUserListViewController: BaseViewController<GithubService, GithubUser, GithubUserEntity>, Storyboarded  {
     private var githubViewModel: GithubViewModel!
+    private let cellConfiguratorFactory = TableViewCellConfiguratorFactory()
+    private let shimmerOffset = 10
     
     private let tableView = UITableView()
-    private let cellConfiguratorFactory = TableViewCellConfiguratorFactory()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
@@ -243,8 +244,9 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
         var count = githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
 //            count = githubViewModel.fetchedResultsController.sections?[section].numberOfObjects ?? 0
         
+        //load extra cell item for shimmer effect (it happens basically when fetchedResultsController.fetchedObjects = 0)
         if isShimmerNeeded {
-            count += 10
+            count += shimmerOffset
         }
         
         return count
