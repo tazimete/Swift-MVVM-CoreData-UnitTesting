@@ -13,10 +13,10 @@ enum CoreDataEntities<T: NSManagedObject>: String {
     case None = ""
     
     public static func getEntityName() -> String{
-//        if (T.Type) == (GithubUserEntity.self) {
+        if T.self is GithubUserEntity.Type  {
             return CoreDataEntities.GithubUserEntity.rawValue
-//        }
+        }
 
-//        return CoreDataEntities.None.rawValue
+        return CoreDataEntities.None.rawValue
     }
 }
