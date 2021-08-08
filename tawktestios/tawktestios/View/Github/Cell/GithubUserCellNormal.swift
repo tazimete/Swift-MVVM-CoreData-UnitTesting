@@ -80,11 +80,12 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
     }
 
     public func configure(data: DataType) {
+        ShimmerHelper.startShimmerAnimation(view: ivAvatar)
+        
         imageUrlAtCurrentIndex = data.thumbnail
         lblUsername.text = data.title
         lblDescription.text = data.subtitle
         containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
-        print("")
         
         ivAvatar.loadImage(from: data.thumbnail ?? "", completionHandler: {
             [weak self] url, image, isCache in
@@ -95,6 +96,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
 
             if (url).elementsEqual(weakSelf.imageUrlAtCurrentIndex ?? ""){
                 weakSelf.ivAvatar.image = image
+                ShimmerHelper.stopShimmerAnimation(view: weakSelf.ivAvatar)
             }
         })
         

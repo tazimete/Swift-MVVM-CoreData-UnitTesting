@@ -39,7 +39,7 @@ class ShimmerHelper: NSObject {
     //start shimmer animation
     public static func startShimmerAnimation(view: UIView) -> Void {
         //shmmer skeleton animation
-        let gradient = SkeletonGradient(baseColor: UIColor(0xe2e2e2))
+        let gradient = SkeletonGradient(baseColor: UIColor.lightGray)
         let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .topLeftBottomRight)
 
         if view.isKind(of: UITextView.self){

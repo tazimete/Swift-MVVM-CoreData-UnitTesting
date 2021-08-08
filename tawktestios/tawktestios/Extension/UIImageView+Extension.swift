@@ -10,7 +10,7 @@ import UIKit
 extension UIImageView {
     func loadImage(from url: String, placeholderImage: UIImage? = UIImage(named: "img_avatar"), completionHandler: @escaping (ImageDownloadCompletionHandler)){
         
-        self.image = placeholderImage
+//        self.image = placeholderImage
         ImageDownloader.shared.downloadImage(with: url, completionHandler: completionHandler, placeholderImage: placeholderImage)
     }
 }

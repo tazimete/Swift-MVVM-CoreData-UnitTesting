@@ -22,6 +22,7 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
     
     public func fetchProfile(username: String) {
         service.remoteDataSource.fetchData(request: .fetchUserProfile(params: FetchUserProfileParam(username: username))) { [weak self] result in
+            
             guard let weakSelf = self else {
                 return
             }
