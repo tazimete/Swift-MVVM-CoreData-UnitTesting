@@ -20,7 +20,6 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     public let notificationBannerQueue = NotificationBannerQueue(maxBannersOnScreenSimultaneously: 1)
     public var isShimmerNeeded: Bool = false
     public var isPaginationEnabled: Bool = true
-    public weak var subViewController: UIViewController?
     
     public init(viewModel: ViewModel<S, D, T>) {
         super.init(nibName: nil, bundle: nil)
@@ -76,11 +75,6 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         initReachability()
     }
     
-    //initialize its subview
-    public func setSubViewController(viewController: UIViewController) {
-        self.subViewController = viewController
-    }
-    
     //set its data source for subview/table/collection view
     public func setDataSource() {
         // TODO: Implement in child Class
@@ -108,7 +102,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
             
             notificationBanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
             notificationBanner.autoDismiss = true
-            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: self)
     
             //load last request
             didReachabilityConnected()
@@ -118,7 +112,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
             
             notificationBanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
             notificationBanner.autoDismiss = true
-            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: self)
             
             //load last request
             didReachabilityConnected()
@@ -128,7 +122,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
             
             notificationBanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
             notificationBanner.autoDismiss = false
-            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: self)
             
             //load last request
             didReachabilityConnected()
@@ -138,7 +132,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
             
             notificationBanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
             notificationBanner.autoDismiss = false
-            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: self)
             
             // call back for disconnection
             didReachabilityDisConnected()
