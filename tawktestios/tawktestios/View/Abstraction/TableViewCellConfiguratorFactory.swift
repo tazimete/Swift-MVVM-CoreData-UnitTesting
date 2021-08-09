@@ -160,7 +160,7 @@ class TableViewCellConfiguratorFactory {
     
     public func removeCellConfigurator(at index: Int) {
         let count = items.count;
-        items.remove(at: index)
+//        items.remove(at: index)
     }
     
     public func removeAll() {
