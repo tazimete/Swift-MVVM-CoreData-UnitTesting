@@ -15,6 +15,8 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     public let TAG = description()
     public var viewModel: ViewModel<S, D, T>!
+    public let reachability = try! Reachability()
+    public var notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
     public var isShimmerNeeded: Bool = false
     public var isPaginationEnabled: Bool = true 
     public var lastContentOffset: CGFloat = 0.0
@@ -50,6 +52,23 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         setDataSource()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+    }
+    
     // bind respective viewmodel
     public func bindViewModel() {
         // TODO: Implement in child Class
@@ -63,11 +82,81 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     //initialize its subview
     public func initView() {
         // TODO: Implement in child Class
+        initReachability()
     }
     
     //set its data source for subview/table/collection view
     public func setDataSource() {
         // TODO: Implement in child Class
+    }
+    
+    
+    public func initReachability() {
+        notificationbanner.autoDismiss = false
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+            do {
+                try reachability.startNotifier()
+            } catch {
+                print("Unable to start notifier")
+            }
+    }
+    
+    @objc public func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        notificationbanner.dismiss()
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Wifi Connection")
+            
+            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
+            notificationbanner.autoDismiss = true
+            notificationbanner.show()
+            
+            //load last request
+            didReachabilityConnected()
+            
+        case .cellular:
+            print("Cellular Connection")
+            
+            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
+            notificationbanner.autoDismiss = true
+            notificationbanner.show()
+            
+            //load last request
+            didReachabilityConnected()
+            
+        case .unavailable:
+            print("No Connection")
+            
+            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+            notificationbanner.autoDismiss = false
+            notificationbanner.show()
+            
+            //load last request
+            didReachabilityConnected()
+            
+        case .none:
+            print("No Connection")
+            
+            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+            notificationbanner.autoDismiss = false
+            notificationbanner.show()
+            
+            // call back for disconnection
+            didReachabilityDisConnected()
+        }
+    }
+    
+    //load data when internet connected
+    public func didReachabilityConnected() {
+        
+    }
+    
+    //load data when internet disconnected
+    public func didReachabilityDisConnected() {
+        
     }
     
     //disbale keyboard

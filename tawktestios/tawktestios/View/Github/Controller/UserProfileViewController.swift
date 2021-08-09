@@ -39,6 +39,8 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     }
     
     override func initView() {
+        super.initView()
+        
         disableKeyboard(tappingView: view)
         ivProfilePicture.contentMode = .scaleAspectFill
         
@@ -61,6 +63,23 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         
         user.isSeen = true
         userProfileViewModel.updateUserEntity(user: user)
+        
+        //fetch user profile
+        fetchUserProfile(user: user)
+    }
+    
+    //when internet connected
+    override func didReachabilityConnected() {
+        //fetch user data
+        guard let user = githubUser else {
+            return
+        }
+        
+        fetchUserProfile(user: user)
+    }
+    
+    //MARK: API_CALL
+    private func fetchUserProfile(user: GithubUserEntity) {
         userProfileViewModel.fetchProfile(username: user.username ?? "")
         
         userProfileViewModel.dataFetchingSuccessHandler = {[weak self] in

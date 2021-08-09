@@ -27,8 +27,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         return searchController
     }()
     
-    public let reachability = try! Reachability()
-    public var notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
     
     override public init(viewModel: ViewModel<S, D, T>) {
         super.init(viewModel: viewModel)
@@ -44,11 +42,11 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        reachability.stopNotifier()
-        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+        
     }
     
     override func initView() {
+        super.initView()
         //setup tableview
         view.addSubview(tableView)
         
@@ -74,8 +72,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         //add serch controller
         self.navigationItem.titleView = self.searchController.searchBar
-        
-        //disable keyboard for search controller
     }
     
     private func addBottomIndicator (){
@@ -96,7 +92,13 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         githubViewModel.fetchedResultsControllerDelegate = self 
         
         loadGithubUserList(since: githubViewModel.paginationlimit)
-        initReachability()
+//        initReachability()
+    }
+    
+    //when internet connected
+    override func didReachabilityConnected() {
+        //execute last request
+        loadMoreData()
     }
     
     public func loadGithubUserList(since: Int) {
@@ -116,61 +118,6 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
             [weak self] in
             print("\(self?.TAG) -- dataFetchingFailedHandler()")
             self?.showBottomIndicator(flag: true)
-        }
-    }
-    
-    private func initReachability() {
-        notificationbanner.autoDismiss = false
-       
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-            do {
-                try reachability.startNotifier()
-            } catch {
-                print("Unable to start notifier")
-            }
-    }
-    
-    @objc func reachabilityChanged(note: Notification) {
-        let reachability = note.object as! Reachability
-        notificationbanner.dismiss()
-        
-        switch reachability.connection {
-        case .wifi:
-            print("Wifi Connection")
-            
-            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
-            notificationbanner.autoDismiss = true
-            notificationbanner.show()
-            
-            //load last request
-            loadMoreData()
-            
-        case .cellular:
-            print("Cellular Connection")
-            
-            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
-            notificationbanner.autoDismiss = true
-            notificationbanner.show()
-            
-            //load last request
-            loadMoreData()
-            
-        case .unavailable:
-            print("No Connection")
-            
-            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
-            notificationbanner.autoDismiss = false
-            notificationbanner.show()
-            
-            //load last request
-            loadMoreData()
-            
-        case .none:
-            print("No Connection")
-            
-            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
-            notificationbanner.autoDismiss = false
-            notificationbanner.show()
         }
     }
     
