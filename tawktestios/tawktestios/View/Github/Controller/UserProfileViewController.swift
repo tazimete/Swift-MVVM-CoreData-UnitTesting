@@ -33,6 +33,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
     }
     
     override func viewDidLoad() {
+        setSubViewController(viewController: self)
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         startShimmerAnimation()
@@ -75,6 +76,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             return
         }
         
+        startShimmerAnimation()
         fetchUserProfile(user: user)
     }
     

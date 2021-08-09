@@ -16,19 +16,11 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     public let TAG = description()
     public var viewModel: ViewModel<S, D, T>!
     public let reachability = try! Reachability()
-    public var notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+    public var notificationBanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+    public let notificationBannerQueue = NotificationBannerQueue(maxBannersOnScreenSimultaneously: 1)
     public var isShimmerNeeded: Bool = false
-    public var isPaginationEnabled: Bool = true 
-    public var lastContentOffset: CGFloat = 0.0
-    
-    enum ScrollDirection : Int {
-        case none
-        case right
-        case left
-        case up
-        case down
-        case crazy
-    }
+    public var isPaginationEnabled: Bool = true
+    public weak var subViewController: UIViewController?
     
     public init(viewModel: ViewModel<S, D, T>) {
         super.init(nibName: nil, bundle: nil)
@@ -81,8 +73,12 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     //initialize its subview
     public func initView() {
-        // TODO: Implement in child Class
         initReachability()
+    }
+    
+    //initialize its subview
+    public func setSubViewController(viewController: UIViewController) {
+        self.subViewController = viewController
     }
     
     //set its data source for subview/table/collection view
@@ -92,7 +88,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     
     public func initReachability() {
-        notificationbanner.autoDismiss = false
+        notificationBanner.autoDismiss = false
        
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
             do {
@@ -104,25 +100,25 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     @objc public func reachabilityChanged(note: Notification) {
         let reachability = note.object as! Reachability
-        notificationbanner.dismiss()
+        notificationBanner.dismiss()
         
         switch reachability.connection {
         case .wifi:
             print("Wifi Connection")
             
-            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
-            notificationbanner.autoDismiss = true
-            notificationbanner.show()
-            
+            notificationBanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
+            notificationBanner.autoDismiss = true
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
+    
             //load last request
             didReachabilityConnected()
             
         case .cellular:
             print("Cellular Connection")
             
-            notificationbanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
-            notificationbanner.autoDismiss = true
-            notificationbanner.show()
+            notificationBanner = StatusBarNotificationBanner(title: "Internet connection available", style: .success)
+            notificationBanner.autoDismiss = true
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
             
             //load last request
             didReachabilityConnected()
@@ -130,9 +126,9 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         case .unavailable:
             print("No Connection")
             
-            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
-            notificationbanner.autoDismiss = false
-            notificationbanner.show()
+            notificationBanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+            notificationBanner.autoDismiss = false
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
             
             //load last request
             didReachabilityConnected()
@@ -140,9 +136,9 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         case .none:
             print("No Connection")
             
-            notificationbanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
-            notificationbanner.autoDismiss = false
-            notificationbanner.show()
+            notificationBanner = StatusBarNotificationBanner(title: "No internet connection", style: .danger)
+            notificationBanner.autoDismiss = false
+            notificationBanner.show(queuePosition: .front, bannerPosition: .bottom, queue: notificationBannerQueue, on: subViewController)
             
             // call back for disconnection
             didReachabilityDisConnected()
@@ -182,6 +178,17 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     
     // MARK: Pagination
+    enum ScrollDirection : Int {
+        case none
+        case right
+        case left
+        case up
+        case down
+        case crazy
+    }
+    
+    public var lastContentOffset: CGFloat = 0.0
+    
     public func getScrollDirection(scrollView:UIScrollView) -> ScrollDirection{
         var scrollDirection: ScrollDirection = .none
         

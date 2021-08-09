@@ -38,6 +38,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     
     override func viewDidLoad() {
         isShimmerNeeded = true
+        setSubViewController(viewController: self)
         super.viewDidLoad()
     }
     
