@@ -93,7 +93,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
-        //load user list from server 
+        //load user list from server
         loadGithubUserList(since: githubViewModel.paginationlimit)
     }
     
