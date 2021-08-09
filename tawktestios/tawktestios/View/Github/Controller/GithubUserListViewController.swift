@@ -256,7 +256,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
-//            cellConfiguratorFactory.removeCellConfigurator(at: index.row)
+            cellConfiguratorFactory.removeCellConfigurator(at: index.row)
             tableView.deleteRows(at: [index], with: .automatic)
 
         case .update:
