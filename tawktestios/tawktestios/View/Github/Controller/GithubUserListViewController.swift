@@ -91,8 +91,10 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         githubViewModel.fetchedResultsControllerDelegate = self 
         
+        cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
+        
+        //load user list from server 
         loadGithubUserList(since: githubViewModel.paginationlimit)
-//        initReachability()
     }
     
     //when internet connected
@@ -104,7 +106,8 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     public func loadGithubUserList(since: Int) {
         showBottomIndicator(flag: true)
         
-        cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
+        // removed temporarily
+//        cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
         isShimmerNeeded = cellConfiguratorFactory.getCount() == 0
         
@@ -245,6 +248,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+            cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.insertRows(at: [index], with: .automatic)
 
         case .delete:
@@ -252,6 +256,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+//            cellConfiguratorFactory.removeCellConfigurator(at: index.row)
             tableView.deleteRows(at: [index], with: .automatic)
 
         case .update:
@@ -259,6 +264,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
             
+            cellConfiguratorFactory.updateAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.reloadRows(at: [index], with: .automatic)
 
         case .move:
@@ -266,6 +272,8 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+            cellConfiguratorFactory.removeCellConfigurator(at: index.row)
+            cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel(), at: newIndex.row)
             tableView.deleteRows(at: [index], with: .automatic)
             tableView.insertRows(at: [newIndex], with: .automatic)
 

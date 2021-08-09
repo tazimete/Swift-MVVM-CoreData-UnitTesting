@@ -121,6 +121,23 @@ class TableViewCellConfiguratorFactory {
         }
     }
     
+    public func updateAsCellConfigurator(cellViewModel: AbstractCellViewModel, at index: Int) {
+        if (cellViewModel.hasNote ?? false) {
+            let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
+            items[index] = cellConfig
+        }
+        
+        else if (cellViewModel.isInverted ?? false) {
+            let cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
+            items[index] = cellConfig
+        }
+        
+        else {
+            let cellConfig = GithubUserNormalCellConfig.init(item: cellViewModel)
+            items[index] = cellConfig
+        }
+    }
+    
     public func insertCellConfigurator(cellConfig: CellConfigurator, at index: Int) {
         items.insert(cellConfig, at: index)
     }
@@ -142,7 +159,7 @@ class TableViewCellConfiguratorFactory {
     }
     
     public func removeCellConfigurator(at index: Int) {
-        let cournt = items.count;
+        let count = items.count;
         items.remove(at: index)
     }
     
