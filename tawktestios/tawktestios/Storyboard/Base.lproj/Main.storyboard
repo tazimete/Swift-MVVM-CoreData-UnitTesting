@@ -25,16 +25,16 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cNG-l2-t9E">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="290"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="250" id="RL1-hA-pWt"/>
+                                                <constraint firstAttribute="width" secondItem="cNG-l2-t9E" secondAttribute="height" multiplier="100:70" id="TIC-zw-dCD"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfI-gs-rUV">
-                                            <rect key="frame" x="15" y="275" width="72" height="20.5"/>
+                                            <rect key="frame" x="15" y="315" width="72" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follower" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAI-hq-3nr">
-                                            <rect key="frame" x="335" y="275" width="64" height="20.5"/>
+                                            <rect key="frame" x="335" y="315" width="64" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-lQ-Dau">
-                                            <rect key="frame" x="15" y="320.5" width="384" height="101.5"/>
+                                            <rect key="frame" x="15" y="360.5" width="384" height="101.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WoL-mC-XSg">
                                                     <rect key="frame" x="10" y="10" width="364" height="81.5"/>
@@ -96,7 +96,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eU-xo-JUr">
-                                            <rect key="frame" x="15" y="452" width="37" height="20.5"/>
+                                            <rect key="frame" x="15" y="492" width="37" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -114,7 +114,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfF-ZR-YJN">
-                                            <rect key="frame" x="15" y="492.5" width="384" height="160"/>
+                                            <rect key="frame" x="15" y="532.5" width="384" height="160"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="160" id="nqN-tZ-XGG"/>
@@ -136,7 +136,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </textView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-dV-sGU">
-                                            <rect key="frame" x="170" y="682.5" width="74" height="38"/>
+                                            <rect key="frame" x="170" y="722.5" width="74" height="38"/>
                                             <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                             <state key="normal" title="Save">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
