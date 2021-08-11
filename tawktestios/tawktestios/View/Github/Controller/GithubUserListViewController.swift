@@ -124,6 +124,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         }
     }
     
+    // stop shimmer effect when got data from server (First tiem only)
     private func stopShimmering() {
         if self.isShimmerNeeded {
             self.isShimmerNeeded = false
@@ -148,12 +149,15 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
     }
     
     //MARK: Pagination
+    //check if server has more data to load by pagination
     override func hasMoreData() -> Bool {
         return true
     }
     
+    // load more data on paginate
     override func loadMoreData() -> Void {
         if isPaginationEnabled {
+            //increase pagination offset
             githubViewModel.paginationOffset += githubViewModel.paginationlimit
             
             var userId = githubViewModel.paginationlimit
@@ -162,10 +166,12 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
                 userId = user.id ?? 0
             }
             
+            // api call to fetch github users from server
             loadGithubUserList(since: userId)
         }
     }
     
+    // get last visible item of listview to calculate if pagination (data loading from server) needs or not
     override func getLastVisibleItem() -> IndexPath {
         guard let user = getLastUserEntity() else {
             return IndexPath(row: 0, section: 0)
@@ -178,10 +184,12 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         return indexpath
     }
     
+    // total data count of from server to determine if scroll reached last item
     override func getTotalDataCount() -> Int {
         return githubViewModel.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
+    // limit of pagination offset to call pagination callback, after scrolling this limit, fetching data from server will be occured
     override func getPaginationOffset() -> Int {
         return githubViewModel.paginationlimit - 5
     }
@@ -221,6 +229,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         
         view.endEditing(true)
+        
         if isShimmerNeeded {
             return
         }
@@ -229,6 +238,7 @@ extension GithubUserListViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
                                                 
+        //navigate to profile view controller 
         (self.view.window?.windowScene?.delegate as! SceneDelegate).rootCoordinator.showUserProfileController(user: user)
     }
 }
@@ -248,6 +258,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+            // insert cell configurator to datasource/factory
             cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.insertRows(at: [index], with: .automatic)
 
@@ -256,6 +267,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+            // remove cell configurator from datasource/factory
             cellConfiguratorFactory.removeCellConfigurator(at: index.row)
             tableView.deleteRows(at: [index], with: .automatic)
 
@@ -264,6 +276,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
             
+            // update cell configurator from datasource/factory
             cellConfiguratorFactory.updateAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: index)?.asCellViewModel ?? GithubCellViewModel(), at: index.row)
             tableView.reloadRows(at: [index], with: .automatic)
 
@@ -272,6 +285,7 @@ extension GithubUserListViewController: NSFetchedResultsControllerDelegate {
                 return
             }
 
+            // remove and insert cell configurator to datasource/factory 
             cellConfiguratorFactory.removeCellConfigurator(at: index.row)
             cellConfiguratorFactory.insertAsCellConfigurator(cellViewModel: getUserEntityAt(indexPath: newIndex)?.asCellViewModel ?? GithubCellViewModel(), at: newIndex.row)
             tableView.deleteRows(at: [index], with: .automatic)

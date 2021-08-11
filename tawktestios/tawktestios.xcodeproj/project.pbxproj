@@ -598,6 +598,7 @@
 		2948DC8726ABFAD9001EF5D2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */,
 				29F7BFA326BD3F09004E6BFC /* Abstraction */,
 				2948DC8F26ABFDB4001EF5D2 /* Github */,
 			);
@@ -806,7 +807,6 @@
 		29F7BFA326BD3F09004E6BFC /* Abstraction */ = {
 			isa = PBXGroup;
 			children = (
-				2948DC9926AC1C39001EF5D2 /* BaseViewController.swift */,
 				29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */,
 				29F7BF9626BD25F3004E6BFC /* GenericCell.swift */,
 				29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */,
