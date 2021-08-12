@@ -27,12 +27,14 @@ public class CoreDataClient {
         }
 
         mainContext = persistentContainer.viewContext
-//        mainContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 //        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainContext.automaticallyMergesChangesFromParent = true
+        mainContext.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
 
-        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+//        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+//        backgroundContext.parent = self.mainContext
+        backgroundContext = persistentContainer.newBackgroundContext()
         backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        backgroundContext.parent = self.mainContext
     }
 
 }

@@ -44,7 +44,7 @@ class LocalDataSourceTest: XCTestCase {
     func testInsertItems() {
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
         
-        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.mainContext)
         
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)
@@ -55,7 +55,7 @@ class LocalDataSourceTest: XCTestCase {
     
     func testFetchItems() {
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
-        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.mainContext)
 
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)
@@ -66,9 +66,10 @@ class LocalDataSourceTest: XCTestCase {
 
     func testBtachDelete() {
         localDataSource.insertItems(items: users, taskContext: localDataSource.viewContext)
+        
         let ids = users.map { $0.id ?? -1 }.compactMap { $0 }
         localDataSource.batchDeleteItems(ids: ids, taskContext: localDataSource.viewContext)
-        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.mainContext)
         
         XCTAssertEqual(result.count, 0)
         XCTAssertNotEqual(users.count, result.count)
@@ -77,8 +78,19 @@ class LocalDataSourceTest: XCTestCase {
     }
     
     func testSyncData() {
+        // insert first to set preloaded user with id=12
+        let user4 = GithubUser()
+        user4.id = 12
+        user4.username = "test name 3"
+        user4.avatarUrl = "www.testapp.com/img/12"
+
+        localDataSource.insertItems(items: [user4], taskContext: localDataSource.viewContext)
+        
+        //users array have another user with id=12 
         let isSuccess = localDataSource.syncData(data: users, taskContext: localDataSource.viewContext)
-        let result = localDataSource.fetchItems(taskContext: localDataSource.viewContext)
+        
+        // so we have user with id = 12 twice now, sync method will sync these double user data and make it only one. We are supposed to have 4 data in user entity but we have 3 now, because of syncing
+        let result = localDataSource.fetchItems(taskContext: CoreDataClientTest.shared.mainContext)
         
         XCTAssertTrue(isSuccess)
         XCTAssertEqual(result.count, 3)
