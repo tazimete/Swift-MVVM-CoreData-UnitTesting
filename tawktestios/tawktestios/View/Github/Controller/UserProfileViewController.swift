@@ -61,6 +61,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             return
         }
         
+        // update profile seen status to local db
         user.isSeen = true
         userProfileViewModel.updateUserEntity(user: user)
         
@@ -104,8 +105,8 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
             return
         }
         
+        //update user note to local db
         user.note = tvNote.text.isEmpty ? nil : tvNote.text
-        
         userProfileViewModel.updateUserEntity(user: user)
     }
     
@@ -129,6 +130,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         }
     }
     
+    // save user profile data to local db
     private func saveData(userProfile: GithubUser) {
         guard let user = githubUser else {
             return

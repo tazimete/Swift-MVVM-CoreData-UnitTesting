@@ -29,14 +29,6 @@ class CoreDataClientTest {
             }
         }
         
-//        mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-//        mainContext.automaticallyMergesChangesFromParent = true
-//        mainContext.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
-//
-//        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-//        backgroundContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-//        backgroundContext.parent = self.mainContext
-        
         mainContext = persistentContainer.viewContext
         mainContext.automaticallyMergesChangesFromParent = true
         mainContext.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator

@@ -35,7 +35,7 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
         fetchRequest.fetchBatchSize = paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                    managedObjectContext: CoreDataClient.shared.mainContext,
+                                                    managedObjectContext: CoreDataClient.shared.backgroundContext,
                                                     sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self.fetchedResultsControllerDelegate
         

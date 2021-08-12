@@ -5,7 +5,6 @@
 //  Created by JMC on 5/8/21.
 //
 
-
 import CoreData
 
 
@@ -40,6 +39,6 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
     }
     
     public func updateUserEntity(user: GithubUserEntity) {
-        service.localDataSource.updateItem(item: user, taskContext: CoreDataClient.shared.mainContext)
+        service.localDataSource.updateItem(item: user, taskContext: CoreDataClient.shared.backgroundContext)
     }
 }
