@@ -5,8 +5,8 @@
 //  Created by JMC on 29/7/21.
 //
 
+import Foundation
 import CoreData
-
 
 /*
  This is local data source of our project, It uses generic data model (AbstractDataModel/NSManagedObject ) to store and retrieve data which is actually server response, must be conformed from AbstractdataModel.
@@ -72,7 +72,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     }
     
     public func insertItems(items: [T], taskContext: NSManagedObjectContext) {
-//        taskContext.performAndWait {
+        taskContext.performAndWait {
             for item in items {
                 guard let userEntity = self.insertEntity(entityName: self.entityName, into: taskContext) else {
                     print("\(self.TAG) -- Error: Failed to create a new user object!")
@@ -90,7 +90,7 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
                     taskContext.delete(userEntity)
                 }
             }
-//        }
+        }
         
     }
     
@@ -191,15 +191,18 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         
         controller.fetchRequest.predicate = predicates
         
-        try? controller.performFetch()
-        
-        controller.managedObjectContext.refreshAllObjects()
+//        controller.managedObjectContext.perform {
+            try? controller.performFetch()
+//            controller.managedObjectContext.refreshAllObjects()
+            try? controller.managedObjectContext.save()
+//        }
     }
     
     public func clearSearch(controller: NSFetchedResultsController<D>) {
         controller.fetchRequest.predicate = nil
         try? controller.performFetch()
         
-        controller.managedObjectContext.refreshAllObjects()
+//        controller.managedObjectContext.refreshAllObjects()
+        try? controller.managedObjectContext.save()  
     }
 }
