@@ -15,6 +15,7 @@ class LocalDataSourceTest: XCTestCase {
     var users = [GithubUser]()
 
     override func setUp() {
+        super.setUp()
         localDataSource = LocalDataSource(persistentContainer: CoreDataClientTest.shared.persistentContainer, viewContext: CoreDataClientTest.shared.backgroundContext)
 
         let user1 = GithubUser()
@@ -57,6 +58,7 @@ class LocalDataSourceTest: XCTestCase {
     }
 
     override func tearDown() {
+        super.tearDown()
         users.removeAll()
         localDataSource.deleteAllItems(taskContext: CoreDataClientTest.shared.backgroundContext)
         localDataSource = nil

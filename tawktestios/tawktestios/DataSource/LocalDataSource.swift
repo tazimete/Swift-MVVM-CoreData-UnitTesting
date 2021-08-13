@@ -91,8 +91,8 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
 //                }
 //            }
 //        }
-        let itemsDic = items.map({return ($0 as? GithubUser)?.asDictionari ?? [String: Any]()})
-        print("Encoded dictionary : \(itemsDic)")
+        
+        let itemsDic = items.map({return ($0 as? GithubUser)?.asDictionary ?? [String: Any]()})
         
         taskContext.performAndWait {
            let insertRequest = NSBatchInsertRequest(entity: D.entity(), objects: itemsDic)

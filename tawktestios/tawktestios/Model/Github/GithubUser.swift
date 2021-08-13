@@ -38,7 +38,7 @@ public class GithubUser: AbstractDataModel, Codable {
         case isSeen = "isSeen"
     }
     
-    var asDictionari : [String: Any]? {
+    var asDictionary : [String: Any]? {
         var dictionary = [String: Any]()
         dictionary["id"] = id
         dictionary["username"] = username
