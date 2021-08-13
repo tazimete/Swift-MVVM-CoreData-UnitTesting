@@ -73,6 +73,8 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertTrue(users.count == result.count)
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertEqual(users[0].followers, Int(result[0].followers))
+        XCTAssertEqual(users[0].followings, Int(result[0].followings))
         XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
     
@@ -84,6 +86,8 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertTrue(users.count == result.count)
         XCTAssertNotNil(result[0].username)
         XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertEqual(users[0].followers, Int(result[0].followers))
+        XCTAssertEqual(users[0].followings, Int(result[0].followings))
         XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
 
@@ -96,7 +100,9 @@ class LocalDataSourceTest: XCTestCase {
         
         XCTAssertEqual(result.count, 0)
         XCTAssertNotEqual(users.count, result.count)
-        XCTAssertNotEqual(users.first?.username, result.last?.username)
+        XCTAssertNotEqual(users.first?.username, result.first?.username)
+        XCTAssertNotEqual(users.first?.followers, Int(result.first?.followers ?? 0))
+        XCTAssertNotEqual(users.last?.followings, Int(result.last?.followings ?? 0))
         XCTAssertNil(result.first)
     }
     
@@ -126,7 +132,9 @@ class LocalDataSourceTest: XCTestCase {
         XCTAssertEqual(result.count, 3)
         XCTAssertTrue(users.count == result.count)
         XCTAssertNotNil(result[0].username)
-        XCTAssertEqual(users[0].username, result[0].username)
+        XCTAssertEqual(users.first?.username, result.first?.username)
+        XCTAssertEqual(users.first?.followers, Int(result.first?.followers ?? 0))
+        XCTAssertEqual(users.last?.followings, Int(result.last?.followings ?? 0))
         XCTAssertNotEqual(users.first?.username, result.last?.username)
     }
     
@@ -136,7 +144,7 @@ class LocalDataSourceTest: XCTestCase {
         
         let viewModel = GithubViewModel(with: service)
         viewModel.fetchedResultsControllerDelegate = FetchResultControllerDeleagte()
-        localDataSource.search(params: ["username": "test name 2", "note": "test note"], controller: viewModel.fetchedResultsController, isEnded: false)
+        localDataSource.search(params: ["username": "test name 11", "note": "test note"], controller: viewModel.fetchedResultsController, isEnded: false)
     }
     
     func testClearSearch() {
