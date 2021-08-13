@@ -45,6 +45,7 @@
 		29E8429E26B94E1200C8B48A /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */; };
 		29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */; };
 		29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */; };
+		29F1F2D526C6E113003C2B3A /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */; };
@@ -258,6 +259,7 @@
 		29E8429D26B94E1200C8B48A /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellViewModel.swift; sourceTree = "<group>"; };
 		29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGithubCell.swift; sourceTree = "<group>"; };
+		29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 				29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */,
 				29F4286D26B12D660073C150 /* UIImageView+Extension.swift */,
 				29F4286F26B12EEC0073C150 /* UIImage+Extension.swift */,
+				29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1463,6 +1466,7 @@
 				29F7C12726BFBFD7004E6BFC /* IQUITextFieldView+Additions.swift in Sources */,
 				29F7C02B26BE6E78004E6BFC /* Constraint.swift in Sources */,
 				2948DC8126AB3F28001EF5D2 /* GithubUser.swift in Sources */,
+				29F1F2D526C6E113003C2B3A /* Codable+Extension.swift in Sources */,
 				29F7BF9E26BD3D73004E6BFC /* GithubCellViewModel.swift in Sources */,
 				29F7C0C126BE9BFC004E6BFC /* SkeletonGradient.swift in Sources */,
 				29F7C05926BE6EDC004E6BFC /* GrowingNotificationBanner.swift in Sources */,

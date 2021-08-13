@@ -19,18 +19,39 @@ class LocalDataSourceTest: XCTestCase {
 
         let user1 = GithubUser()
         user1.id = 10
-        user1.username = "test name 1"
+        user1.username = "test name 10"
         user1.avatarUrl = "www.testapp.com/img/10"
+        user1.url = "www.testapp.com/profile/10"
+        user1.note = "test note 10"
+        user1.company = "test company 10"
+        user1.blog = "test blog 10"
+        user1.followers = 1000
+        user1.followings = 1001
+        user1.isSeen = false
 
         let user2 = GithubUser()
         user2.id = 11
-        user2.username = "test name 2"
+        user2.username = "test name 11"
         user2.avatarUrl = "www.testapp.com/img/11"
+        user2.url = "www.testapp.com/profile/11"
+        user2.note = "test note 11"
+        user2.company = "test company 11"
+        user2.blog = "test blog 11"
+        user2.followers = 1100
+        user2.followings = 1101
+        user2.isSeen = true
 
         let user3 = GithubUser()
         user3.id = 12
-        user3.username = "test name 3"
+        user3.username = "test name 12"
         user3.avatarUrl = "www.testapp.com/img/12"
+        user3.url = "www.testapp.com/profile/12"
+        user3.note = "test note 12"
+        user3.company = "test company 12"
+        user3.blog = "test blog 12"
+        user3.followers = 1200
+        user3.followings = 1201
+        user3.isSeen = false
 
         users = [user1, user2, user3]
     }
@@ -81,12 +102,19 @@ class LocalDataSourceTest: XCTestCase {
         // insert first to set preloaded user with id=12
         let user4 = GithubUser()
         user4.id = 12
-        user4.username = "test name 3"
+        user4.username = "test name 12"
         user4.avatarUrl = "www.testapp.com/img/12"
+        user4.url = "www.testapp.com/profile/12"
+        user4.note = "test note 12"
+        user4.company = "test company 12"
+        user4.blog = "test blog 12"
+        user4.followers = 1200
+        user4.followings = 1201
+        user4.isSeen = false
 
         localDataSource.insertItems(items: [user4], taskContext: localDataSource.viewContext)
         
-        //users array have another user with id=12 
+        //users array have another user with id=12
         let isSuccess = localDataSource.syncData(data: users, taskContext: localDataSource.viewContext)
         
         // so we have user with id = 12 twice now, sync method will sync these double user data and make it only one. We are supposed to have 4 data in user entity but we have 3 now, because of syncing

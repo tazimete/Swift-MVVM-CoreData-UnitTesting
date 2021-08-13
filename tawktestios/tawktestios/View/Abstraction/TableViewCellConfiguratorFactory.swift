@@ -107,17 +107,20 @@ class TableViewCellConfiguratorFactory {
     public func insertAsCellConfigurator(cellViewModel: AbstractCellViewModel, at index: Int) {
         if (cellViewModel.hasNote ?? false) {
             let cellConfig = GithubUserNoteCellConfig.init(item: cellViewModel)
-            items.insert(cellConfig, at: index)
+//            items.insert(cellConfig, at: index)
+            items.append(cellConfig)
         }
         
         else if (cellViewModel.isInverted ?? false) {
             let cellConfig = GithubUserInvertedCellConfig.init(item: cellViewModel)
-            items.insert(cellConfig, at: index)
+//            items.insert(cellConfig, at: index)
+            items.append(cellConfig)
         }
         
         else {
             let cellConfig = GithubUserNormalCellConfig.init(item: cellViewModel)
-            items.insert(cellConfig, at: index)
+//            items.insert(cellConfig, at: index)
+            items.append(cellConfig)
         }
     }
     

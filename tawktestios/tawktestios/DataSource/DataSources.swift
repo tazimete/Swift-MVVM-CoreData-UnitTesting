@@ -27,7 +27,7 @@ public protocol AbstractRemoteDataSource: AnyObject {
   Write response data to NSManagedObject model, which is coredata model.
  */
 public protocol AbstractLocalDataSource: AnyObject {
-    associatedtype T: AbstractDataModel = AbstractDataModel
+    associatedtype T: AbstractDataModel = AbstractDataModel & Codable
     associatedtype D: NSManagedObject = NSManagedObject
     
     var persistentContainer: NSPersistentContainer {get set}

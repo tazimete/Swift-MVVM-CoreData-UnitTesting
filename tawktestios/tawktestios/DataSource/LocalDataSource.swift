@@ -13,7 +13,7 @@ import CoreData
   Write response data to NSManagedObject model, which is coredata model. Its used to  create, fetche, update, delete, sync, search  AbstractdataModel to coredata.
  */
 
-public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : AbstractLocalDataSource{
+public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject> : AbstractLocalDataSource{
     public typealias T = T
     public typealias D = D
     
@@ -72,26 +72,38 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
     }
     
     public func insertItems(items: [T], taskContext: NSManagedObjectContext) {
+//        taskContext.performAndWait {
+//            for item in items {
+//                guard let userEntity = self.insertEntity(entityName: self.entityName, into: taskContext) else {
+//                    print("\(self.TAG) -- Error: Failed to create a new user object!")
+//                    return
+//                }
+//
+//                do {
+//                    if let entity = userEntity as? GithubUserEntity {
+//                        try entity.update(user: item)
+//                    }
+//
+//                    try taskContext.save()
+//                } catch (let error){
+//                    print("\(self.TAG) -- Error: \(error)\n this object will be deleted.")
+//                    taskContext.delete(userEntity)
+//                }
+//            }
+//        }
+        let itemsDic = items.map({return ($0 as? GithubUser)?.asDictionari ?? [String: Any]()})
+        print("Encoded dictionary : \(itemsDic)")
+        
         taskContext.performAndWait {
-            for item in items {
-                guard let userEntity = self.insertEntity(entityName: self.entityName, into: taskContext) else {
-                    print("\(self.TAG) -- Error: Failed to create a new user object!")
-                    return
-                }
-
-                do {
-                    if let entity = userEntity as? GithubUserEntity {
-                        try entity.update(user: item)
-                    }
-                    
-                    try taskContext.save()
-                } catch (let error){
-                    print("\(self.TAG) -- Error: \(error)\n this object will be deleted.")
-                    taskContext.delete(userEntity)
-                }
+           let insertRequest = NSBatchInsertRequest(entity: D.entity(), objects: itemsDic)
+             insertRequest.resultType = NSBatchInsertRequestResultType.objectIDs
+             let result = try? taskContext.execute(insertRequest) as? NSBatchInsertResult
+    
+            if let objectIDs = result?.result as? [NSManagedObjectID], !objectIDs.isEmpty {
+                let save = [NSInsertedObjectsKey: objectIDs]
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: save, into: [CoreDataClient.shared.mainContext])
             }
         }
-        
     }
     
     public func updateItem(item: D, taskContext: NSManagedObjectContext) {
