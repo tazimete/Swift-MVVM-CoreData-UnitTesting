@@ -92,6 +92,7 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
 //            }
 //        }
         
+        // batch insert request
         let itemsDic = items.map({return ($0 as? GithubUser)?.asDictionary ?? [String: Any]()})
         
         taskContext.performAndWait {
@@ -115,33 +116,32 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
     }
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
-        //removing batch delete request, because its not working inMemoryStore Type 
-//        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-//        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
+        let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
-//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-//        batchDeleteRequest.resultType = .resultTypeObjectIDs
-//
-//        // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
-//        do {
-//            let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
-//
-//            if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
-//                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
-//                                                    into: [taskContext])
-//            }
-//        }catch {
-//            print("Error: \(error)\nCould not batch delete existing records.")
-//        }
-        
-        // batch delete is not working in InMemoryStoreType for unit testing, thats why deleting manually
-        let items = fetchItems(ids: ids, taskContext: taskContext)
-        
-        for item in items {
-            taskContext.delete(item)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+
+        // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
+        do {
+            let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+
+            if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+                                                    into: [CoreDataClient.shared.mainContext])
+            }
+        }catch {
+            print("Error: \(error)\nCould not batch delete existing records.")
         }
         
-        try? taskContext.save()
+        // batch delete is not working in InMemoryStoreType for unit testing, thats why deleting manually
+//        let items = fetchItems(ids: ids, taskContext: taskContext)
+//
+//        for item in items {
+//            taskContext.delete(item)
+//        }
+//
+//        try? taskContext.save()
     }
     
     public func deleteAllItems(taskContext: NSManagedObjectContext) {
@@ -204,7 +204,7 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
         controller.fetchRequest.predicate = predicates
         
         try? controller.performFetch()
-//            controller.managedObjectContext.refreshAllObjects()
+        
         if controller.managedObjectContext.hasChanges {
             try? controller.managedObjectContext.save()
         }
@@ -214,7 +214,6 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
         controller.fetchRequest.predicate = nil
         try? controller.performFetch()
         
-//        controller.managedObjectContext.refreshAllObjects()
         if controller.managedObjectContext.hasChanges {
             try? controller.managedObjectContext.save()
         }
