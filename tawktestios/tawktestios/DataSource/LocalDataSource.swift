@@ -191,11 +191,11 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         
         controller.fetchRequest.predicate = predicates
         
-//        controller.managedObjectContext.perform {
-            try? controller.performFetch()
+        try? controller.performFetch()
 //            controller.managedObjectContext.refreshAllObjects()
+        if controller.managedObjectContext.hasChanges {
             try? controller.managedObjectContext.save()
-//        }
+        }
     }
     
     public func clearSearch(controller: NSFetchedResultsController<D>) {
@@ -203,6 +203,8 @@ public class LocalDataSource<T: AbstractDataModel, D: NSManagedObject> : Abstrac
         try? controller.performFetch()
         
 //        controller.managedObjectContext.refreshAllObjects()
-        try? controller.managedObjectContext.save()  
+        if controller.managedObjectContext.hasChanges {
+            try? controller.managedObjectContext.save()
+        }
     }
 }

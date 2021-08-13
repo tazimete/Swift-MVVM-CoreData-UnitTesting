@@ -309,6 +309,7 @@ extension GithubUserListViewController: UISearchBarDelegate {
         
         //enable/disable pagination and bottom indicator
         if text.isEmpty {
+            githubViewModel.paginationOffset = 0 
             isPaginationEnabled = true
         }else{
             isPaginationEnabled = false
@@ -322,6 +323,7 @@ extension GithubUserListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isPaginationEnabled = true
         view.endEditing(true)
+        githubViewModel.paginationOffset = 0
         githubViewModel.clearSearch()
         tableView.reloadData()
     }

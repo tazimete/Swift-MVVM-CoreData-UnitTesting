@@ -23,3 +23,4 @@ class ApiClientTest: AbstractApiClient {
         operation.getStubbResponse(type: type, completionHandler: completionHandler)
     }
 }
+
