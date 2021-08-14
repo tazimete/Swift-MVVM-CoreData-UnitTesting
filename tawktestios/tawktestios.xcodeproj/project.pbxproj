@@ -46,6 +46,7 @@
 		29E842A026B9674600C8B48A /* AbstractCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */; };
 		29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */; };
 		29F1F2D526C6E113003C2B3A /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */; };
+		29F1F2D726C7A105003C2B3A /* ImageDownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */; };
@@ -260,6 +261,7 @@
 		29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellViewModel.swift; sourceTree = "<group>"; };
 		29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGithubCell.swift; sourceTree = "<group>"; };
 		29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
+		29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderClient.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				29F4286B26B12C860073C150 /* ImageDownloader.swift */,
+				29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */,
 			);
 			path = ImageDownloader;
 			sourceTree = "<group>";
@@ -1435,6 +1438,7 @@
 				2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */,
 				29F7C11B26BFBFD7004E6BFC /* IQInvocation.swift in Sources */,
 				2948DC9A26AC1C39001EF5D2 /* BaseViewController.swift in Sources */,
+				29F1F2D726C7A105003C2B3A /* ImageDownloaderClient.swift in Sources */,
 				29F7C0C926BE9BFC004E6BFC /* Recoverable.swift in Sources */,
 				29F7C05A26BE6EDC004E6BFC /* BannerHapticGenerator.swift in Sources */,
 				29F7C0E926BE9BFC004E6BFC /* RecursiveProtocol.swift in Sources */,
