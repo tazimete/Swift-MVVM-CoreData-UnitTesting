@@ -50,34 +50,10 @@ public final class ImageDownloader: AbstractImageDownloader {
             let session = URLSession(configuration: config)
             
             downloaderClient.enqueue(session: session, downloadTaskURL: url, completionHandler: {
-                result in
+                [weak self] result in
                 
-                switch result {
-                    case .success(let response):
-                        guard  let data = response.data else {
-                            completionHandler(response.url ?? "", placeholderImage, response.isCached ?? false)
-                            return
-                        }
-                        
-                        let image = UIImage(data: data)?.decodedImage()
-                        completionHandler(response.url ?? "", image ?? placeholderImage, response.isCached ?? false)
-                        
-                        // Store the downloaded image in cache
-                        self.serialQueueForImages.sync(flags: .barrier) {
-                            self.cachedImages[imageUrlString] = image
-                        }
-        
-                        // Clear out the finished task from download tasks container
-                        _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
-                            self.imagesDownloadTasks.removeValue(forKey: response.url ?? "")
-                        }
-                        
-                        break
-                        
-                    case .failure(let error):
-                        completionHandler("", placeholderImage, false)
-                        break
-                }
+                //handle result
+                self?.handleDownloadResult(result: result, placeholderImage: placeholderImage, completionHandler: completionHandler)
             })
             
             // We want to control the access to no-thread-safe dictionary in case it's being accessed by multiple threads at once
@@ -87,6 +63,35 @@ public final class ImageDownloader: AbstractImageDownloader {
         }
     }
     
+    
+    private func handleDownloadResult(result: Result<DownloaderResponse, NetworkError>, placeholderImage: UIImage?, completionHandler: @escaping (ImageDownloadCompletionHandler)) {
+        switch result {
+            case .success(let response):
+                guard  let data = response.data else {
+                    completionHandler(response.url ?? "", placeholderImage, response.isCached ?? false)
+                    return
+                }
+                
+                let image = UIImage(data: data)?.decodedImage()
+                completionHandler(response.url ?? "", image ?? placeholderImage, response.isCached ?? false)
+                
+                // Store the downloaded image in cache
+                self.serialQueueForImages.sync(flags: .barrier) {
+                    self.cachedImages[response.url ?? ""] = image
+                }
+
+                // Clear out the finished task from download tasks container
+                _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
+                    self.imagesDownloadTasks.removeValue(forKey: response.url ?? "")
+                }
+                
+                break
+                
+            case .failure(let error):
+                completionHandler("", placeholderImage, false)
+                break
+        }
+    }
     
     public func getCachedImageFrom(urlString: String) -> UIImage? {
         // Reading from the dictionary should happen in the thread-safe manner.
