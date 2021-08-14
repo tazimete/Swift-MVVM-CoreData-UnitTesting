@@ -49,6 +49,7 @@
 		29F1F2D726C7A105003C2B3A /* DownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */; };
 		29F1F2D926C8264F003C2B3A /* AbstractDownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */; };
 		29F1F2DC26C84616003C2B3A /* AbstractImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2DB26C84616003C2B3A /* AbstractImageDownloader.swift */; };
+		29F1F2DF26C85F79003C2B3A /* DataModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2DE26C85F79003C2B3A /* DataModelConverter.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */; };
@@ -266,6 +267,7 @@
 		29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderClient.swift; sourceTree = "<group>"; };
 		29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDownloaderClient.swift; sourceTree = "<group>"; };
 		29F1F2DB26C84616003C2B3A /* AbstractImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractImageDownloader.swift; sourceTree = "<group>"; };
+		29F1F2DE26C85F79003C2B3A /* DataModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelConverter.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -485,7 +487,8 @@
 			isa = PBXGroup;
 			children = (
 				291D3B1A26BFD9D400334071 /* Application */,
-				29F4289726B5ED320073C150 /* Helper */,
+				29F4289726B5ED320073C150 /* Library */,
+				29F1F2DD26C85F39003C2B3A /* Helper */,
 				29F4287526B2EF620073C150 /* CoreData */,
 				29F4286326AE9A1F0073C150 /* Extension */,
 				2917C6F326AACA91003767B0 /* Network */,
@@ -731,6 +734,15 @@
 			path = Downloader;
 			sourceTree = "<group>";
 		};
+		29F1F2DD26C85F39003C2B3A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				29F7C0EB26BEA0EE004E6BFC /* ShimmerHelper.swift */,
+				29F1F2DE26C85F79003C2B3A /* DataModelConverter.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		29F4285926AD267B0073C150 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -804,16 +816,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		29F4289726B5ED320073C150 /* Helper */ = {
+		29F4289726B5ED320073C150 /* Library */ = {
 			isa = PBXGroup;
 			children = (
 				29F7C0F726BFBFD7004E6BFC /* IQKeyboardManagerSwift */,
 				29F7C08A26BE9BFB004E6BFC /* Skeleton */,
 				29F7C03326BE6EDC004E6BFC /* NotificationBanner */,
 				29F4289826B5ED490073C150 /* Reachability.swift */,
-				29F7C0EB26BEA0EE004E6BFC /* ShimmerHelper.swift */,
 			);
-			path = Helper;
+			path = Library;
 			sourceTree = "<group>";
 		};
 		29F7BF9C26BD3C94004E6BFC /* CellViewModel */ = {
@@ -1393,6 +1404,7 @@
 				2948DC8D26ABFB6E001EF5D2 /* Service.swift in Sources */,
 				29F7C0E826BE9BFC004E6BFC /* PrepareForSkeletonProtocol.swift in Sources */,
 				29F7C12626BFBFD7004E6BFC /* IQUIViewController+Additions.swift in Sources */,
+				29F1F2DF26C85F79003C2B3A /* DataModelConverter.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F7C0CC26BE9BFC004E6BFC /* UIView+Extension.swift in Sources */,
 				29F1F2D926C8264F003C2B3A /* AbstractDownloaderClient.swift in Sources */,
