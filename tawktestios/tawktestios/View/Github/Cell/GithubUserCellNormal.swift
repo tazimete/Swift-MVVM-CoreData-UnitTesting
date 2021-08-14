@@ -53,6 +53,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
     }()
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         ivAvatar.image = nil
         lblUsername.text = ""
         lblDescription.text = ""

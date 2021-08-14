@@ -28,6 +28,10 @@ class GithubUserCellNote: GithubUserCellNormal {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     override func configure(data: GithubUserCellNote.DataType) {
         super.configure(data: data)
     }

@@ -30,11 +30,18 @@ class GithubUserCellInverted: GithubUserCellNormal {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     override func configure(data: GithubUserCellInverted.DataType) {
+        ShimmerHelper.startShimmerAnimation(view: ivAvatar)
+        
         imageUrlAtCurrentIndex = data.thumbnail
         lblUsername.text = data.title
         lblDescription.text = data.subtitle
         containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
+        
         ivAvatar.loadImage(from: data.thumbnail ?? "", completionHandler: {
             [weak self] url, image, isCache in
 
@@ -50,6 +57,7 @@ class GithubUserCellInverted: GithubUserCellNormal {
 
                     DispatchQueue.main.async {
                         weakSelf.ivAvatar.image = invertedImage
+                        ShimmerHelper.stopShimmerAnimation(view: weakSelf.ivAvatar)
                     }
                 }
             }
