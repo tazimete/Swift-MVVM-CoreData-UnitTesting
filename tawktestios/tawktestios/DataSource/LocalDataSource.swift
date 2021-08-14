@@ -108,18 +108,23 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
     }
     
     public func updateItem(item: D, taskContext: NSManagedObjectContext) {
-        do {
-            try taskContext.save()
-        } catch let error {
-            print("\(TAG) -- Failed to update: \(error)")
+        
+        taskContext.performAndWait {
+            do {
+                if taskContext.hasChanges {
+                    try taskContext.save()
+                }
+            } catch let error {
+                print("\(TAG) -- Failed to update: \(error)")
+            }
         }
     }
     
     public func batchDeleteItems(ids: [Int], taskContext: NSManagedObjectContext) {
         let fRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
+        fRequest.predicate = NSPredicate(format: "id in %@", argumentArray: [ids])
 
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fRequest)
         batchDeleteRequest.resultType = .resultTypeObjectIDs
 
         // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
@@ -151,7 +156,9 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
             taskContext.delete(item)
         }
         
-        try? taskContext.save()
+        if taskContext.hasChanges {
+            try? taskContext.save()
+        }
     }
     
     
