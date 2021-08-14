@@ -15,6 +15,10 @@ public class QueueManager {
         queue.maxConcurrentOperationCount = 1
         return queue;
     }()
+    
+    public init(){
+        
+    }
 
     public func enqueue(_ operation: Operation) {
         queue.addOperation(operation)
