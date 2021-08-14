@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 
-public class ImageDownloaderClient{
-    public static let shared = ImageDownloaderClient()
+public class DownloaderClient: AbstractDownloaderClient {
+    public static let shared = DownloaderClient()
     public var queueManager: QueueManager
 
     
@@ -18,7 +18,7 @@ public class ImageDownloaderClient{
         self.queueManager = queueManager
     }
     
-    public func enqueue(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler) {
+    public func enqueue<T: NSObject>(session: URLSession, downloadTaskURL: URL, type: T.Type, completionHandler: @escaping ImageDownloadResultHandler<T>)  {
         let operation = NetworkOperation(session: session, downloadTaskURL: downloadTaskURL, completionHandler: completionHandler)
         operation.qualityOfService = .utility
         queueManager.enqueue(operation)

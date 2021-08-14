@@ -47,7 +47,7 @@
 		29E842A226B967DD00C8B48A /* AbstractGithubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */; };
 		29F1F2D526C6E113003C2B3A /* Codable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */; };
 		29F1F2D726C7A105003C2B3A /* ImageDownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */; };
-		29F1F2D926C8264F003C2B3A /* AbstractDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D826C8264E003C2B3A /* AbstractDownloader.swift */; };
+		29F1F2D926C8264F003C2B3A /* AbstractDownloaderClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */; };
 		29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4285E26AD924D0073C150 /* NetworkOperation.swift */; };
 		29F4286226ADCC8C0073C150 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286126ADCC8C0073C150 /* QueueManager.swift */; };
 		29F4286526AE9A3E0073C150 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */; };
@@ -263,7 +263,7 @@
 		29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGithubCell.swift; sourceTree = "<group>"; };
 		29F1F2D426C6E113003C2B3A /* Codable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extension.swift"; sourceTree = "<group>"; };
 		29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderClient.swift; sourceTree = "<group>"; };
-		29F1F2D826C8264E003C2B3A /* AbstractDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDownloader.swift; sourceTree = "<group>"; };
+		29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDownloaderClient.swift; sourceTree = "<group>"; };
 		29F4285E26AD924D0073C150 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		29F4286126ADCC8C0073C150 /* QueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		29F4286426AE9A3E0073C150 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -526,8 +526,9 @@
 		2917C6F326AACA91003767B0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				29F4286A26B12C740073C150 /* ImageDownloader */,
 				2948DC7F26AB3EA6001EF5D2 /* ApiClient */,
+				29F1F2DA26C828C3003C2B3A /* Downloader */,
+				29F4286A26B12C740073C150 /* ImageDownloader */,
 				2948DC7A26AB3D4A001EF5D2 /* Request */,
 			);
 			path = Network;
@@ -719,6 +720,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		29F1F2DA26C828C3003C2B3A /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */,
+				29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */,
+			);
+			path = Downloader;
+			sourceTree = "<group>";
+		};
 		29F4285926AD267B0073C150 /* Root */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,9 +779,7 @@
 		29F4286A26B12C740073C150 /* ImageDownloader */ = {
 			isa = PBXGroup;
 			children = (
-				29F1F2D826C8264E003C2B3A /* AbstractDownloader.swift */,
 				29F4286B26B12C860073C150 /* ImageDownloader.swift */,
-				29F1F2D626C7A104003C2B3A /* ImageDownloaderClient.swift */,
 			);
 			path = ImageDownloader;
 			sourceTree = "<group>";
@@ -1384,7 +1392,7 @@
 				29F7C12626BFBFD7004E6BFC /* IQUIViewController+Additions.swift in Sources */,
 				29F4285F26AD924D0073C150 /* NetworkOperation.swift in Sources */,
 				29F7C0CC26BE9BFC004E6BFC /* UIView+Extension.swift in Sources */,
-				29F1F2D926C8264F003C2B3A /* AbstractDownloader.swift in Sources */,
+				29F1F2D926C8264F003C2B3A /* AbstractDownloaderClient.swift in Sources */,
 				29F7C0CB26BE9BFC004E6BFC /* Int+Whitespaces.swift in Sources */,
 				29F7C0D026BE9BFC004E6BFC /* UIColor+Skeleton.swift in Sources */,
 				29F4287726B2EF860073C150 /* CoreDataClient.swift in Sources */,

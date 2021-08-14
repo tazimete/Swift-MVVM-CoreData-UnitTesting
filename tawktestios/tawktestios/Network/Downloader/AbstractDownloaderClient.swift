@@ -23,8 +23,7 @@ public class ImageDownloadresResponse<T> {
     }
 }
 
-public protocol AbstractDownloader: AnyObject {
-    associatedtype T
+public protocol AbstractDownloaderClient: AnyObject {
     var queueManager: QueueManager {get set}
-    func enqueue(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler<T>)
+    func enqueue<T: NSObject>(session: URLSession, downloadTaskURL: URL, type: T.Type, completionHandler: @escaping ImageDownloadResultHandler<T>)
 }

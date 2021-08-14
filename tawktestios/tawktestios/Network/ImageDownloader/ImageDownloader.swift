@@ -49,16 +49,16 @@ final class ImageDownloader {
             
 //            let task = session.dataTask(with: url)
             
-            ImageDownloaderClient.shared.enqueue(session: session, downloadTaskURL: url, completionHandler: {
+            DownloaderClient .shared.enqueue(session: session, downloadTaskURL: url,type: UIImage.self, completionHandler: {
                 result in
                 
                 switch result {
                     case .success(let response):
-                        completionHandler(response.url ?? "", response.image ?? placeholderImage, response.isCached ?? false)
+                        completionHandler(response.url ?? "", response.data ?? placeholderImage, response.isCached ?? false)
                         
                         // Store the downloaded image in cache
                         self.serialQueueForImages.sync(flags: .barrier) {
-                            self.cachedImages[imageUrlString] = response.image
+                            self.cachedImages[imageUrlString] = response.data
                         }
         
                         // Clear out the finished task from download tasks container

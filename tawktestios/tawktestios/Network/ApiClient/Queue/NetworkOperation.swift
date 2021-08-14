@@ -82,7 +82,7 @@ public class NetworkOperation: Operation {
        }
     }
     
-    public init(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler) {
+    public init<T>(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler<T>) {
            super.init()
 
 //           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
@@ -136,7 +136,7 @@ public class NetworkOperation: Operation {
             
             // Always execute completion handler explicitly on main thread
             DispatchQueue.main.async {
-                completionHandler(.success(.init(url: imageUrlString, image: image, isCached: false)))
+                completionHandler(.success(.init(url: imageUrlString, data: image as! T, isCached: false)))
                 self?.state = .finished
             }
         }
