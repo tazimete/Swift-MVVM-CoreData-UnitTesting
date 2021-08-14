@@ -21,6 +21,10 @@ public class ImageDownloadresResponse {
     }
 }
 
+
+public typealias ImageDownloadResultHandler = (Result<ImageDownloadresResponse, NetworkError>) -> Void
+public typealias ImageDownloadCompletionHandler = (String, UIImage?, Bool) -> Void
+
 public class ImageDownloaderClient{
     public static let shared = ImageDownloaderClient()
     public var queueManager: QueueManager

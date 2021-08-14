@@ -100,6 +100,5 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
                 ShimmerHelper.stopShimmerAnimation(view: weakSelf.ivAvatar)
             }
         })
-        
     }
 }
