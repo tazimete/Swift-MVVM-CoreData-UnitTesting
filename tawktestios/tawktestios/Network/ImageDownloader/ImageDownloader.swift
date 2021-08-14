@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 
-final class ImageDownloader: AbstractImageDownloader {
+public final class ImageDownloader: AbstractImageDownloader {
     static let shared = ImageDownloader()
     public let downloaderClient = DownloaderClient.shared
-    internal var serialQueueForImages = DispatchQueue(label: "images.queue", attributes: .concurrent)
-    internal var serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
-    internal var cachedImages: [String: UIImage]
-    internal var imagesDownloadTasks: [String: URLSession]
+    public var serialQueueForImages = DispatchQueue(label: "images.queue", attributes: .concurrent)
+    public var serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
+    public var cachedImages: [String: UIImage]
+    public var imagesDownloadTasks: [String: URLSession]
     
     // MARK: Private init
     private init() {
@@ -88,14 +88,14 @@ final class ImageDownloader: AbstractImageDownloader {
     }
     
     
-    internal func getCachedImageFrom(urlString: String) -> UIImage? {
+    public func getCachedImageFrom(urlString: String) -> UIImage? {
         // Reading from the dictionary should happen in the thread-safe manner.
         serialQueueForImages.sync {
             return cachedImages[urlString]
         }
     }
     
-    internal func getDataTaskFrom(urlString: String) -> URLSession? {
+    public func getDataTaskFrom(urlString: String) -> URLSession? {
         // Reading from the dictionary should happen in the thread-safe manner.
         serialQueueForDataTasks.sync {
             return imagesDownloadTasks[urlString]
