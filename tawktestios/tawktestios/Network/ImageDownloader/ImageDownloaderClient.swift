@@ -17,7 +17,7 @@ public class ImageDownloaderClient{
         self.queueManager = queueManager
     }
     
-    public func enqueue(session: URLSession, downloadTaskURL: URL, completionHandler: ImageDownloadCompletionHandler) {
+    public func enqueue(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler) {
         let operation = NetworkOperation(session: session, downloadTaskURL: downloadTaskURL, completionHandler: completionHandler)
         operation.qualityOfService = .utility
         queueManager.enqueue(operation)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class NetworkOperation: Operation {
     
@@ -81,29 +82,65 @@ public class NetworkOperation: Operation {
        }
     }
     
-    public init(session: URLSession, downloadTaskURL: URL, completionHandler: ((URL?, URLResponse?, Error?) -> Void)?) {
+    public init(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler) {
            super.init()
 
-           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
+//           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
+//                DispatchQueue.main.async {
+//                    /*
+//                    if there is a custom completionHandler defined,
+//                    pass the result gotten in downloadTask's completionHandler to the
+//                    custom completionHandler
+//                    */
+//                    if let completionHandler = completionHandler {
+//                        // localURL is the temporary URL the downloaded file is located
+//                        completionHandler(localURL, response, error)
+//                    }
+//
+//                   /*
+//                     set the operation state to finished once
+//                     the download task is completed or have error
+//                   */
+//                    self?.state = .finished
+//                }
+//           })
+        
+        let imageUrlString = downloadTaskURL.absoluteString
+                
+        print("Downloading --  \(imageUrlString)")
+        
+        task = session.dataTask(with: downloadTaskURL) { [weak self] (data, response, error) in
+            if let _ = error {
                 DispatchQueue.main.async {
-                    /*
-                    if there is a custom completionHandler defined,
-                    pass the result gotten in downloadTask's completionHandler to the
-                    custom completionHandler
-                    */
-                    if let completionHandler = completionHandler {
-                        // localURL is the temporary URL the downloaded file is located
-                        completionHandler(localURL, response, error)
-                    }
-
-                   /*
-                     set the operation state to finished once
-                     the download task is completed or have error
-                   */
-                    self?.state = .finished
+                    completionHandler(.failure(.serverError))
                 }
-           })
-       }
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(.failure(.noDataError))
+                return
+            }
+
+            let image = UIImage(data: data)?.decodedImage()
+//
+//            // Store the downloaded image in cache
+//            self.serialQueueForImages.sync(flags: .barrier) {
+//                self.cachedImages[imageUrlString] = image
+//            }
+//
+//            // Clear out the finished task from download tasks container
+//            _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
+//                self.imagesDownloadTasks.removeValue(forKey: imageUrlString)
+//            }
+            
+            // Always execute completion handler explicitly on main thread
+            DispatchQueue.main.async {
+                completionHandler(.success(.init(url: imageUrlString, image: image, isCached: false)))
+                self?.state = .finished
+            }
+        }
+    }
     
     override public func start() {
         if(self.isCancelled) {

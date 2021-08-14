@@ -19,4 +19,8 @@ public class QueueManager {
     public func enqueue(_ operation: Operation) {
         queue.addOperation(operation)
     }
+    
+    public func getOperation(at index: Int) -> Operation {
+       return queue.operations[index]
+    }
 }

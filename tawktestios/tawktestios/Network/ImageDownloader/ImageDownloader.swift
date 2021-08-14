@@ -47,44 +47,69 @@ final class ImageDownloader {
             config.urlCache = cache
             let session = URLSession(configuration: config)
             
-
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = session.dataTask(with: url)
+            
+            ImageDownloaderClient.shared.enqueue(session: session, downloadTaskURL: url, completionHandler: {
+                result in
                 
-                guard let data = data else {
-                    return
+                switch result {
+                    case .success(let response):
+                        completionHandler(response.url ?? "", response.image ?? placeholderImage, response.isCached ?? false)
+                        
+                        // Store the downloaded image in cache
+                        self.serialQueueForImages.sync(flags: .barrier) {
+                            self.cachedImages[imageUrlString] = response.image
+                        }
+        
+                        // Clear out the finished task from download tasks container
+                        _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
+                            self.imagesDownloadTasks.removeValue(forKey: response.url ?? "")
+                        }
+                        
+                        break
+                        
+                    case .failure(let error):
+                        completionHandler("", placeholderImage, false)
+                        break
                 }
-                
-                if let _ = error {
-                    DispatchQueue.main.async {
-                        completionHandler(imageUrlString, placeholderImage, false)
-                    }
-                    return
-                }
-                
-                let image = UIImage(data: data)?.decodedImage()
-                
-                // Store the downloaded image in cache
-                self.serialQueueForImages.sync(flags: .barrier) {
-                    self.cachedImages[imageUrlString] = image
-                }
-                
-                // Clear out the finished task from download tasks container
-                _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
-                    self.imagesDownloadTasks.removeValue(forKey: imageUrlString)
-                }
-                
-                // Always execute completion handler explicitly on main thread
-                DispatchQueue.main.async {
-                    completionHandler(imageUrlString, image, false)
-                }
-            }
+            })
+//            let task = session.dataTask(with: url) { (data, response, error) in
+//
+//                guard let data = data else {
+//                    return
+//                }
+//
+//                if let _ = error {
+//                    DispatchQueue.main.async {
+//                        completionHandler(imageUrlString, placeholderImage, false)
+//                    }
+//                    return
+//                }
+//
+//                let image = UIImage(data: data)?.decodedImage()
+//
+//                // Store the downloaded image in cache
+//                self.serialQueueForImages.sync(flags: .barrier) {
+//                    self.cachedImages[imageUrlString] = image
+//                }
+//
+//                // Clear out the finished task from download tasks container
+//                _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
+//                    self.imagesDownloadTasks.removeValue(forKey: imageUrlString)
+//                }
+//
+//                // Always execute completion handler explicitly on main thread
+//                DispatchQueue.main.async {
+//                    completionHandler(imageUrlString, image, false)
+//                }
+//            }
             
             // We want to control the access to no-thread-safe dictionary in case it's being accessed by multiple threads at once
             self.serialQueueForDataTasks.sync(flags: .barrier) {
                 imagesDownloadTasks[imageUrlString] = task
             }
             
-            task.resume()
+//            task.resume()
         }
     }
     
