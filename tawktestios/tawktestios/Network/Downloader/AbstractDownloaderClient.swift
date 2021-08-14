@@ -8,22 +8,22 @@
 import UIKit
 
 
-public typealias ImageDownloadResultHandler<T> = (Result<ImageDownloadresResponse<T>, NetworkError>) -> Void
-public typealias ImageDownloadCompletionHandler = (String, UIImage?, Bool) -> Void
+public typealias DownloadResultHandler = (Result<DownloaderResponse, NetworkError>) -> Void
 
-public class ImageDownloadresResponse<T> {
+public class DownloaderResponse {
     public var url: String?
-    public var data: T?
+    public var data: Data?
     public var isCached: Bool?
     
-    init(url: String? = nil, data: T? = nil, isCached: Bool? = nil) {
+    init(url: String? = nil, data: Data? = nil, isCached: Bool? = nil) {
         self.url = url
         self.data = data
         self.isCached = isCached
     }
 }
 
+
 public protocol AbstractDownloaderClient: AnyObject {
     var queueManager: QueueManager {get set}
-    func enqueue<T: NSObject>(session: URLSession, downloadTaskURL: URL, type: T.Type, completionHandler: @escaping ImageDownloadResultHandler<T>)
+    func enqueue(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping DownloadResultHandler)
 }

@@ -82,28 +82,8 @@ public class NetworkOperation: Operation {
        }
     }
     
-    public init<T>(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping ImageDownloadResultHandler<T>) {
+    public init(session: URLSession, downloadTaskURL: URL, completionHandler: @escaping DownloadResultHandler) {
            super.init()
-
-//           task = session.downloadTask(with: downloadTaskURL, completionHandler: { [weak self] (localURL, response, error) in
-//                DispatchQueue.main.async {
-//                    /*
-//                    if there is a custom completionHandler defined,
-//                    pass the result gotten in downloadTask's completionHandler to the
-//                    custom completionHandler
-//                    */
-//                    if let completionHandler = completionHandler {
-//                        // localURL is the temporary URL the downloaded file is located
-//                        completionHandler(localURL, response, error)
-//                    }
-//
-//                   /*
-//                     set the operation state to finished once
-//                     the download task is completed or have error
-//                   */
-//                    self?.state = .finished
-//                }
-//           })
         
         let imageUrlString = downloadTaskURL.absoluteString
                 
@@ -121,22 +101,10 @@ public class NetworkOperation: Operation {
                 completionHandler(.failure(.noDataError))
                 return
             }
-
-            let image = UIImage(data: data)?.decodedImage()
-//
-//            // Store the downloaded image in cache
-//            self.serialQueueForImages.sync(flags: .barrier) {
-//                self.cachedImages[imageUrlString] = image
-//            }
-//
-//            // Clear out the finished task from download tasks container
-//            _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
-//                self.imagesDownloadTasks.removeValue(forKey: imageUrlString)
-//            }
             
             // Always execute completion handler explicitly on main thread
             DispatchQueue.main.async {
-                completionHandler(.success(.init(url: imageUrlString, data: image as! T, isCached: false)))
+                completionHandler(.success(.init(url: imageUrlString, data: data, isCached: false)))
                 self?.state = .finished
             }
         }

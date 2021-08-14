@@ -8,12 +8,14 @@
 import Foundation
 import UIKit
 
-final class ImageDownloader {
+
+final class ImageDownloader: AbstractImageDownloader {
     static let shared = ImageDownloader()
-    private let serialQueueForImages = DispatchQueue(label: "images.queue", attributes: .concurrent)
-    private let serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
-    private var cachedImages: [String: UIImage]
-    private var imagesDownloadTasks: [String: URLSession]
+    public let downloaderClient = DownloaderClient.shared
+    internal var serialQueueForImages = DispatchQueue(label: "images.queue", attributes: .concurrent)
+    internal var serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
+    internal var cachedImages: [String: UIImage]
+    internal var imagesDownloadTasks: [String: URLSession]
     
     // MARK: Private init
     private init() {
@@ -21,7 +23,7 @@ final class ImageDownloader {
         imagesDownloadTasks = [:]
     }
     
-    func downloadImage(with imageUrlString: String?, completionHandler: @escaping (ImageDownloadCompletionHandler), placeholderImage: UIImage?) {
+    public func downloadImage(with imageUrlString: String?, completionHandler: @escaping (ImageDownloadCompletionHandler), placeholderImage: UIImage?) {
         
         guard let imageUrlString = imageUrlString else {
             completionHandler("", placeholderImage, false)
@@ -47,18 +49,22 @@ final class ImageDownloader {
             config.urlCache = cache
             let session = URLSession(configuration: config)
             
-//            let task = session.dataTask(with: url)
-            
-            DownloaderClient .shared.enqueue(session: session, downloadTaskURL: url,type: UIImage.self, completionHandler: {
+            downloaderClient.enqueue(session: session, downloadTaskURL: url, completionHandler: {
                 result in
                 
                 switch result {
                     case .success(let response):
-                        completionHandler(response.url ?? "", response.data ?? placeholderImage, response.isCached ?? false)
+                        guard  let data = response.data else {
+                            completionHandler(response.url ?? "", placeholderImage, response.isCached ?? false)
+                            return
+                        }
+                        
+                        let image = UIImage(data: data)?.decodedImage()
+                        completionHandler(response.url ?? "", image ?? placeholderImage, response.isCached ?? false)
                         
                         // Store the downloaded image in cache
                         self.serialQueueForImages.sync(flags: .barrier) {
-                            self.cachedImages[imageUrlString] = response.data
+                            self.cachedImages[imageUrlString] = image
                         }
         
                         // Clear out the finished task from download tasks container
@@ -73,61 +79,27 @@ final class ImageDownloader {
                         break
                 }
             })
-//            let task = session.dataTask(with: url) { (data, response, error) in
-//
-//                guard let data = data else {
-//                    return
-//                }
-//
-//                if let _ = error {
-//                    DispatchQueue.main.async {
-//                        completionHandler(imageUrlString, placeholderImage, false)
-//                    }
-//                    return
-//                }
-//
-//                let image = UIImage(data: data)?.decodedImage()
-//
-//                // Store the downloaded image in cache
-//                self.serialQueueForImages.sync(flags: .barrier) {
-//                    self.cachedImages[imageUrlString] = image
-//                }
-//
-//                // Clear out the finished task from download tasks container
-//                _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
-//                    self.imagesDownloadTasks.removeValue(forKey: imageUrlString)
-//                }
-//
-//                // Always execute completion handler explicitly on main thread
-//                DispatchQueue.main.async {
-//                    completionHandler(imageUrlString, image, false)
-//                }
-//            }
             
             // We want to control the access to no-thread-safe dictionary in case it's being accessed by multiple threads at once
             self.serialQueueForDataTasks.sync(flags: .barrier) {
                 imagesDownloadTasks[imageUrlString] = session
             }
-            
-//            task.resume()
         }
     }
     
     
-    private func getCachedImageFrom(urlString: String) -> UIImage? {
+    internal func getCachedImageFrom(urlString: String) -> UIImage? {
         // Reading from the dictionary should happen in the thread-safe manner.
         serialQueueForImages.sync {
             return cachedImages[urlString]
         }
     }
     
-    private func getDataTaskFrom(urlString: String) -> URLSession? {
-
+    internal func getDataTaskFrom(urlString: String) -> URLSession? {
         // Reading from the dictionary should happen in the thread-safe manner.
         serialQueueForDataTasks.sync {
             return imagesDownloadTasks[urlString]
         }
     }
-    
 }
 
