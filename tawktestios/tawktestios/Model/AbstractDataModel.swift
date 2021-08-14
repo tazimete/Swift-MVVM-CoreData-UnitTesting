@@ -14,5 +14,6 @@ import Foundation
 
 public protocol AbstractDataModel: AnyObject {
     var id: Int? {get set}
+    var asDictionary : [String: Any]? {get}
 }
 

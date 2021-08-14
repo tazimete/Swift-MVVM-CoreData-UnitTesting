@@ -93,7 +93,7 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
 //        }
         
         // batch insert request
-        let itemsDic = items.map({return ($0 as? GithubUser)?.asDictionary ?? [String: Any]()})
+        let itemsDic = items.map({return DataModelConverter().asDictionary(of: $0)})
         
         taskContext.performAndWait {
            let insertRequest = NSBatchInsertRequest(entity: D.entity(), objects: itemsDic)
