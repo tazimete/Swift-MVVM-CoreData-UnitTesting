@@ -115,7 +115,7 @@ public class LocalDataSource<T: AbstractDataModel & Codable, D: NSManagedObject>
                     try taskContext.save()
                 }
             } catch let error {
-                print("\(TAG) -- Failed to update: \(error)")
+                print("\(self.TAG) -- Failed to update: \(error)")
             }
         }
     }
