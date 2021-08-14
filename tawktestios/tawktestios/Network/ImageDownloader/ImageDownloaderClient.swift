@@ -6,7 +6,20 @@
 //
 
 import Foundation
+import UIKit
 
+
+public class ImageDownloadresResponse {
+    public var url: String?
+    public var image: UIImage?
+    public var isCached: Bool?
+    
+    init(url: String? = nil, image: UIImage? = nil, isCached: Bool? = nil) {
+        self.url = url
+        self.image = image
+        self.isCached = isCached
+    }
+}
 
 public class ImageDownloaderClient{
     public static let shared = ImageDownloaderClient()

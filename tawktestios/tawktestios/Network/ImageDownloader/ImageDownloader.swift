@@ -11,14 +11,14 @@ import UIKit
 final class ImageDownloader {
     static let shared = ImageDownloader()
     private let serialQueueForImages = DispatchQueue(label: "images.queue", attributes: .concurrent)
-    private let serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
+//    private let serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
     private var cachedImages: [String: UIImage]
-    private var imagesDownloadTasks: [String: URLSessionDataTask]
+//    private var imagesDownloadTasks: [String: URLSessionDataTask]
     
     // MARK: Private init
     private init() {
         cachedImages = [:]
-        imagesDownloadTasks = [:]
+//        imagesDownloadTasks = [:]
     }
     
     func downloadImage(with imageUrlString: String?, completionHandler: @escaping (ImageDownloadCompletionHandler), placeholderImage: UIImage?) {
@@ -36,9 +36,9 @@ final class ImageDownloader {
                 return
             }
             
-            if let cachedTask = getDataTaskFrom(urlString: imageUrlString) {
-                return
-            }
+//            if let cachedTask = getDataTaskFrom(urlString: imageUrlString) {
+//                return
+//            }
             
             let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
             let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
@@ -47,7 +47,7 @@ final class ImageDownloader {
             config.urlCache = cache
             let session = URLSession(configuration: config)
             
-            let task = session.dataTask(with: url)
+//            let task = session.dataTask(with: url)
             
             ImageDownloaderClient.shared.enqueue(session: session, downloadTaskURL: url, completionHandler: {
                 result in
@@ -62,9 +62,9 @@ final class ImageDownloader {
                         }
         
                         // Clear out the finished task from download tasks container
-                        _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
-                            self.imagesDownloadTasks.removeValue(forKey: response.url ?? "")
-                        }
+//                        _ = self.serialQueueForDataTasks.sync(flags: .barrier) {
+//                            self.imagesDownloadTasks.removeValue(forKey: response.url ?? "")
+//                        }
                         
                         break
                         
@@ -105,9 +105,9 @@ final class ImageDownloader {
 //            }
             
             // We want to control the access to no-thread-safe dictionary in case it's being accessed by multiple threads at once
-            self.serialQueueForDataTasks.sync(flags: .barrier) {
-                imagesDownloadTasks[imageUrlString] = task
-            }
+//            self.serialQueueForDataTasks.sync(flags: .barrier) {
+//                imagesDownloadTasks[imageUrlString] = task
+//            }
             
 //            task.resume()
         }
@@ -121,13 +121,13 @@ final class ImageDownloader {
         }
     }
     
-    private func getDataTaskFrom(urlString: String) -> URLSessionTask? {
-        
-        // Reading from the dictionary should happen in the thread-safe manner.
-        serialQueueForDataTasks.sync {
-            return imagesDownloadTasks[urlString]
-        }
-    }
+//    private func getDataTaskFrom(urlString: String) -> URLSessionTask? {
+//        
+//        // Reading from the dictionary should happen in the thread-safe manner.
+//        serialQueueForDataTasks.sync {
+//            return imagesDownloadTasks[urlString]
+//        }
+//    }
     
 }
 
