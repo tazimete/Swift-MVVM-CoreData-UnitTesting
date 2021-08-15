@@ -62,5 +62,32 @@ class GithubUserCellInverted: GithubUserCellNormal {
                 }
             }
         })
+        
+        //apply theme change
+        applyTheme(data: data)
+    }
+    
+    // when theme change
+    override public func applyTheme(data: DataType) {
+        switch (traitCollection.userInterfaceStyle) {
+            case .dark:
+                containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .black
+                containerView.layer.borderColor = UIColor.white.cgColor
+                lblUsername.textColor = .white
+                lblDescription.textColor = .white
+                lblType.textColor = .white
+                break
+                
+            case .light:
+                containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
+                containerView.layer.borderColor = UIColor.black.cgColor
+                lblUsername.textColor = .black
+                lblDescription.textColor = .darkGray
+                lblType.textColor = .black
+                break
+                
+            default:
+                break
+        }
     }
 }

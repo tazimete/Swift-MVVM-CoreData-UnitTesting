@@ -101,7 +101,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
             }
         })
         
-        //when did change theme
+        //apply  change theme
         applyTheme(data: data)
     }
     

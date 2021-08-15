@@ -74,23 +74,26 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         self.navigationItem.titleView = self.searchController.searchBar
     }
     
-    override func applyThemeChange() {
-        super.applyThemeChange()
+    //when theme change
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         
         switch (traitCollection.userInterfaceStyle) {
             case .dark:
-                view.backgroundColor = .black
+                searchController.searchBar.backgroundColor = .black
                 tableView.backgroundColor = .black
                 break
                 
             case .light:
-                view.backgroundColor = .white
+                searchController.searchBar.backgroundColor = .white
                 tableView.backgroundColor = .white
                 break
                 
             default:
                 break
         }
+        
+        tableView.reloadData()
     }
     
     private func addBottomIndicator (){

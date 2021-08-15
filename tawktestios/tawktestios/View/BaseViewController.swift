@@ -41,8 +41,6 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         initView()
         
         setDataSource()
-        
-        applyThemeChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,9 +80,24 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         // TODO: Implement in child Class
     }
     
-    //when theme change 
-    public func applyThemeChange() {
-        // TODO: Implement in child Class
+    //when theme change
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch (traitCollection.userInterfaceStyle) {
+            case .dark:
+                navigationController?.navigationBar.backgroundColor = .black
+                view.backgroundColor = .black
+                break
+                
+            case .light:
+                navigationController?.navigationBar.backgroundColor = .white
+                view.backgroundColor = .white
+                break
+                
+            default:
+                break
+        }
     }
     
     
