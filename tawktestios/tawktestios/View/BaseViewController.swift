@@ -80,7 +80,7 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         // TODO: Implement in child Class
     }
     
-    //when theme change
+    //when theme change, we can also define dark mode color option in color asset
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         

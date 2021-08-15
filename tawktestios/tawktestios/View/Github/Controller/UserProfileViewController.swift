@@ -50,7 +50,7 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         self.lblFollowing.text = "Follwings : \(githubUser?.followings ?? 0)"
     }
     
-    //when theme change
+    //when theme change, we can also define dark mode color option in color asset
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         

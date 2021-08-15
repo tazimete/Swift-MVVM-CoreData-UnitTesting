@@ -74,7 +74,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         self.navigationItem.titleView = self.searchController.searchBar
     }
     
-    //when theme change
+    //when theme change, we can also define dark mode color option in color asset
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
