@@ -782,6 +782,7 @@
 		29F4286726AE9A510073C150 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				29F7C0EF26BEAA39004E6BFC /* TableViewCellConfiguratorFactory.swift */,
 				29F4286826AE9A640073C150 /* GithubUserCellNormal.swift */,
 				29F7BF9826BD30CB004E6BFC /* GithubUserCellNote.swift */,
 				29F7BF9A26BD30F9004E6BFC /* GithubUserCellInverted.swift */,
@@ -841,7 +842,6 @@
 				29E8429F26B9674600C8B48A /* AbstractCellViewModel.swift */,
 				29F7BF9626BD25F3004E6BFC /* GenericCell.swift */,
 				29E842A126B967DD00C8B48A /* AbstractGithubCell.swift */,
-				29F7C0EF26BEAA39004E6BFC /* TableViewCellConfiguratorFactory.swift */,
 			);
 			path = Abstraction;
 			sourceTree = "<group>";
