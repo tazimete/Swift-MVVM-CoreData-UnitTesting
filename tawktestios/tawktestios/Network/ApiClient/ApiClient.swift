@@ -20,7 +20,7 @@ public class APIClient: AbstractApiClient{
     public var queueManager: QueueManager
 
     
-    public init(withQueueManager queueManager: QueueManager = QueueManager.shared) {
+    public init(withQueueManager queueManager: QueueManager = QueueManager()) {
         self.queueManager = queueManager
     }
     
