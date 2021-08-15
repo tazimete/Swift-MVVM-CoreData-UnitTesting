@@ -50,6 +50,26 @@ class UserProfileViewController: BaseViewController<GithubService, GithubUser, G
         self.lblFollowing.text = "Follwings : \(githubUser?.followings ?? 0)"
     }
     
+    //when theme change
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch (traitCollection.userInterfaceStyle) {
+            case .dark:
+                btnSave.layer.borderColor = UIColor.white.cgColor
+                btnSave.setTitleColor(.white, for: .normal)
+                break
+                
+            case .light:
+                btnSave.layer.borderColor = UIColor.black.cgColor
+                btnSave.setTitleColor(.black, for: .normal)
+                break
+                
+            default:
+                break
+        }
+    }
+    
     override func initNavigationBar() {
         
     }
