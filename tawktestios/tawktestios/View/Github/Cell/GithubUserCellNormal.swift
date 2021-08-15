@@ -86,7 +86,7 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
         imageUrlAtCurrentIndex = data.thumbnail
         lblUsername.text = data.title
         lblDescription.text = data.subtitle
-        containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
+//        containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
         
         ivAvatar.loadImage(from: data.thumbnail ?? "", completionHandler: {
             [weak self] url, image, isCache in
@@ -115,14 +115,14 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
                 lblDescription.textColor = .white
                 backgroundView?.backgroundColor = .black
                 break
-                
+
             case .light:
                 containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
                 containerView.layer.borderColor = UIColor.black.cgColor
                 lblUsername.textColor = .black
                 lblDescription.textColor = .darkGray
                 break
-                
+
             default:
                 break
         }
