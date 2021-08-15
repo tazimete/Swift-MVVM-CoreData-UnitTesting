@@ -100,5 +100,31 @@ class GithubUserCellNormal : UITableViewCell, ConfigurableCell {
                 ShimmerHelper.stopShimmerAnimation(view: weakSelf.ivAvatar)
             }
         })
+        
+        //when did change theme
+        applyTheme(data: data)
+    }
+    
+    // when theme change
+    public func applyTheme(data: DataType) {
+        switch (traitCollection.userInterfaceStyle) {
+            case .dark:
+                containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .black
+                containerView.layer.borderColor = UIColor.white.cgColor
+                lblUsername.textColor = .white
+                lblDescription.textColor = .white
+                backgroundView?.backgroundColor = .black
+                break
+                
+            case .light:
+                containerView.backgroundColor = data.isSeen ?? false ? .lightGray : .white
+                containerView.layer.borderColor = UIColor.black.cgColor
+                lblUsername.textColor = .black
+                lblDescription.textColor = .darkGray
+                break
+                
+            default:
+                break
+        }
     }
 }

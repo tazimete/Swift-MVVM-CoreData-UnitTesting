@@ -41,6 +41,8 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
         initView()
         
         setDataSource()
+        
+        applyThemeChange()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +79,11 @@ class BaseViewController<S: Service, D: AbstractDataModel & Codable, T: NSManage
     
     //set its data source for subview/table/collection view
     public func setDataSource() {
+        // TODO: Implement in child Class
+    }
+    
+    //when theme change 
+    public func applyThemeChange() {
         // TODO: Implement in child Class
     }
     
