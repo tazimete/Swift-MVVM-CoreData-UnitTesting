@@ -38,6 +38,7 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
         }
     }
     
+    //the user object was fetched from main context, so we need to use main context to update this object too 
     public func updateUserEntity(user: GithubUserEntity) {
         service.localDataSource.updateItem(item: user, taskContext: CoreDataClient.shared.mainContext)
     }
