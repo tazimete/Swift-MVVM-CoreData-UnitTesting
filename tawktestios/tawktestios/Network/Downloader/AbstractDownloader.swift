@@ -18,7 +18,7 @@ public protocol AbstractDownloader: AnyObject {
     var cachedDataList: [String: T] {set get}
     var dataDownloadSessionList: [String: URLSession] {set get}
     
-    func download(with urlString: String?, completionHandler: @escaping (DownloadCompletionHandler<T>), placeholderImage: T?)
+    func download(with urlString: String?, completionHandler: @escaping (DownloadCompletionHandler<T>), placeholder: T?)
     func getCachedDataFrom(urlString: String) -> T?
     func getDataTaskFrom(urlString: String) -> URLSession?
 }

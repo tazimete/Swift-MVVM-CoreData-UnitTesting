@@ -24,10 +24,10 @@ public class Downloader<T>: AbstractDownloader {
         downloaderClient = DownloaderClient.shared
     }
     
-    public func download(with urlString: String?, completionHandler: @escaping (DownloadCompletionHandler<T>), placeholderImage: T?) {
+    public func download(with urlString: String?, completionHandler: @escaping (DownloadCompletionHandler<T>), placeholder: T?) {
         
         guard let urlString = urlString else {
-            completionHandler("", placeholderImage, false)
+            completionHandler("", placeholder, false)
             return
         }
         
@@ -35,7 +35,7 @@ public class Downloader<T>: AbstractDownloader {
             completionHandler(urlString, image, true)
         } else {
             guard let url = URL(string: urlString) else {
-                completionHandler(urlString, placeholderImage, false)
+                completionHandler(urlString, placeholder, false)
                 return
             }
             
@@ -54,7 +54,7 @@ public class Downloader<T>: AbstractDownloader {
                 [weak self] result in
                 
                 //handle result
-                self?.handleDownloadResult(result: result, placeholderImage: placeholderImage, completionHandler: completionHandler)
+                self?.handleDownloadResult(result: result, placeholder: placeholder, completionHandler: completionHandler)
             })
             
             // We want to control the access to no-thread-safe dictionary in case it's being accessed by multiple threads at once
@@ -65,16 +65,16 @@ public class Downloader<T>: AbstractDownloader {
     }
     
     
-    private func handleDownloadResult(result: Result<DownloaderResponse, NetworkError>, placeholderImage: T?, completionHandler: @escaping (DownloadCompletionHandler<T>)) {
+    private func handleDownloadResult(result: Result<DownloaderResponse, NetworkError>, placeholder: T?, completionHandler: @escaping (DownloadCompletionHandler<T>)) {
         switch result {
             case .success(let response):
                 guard  let data = response.data else {
-                    completionHandler(response.url ?? "", placeholderImage, response.isCached ?? false)
+                    completionHandler(response.url ?? "", placeholder, response.isCached ?? false)
                     return
                 }
                 
                 let downloadedObject = DownloadDataParser<T>.getObjectAsType(data: data)
-                completionHandler(response.url ?? "", downloadedObject ?? placeholderImage, response.isCached ?? false)
+                completionHandler(response.url ?? "", downloadedObject ?? placeholder, response.isCached ?? false)
                 
                 // Store the downloaded image in cache
                 self.serialQueueForData.sync(flags: .barrier) {
@@ -89,7 +89,7 @@ public class Downloader<T>: AbstractDownloader {
                 break
                 
             case .failure(let error):
-                completionHandler("", placeholderImage, false)
+                completionHandler("", placeholder, false)
                 break
         }
     }

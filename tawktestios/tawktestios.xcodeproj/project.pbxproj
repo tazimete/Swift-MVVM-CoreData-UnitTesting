@@ -695,6 +695,15 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		29C488D626CC389300A6F88E /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */,
+				29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
 		29E8429526B94A3A00C8B48A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,8 +741,7 @@
 		29F1F2DA26C828C3003C2B3A /* Downloader */ = {
 			isa = PBXGroup;
 			children = (
-				29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */,
-				29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */,
+				29C488D626CC389300A6F88E /* Client */,
 				29F1F2DB26C84616003C2B3A /* AbstractDownloader.swift */,
 				29F4286B26B12C860073C150 /* Downloader.swift */,
 				29C488D426CC2F2C00A6F88E /* DownloadDataParser.swift */,
