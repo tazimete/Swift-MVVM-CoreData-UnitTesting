@@ -10,7 +10,7 @@ import UIKit
 
 public class Downloader<T>: AbstractDownloader {
     public typealias T = T
-//    static let shared = Downloader<UIImage>()
+    
     public var downloaderClient: AbstractDownloaderClient
     public var serialQueueForData = DispatchQueue(label: "datas.queue", attributes: .concurrent)
     public var serialQueueForDataTasks = DispatchQueue(label: "dataTasks.queue", attributes: .concurrent)
@@ -73,12 +73,12 @@ public class Downloader<T>: AbstractDownloader {
                     return
                 }
                 
-                let image = UIImage(data: data)?.decodedImage()
-                completionHandler(response.url ?? "", image as! T ?? placeholderImage, response.isCached ?? false)
+                let downloadedObject = DownloadDataParser<T>.getObjectAsType(data: data)
+                completionHandler(response.url ?? "", downloadedObject ?? placeholderImage, response.isCached ?? false)
                 
                 // Store the downloaded image in cache
                 self.serialQueueForData.sync(flags: .barrier) {
-                    self.cachedDataList[response.url ?? ""] = image as! T
+                    self.cachedDataList[response.url ?? ""] = downloadedObject
                 }
 
                 // Clear out the finished task from download tasks container

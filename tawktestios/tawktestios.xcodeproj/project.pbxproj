@@ -35,6 +35,7 @@
 		2948DC9C26AC2C33001EF5D2 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */; };
 		2948DC9E26AC2D98001EF5D2 /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */; };
 		29C488D326CC2DEA00A6F88E /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C488D226CC2DEA00A6F88E /* ImageDownloader.swift */; };
+		29C488D526CC2F2C00A6F88E /* DownloadDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C488D426CC2F2C00A6F88E /* DownloadDataParser.swift */; };
 		29D4DE9626BA907700AE6DB8 /* FetchUserProfileParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */; };
 		29D4DE9826BA935200AE6DB8 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */; };
 		29E8428E26B7BA0E00C8B48A /* CoreDataClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */; };
@@ -254,6 +255,7 @@
 		2948DC9B26AC2C33001EF5D2 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		2948DC9D26AC2D98001EF5D2 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
 		29C488D226CC2DEA00A6F88E /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		29C488D426CC2F2C00A6F88E /* DownloadDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadDataParser.swift; sourceTree = "<group>"; };
 		29D4DE9526BA907700AE6DB8 /* FetchUserProfileParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserProfileParam.swift; sourceTree = "<group>"; };
 		29D4DE9726BA935200AE6DB8 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		29E8428D26B7BA0E00C8B48A /* CoreDataClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClientTest.swift; sourceTree = "<group>"; };
@@ -730,10 +732,11 @@
 		29F1F2DA26C828C3003C2B3A /* Downloader */ = {
 			isa = PBXGroup;
 			children = (
-				29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */,
 				29F1F2D826C8264E003C2B3A /* AbstractDownloaderClient.swift */,
+				29F1F2D626C7A104003C2B3A /* DownloaderClient.swift */,
 				29F1F2DB26C84616003C2B3A /* AbstractDownloader.swift */,
 				29F4286B26B12C860073C150 /* Downloader.swift */,
+				29C488D426CC2F2C00A6F88E /* DownloadDataParser.swift */,
 			);
 			path = Downloader;
 			sourceTree = "<group>";
@@ -1536,6 +1539,7 @@
 				29F7C01026BE6E78004E6BFC /* ConstraintMakerPrioritizable.swift in Sources */,
 				29F7C0DB26BE9BFC004E6BFC /* SkeletonReusableCell.swift in Sources */,
 				29C488D326CC2DEA00A6F88E /* ImageDownloader.swift in Sources */,
+				29C488D526CC2F2C00A6F88E /* DownloadDataParser.swift in Sources */,
 				29F4287926B2F1910073C150 /* LocalDataSource.swift in Sources */,
 				29F7C0EC26BEA0EE004E6BFC /* ShimmerHelper.swift in Sources */,
 				29F7C02726BE6E78004E6BFC /* ConstraintRelation.swift in Sources */,
