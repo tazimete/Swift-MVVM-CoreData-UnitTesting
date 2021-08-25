@@ -67,11 +67,11 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
         paginationlimit = limit
     }
     
-    func fetchData(page: Int, completionHandler: @escaping NetworkCompletionHandler<D>) {
+    func fetchData(params: Parameterizable, completionHandler: @escaping NetworkCompletionHandler<D>) {
         fatalError("Must be overwitten")
     }
     
-    func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
+    func fetchDataList(params: Parameterizable, completionHandler: @escaping NetworkCompletionHandler<[D]>) {
         fatalError("Must be overwitten")
     }
 }

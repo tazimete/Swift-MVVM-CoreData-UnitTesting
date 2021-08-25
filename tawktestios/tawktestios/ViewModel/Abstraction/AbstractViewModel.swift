@@ -8,7 +8,6 @@
 import Foundation
 import CoreData
 
-
 /*
  This is the Abstraction of view model of our project. It will be used to ceate a base viewmodel, which is will be used create all other view model of our porject. AbstractViewModel consist generic service (S), server data model(D) and coredata model (T), means which data (conformed from AbstractDataModel & Codable) it should fetch from server and which core data entity (NSManagedObject type) it should store into local database through its service (Service has LocalDataSource and RemoteDataSource). It will fetch array of objects and single object  from server
  */
@@ -30,8 +29,8 @@ protocol AbstractViewModel {
     var dataList: [D]? {get set}
     var errorMessage: String? {get set}
     
-    func fetchData(page: Int, completionHandler: @escaping NetworkCompletionHandler<D>)
-    func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[D]>)
+    func fetchData(params: Parameterizable, completionHandler: @escaping NetworkCompletionHandler<D>)
+    func fetchDataList(params: Parameterizable, completionHandler: @escaping NetworkCompletionHandler<[D]>)
     func setPaginationOffset(offset: Int)
     func setPaginationLimit(limit: Int)
 }
