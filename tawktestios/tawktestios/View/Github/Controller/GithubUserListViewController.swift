@@ -125,7 +125,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         loadMoreData()
     }
     
-    public func loadGithubUserList(since: Int) {
+    public func loadGithubUserList(since: Int, perPage: Int = 0) {
         showBottomIndicator(flag: true)
         
         // removed temporarily
@@ -133,7 +133,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         
         isShimmerNeeded = cellConfiguratorFactory.getCount() == 0
         
-        githubViewModel.fetchUserList(since: since)
+        githubViewModel.fetchUserList(since: since, perPage: perPage)
         githubViewModel.dataFetchingSuccessHandler = { [weak self] in
             print("\(self?.TAG) -- dataFetchingSuccessHandler()")
             self?.stopShimmering()
@@ -185,7 +185,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
             let userId = getLastUserEntity()?.asGithubUser.id ?? 0
             
             // api call to fetch github users from server
-            loadGithubUserList(since: userId)
+            loadGithubUserList(since: userId, perPage: githubViewModel.paginationlimit)
         }
     }
     

@@ -12,7 +12,7 @@ public class FetchGithubUserParam: Parameterizable{
     let since: Int
     let perPage: Int
 
-    public init(since: Int, perPage: Int) {
+    public init(since: Int, perPage: Int = 0) {
         self.since = since
         self.perPage = perPage
     }
@@ -23,7 +23,12 @@ public class FetchGithubUserParam: Parameterizable{
     }
 
     public var asRequestParam: [String: Any] {
-        let param: [String: Any?] = [CodingKeys.since.rawValue: since, CodingKeys.perPage.rawValue: perPage]
+        var param: [String: Any?] = [CodingKeys.since.rawValue: since]
+        
+        if perPage > 0 {
+            param[CodingKeys.perPage.rawValue] = perPage
+        }
+        
         return param.compactMapValues { $0 }
     }
 }

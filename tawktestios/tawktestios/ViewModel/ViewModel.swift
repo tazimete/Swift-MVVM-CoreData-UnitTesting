@@ -22,7 +22,7 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
     
     public var paginationOffset: Int = 0
     
-    public var paginationlimit: Int = 20
+    public var paginationlimit: Int = 0
     
     public var dataFetchingSuccessHandler: (() -> Void)?
     public var dataFetchingFailedHandler: (() -> Void)?
@@ -31,7 +31,7 @@ public class ViewModel<S: Service, D: AbstractDataModel & Codable, T: NSManagedO
         let fetchRequest = NSFetchRequest<T>(entityName: CoreDataEntities<T>.getEntityName())
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending:true)]
         fetchRequest.fetchOffset = paginationOffset
-        fetchRequest.fetchLimit = paginationOffset + paginationlimit
+        fetchRequest.fetchLimit = paginationOffset + (paginationlimit == 0 ? 20: paginationlimit)
         fetchRequest.fetchBatchSize = paginationlimit
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest,

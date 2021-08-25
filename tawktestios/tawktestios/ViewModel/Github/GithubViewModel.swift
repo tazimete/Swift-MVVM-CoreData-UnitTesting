@@ -23,8 +23,8 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
         service.remoteDataSource.fetchDataList(request: .fetchUserList(params: params), completionHandler: completionHandler)
     }
     
-    public func fetchUserList(since: Int) {
-        fetchDataList(params: FetchGithubUserParam(since: since, perPage: 30)) { [weak self] result in
+    public func fetchUserList(since: Int, perPage: Int = 0) {
+        fetchDataList(params: FetchGithubUserParam(since: since, perPage: perPage)) { [weak self] result in
             guard let weakSelf = self else {
                 return
             }
@@ -32,6 +32,8 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
             switch result{
                 case .success(let users):
                     print("fetchData() -- \(users.map({$0.username}))")
+                    
+                    weakSelf.paginationlimit = users.count
                     weakSelf.service.localDataSource.syncData(data: users, taskContext: CoreDataClient.shared.backgroundContext)
 //                    weakSelf.dataList.append(contentsOf: users)
 
