@@ -116,7 +116,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
         cellConfiguratorFactory.addAllAsCellConfigurator(cellViewModels: githubViewModel.fetchedResultsController.fetchedObjects?.map({ return $0.asCellViewModel}) ?? [])
         
         //load user list from server
-        loadGithubUserList(since: githubViewModel.paginationlimit)
+        loadGithubUserList(since: 0)
     }
     
     //when internet connected
@@ -182,11 +182,7 @@ class GithubUserListViewController: BaseViewController<GithubService, GithubUser
             //increase pagination offset
             githubViewModel.paginationOffset += githubViewModel.paginationlimit
             
-            var userId = githubViewModel.paginationlimit
-            
-            if let user = getLastUserEntity()?.asGithubUser  {
-                userId = user.id ?? 0
-            }
+            let userId = getLastUserEntity()?.asGithubUser.id ?? 0
             
             // api call to fetch github users from server
             loadGithubUserList(since: userId)

@@ -20,7 +20,7 @@ public class GithubViewModel: ViewModel<GithubService, GithubUser, GithubUserEnt
     }
     
     public override func fetchDataList(page: Int, completionHandler: @escaping NetworkCompletionHandler<[GithubUser]>) {
-        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParam(since: page)), completionHandler: completionHandler)
+        service.remoteDataSource.fetchDataList(request: .fetchUserList(params: FetchGithubUserParam(since: page, perPage: 30)), completionHandler: completionHandler)
     }
     
     public func fetchUserList(since: Int) {
