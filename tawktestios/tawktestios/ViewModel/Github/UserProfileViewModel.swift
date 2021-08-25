@@ -19,8 +19,12 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
         super.init(with: service)
     }
     
+    override func fetchData(params: Parameterizable, completionHandler: @escaping NetworkCompletionHandler<GithubUser>) {
+        service.remoteDataSource.fetchData(request: .fetchUserProfile(params: params), completionHandler: completionHandler)
+    }
+    
     public func fetchProfile(username: String) {
-        service.remoteDataSource.fetchData(request: .fetchUserProfile(params: FetchUserProfileParam(username: username))) { [weak self] result in
+        fetchData(params: FetchUserProfileParam(username: username)) { [weak self] result in
             
             guard let weakSelf = self else {
                 return
@@ -32,7 +36,7 @@ public class UserProfileViewModel: ViewModel<GithubService, GithubUser, GithubUs
                     weakSelf.dataFetchingSuccessHandler?()
                 case .failure(let error):
                     print("\(String(describing: (error).localizedDescription))")
-                    weakSelf.errorMessage = (String(describing: (error).localizedDescription)) 
+                    weakSelf.errorMessage = (String(describing: (error).localizedDescription))
                     weakSelf.dataFetchingFailedHandler?()
             }
         }
